@@ -38,11 +38,22 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private TextMeshProUGUI textMesh;
     private Canvas canvas;
 
+    bool useCurve;
+    private float curveX;
+    private float curveY;
+    private float zoom;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         textMesh = GetComponent<TextMeshProUGUI>();
         canvas = GetComponentInParent<Canvas>();
+
+        Material screenEffect = (Material)Resources.Load("ScreenEffect");
+        useCurve = screenEffect.GetFloat("_UseCurve") == 1f;
+        curveX = screenEffect.GetFloat("_CurveX");
+        curveY = screenEffect.GetFloat("_CurveY");
+        zoom = screenEffect.GetFloat("_Zoom");
 
         PlayerInput.SubmitTextEvent += OnSubmitText;
 
@@ -51,17 +62,38 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void Update()
     {
-        if (isHolding && TMP_TextUtilities.IsIntersectingRectTransform(rectTransform, Input.mousePosition, Camera.main))
+        if (isHolding)
         {
-            int wordIndex = TMP_TextUtilities.FindIntersectingWord(textMesh, Input.mousePosition, Camera.main);
-            if (wordIndex >= 0 && wordIndex != selectionEndIndex)
+            Vector3 mousePos = ScreenCurvePoint(Input.mousePosition);
+            if (TMP_TextUtilities.IsIntersectingRectTransform(rectTransform, mousePos, Camera.main))
             {
-                if (selectionStartIndex < 0) { selectionStartIndex = wordIndex; }
-                selectionEndIndex = wordIndex;
+                int wordIndex = TMP_TextUtilities.FindIntersectingWord(textMesh, mousePos, Camera.main);
+                if (wordIndex >= 0 && wordIndex != selectionEndIndex)
+                {
+                    if (selectionStartIndex < 0) { selectionStartIndex = wordIndex; }
+                    selectionEndIndex = wordIndex;
 
-                SelectWords();
+                    SelectWords();
+                }
             }
         }
+    }
+
+    // Adjust screen-space coordinate according to screen effect's curve function
+    private Vector3 ScreenCurvePoint(Vector3 screenPoint)
+    {
+        if (!useCurve) { return screenPoint; }
+
+        Vector2 uv = new Vector2(screenPoint.x / Screen.width, screenPoint.y / Screen.height);
+        uv = (uv - new Vector2(0.5f, 0.5f)) * 2.0f;
+        uv *= 1.1f;
+        uv.x *= 1.0f + Mathf.Pow((Mathf.Abs(uv.y) / curveX), 2);
+        uv.y *= 1.0f + Mathf.Pow((Mathf.Abs(uv.x) / curveY), 2);
+        uv *= zoom;
+        uv = (uv / 2.0f) + new Vector2(0.5f, 0.5f);
+        uv = uv * 0.92f + new Vector2(0.04f, 0.04f);
+
+        return new Vector3(uv.x * Screen.width, uv.y * Screen.height, screenPoint.z);
     }
 
     public void DeleteSelection()
