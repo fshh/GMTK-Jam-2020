@@ -29,6 +29,9 @@ public class GlitchEffect : MonoBehaviour
 	[Range(0, 1)]
 	public float colorIntensity;
 
+	[SerializeField]
+	float introGlitchTime =2f;
+
 	private float _glitchup;
 	private float _glitchdown;
 	private float flicker;
@@ -40,6 +43,29 @@ public class GlitchEffect : MonoBehaviour
 	void Start()
 	{
 		_material = new Material(Shader);
+		MaxIntensityGlitch();
+		Invoke("MediumIntensityGlitch", introGlitchTime);
+	}
+
+	public void MaxIntensityGlitch()
+	{
+		intensity = 1;
+		flipIntensity = 1;
+		colorIntensity = 1;
+	}
+
+	public void NoGlitch()
+	{
+		intensity = 0;
+		flipIntensity = 0;
+		colorIntensity = 0;
+	}
+
+	public void MediumIntensityGlitch()
+	{
+		intensity = 0.1f;
+		flipIntensity = 0.1f;
+		colorIntensity = 0.1f;
 	}
 
 	// Called by camera to apply image effect
