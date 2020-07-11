@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CopyPaste.unity
+    guid: 6d65b0f7ff4324240b378baaa7f2a723
   m_configObjects: {}
