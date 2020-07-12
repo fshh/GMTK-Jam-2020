@@ -22,10 +22,16 @@ public class StateMachine : MonoBehaviour
     bool pressedEnter = false;
 
     public TextMeshProUGUI typing;
+    public TextMeshProUGUI subtitles;
 
     // Update is called once per frame
     void Update()
     {
+        if (line >= parser.wordList.Count - 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
         switch (gameState)
         {
             case state.User:
@@ -35,10 +41,6 @@ public class StateMachine : MonoBehaviour
                 }
                 break;
             case state.Choosing:
-                if(line >= parser.wordList.Count)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
 
                 if (parser.isSpoken[line])
                 {
@@ -67,6 +69,7 @@ public class StateMachine : MonoBehaviour
     IEnumerator playVO()
     {
         playingCoroutine = true;
+        subtitles.text = parser.wordList[line];
         yield return new WaitForSeconds(voice.playNextLine() + 1f);
         gameState = state.Choosing;
         playingCoroutine = false;
