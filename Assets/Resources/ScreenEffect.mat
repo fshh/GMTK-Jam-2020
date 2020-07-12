@@ -74,8 +74,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _Distort: 0
     - _Distortion: 0.6
-    - _DoubleOffset: -3.35
-    - _DoubleStrength: 0.26
+    - _DoubleOffset: 2.54
+    - _DoubleStrength: -4.83
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
