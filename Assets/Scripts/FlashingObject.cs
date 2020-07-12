@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashingButton : MonoBehaviour
+public class FlashingObject : MonoBehaviour
 {
-    float timer;
-    [SerializeField] GameObject buttonImage;
+    public GameObject Object;
 
+    float timer;
 
     void Update()
     {
         timer += Time.deltaTime;
         if (timer >= 0.5f)
         {
-            buttonImage.SetActive(true);
+            Object.SetActive(true);
         }
 
         if (timer >= 1.5)
         {
-            buttonImage.SetActive(false);
+            Object.SetActive(false);
             timer = 0;
         }
     }

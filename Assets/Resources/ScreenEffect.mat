@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Screen
+  m_Name: ScreenEffect
   m_Shader: {fileID: 4800000, guid: 6e1e54c57771b455280e52851ba36386, type: 3}
   m_ShaderKeywords: _USEABERRATION_ON _USECURVE_ON _USESCANLINES_ON _USEVIGNETTE_ON
   m_LightmapFlags: 4
@@ -74,16 +74,16 @@ Material:
     - _DetailNormalMapScale: 1
     - _Distort: 0
     - _Distortion: 0.6
-    - _DoubleOffset: 2.54
-    - _DoubleStrength: -4.83
+    - _DoubleOffset: 1.15
+    - _DoubleStrength: -4.06
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _LineDistributionPow: -0.15
     - _LinePow: 1.7
-    - _LineScale: 5.36
-    - _LineWeight: 0
+    - _LineScale: 0.23
+    - _LineWeight: 0.218
     - _LineWeightMax: 0.86
     - _LineWeightMin: 0.07
     - _Metallic: 0
