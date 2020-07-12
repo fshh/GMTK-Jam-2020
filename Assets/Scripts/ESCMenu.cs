@@ -1,18 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ESCMenu : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject ButtonPanel;
+    public GameObject OptionsPanel;
     public GameObject CreditsPanel;
+
+    [Header("Options")]
+    public Toggle CRTToggle;
 
     private bool isActive = false;
 
+    private static ESCMenu instance;
+
     private void Awake()
     {
-        SwitchToPanel(ButtonPanel);
-        UpdateChildrenActive();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+            LoadPreferences();
+            SwitchToPanel(ButtonPanel);
+            UpdateChildrenActive();
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Update()
@@ -20,8 +38,14 @@ public class ESCMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             isActive = !isActive;
+            SwitchToPanel(ButtonPanel);
             UpdateChildrenActive();
         }
+    }
+
+    private void LoadPreferences()
+    {
+        CRTToggle.isOn = PlayerPrefs.GetInt("CRTEffect", 1) == 1;
     }
 
     private void UpdateChildrenActive()
@@ -35,6 +59,7 @@ public class ESCMenu : MonoBehaviour
     private void SwitchToPanel(GameObject panel)
     {
         ButtonPanel.SetActive(false);
+        OptionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
 
         panel.SetActive(true);
@@ -43,6 +68,11 @@ public class ESCMenu : MonoBehaviour
     public void ToButtons()
     {
         SwitchToPanel(ButtonPanel);
+    }
+
+    public void Options()
+    {
+        SwitchToPanel(OptionsPanel);
     }
 
     public void Credits()
@@ -57,5 +87,17 @@ public class ESCMenu : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    public void ToggleCRTEffect(bool enabled)
+    {
+        if (enabled)
+        {
+            PlayerPrefs.SetInt("CRTEffect", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CRTEffect", 0);
+        }
     }
 }

@@ -659,7 +659,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f551c703b4954b33bf9c0e76e8bf757, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad355ca877b2bf438b066033c5cad1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0248e10c498664bc082199d120d4c4ae, type: 2}
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.9
+  m_fontSize: 27.3
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2484,6 +2484,36 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181811383766562674, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7450018838539135693, guid: 1848c4388bf352947bb9f290b13b8305,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2507,6 +2537,26 @@ PrefabInstance:
     - target: {fileID: 7450018838539135693, guid: 1848c4388bf352947bb9f290b13b8305,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

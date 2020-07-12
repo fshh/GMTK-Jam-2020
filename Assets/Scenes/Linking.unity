@@ -569,7 +569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f551c703b4954b33bf9c0e76e8bf757, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad355ca877b2bf438b066033c5cad1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0248e10c498664bc082199d120d4c4ae, type: 2}
@@ -1057,7 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4cb249abd7a6f468cdb94180ff2247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversationText: {fileID: 2060535521}
 --- !u!1 &1503519010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3418693256048988455, guid: 5f094797120bc9441879ce4cca958a72,
@@ -1122,7 +1121,7 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
