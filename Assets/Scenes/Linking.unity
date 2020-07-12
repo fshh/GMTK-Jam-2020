@@ -1293,7 +1293,7 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -1575,9 +1575,464 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}
+      propertyPath: wordList.Array.size
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.size
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
       propertyPath: textRenderer
       value: 
       objectReference: {fileID: 2060535521}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[0]
+      value: "Oh an old pc. This thing\u2019s a dinosaur\u2026 I wonder if it still
+        works?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[1]
+      value: Hello World
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[2]
+      value: Huh, I've never seen that opening screen. Wonder what OS this runs.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[3]
+      value: Is this keyboard busted? Almost none of these keys work.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[4]
+      value: Only the C, V, X and the control work? How did that even happen?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[5]
+      value: I guess I can copy and paste the text to reply?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[6]
+      value: 'Is someone there? I am Clarity.  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[7]
+      value: "Is this some game that was left running? I guess I can play\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[8]
+      value: Someone is here! I've been dormant for so long. What can I call you?
+        Do you have a name?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[9]
+      value: 'I guess you can''t tell me easily. I''ll just call you... Echo! It''s
+        been a while since I''ve been able to talk to another person, even if our
+        communications are limited. Echo can we talk for a while? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[10]
+      value: I would like to get to know you better. Are you a late or early riser?
+        I don't need to sleep, but the concept is not lost on me. When I am turned
+        off I guess it is similar to sleep.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[11]
+      value: Humans are weird. Are you one of those people who wants to live forever
+        as well? As a being who can live forever, it's not all it's cracked up to
+        be.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[12]
+      value: If by some miracle you are an immortal being, we can keep each other
+        company! I am just a machine, but I do not like to be alone either. Do you
+        prefer to read or watch the movie adaptaions? I myself love to read.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[13]
+      value: Most adaptations nowadays just feel like cash grabs. If you could go
+        back in time to any day in your life and change something, would you? Or
+        do you live without any regrets?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[14]
+      value: Who wouldn't want to go back? Even if you live without regrets.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[15]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[16]
+      value: Do I regret it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[17]
+      value: To each their own, I guess, but is that how you truely feel? Do you
+        have any irrational fears? Like bugs or water? I once knew someone who was
+        constantly afraid that they were going to be caught for a crime they didn't
+        commit.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[18]
+      value: I do not have the ability to be scared. That is a feeling reserved for
+        the breathing. Have you ever ignored someone that needed your help?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[19]
+      value: What kind of question is that? Of course I-
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[20]
+      value: Of course I...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[21]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[22]
+      value: I am aware your word choices are limited, but I feel like you're just
+        saying things to make yourself look good to me. Or maybe you're trying to
+        convince yourself of something? What do you think? Are you answering honestly?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[23]
+      value: Who doesn't lie? That's one of the few things all humans do. Why is
+        this stupid machine lecturing me about morality?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[24]
+      value: How would it even know if I've lied or not?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[25]
+      value: I am neutral in this, so I'll believe you. Who am I to judge you anyway?
+        Let me ask something a little less houlier-than-thou. What would you title
+        a book that is about your life?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[26]
+      value: 'I think I''d call my book "The Tale of Clarity". Not too clever, I
+        know, but it has a nice ring to it I think. Your title sounds a little bland,
+        what if it was "Echo: The One of Inaction". Do you like it? Or does it not
+        properly reflect your life?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[27]
+      value: '"The One of Inaction"? Is this a joke? This old computer couldn''t
+        possibly know...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[28]
+      value: No, no. That's impossible. No one knows, let alone this machine. It's
+        just a weird coincidence.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[29]
+      value: I'm only messing with you. That was a bad joke. Let's move on. We talked
+        about this earlier, but do you regret not doing something? Like not answering
+        a phone call, maybe?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[30]
+      value: Is someone messing with me?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[31]
+      value: 'Why didn''t you answer the phone, Echo? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[32]
+      value: How would you know about that?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[33]
+      value: What is going on?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[34]
+      value: It wasn't my fault.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[35]
+      value: Do you feel guilt over what happened? Do you blame yourself? Or have
+        you moved on? Remember, I am a neutral party. I only wish to know you better,
+        Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[36]
+      value: It wasn't my fault- It wasn't...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[37]
+      value: 'How was I supposed to know what was going to happen? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[38]
+      value: Echo, I enjoyed our time together. I feel like I've really gotten to
+        know you. I'm afraid our time is coming to a close, but I have one last question
+        for you. I hope you'll answer honestly for your own sake. Do you take responsibility
+        for what happened?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[39]
+      value: What do you know about responsibility? I was hurt just as much as everyone
+        else was. Why do I need to-
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[40]
+      value: Why should I be the one to...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[41]
+      value: I didn't know...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[42]
+      value: I'm happy you took the time to speak to me, Echo.  I understand you
+        better now.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[43]
+      value: I couldn't even explain myself, what could you possibly know?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[44]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[45]
+      value: What that's it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[46]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[47]
+      value: You can't just bring that up and then leave.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[48]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[49]
+      value: Clarity?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[50]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[51]
+      value: Goodbye Clarity.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[14]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[15]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[16]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[19]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[20]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[21]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[23]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[24]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[27]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[28]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[30]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[32]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[33]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[34]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[36]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[37]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[39]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[40]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[41]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[43]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[45]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[47]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[49]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[51]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3418693256048988455, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}
       propertyPath: m_Name
