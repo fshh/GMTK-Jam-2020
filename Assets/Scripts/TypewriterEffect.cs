@@ -23,11 +23,17 @@ public class TypewriterEffect : MonoBehaviour
         {
             foreach (char c in story)
             {
-                textContent.text += c;
+                if (textContent.enabled)
+                {
+                    textContent.text += c;
+                }
                 yield return new WaitForSeconds(delayBetweenCharacters);
             }
             yield return new WaitForSeconds(1f);
-            textContent.text = "";
+            if (textContent.enabled)
+            {
+                textContent.text = "";
+            }
         }
     }
 

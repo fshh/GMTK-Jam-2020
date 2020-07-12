@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StateMachine : MonoBehaviour
 {
@@ -20,25 +21,16 @@ public class StateMachine : MonoBehaviour
 
     bool pressedEnter = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMeshProUGUI typing;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            pressedEnter = true;
-        }
         switch (gameState)
         {
             case state.User:
-                if (pressedEnter)
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    pressedEnter = false;
                     gameState = state.Choosing;
                 }
                 break;
@@ -79,7 +71,9 @@ public class StateMachine : MonoBehaviour
     IEnumerator pastingText()
     {
         playingCoroutine = true;
+        typing.enabled = true;
         yield return new WaitForSeconds(secPerLetter * parser.wordList[line].Length);
+        typing.enabled = false;
         parser.addText(line);
         gameState = state.User;
         playingCoroutine = false;
