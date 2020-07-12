@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    [Header("Receive Player Submissions?")]
+    public bool receiveSubmissions = false;
+
     // Highlighting
     private Transform highlightsParent;
     private GameObject highlightPrefab;
@@ -114,9 +117,7 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             string removed = text.Remove(firstChar, lastChar - firstChar + 2);
             textMesh.text = removed;
 
-            ResetSelectionIndices();
-            ResetHighlights();
-            ResetSelectedText();
+            FullReset();
         }
     }
 
@@ -264,9 +265,7 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        ResetSelectionIndices();
-        ResetHighlights();
-        ResetSelectedText();
+        FullReset();
         isHolding = true;
     }
 
@@ -284,6 +283,16 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if (SelectedInstance == this)
         {
             FullReset();
+        }
+
+        if (receiveSubmissions)
+        {
+            Color color = PlayerInput.PlayerTextColor;
+            string hexCode = ColorUtility.ToHtmlStringRGBA(color);
+
+            text = $"\n\n<#{hexCode}>> " + text + "</color>";
+
+            textMesh.text += text;
         }
     }
 }

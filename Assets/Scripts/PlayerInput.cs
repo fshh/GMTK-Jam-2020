@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
 {
     public static event Action<string> SubmitTextEvent;
 
-    public TextMeshProUGUI conversationText;
+    public static Color32 PlayerTextColor;
 
     private string clipboard;
 
@@ -20,6 +20,8 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
+        PlayerTextColor = textMesh.color;
+
         inputSelection = GetComponent<TextSelection>();
     }
 
@@ -76,8 +78,7 @@ public class PlayerInput : MonoBehaviour
         if (textMesh.text.Length > 0)
         {
             Debug.Log($"Submitting \"{textMesh.text}\"");
-            string submissionText = "> " + textMesh.text;
-            conversationText.text += "\n\n" + submissionText;
+            string submissionText = textMesh.text;
             textMesh.text = "";
 
             if (SubmitTextEvent != null)
