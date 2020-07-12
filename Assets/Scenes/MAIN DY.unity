@@ -1046,12 +1046,20 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
       value: -0.000061035156
+=======
+      value: -664.74005
+>>>>>>> 528b10287b560c5f864c980ae0d44f6b3ccff734
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_SizeDelta.y
+<<<<<<< HEAD
       value: 664.73987
+=======
+      value: 0
+>>>>>>> 528b10287b560c5f864c980ae0d44f6b3ccff734
       objectReference: {fileID: 0}
     - target: {fileID: 1429539456378736664, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -1900,12 +1908,20 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
       value: -235.08975
+=======
+      value: -154.69983
+>>>>>>> 528b10287b560c5f864c980ae0d44f6b3ccff734
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_SizeDelta.y
+<<<<<<< HEAD
       value: 235.08978
+=======
+      value: 0
+>>>>>>> 528b10287b560c5f864c980ae0d44f6b3ccff734
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -2120,11 +2136,14 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_SizeDelta.y
+<<<<<<< HEAD
       value: 591.0627
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682906, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_IsActive
+=======
+>>>>>>> 528b10287b560c5f864c980ae0d44f6b3ccff734
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1429539457175614425, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
