@@ -9,6 +9,11 @@ public class FlashingObject : MonoBehaviour
 
     float timer;
 
+    private void Awake()
+    {
+        Object.SetActive(false);
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
