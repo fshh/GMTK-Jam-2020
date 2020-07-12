@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "implemented by \nCam, Andrew, Ezra, & Daichi "
+  m_text: "implemented by \nCam, Andrew, Ezra, Daichi & Katherine"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23747fb756c7efa42a3acd2270eb9301, type: 2}
   m_sharedMaterial: {fileID: 2980487154883212920, guid: 23747fb756c7efa42a3acd2270eb9301,
@@ -1322,10 +1322,10 @@ MonoBehaviour:
   m_margin: {x: 10, y: 5, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1719803684}
-    characterCount: 44
+    characterCount: 53
     spriteCount: 0
     spaceCount: 8
-    wordCount: 6
+    wordCount: 7
     linkCount: 0
     lineCount: 2
     pageCount: 1
