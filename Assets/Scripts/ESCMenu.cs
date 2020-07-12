@@ -17,7 +17,7 @@ public class ESCMenu : MonoBehaviour
 
     private static ESCMenu instance;
 
-    private void Awake()
+    private void Start()
     {
         if (instance == null)
         {
@@ -94,10 +94,12 @@ public class ESCMenu : MonoBehaviour
         if (enabled)
         {
             PlayerPrefs.SetInt("CRTEffect", 1);
+            PlayerPrefs.Save();
         }
         else
         {
             PlayerPrefs.SetInt("CRTEffect", 0);
+            PlayerPrefs.Save();
         }
     }
 }

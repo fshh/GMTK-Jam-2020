@@ -6,7 +6,7 @@ public class CRTEffect : MonoBehaviour
     public Material mat;
     void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
-        if (PlayerPrefs.GetInt("CRTEffect") == 1)
+        if (PlayerPrefs.GetInt("CRTEffect", 1) == 1)
         {
             Graphics.Blit(src, dest, mat);
         }

@@ -15,6 +15,7 @@ public class PlayAtRandomIntervals : MonoBehaviour
 
     private float seed;
 
+    private float volumeMultiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +25,14 @@ public class PlayAtRandomIntervals : MonoBehaviour
         nextTime += Random.Range(minTime, maxTime);
 
         seed = Random.Range(0, 100);
+
+        volumeMultiplier = sound.volume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!sound.isPlaying && Time.time > nextTime)
+        if (!sound.isPlaying && Time.time > nextTime)
         {
             nextTime += Random.Range(minTime, maxTime);
 
@@ -38,8 +41,8 @@ public class PlayAtRandomIntervals : MonoBehaviour
             sound.Play();
         }
 
-        sound.panStereo = (Mathf.PerlinNoise(Time.time / 3, seed) * 2 ) - 1;
+        sound.panStereo = (Mathf.PerlinNoise(Time.time / 3, seed) * 2) - 1;
 
-        sound.volume = (1 - (sound.panStereo * sound.panStereo));
+        sound.volume = (1 - (sound.panStereo * sound.panStereo)) * volumeMultiplier;
     }
 }
