@@ -316,6 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c4345c7f531b740bc605b576e69449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingCursor: {fileID: 21300000, guid: e4d91ace070cee541a3c5306c96fc49f, type: 3}
+  defaultCursor: {fileID: 21300000, guid: 3423c10890cfde444adedaeff48ee8f2, type: 3}
 --- !u!1 &358512662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,12 +1197,12 @@ PrefabInstance:
     - target: {fileID: 1429539457289163455, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_Value
-      value: 0.9999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1429539457289163455, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_Size
-      value: 0.44938976
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5976690d7f49342b6d8396bf6aaf0d, type: 3}
@@ -1765,7 +1767,7 @@ PrefabInstance:
     - target: {fileID: 1429539455939682904, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 123
+      value: 464
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682904, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -1776,6 +1778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.y
       value: 7.4609294
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429539455939682904, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -793.2238
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -1970,12 +1977,12 @@ PrefabInstance:
     - target: {fileID: 1429539457289163455, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_Value
-      value: 0.9999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1429539457289163455, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_Size
-      value: 0.44938976
+      value: 0.395
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5976690d7f49342b6d8396bf6aaf0d, type: 3}
