@@ -45,6 +45,11 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log($"Pasting \"{clipboard}\"");
         textMesh.text += clipboard;
+
+        if (TextSelection.SelectedInstance == inputSelection)
+        {
+            inputSelection.FullReset();
+        }
     }
 
     private void Cut()

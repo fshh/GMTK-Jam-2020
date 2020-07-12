@@ -6,12 +6,11 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     // Highlighting
-    [Header("Highlighting")]
-    public Transform HighlightsParent;
-    public GameObject HighlightPrefab;
+    private Transform highlightsParent;
+    private GameObject highlightPrefab;
     private static float paddingX = 5f;
     private static float paddingY = 5f;
     private struct Highlight
@@ -40,6 +39,9 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void Awake()
     {
+        highlightsParent = GameObject.FindGameObjectWithTag("HighlightsParent").transform;
+        highlightPrefab = (GameObject)Resources.Load("Highlight");
+
         rectTransform = GetComponent<RectTransform>();
         textMesh = GetComponent<TextMeshProUGUI>();
         canvas = GetComponentInParent<Canvas>();
@@ -189,7 +191,7 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void CreateHighlight(Highlight highlight)
     {
-        GameObject obj = Instantiate(HighlightPrefab, HighlightsParent);
+        GameObject obj = Instantiate(highlightPrefab, highlightsParent);
         RectTransform rect = obj.GetComponent<RectTransform>();
 
         rect.SetPositionAndRotation(highlight.position, Quaternion.identity);
@@ -209,13 +211,21 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void ResetHighlights()
     {
-        foreach (Transform child in HighlightsParent) { Destroy(child.gameObject); }
+        foreach (Transform child in highlightsParent) { Destroy(child.gameObject); }
         highlights.Clear();
     }
 
     private void ResetSelectedText()
     {
         SelectedText = "";
+    }
+
+    public void FullReset()
+    {
+        SelectedInstance = null;
+        ResetSelectionIndices();
+        ResetHighlights();
+        ResetSelectedText();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -231,14 +241,15 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         isHolding = false;
     }
 
+    // DO NOT DELETE!!
+    // If this isn't here, then OnPointerUp gets called as soon as the mouse moves
+    public void OnDrag(PointerEventData eventData) {}
+
     private void OnSubmitText(string text)
     {
         if (SelectedInstance == this)
         {
-            SelectedInstance = null;
-            ResetSelectionIndices();
-            ResetHighlights();
-            ResetSelectedText();
+            FullReset();
         }
     }
 }
