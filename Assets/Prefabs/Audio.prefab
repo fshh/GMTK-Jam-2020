@@ -147,8 +147,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67551e9b8086f494aa51222ba7e57d5b, type: 3}
   - {fileID: 8300000, guid: 313aede52b9b42043b034d667892f8a4, type: 3}
   - {fileID: 8300000, guid: ef4c2104924a87b44bd39b1ca9c193eb, type: 3}
-  minTime: 20
-  maxTime: 70
+  minTime: 45
+  maxTime: 80
 --- !u!1 &46406766078751170
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,8 +297,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b60bda335736c934ab96839632ee2cfe, type: 3}
   - {fileID: 8300000, guid: 4fd8898a418bf68448fac54751f0732b, type: 3}
   - {fileID: 8300000, guid: 40f81aa785f91e745a63b758952004c4, type: 3}
-  minTime: 30
-  maxTime: 60
+  minTime: 50
+  maxTime: 70
 --- !u!1 &46406766966845129
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: daa656bc9840b0344a9aec3266c07d4a, type: 3}
   - {fileID: 8300000, guid: bf05ad0cf8654e34a890a21eb0065856, type: 3}
   - {fileID: 8300000, guid: 95ae31611854111458b2433d26f4d975, type: 3}
-  minTime: 10
+  minTime: 30
   maxTime: 90
 --- !u!1 &1958050597084320640
 GameObject:
@@ -723,9 +723,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7509317139882140376}
+  - component: {fileID: 2999371358732606866}
   m_Layer: 0
   m_Name: Audio
-  m_TagString: Untagged
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -749,3 +750,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2999371358732606866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032818984935425513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62f41ee29b59dc43b48584051584be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

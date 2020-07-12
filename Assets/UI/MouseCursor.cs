@@ -14,6 +14,7 @@ public class MouseCursor : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()
