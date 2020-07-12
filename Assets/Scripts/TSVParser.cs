@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 public class TSVParser : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class TSVParser : MonoBehaviour
     public List<string> wordList;
 
     public List<bool> isSpoken;
+
+    public TextMeshProUGUI textRenderer;
+
+    float interval = 6f;
+    float nextTime = 0;
+
+    int scriptIndex = 0;
 
     public void Start()
     {
@@ -23,7 +31,27 @@ public class TSVParser : MonoBehaviour
         wordList = new List<string>(text.Split('\t'));
 
         clean();
+        textRenderer.text = "";
 
+    }
+
+    public void addText(int line)
+    {
+        textRenderer.text += "\n \n" + wordList[line];
+    }
+
+
+    private void Update()
+    {/*
+        if(Time.time > nextTime && scriptIndex < wordList.Count)
+        {
+            nextTime += interval;
+            while (isSpoken[scriptIndex])
+            {
+                scriptIndex++;
+            }
+            textRenderer.text += "\n \n" + wordList[scriptIndex++];
+        }*/
     }
 
     void clean()

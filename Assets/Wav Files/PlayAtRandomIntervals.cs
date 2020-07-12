@@ -13,12 +13,17 @@ public class PlayAtRandomIntervals : MonoBehaviour
 
     private AudioSource sound;
 
+    private float seed;
+
+
     // Start is called before the first frame update
     void Start()
     {
         sound = GetComponent<AudioSource>();
 
         nextTime += Random.Range(minTime, maxTime);
+
+        seed = Random.Range(0, 100);
     }
 
     // Update is called once per frame
@@ -32,5 +37,7 @@ public class PlayAtRandomIntervals : MonoBehaviour
 
             sound.Play();
         }
+
+        sound.panStereo = (Mathf.PerlinNoise(Time.time / 3, seed) * 2 ) - 1;
     }
 }
