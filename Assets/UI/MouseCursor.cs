@@ -8,6 +8,7 @@ public class MouseCursor : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite loadingCursor;
     [SerializeField] Sprite defaultCursor;
+    [SerializeField] Sprite smallCursor;
 
     private void Start()
     {
@@ -18,6 +19,14 @@ public class MouseCursor : MonoBehaviour
     {
         cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPosition;
+        if (Input.GetMouseButtonDown(0))
+        {
+            SwitchToSmallCursor();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            SwitchToDefaultCursor();
+        }
     }
 
     public void SwitchToLoadingCursor()
@@ -28,5 +37,10 @@ public class MouseCursor : MonoBehaviour
     public void SwitchToDefaultCursor()
     {
         spriteRenderer.sprite = defaultCursor;
+    }
+
+    public void SwitchToSmallCursor()
+    {
+        spriteRenderer.sprite = smallCursor;
     }
 }
