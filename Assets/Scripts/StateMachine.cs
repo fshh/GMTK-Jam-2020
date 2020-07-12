@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class StateMachine : MonoBehaviour
 {
-    public enum state { User, Choosing, Voice, Typing};
+    public enum state { User, Choosing, Voice, Typing }
 
     public state gameState;
 
@@ -22,7 +23,13 @@ public class StateMachine : MonoBehaviour
     bool pressedEnter = false;
 
     public TextMeshProUGUI typing;
+    public Image subtitleBackground;
     public TextMeshProUGUI subtitles;
+
+    private void Awake()
+    {
+        subtitleBackground.enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,7 +52,8 @@ public class StateMachine : MonoBehaviour
                 if (parser.isSpoken[line])
                 {
                     gameState = state.Voice;
-                } else
+                }
+                else
                 {
                     gameState = state.Typing;
                 }
@@ -70,7 +78,10 @@ public class StateMachine : MonoBehaviour
     {
         playingCoroutine = true;
         subtitles.text = parser.wordList[line];
+        subtitleBackground.enabled = true;
         yield return new WaitForSeconds(voice.playNextLine() + 1f);
+        subtitles.text = "";
+        subtitleBackground.enabled = false;
         gameState = state.Choosing;
         playingCoroutine = false;
         line++;
@@ -87,5 +98,5 @@ public class StateMachine : MonoBehaviour
         playingCoroutine = false;
         line++;
     }
-    
+
 }
