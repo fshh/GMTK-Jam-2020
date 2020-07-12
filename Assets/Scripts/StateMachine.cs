@@ -27,6 +27,11 @@ public class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (line >= parser.wordList.Count - 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
         switch (gameState)
         {
             case state.User:
@@ -36,10 +41,6 @@ public class StateMachine : MonoBehaviour
                 }
                 break;
             case state.Choosing:
-                if(line >= parser.wordList.Count)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
 
                 if (parser.isSpoken[line])
                 {
