@@ -10,8 +10,13 @@ public class FlashingText : MonoBehaviour
 
     void Update()
     {
+        flash();
+    }
+
+    public void flash()
+    {
         timer += Time.deltaTime;
-        if(timer >= 0.5f)
+        if (timer >= 0.5f)
         {
             textContent.enabled = true;
         }
