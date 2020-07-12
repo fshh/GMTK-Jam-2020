@@ -9,6 +9,7 @@ public class MouseCursor : MonoBehaviour
     [SerializeField] Sprite loadingCursor;
     [SerializeField] Sprite defaultCursor;
     [SerializeField] Sprite smallCursor;
+    [SerializeField] AudioClip clickingSound;
 
     private void Start()
     {
@@ -26,6 +27,14 @@ public class MouseCursor : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             SwitchToDefaultCursor();
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        if(clickingSound != null)
+        {
+            AudioSource.PlayClipAtPoint(clickingSound, Camera.main.transform.position);
         }
     }
 
