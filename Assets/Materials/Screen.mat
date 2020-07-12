@@ -75,7 +75,7 @@ Material:
     - _Distort: 0
     - _Distortion: 0.6
     - _DoubleOffset: 2.54
-    - _DoubleStrength: -6.2
+    - _DoubleStrength: -4.83
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5

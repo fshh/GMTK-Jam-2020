@@ -19,10 +19,14 @@ public class TypewriterEffect : MonoBehaviour
 
     IEnumerator PlayText()
     {
-        foreach (char c in story)
+        while (true)
         {
-            textContent.text += c;
-            yield return new WaitForSeconds(delayBetweenCharacters);
+            foreach (char c in story)
+            {
+                textContent.text += c;
+                yield return new WaitForSeconds(delayBetweenCharacters);
+            }
+            textContent.text = "";
         }
     }
 
