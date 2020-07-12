@@ -22,6 +22,7 @@ public class StateMachine : MonoBehaviour
     bool pressedEnter = false;
 
     public TextMeshProUGUI typing;
+    public TextMeshProUGUI subtitles;
 
     // Update is called once per frame
     void Update()
@@ -67,6 +68,7 @@ public class StateMachine : MonoBehaviour
     IEnumerator playVO()
     {
         playingCoroutine = true;
+        subtitles.text = parser.wordList[line];
         yield return new WaitForSeconds(voice.playNextLine() + 1f);
         gameState = state.Choosing;
         playingCoroutine = false;
