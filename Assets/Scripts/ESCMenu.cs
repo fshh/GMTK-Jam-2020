@@ -22,7 +22,7 @@ public class ESCMenu : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject);
             LoadPreferences();
             SwitchToPanel(ButtonPanel);
             UpdateChildrenActive();
