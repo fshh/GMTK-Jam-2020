@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.SceneManagement;
 public class StateMachine : MonoBehaviour
 {
     public enum state { User, Choosing, Voice, Typing};
@@ -16,11 +17,11 @@ public class StateMachine : MonoBehaviour
 
     public float secPerLetter;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public voiceLines voice;
+
+    bool pressedEnter = false;
+
+    public TextMeshProUGUI typing;
 
     // Update is called once per frame
     void Update()
@@ -34,6 +35,11 @@ public class StateMachine : MonoBehaviour
                 }
                 break;
             case state.Choosing:
+                if(line >= parser.wordList.Count)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+
                 if (parser.isSpoken[line])
                 {
                     gameState = state.Voice;
@@ -61,7 +67,7 @@ public class StateMachine : MonoBehaviour
     IEnumerator playVO()
     {
         playingCoroutine = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(voice.playNextLine() + 1f);
         gameState = state.Choosing;
         playingCoroutine = false;
         line++;
@@ -70,7 +76,9 @@ public class StateMachine : MonoBehaviour
     IEnumerator pastingText()
     {
         playingCoroutine = true;
+        typing.enabled = true;
         yield return new WaitForSeconds(secPerLetter * parser.wordList[line].Length);
+        typing.enabled = false;
         parser.addText(line);
         gameState = state.User;
         playingCoroutine = false;

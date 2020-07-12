@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
-public class FlashingText : MonoBehaviour
+public class FlashingButton : MonoBehaviour
 {
     float timer;
-    [SerializeField] TextMeshProUGUI textContent;
+    [SerializeField] GameObject buttonImage;
+
 
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= 0.5f)
+        if (timer >= 0.5f)
         {
-            textContent.enabled = true;
+            buttonImage.SetActive(true);
         }
 
         if (timer >= 1.5)
         {
-            textContent.enabled = false;
+            buttonImage.SetActive(false);
             timer = 0;
         }
     }

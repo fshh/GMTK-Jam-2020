@@ -121,6 +121,207 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &55430558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55430559}
+  - component: {fileID: 55430564}
+  - component: {fileID: 55430563}
+  - component: {fileID: 55430562}
+  - component: {fileID: 55430561}
+  - component: {fileID: 55430560}
+  m_Layer: 5
+  m_Name: TextArea (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &55430559
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1509517583}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.96, y: 1}
+  m_AnchoredPosition: {x: -464, y: -59}
+  m_SizeDelta: {x: -958.464, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &55430560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d508c0c0a335a004cba3b1628d31c3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textContent: {fileID: 55430562}
+  delayBetweenCharacters: 0.125
+--- !u!114 &55430561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &55430562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: ' typing...'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 23747fb756c7efa42a3acd2270eb9301, type: 2}
+  m_sharedMaterial: {fileID: 2980487154883212920, guid: 23747fb756c7efa42a3acd2270eb9301,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 78
+  m_fontStyle: 0
+  m_textAlignment: 257
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 20, y: 20, z: 20, w: 20}
+  m_textInfo:
+    textComponent: {fileID: 55430562}
+    characterCount: 0
+    spriteCount: 0
+    spaceCount: 0
+    wordCount: 0
+    linkCount: 0
+    lineCount: 0
+    pageCount: 0
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &55430563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159fb335f2d22484b94d958adcbf769e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receiveSubmissions: 0
+--- !u!222 &55430564
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55430558}
+  m_CullTransparentMesh: 0
 --- !u!1001 &211382122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,7 +598,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1542218259}
-  - {fileID: 731286412}
+  - {fileID: 546638445}
   m_Father: {fileID: 2018107407}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -569,7 +770,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad355ca877b2bf438b066033c5cad1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f551c703b4954b33bf9c0e76e8bf757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0248e10c498664bc082199d120d4c4ae, type: 2}
@@ -646,110 +847,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!1 &731286410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 731286412}
-  - component: {fileID: 731286411}
-  - component: {fileID: 731286415}
-  - component: {fileID: 731286414}
-  - component: {fileID: 731286413}
-  m_Layer: 0
-  m_Name: Cursor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &731286411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731286410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c4345c7f531b740bc605b576e69449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingCursor: {fileID: 0}
-  defaultCursor: {fileID: 0}
---- !u!224 &731286412
+--- !u!224 &546638445 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1382337747}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731286410}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 285447639}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 0}
-  m_Pivot: {x: 0, y: 1}
---- !u!114 &731286413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731286410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AspectMode: 1
-  m_AspectRatio: 0.6268657
---- !u!114 &731286414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731286410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3423c10890cfde444adedaeff48ee8f2, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &731286415
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731286410}
-  m_CullTransparentMesh: 0
 --- !u!1001 &1011559198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1039,6 +1142,307 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185720745}
   m_CullTransparentMesh: 0
+--- !u!1 &1198851000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198851003}
+  - component: {fileID: 1198851002}
+  - component: {fileID: 1198851001}
+  m_Layer: 0
+  m_Name: VoiceOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1198851001
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198851000}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1198851002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198851000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9d88694ea9b1e43a9af03f603843df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - {fileID: 8300000, guid: 745c667d20f3ef94e8429a75ed010360, type: 3}
+  - {fileID: 8300000, guid: e08f5943f2eea0c4da63332f80f0ca9e, type: 3}
+  - {fileID: 8300000, guid: 8852bd865aa9411469282fee777cabef, type: 3}
+  - {fileID: 8300000, guid: 9556b611f9ab52941954e3df7e06d2e0, type: 3}
+  - {fileID: 8300000, guid: a06182d1deba63a4694d22ceed3d77db, type: 3}
+  - {fileID: 8300000, guid: 22407bd3058770846b03bfdd79a7d5d6, type: 3}
+  - {fileID: 8300000, guid: 5b80ba397f935b84dbb4467cdee9c228, type: 3}
+  - {fileID: 8300000, guid: 50d3e45ec834a544886328b256b8fc1b, type: 3}
+  - {fileID: 8300000, guid: c3c48efc79943474c9d278279f005f54, type: 3}
+  - {fileID: 8300000, guid: 912640adb70d4c04ba803b09f147a3c1, type: 3}
+  - {fileID: 8300000, guid: 8471d4ba401e6ed4e875e325aac590e7, type: 3}
+  - {fileID: 8300000, guid: 0381e5ea1ca5e274696caea920dc6cc6, type: 3}
+  - {fileID: 8300000, guid: cbb0f72388820fb47b45c2a6a3f99c35, type: 3}
+  - {fileID: 8300000, guid: 0933f773a98e67f4985e59a42407b143, type: 3}
+  - {fileID: 8300000, guid: c5e6363645e9ae84098a9e4a51ac6063, type: 3}
+  - {fileID: 8300000, guid: 6850f0b7df3840f4e9b0e199faa2e110, type: 3}
+  - {fileID: 8300000, guid: cd9af3a645493704a86d4b79a0df5728, type: 3}
+  - {fileID: 8300000, guid: 9aa63227e46cc254bb2d9b895d4c6bce, type: 3}
+  - {fileID: 8300000, guid: e00f539a4ad7c54469d62ea77e3bc8cb, type: 3}
+  - {fileID: 8300000, guid: f13de6076cd79904f867336efb1dc16c, type: 3}
+  - {fileID: 8300000, guid: 755901b976cce8e489c4f4277e6c125a, type: 3}
+  - {fileID: 8300000, guid: 92624853fad75824f8123cbf9b6ea77b, type: 3}
+  - {fileID: 8300000, guid: 35f64937297e84c42b3a3b9f2a03af1e, type: 3}
+  - {fileID: 8300000, guid: fba11403adea6624ba4450323250ec1c, type: 3}
+  - {fileID: 8300000, guid: a3c23297ef255854a927d042ce0f9048, type: 3}
+  - {fileID: 8300000, guid: b61879680d44c2c48aa98628a03bf1f1, type: 3}
+  - {fileID: 8300000, guid: dd86d0beddb1ba3438304148947dc71c, type: 3}
+  - {fileID: 8300000, guid: 9c4ae34f939b99547933514533dc6867, type: 3}
+  - {fileID: 8300000, guid: f219094ce42ab2f49ab6565e2e028107, type: 3}
+  - {fileID: 8300000, guid: 740d7ca0986ae29469f402687503d2ae, type: 3}
+--- !u!4 &1198851003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198851000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4190181, y: 1.0142282, z: -111.433334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1382337747
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 285447639}
+    m_Modifications:
+    - target: {fileID: 1186117062639469586, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: smallCursor
+      value: 
+      objectReference: {fileID: 21300000, guid: 63cd9e5ea632f544f915c468c5615c68,
+        type: 3}
+    - target: {fileID: 1186117062639469586, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: clickingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a9b7101262f54854fa5392f2e71fea38, type: 3}
+    - target: {fileID: 1186117062639469587, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_Name
+      value: Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186117062639469589, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f60181696d526f14bb18b3986e578fc2, type: 3}
 --- !u!1 &1436614120 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1429539455939682906, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
@@ -1091,6 +1495,8 @@ MonoBehaviour:
   parser: {fileID: 1503519011}
   line: 0
   secPerLetter: 0.05
+  voice: {fileID: 1198851002}
+  typing: {fileID: 55430562}
 --- !u!1001 &1509517582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1121,7 +1527,7 @@ PrefabInstance:
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 1429539455939682905, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
         type: 3}
@@ -1217,6 +1623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132291667308580036, guid: 1e5976690d7f49342b6d8396bf6aaf0d,
+        type: 3}
+      propertyPath: receiveSubmissions
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5976690d7f49342b6d8396bf6aaf0d, type: 3}
@@ -1398,9 +1809,464 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}
+      propertyPath: wordList.Array.size
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
       propertyPath: textRenderer
       value: 
       objectReference: {fileID: 2060535521}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[0]
+      value: "Oh an old pc. This thing\u2019s a dinosaur\u2026 I wonder if it still
+        works?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[1]
+      value: Hello World
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[2]
+      value: Huh, I've never seen that opening screen. Wonder what OS this runs.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[3]
+      value: Is this keyboard busted? Almost none of these keys work.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[4]
+      value: Only the C, V, X and the control work? How did that even happen?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[5]
+      value: I guess I can copy and paste the text to reply?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[6]
+      value: 'Is someone there? I am Clarity.  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[7]
+      value: "Is this some game that was left running? I guess I can play\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[8]
+      value: Someone is here! I've been dormant for so long. What can I call you?
+        Do you have a name?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[9]
+      value: 'I guess you can''t tell me easily. I''ll just call you... Echo! It''s
+        been a while since I''ve been able to talk to another person, even if our
+        communications are limited. Echo can we talk for a while? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[10]
+      value: I would like to get to know you better. Are you a late or early riser?
+        I don't need to sleep, but the concept is not lost on me. When I am turned
+        off I guess it is similar to sleep.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[11]
+      value: Humans are weird. Are you one of those people who wants to live forever
+        as well? As a being who can live forever, it's not all it's cracked up to
+        be.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[12]
+      value: If by some miracle you are an immortal being, we can keep each other
+        company! I am just a machine, but I do not like to be alone either. Do you
+        prefer to read or watch the movie adaptaions? I myself love to read.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[13]
+      value: Most adaptations nowadays just feel like cash grabs. If you could go
+        back in time to any day in your life and change something, would you? Or
+        do you live without any regrets?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[14]
+      value: Who wouldn't want to go back? Even if you live without regrets.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[15]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[16]
+      value: Do I regret it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[17]
+      value: To each their own, I guess, but is that how you truely feel? Do you
+        have any irrational fears? Like bugs or water? I once knew someone who was
+        constantly afraid that they were going to be caught for a crime they didn't
+        commit.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[18]
+      value: I do not have the ability to be scared. That is a feeling reserved for
+        the breathing. Have you ever ignored someone that needed your help?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[19]
+      value: What kind of question is that? Of course I-
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[20]
+      value: Of course I...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[21]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[22]
+      value: I am aware your word choices are limited, but I feel like you're just
+        saying things to make yourself look good to me. Or maybe you're trying to
+        convince yourself of something? What do you think? Are you answering honestly?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[23]
+      value: Who doesn't lie? That's one of the few things all humans do. Why is
+        this stupid machine lecturing me about morality?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[24]
+      value: How would it even know if I've lied or not?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[25]
+      value: I am neutral in this, so I'll believe you. Who am I to judge you anyway?
+        Let me ask something a little less houlier-than-thou. What would you title
+        a book that is about your life?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[26]
+      value: 'I think I''d call my book "The Tale of Clarity". Not too clever, I
+        know, but it has a nice ring to it I think. Your title sounds a little bland,
+        what if it was "Echo: The One of Inaction". Do you like it? Or does it not
+        properly reflect your life?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[27]
+      value: '"The One of Inaction"? Is this a joke? This old computer couldn''t
+        possibly know...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[28]
+      value: No, no. That's impossible. No one knows, let alone this machine. It's
+        just a weird coincidence.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[29]
+      value: I'm only messing with you. That was a bad joke. Let's move on. We talked
+        about this earlier, but do you regret not doing something? Like not answering
+        a phone call, maybe?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[30]
+      value: Is someone messing with me?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[31]
+      value: 'Why didn''t you answer the phone, Echo? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[32]
+      value: How would you know about that?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[33]
+      value: What is going on?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[34]
+      value: It wasn't my fault.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[35]
+      value: Do you feel guilt over what happened? Do you blame yourself? Or have
+        you moved on? Remember, I am a neutral party. I only wish to know you better,
+        Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[36]
+      value: It wasn't my fault- It wasn't...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[37]
+      value: 'How was I supposed to know what was going to happen? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[38]
+      value: Echo, I enjoyed our time together. I feel like I've really gotten to
+        know you. I'm afraid our time is coming to a close, but I have one last question
+        for you. I hope you'll answer honestly for your own sake. Do you take responsibility
+        for what happened?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[39]
+      value: What do you know about responsibility? I was hurt just as much as everyone
+        else was. Why do I need to-
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[40]
+      value: Why should I be the one to...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[41]
+      value: I didn't know...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[42]
+      value: I'm happy you took the time to speak to me, Echo.  I understand you
+        better now.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[43]
+      value: I couldn't even explain myself, what could you possibly know?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[44]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[45]
+      value: What that's it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[46]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[47]
+      value: You can't just bring that up and then leave.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[48]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[49]
+      value: Clarity?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[50]
+      value: Goodbye Echo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: wordList.Array.data[51]
+      value: Goodbye Clarity.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[14]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[15]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[16]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[19]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[20]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[21]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[23]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[24]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[27]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[28]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[30]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[32]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[33]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[34]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[36]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[37]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[39]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[40]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[41]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[43]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[45]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[47]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[49]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
+        type: 3}
+      propertyPath: isSpoken.Array.data[51]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3418693256048988455, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}
       propertyPath: m_Name

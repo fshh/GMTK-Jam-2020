@@ -1,30 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-public class FlashingObject : MonoBehaviour
+public class FlashingText : MonoBehaviour
 {
-    public GameObject Object;
-
     float timer;
-
-    private void Awake()
-    {
-        Object.SetActive(false);
-    }
+    [SerializeField] TextMeshProUGUI textContent;
 
     void Update()
+    {
+        flash();
+    }
+
+    public void flash()
     {
         timer += Time.deltaTime;
         if (timer >= 0.5f)
         {
-            Object.SetActive(true);
+            textContent.enabled = true;
         }
 
         if (timer >= 1.5)
         {
-            Object.SetActive(false);
+            textContent.enabled = false;
             timer = 0;
         }
     }

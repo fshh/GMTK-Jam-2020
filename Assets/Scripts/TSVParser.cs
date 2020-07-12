@@ -31,7 +31,7 @@ public class TSVParser : MonoBehaviour
         wordList = new List<string>(text.Split('\t'));
 
         clean();
-        textRenderer.text = "";
+        textRenderer.text = "Hello World";
 
     }
 
