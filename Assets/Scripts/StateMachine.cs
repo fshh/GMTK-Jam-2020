@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class StateMachine : MonoBehaviour
 {
     public enum state { User, Choosing, Voice, Typing};
@@ -35,6 +35,11 @@ public class StateMachine : MonoBehaviour
                 }
                 break;
             case state.Choosing:
+                if(line >= parser.wordList.Count)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+
                 if (parser.isSpoken[line])
                 {
                     gameState = state.Voice;
