@@ -66,7 +66,8 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         if (isHolding)
         {
-            Vector3 mousePos = ScreenCurvePoint(Input.mousePosition);
+            //Vector3 mousePos = ScreenCurvePoint(Input.mousePosition);
+            Vector3 mousePos = Input.mousePosition;
             if (TMP_TextUtilities.IsIntersectingRectTransform(rectTransform, mousePos, Camera.main))
             {
                 int wordIndex = TMP_TextUtilities.FindIntersectingWord(textMesh, mousePos, Camera.main);
@@ -82,6 +83,7 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     }
 
     // Adjust screen-space coordinate according to screen effect's curve function
+    // Not needed because custom cursor is also affected by screen effect
     private Vector3 ScreenCurvePoint(Vector3 screenPoint)
     {
         if (!useCurve) { return screenPoint; }
