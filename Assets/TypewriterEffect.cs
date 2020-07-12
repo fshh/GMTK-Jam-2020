@@ -26,6 +26,7 @@ public class TypewriterEffect : MonoBehaviour
                 textContent.text += c;
                 yield return new WaitForSeconds(delayBetweenCharacters);
             }
+            yield return new WaitForSeconds(1f);
             textContent.text = "";
         }
     }
