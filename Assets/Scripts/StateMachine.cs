@@ -16,6 +16,8 @@ public class StateMachine : MonoBehaviour
 
     public float secPerLetter;
 
+    public voiceLines voice;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +63,7 @@ public class StateMachine : MonoBehaviour
     IEnumerator playVO()
     {
         playingCoroutine = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(voice.playNextLine() + 0.5f);
         gameState = state.Choosing;
         playingCoroutine = false;
         line++;
