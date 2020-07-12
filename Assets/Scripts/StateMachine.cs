@@ -18,6 +18,8 @@ public class StateMachine : MonoBehaviour
 
     public voiceLines voice;
 
+    bool pressedEnter = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +29,16 @@ public class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            pressedEnter = true;
+        }
         switch (gameState)
         {
             case state.User:
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (pressedEnter)
                 {
+                    pressedEnter = false;
                     gameState = state.Choosing;
                 }
                 break;
@@ -63,7 +70,7 @@ public class StateMachine : MonoBehaviour
     IEnumerator playVO()
     {
         playingCoroutine = true;
-        yield return new WaitForSeconds(voice.playNextLine() + 0.5f);
+        yield return new WaitForSeconds(voice.playNextLine() + 1f);
         gameState = state.Choosing;
         playingCoroutine = false;
         line++;

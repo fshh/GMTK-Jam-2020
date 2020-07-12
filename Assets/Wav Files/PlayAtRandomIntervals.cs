@@ -39,5 +39,7 @@ public class PlayAtRandomIntervals : MonoBehaviour
         }
 
         sound.panStereo = (Mathf.PerlinNoise(Time.time / 3, seed) * 2 ) - 1;
+
+        sound.volume = (1 - (sound.panStereo * sound.panStereo));
     }
 }

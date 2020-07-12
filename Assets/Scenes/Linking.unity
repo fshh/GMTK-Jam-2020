@@ -1581,7 +1581,7 @@ PrefabInstance:
     - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}
       propertyPath: isSpoken.Array.size
-      value: 52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3418693256048988454, guid: 5f094797120bc9441879ce4cca958a72,
         type: 3}

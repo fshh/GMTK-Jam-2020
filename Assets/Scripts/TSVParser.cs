@@ -22,7 +22,7 @@ public class TSVParser : MonoBehaviour
 
     public void Start()
     {
-        /*StreamReader reader = new StreamReader("./Assets/TSV/" + fileName + ".tsv");
+        StreamReader reader = new StreamReader("./Assets/TSV/" + fileName + ".tsv");
 
         string text = reader.ReadToEnd();
 
@@ -30,8 +30,8 @@ public class TSVParser : MonoBehaviour
 
         wordList = new List<string>(text.Split('\t'));
 
-        clean();*/
-        textRenderer.text = "";
+        clean();
+        textRenderer.text = "Hello World";
 
     }
 
