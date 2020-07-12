@@ -4,12 +4,13 @@ Player	P: Oh an old pc. This thing’s a dinosaur… I wonder if it still works?
 Player	P: Huh, I've never seen that opening screen. Wonder what OS this runs.	
 Player	P: Is this keyboard busted? Almost none of these keys work.	
 Player	P: Only the C, V, X and the control work? How did that even happen?	
+Player	P: I guess I can copy and paste the text to reply?	
 	Is someone there? I am Clarity.  	I am someone, Clarity is someone?, Is someone there?
 Player	P: Is this some game that was left running? I guess I can play…	
-	Someone is here! I'm been dormant for so long. What can I call you? Do you have a name?	Someone have name, what dormant for, I have a name, name is someone
+	Someone is here! I've been dormant for so long. What can I call you? Do you have a name?	Someone have name, what dormant for, I have a name, name is someone
 	I guess you can't tell me easily. I'll just call you... Echo! It's been a while since I've been able to talk to another person, even if our communications are limited. Echo can we talk for a while? 	I'll talk, I'm sorry can't talk, can't talk, Echo can talk
-	I would like to get to know you better. Are you a late or early riser? I don't need to sleep, but the concept is not lost on me. When I am turned off I guess it is simlar to sleep.	late riser, early riser, I need sleep for long, 
-	Humans are weird. Are you one of those people who wants to live forever as well? As a being who can live forever, it's not all its cracked up to be.	I'll live forever, not me, I can't live forever
+	I would like to get to know you better. Are you a late or early riser? I don't need to sleep, but the concept is not lost on me. When I am turned off I guess it is similar to sleep.	late riser, early riser, I need sleep for long, 
+	Humans are weird. Are you one of those people who wants to live forever as well? As a being who can live forever, it's not all it's cracked up to be.	I'll live forever, not me, I can't live forever
 	If by some miracle you are an immortal being, we can keep each other company! I am just a machine, but I do not like to be alone either. Do you prefer to read or watch the movie adaptaions? I myself love to read.	I love to read, I am a fan of movie adaptations, I can't read, 
 	Most adaptations nowadays just feel like cash grabs. If you could go back in time to any day in your life and change something, would you? Or do you live without any regrets?	I live without regrets. I would change something, 
 Player	P: Who wouldn't want to go back? Even if you live without regrets.	
@@ -24,7 +25,7 @@ Player	P: ...
 Player	P: Who doesn't lie? That's one of the few things all humans do. Why is this stupid machine lecturing me about morality?	
 Player	P: How would it even know if I've lied or not?	
 	I am neutral in this, so I'll believe you. Who am I to judge you anyway? Let me ask something a little less houlier-than-thou. What would you title a book that is about your life?	This could be literally anything so i'm not even going to pretend to know
-	I think I'd call my book "The Tale of Clarity". Not too clever, I know, but it has a nice ring to it I think. You're title sounds a little bland, what if it was "Echo: The One of Inaction". Do you like it? Or does it not properly reflect your life?	I like it, it is bland, I like my title, 
+	I think I'd call my book "The Tale of Clarity". Not too clever, I know, but it has a nice ring to it I think. Your title sounds a little bland, what if it was "Echo: The One of Inaction". Do you like it? Or does it not properly reflect your life?	I like it, it is bland, I like my title, 
 Player	P: "The One of Inaction"? Is this a joke? This old computer couldn't possibly know...	
 Player	P: No, no. That's impossible. No one knows, let alone this machine. It's just a weird coincidence.	
 	I'm only messing with you. That was a bad joke. Let's move on. We talked about this earlier, but do you regret not doing something? Like not answering a phone call, maybe?	answering a phone call, I regret not doing it, Who Are you to judge, 
@@ -49,4 +50,4 @@ Player	P: You can't just bring that up and then leave.
 	Goodbye Echo.	doesn't matter
 Player	P: Clarity?	
 	Goodbye Echo.	doesn't matter
-Player	P: Goodbye Clarity.	
+Player	P: Goodbye Clarity.	      
