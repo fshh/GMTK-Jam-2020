@@ -43,6 +43,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00619a715a30ec04d8777a0e1cc93c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: conversation
-  wordList: []
-  isSpoken: 
+  wordList:
+  - "Oh an old pc. This thing\u2019s a dinosaur\u2026 I wonder if it still works?"
+  - Huh, I've never seen that opening screen. Wonder what OS this runs.
+  - Is this keyboard busted? Almost none of these keys work.
+  - Only the C, V, X and the control work? How did that even happen?
+  - I guess I can copy and paste the text to reply?
+  - 'Is someone there? I am Clarity.  '
+  - "Is this some game that was left running? I guess I can play\u2026"
+  - Someone is here! I've been dormant for so long. What can I call you? Do you have
+    a name?
+  - 'I guess you can''t tell me easily. I''ll just call you... Echo! It''s been a
+    while since I''ve been able to talk to another person, even if our communications
+    are limited. Echo can we talk for a while? '
+  - I would like to get to know you better. Are you a late or early riser? I don't
+    need to sleep, but the concept is not lost on me. When I am turned off I guess
+    it is similar to sleep.
+  - Humans are weird. Are you one of those people who wants to live forever as well?
+    As a being who can live forever, it's not all it's cracked up to be.
+  - If by some miracle you are an immortal being, we can keep each other company!
+    I am just a machine, but I do not like to be alone either. Do you prefer to read
+    or watch the movie adaptaions? I myself love to read.
+  - Most adaptations nowadays just feel like cash grabs. If you could go back in
+    time to any day in your life and change something, would you? Or do you live
+    without any regrets?
+  - Who wouldn't want to go back? Even if you live without regrets.
+  - ...
+  - Do I regret it?
+  - To each their own, I guess, but is that how you truely feel? Do you have any
+    irrational fears? Like bugs or water? I once knew someone who was constantly
+    afraid that they were going to be caught for a crime they didn't commit.
+  - I do not have the ability to be scared. That is a feeling reserved for the breathing.
+    Have you ever ignored someone that needed your help?
+  - What kind of question is that? Of course I-
+  - Of course I...
+  - ...
+  - I am aware your word choices are limited, but I feel like you're just saying
+    things to make yourself look good to me. Or maybe you're trying to convince yourself
+    of something? What do you think? Are you answering honestly?
+  - Who doesn't lie? That's one of the few things all humans do. Why is this stupid
+    machine lecturing me about morality?
+  - How would it even know if I've lied or not?
+  - I am neutral in this, so I'll believe you. Who am I to judge you anyway? Let
+    me ask something a little less houlier-than-thou. What would you title a book
+    that is about your life?
+  - 'I think I''d call my book "The Tale of Clarity". Not too clever, I know, but
+    it has a nice ring to it I think. Your title sounds a little bland, what if it
+    was "Echo: The One of Inaction". Do you like it? Or does it not properly reflect
+    your life?'
+  - '"The One of Inaction"? Is this a joke? This old computer couldn''t possibly
+    know...'
+  - No, no. That's impossible. No one knows, let alone this machine. It's just a
+    weird coincidence.
+  - I'm only messing with you. That was a bad joke. Let's move on. We talked about
+    this earlier, but do you regret not doing something? Like not answering a phone
+    call, maybe?
+  - Is someone messing with me?
+  - 'Why didn''t you answer the phone, Echo? '
+  - How would you know about that?
+  - What is going on?
+  - It wasn't my fault.
+  - Do you feel guilt over what happened? Do you blame yourself? Or have you moved
+    on? Remember, I am a neutral party. I only wish to know you better, Echo.
+  - It wasn't my fault- It wasn't...
+  - 'How was I supposed to know what was going to happen? '
+  - Echo, I enjoyed our time together. I feel like I've really gotten to know you.
+    I'm afraid our time is coming to a close, but I have one last question for you.
+    I hope you'll answer honestly for your own sake. Do you take responsibility for
+    what happened?
+  - What do you know about responsibility? I was hurt just as much as everyone else
+    was. Why do I need to-
+  - Why should I be the one to...
+  - I didn't know...
+  - I'm happy you took the time to speak to me, Echo.  I understand you better now.
+  - I couldn't even explain myself, what could you possibly know?
+  - Goodbye Echo.
+  - What that's it?
+  - Goodbye Echo.
+  - You can't just bring that up and then leave.
+  - Goodbye Echo.
+  - Clarity?
+  - Goodbye Echo.
+  - Goodbye Clarity.
+  isSpoken: 010101010100010000000000000101010000010101000101000001010001000101010001010001010100010001000100010001
+  textRenderer: {fileID: 0}

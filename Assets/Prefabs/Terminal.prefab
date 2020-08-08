@@ -33,11 +33,11 @@ RectTransform:
   m_Father: {fileID: 1429539457175614425}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.9}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 70}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &482805052909723654
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1429539455343106141}
   - component: {fileID: 1429539455343106142}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,9 +110,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 0, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1429539455343106140
 CanvasRenderer:
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 5193613372078546119}
   - component: {fileID: 1429539455924540530}
   m_Layer: 5
-  m_Name: TextContainer
+  m_Name: ScrollRect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 1429539455939682904}
   - component: {fileID: 178155035210451381}
   m_Layer: 5
-  m_Name: TextArea
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159fb335f2d22484b94d958adcbf769e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  receiveSubmissions: 0
 --- !u!114 &1429539455939682904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +411,7 @@ MonoBehaviour:
     spaceCount: 138
     wordCount: 126
     linkCount: 0
-    lineCount: 34
+    lineCount: 41
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -535,7 +536,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 65.2
+  m_fontSize: 65
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -903,8 +904,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1429539457257941021}
   m_HandleRect: {fileID: 1429539457257941022}
   m_Direction: 2
-  m_Value: 0.000000048271264
-  m_Size: 0.49983782
+  m_Value: 0
+  m_Size: 0.3430606
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
