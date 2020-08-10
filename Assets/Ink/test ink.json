@@ -1,1 +1,1 @@
-﻿{"inkVersion":19,"root":[[["done",{"#f":5,"#n":"g-0"}],null],"done",{"#f":1}],"listDefs":{}}
+﻿{"inkVersion":19,"root":[["^Hello World","\n","ev","str","^Hello","/str","/ev",{"*":"0.c-0","flg":20},"ev","str","^World","/str","/ev",{"*":"0.c-1","flg":20},{"c-0":["^ ",{"->":"hello"},"\n",{"->":"0.g-0"},{"#f":5}],"c-1":["^ ",{"->":"world"},"\n",{"->":"0.g-0"},{"#f":5}],"g-0":["done",{"#f":5}]}],"done",{"hello":["^You chose Hello, good for you!","\n","done",{"#f":1}],"world":["^You have selected the World, very powerful of you","\n","done",{"#f":1}],"#f":1}],"listDefs":{}}

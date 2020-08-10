@@ -45,6 +45,7 @@ public class TextSelection : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private float curveY;
     private float zoom;
 
+
     private void Awake()
     {
         highlightsParent = GameObject.FindGameObjectWithTag("HighlightsParent").transform;

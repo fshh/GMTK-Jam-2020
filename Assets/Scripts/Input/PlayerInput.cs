@@ -17,6 +17,9 @@ public class PlayerInput : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private TextSelection inputSelection;
 
+    //ink
+    public InkWrapper story;
+
     private void Awake()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
@@ -47,6 +50,8 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log($"Pasting \"{clipboard}\"");
         textMesh.text += clipboard;
+
+        story.Response += clipboard;
 
         if (TextSelection.SelectedInstance == inputSelection)
         {
