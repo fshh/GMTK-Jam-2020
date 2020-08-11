@@ -2666,7 +2666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: c51e9519c47babd4c8ff9a20286dc737, type: 3}
-  secPerLetter: 0.1
+  secPerLetter: 0.01
   typingText: {fileID: 1057632449426227079}
   subtitleBackground: {fileID: 913553603}
   subtitles: {fileID: 641861657}
@@ -2856,6 +2856,11 @@ PrefabInstance:
     - target: {fileID: 8955270964183416471, guid: 35b335bad15f61846ad7431de7199fe2,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955270964183416471, guid: 35b335bad15f61846ad7431de7199fe2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8955270965507830992, guid: 35b335bad15f61846ad7431de7199fe2,

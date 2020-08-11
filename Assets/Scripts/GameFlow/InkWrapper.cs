@@ -50,8 +50,8 @@ public class InkWrapper : MonoBehaviour
             responded = true;
         }
 
-        if (typing)
-        {
+        //if (typing)
+        //{
             if (!playingCoroutine)
             {
                 if (story.canContinue)
@@ -63,8 +63,9 @@ public class InkWrapper : MonoBehaviour
                     typing = false;
                 }
             }
-        }
-        else if (responded)
+        //}
+        
+        if (responded)
         {
             int choice = story.currentChoices.Count - 1;
             for (int i = 0; i < story.currentChoices.Count; i++)
@@ -83,7 +84,6 @@ public class InkWrapper : MonoBehaviour
             response = "";
             typing = true;
         }
-
 
     }
 
