@@ -11,10 +11,15 @@ public class MouseCursor : MonoBehaviour
     public Sprite smallCursor;
     public AudioClip clickingSound;
 
+    public bool locked;
+
     private void Start()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        if (locked)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
         image = GetComponent<Image>();
     }
 

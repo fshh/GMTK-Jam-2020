@@ -26,6 +26,9 @@ public class InkWrapper : MonoBehaviour
 
     bool playingCoroutine = false;
 
+    [Header("Time per message")]
+    public float min;
+    public float max;
     public float secPerLetter;
 
     public TextMeshProUGUI typingText;
@@ -92,9 +95,9 @@ public class InkWrapper : MonoBehaviour
     {
         playingCoroutine = true;
         typingText.enabled = true;
-        yield return new WaitForSeconds(secPerLetter * text.Length);
+        yield return new WaitForSeconds( Mathf.Clamp( secPerLetter * text.Length, min, max ));
         typingText.enabled = false;
-        terminal.text += "\n \n" + text;
+        terminal.text += "\n" + text;
         typing = false;
         playingCoroutine = false;
     }
