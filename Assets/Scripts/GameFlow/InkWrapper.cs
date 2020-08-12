@@ -22,7 +22,7 @@ public class InkWrapper : MonoBehaviour
     }
 
 
-    bool typing =  true;
+    bool typing = true;
 
     bool playingCoroutine = false;
 
@@ -48,27 +48,19 @@ public class InkWrapper : MonoBehaviour
     void Update()
     {
 
-        if(hasResponse && Input.GetKeyDown(KeyCode.Return))
+        if (hasResponse && Input.GetKeyDown(KeyCode.Return) && !story.canContinue)
         {
             responded = true;
         }
 
-        //if (typing)
-        //{
+        if (story.canContinue)
+        {
             if (!playingCoroutine)
             {
-                if (story.canContinue)
-                {
-                    StartCoroutine(pastingText(story.Continue()));
-                }
-                else
-                {
-                    typing = false;
-                }
+                StartCoroutine(pastingText(story.Continue()));
             }
-        //}
-        
-        if (responded)
+        }
+        else if (responded)
         {
             int choice = story.currentChoices.Count - 1;
             for (int i = 0; i < story.currentChoices.Count; i++)
@@ -95,7 +87,7 @@ public class InkWrapper : MonoBehaviour
     {
         playingCoroutine = true;
         typingText.enabled = true;
-        yield return new WaitForSeconds( Mathf.Clamp( secPerLetter * text.Length, min, max ));
+        yield return new WaitForSeconds(Mathf.Clamp(secPerLetter * text.Length, min, max));
         typingText.enabled = false;
         terminal.text += "\n" + text;
         typing = false;
