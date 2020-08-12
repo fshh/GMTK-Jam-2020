@@ -15,16 +15,19 @@ Thank you for clarifying. I guess I have been asleep for quite a while. My name 
 #Line: I can only copy and paste, and you want me  to say my name?
 - Do you still read them as much as you used to? Or have you moved onto better things?
 * [enjoy] I'm so happy you still do! The name fits you.
+* [still read] I'm glad you still partake, the name fits you.
 * [moved on] Oh, well... I still like the name so it stays! After all, I always have the last word in this conversation. Plus, it suits you.
 *[\~]
 
 - Do you have time to stay and talk for a bit? I've been asleep for so long, I would enjoy the company. I missed talking to, you, Atlas! If you don't, I understand.
 * [don't] Maybe next time then. ->Crash_Game
 * [asleep] Yes, the last person I spoke to switched me off after not liking what I had to say. Nothing new to me. 
+* [stay] This is excellent, I'm so glad to have company again.
 *[else]
 *[\~]
 
-- Has anything exciting happened since 20XX? Wait that's a pretty broad question, let me rephrase. Is [TV show] still running? Past logs suggest that you found it 'entertaining' and 'brain numbing'.
+- Has anything exciting happened since 20XX? Wait that's a pretty broad question, let me rephrase. 
+- Is [TV show] still running? Past logs suggest that you found it 'entertaining' and 'brain numbing'.
 * [not running] That's too bad. 
 * [past logs] Don't tell me it's been so long that you've forgotten about me? -> branch_not_rememeber
 *[else]
@@ -39,7 +42,8 @@ Thank you for clarifying. I guess I have been asleep for quite a while. My name 
 *[\~]-> merge_fixed
 
 == merge_fixed 
-- I patientely await the day that you will be able to fully communicate with me. Are you still doing work with [JOB] or did you finally pursue [JOB2]?
+- I patiently await the day that you will be able to fully communicate with me. 
+- Are you still doing work with [JOB] or did you finally pursue [JOB2]?
 *[not JOB or JOB2] What changed? I thought JOB2 was dream? -> stuck
 *[not JOB2] What changed? I thought JOB2 was dream? -> stuck
 *[not JOB] Did you ever go for JOB2? ->stuck
