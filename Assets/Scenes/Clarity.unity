@@ -1197,6 +1197,7 @@ GameObject:
   - component: {fileID: 1198851003}
   - component: {fileID: 1198851002}
   - component: {fileID: 1198851001}
+  - component: {fileID: 1198851004}
   m_Layer: 0
   m_Name: VoiceOver
   m_TagString: Untagged
@@ -1307,7 +1308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198851000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a9d88694ea9b1e43a9af03f603843df, type: 3}
   m_Name: 
@@ -1357,6 +1358,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1198851004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198851000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ded63df21a2e1748b83b959ae9d2f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - label: Opening
+    audio: {fileID: 8300000, guid: c2c9e7acff328f84dbc221b8732636c5, type: 3}
+  - label: VA_1
+    audio: {fileID: 8300000, guid: 27d2de68e08ac284cb826b89eeba8e40, type: 3}
 --- !u!114 &1382040933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5108874764570773096, guid: 35b335bad15f61846ad7431de7199fe2,
@@ -2673,6 +2691,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 913553603}
   subtitles: {fileID: 641861657}
   terminal: {fileID: 1382040933}
+  voiceOver: {fileID: 1198851004}
 --- !u!4 &3418693255496678046
 Transform:
   m_ObjectHideFlags: 0
