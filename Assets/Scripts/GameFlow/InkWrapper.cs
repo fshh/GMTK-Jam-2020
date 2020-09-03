@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InkWrapper : MonoBehaviour
 {
-    public TextAsset inkJSON;
+public TextAsset inkJSON;
 
     public Story story;
 
@@ -31,23 +31,25 @@ public class InkWrapper : MonoBehaviour
     public float max;
     public float secPerLetter;
 
+
     public TextMeshProUGUI typingText;
     public Image subtitleBackground;
     public TextMeshProUGUI subtitles;
 
     public TextMeshProUGUI terminal;
 
+    public VoiceLinesDictionary voiceOver;
+
     // Start is called before the first frame update
     void Start()
     {
         story = new Story(inkJSON.text);
         terminal.text = "";
-    }
+    }                      
 
     // Update is called once per frame
     void Update()
     {
-
         if (hasResponse && Input.GetKeyDown(KeyCode.Return) && !story.canContinue)
         {
             responded = true;
@@ -57,6 +59,7 @@ public class InkWrapper : MonoBehaviour
         {
             if (!playingCoroutine)
             {
+                processTags( story.currentTags.ToArray());
                 StartCoroutine(pastingText(story.Continue()));
             }
         }
@@ -65,7 +68,6 @@ public class InkWrapper : MonoBehaviour
             int choice = story.currentChoices.Count - 1;
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
-                Debug.Log(story.currentChoices[i].text);
                 if (response.ToLower().Contains(story.currentChoices[i].text.ToLower()))
                 {
                     choice = i;
@@ -79,9 +81,16 @@ public class InkWrapper : MonoBehaviour
             response = "";
             typing = true;
         }
-
     }
 
+    public void processTags(string [] tags)
+    {
+        if(tags.Length > 0)
+        {
+            string voiceLineName = tags[tags.Length - 1];
+            voiceOver.playLine(voiceLineName);
+        }
+    }
 
     IEnumerator pastingText(string text)
     {
