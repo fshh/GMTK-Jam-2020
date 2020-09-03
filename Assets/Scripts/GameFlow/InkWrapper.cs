@@ -59,8 +59,8 @@ public TextAsset inkJSON;
         {
             if (!playingCoroutine)
             {
-                processTags( story.currentTags.ToArray());
                 StartCoroutine(pastingText(story.Continue()));
+                processTags( story.currentTags.ToArray());
             }
         }
         else if (responded)
@@ -87,9 +87,21 @@ public TextAsset inkJSON;
     {
         if(tags.Length > 0)
         {
-            string voiceLineName = tags[tags.Length - 1];
+            string voiceLineTag = tags[0];
+
+            string[] fields = voiceLineTag.Split(' ');
+
+            string voiceLineName = fields[0];
+
+            //TODO, more parsing
+
             voiceOver.playLine(voiceLineName);
         }
+    }
+
+    public bool isNumber(char possibleNumber)
+    {
+        return possibleNumber > '0' && possibleNumber < '9';
     }
 
     IEnumerator pastingText(string text)

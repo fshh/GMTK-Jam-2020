@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
-public class labeledAudio
-{
-    public string label;
-    public AudioClip audio;
-}
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(AudioSource))]
 public class VoiceLinesDictionary : MonoBehaviour
 {
-    public List<labeledAudio> lines;
-    public Dictionary<string, AudioClip> linesDictionary;
+    [Header("Subtitles Objects")]
+    public TextMeshProUGUI subtitles;
+    public Image subtitleBackground;
+
+    [Header("Lines of Dialogue")]
+    public List<Dialogue> lines;
+    public Dictionary<string, Dialogue> linesDictionary;
 
     AudioSource player;
 
@@ -22,27 +22,37 @@ public class VoiceLinesDictionary : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        linesDictionary = new Dictionary<string, AudioClip>();
-        foreach(labeledAudio nugget in lines)
+        linesDictionary = new Dictionary<string, Dialogue>();
+        foreach(Dialogue nugget in lines)
         {
-            linesDictionary.Add(nugget.label, nugget.audio);
+            linesDictionary.Add(nugget.name, nugget);
         }
 
         player = GetComponent<AudioSource>();
     }
 
-    public float playLine(string lineName)
+    public void playLine(string lineName)
     {
         if (linesDictionary.ContainsKey(lineName))
         {
-            player.clip = linesDictionary[lineName];
+            player.clip = linesDictionary[lineName].audio;
             player.Play();
-            return player.clip.length;
+
+            StartCoroutine(setSubtitles(linesDictionary[lineName].subtitle, player.clip.length + 1f));
         }
         else
         {
             Debug.Log("No such voiceover exists: " + lineName);
-            return 0;
         }
     }
+
+    IEnumerator setSubtitles(string subtitle, float duration)
+    {
+        subtitles.text = subtitle;
+        subtitleBackground.enabled = true;
+        yield return new WaitForSeconds(duration);
+        subtitles.text = "";
+        subtitleBackground.enabled = false;
+    }
+
 }

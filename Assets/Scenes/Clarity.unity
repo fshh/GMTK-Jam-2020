@@ -1370,11 +1370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ded63df21a2e1748b83b959ae9d2f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subtitles: {fileID: 641861657}
+  subtitleBackground: {fileID: 913553603}
   lines:
-  - label: Opening
-    audio: {fileID: 8300000, guid: c2c9e7acff328f84dbc221b8732636c5, type: 3}
-  - label: VA_1
-    audio: {fileID: 8300000, guid: 27d2de68e08ac284cb826b89eeba8e40, type: 3}
+  - {fileID: 11400000, guid: 57b0f3ef4370813458324165c140715b, type: 2}
 --- !u!114 &1382040933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5108874764570773096, guid: 35b335bad15f61846ad7431de7199fe2,
@@ -2453,6 +2452,11 @@ PrefabInstance:
     - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
         type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267897551089291152, guid: 1848c4388bf352947bb9f290b13b8305,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8501258438778037059, guid: 1848c4388bf352947bb9f290b13b8305,
