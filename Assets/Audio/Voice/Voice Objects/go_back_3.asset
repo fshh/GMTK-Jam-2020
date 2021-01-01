@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf30a9bd64065446864e5100b62a0de, type: 3}
-  m_Name: Opening
+  m_Name: go_back_3
   m_EditorClassIdentifier: 
-  audio: {fileID: 8300000, guid: c2c9e7acff328f84dbc221b8732636c5, type: 3}
-  subtitle: Standin for the opening line
+  audio: {fileID: 8300000, guid: c3c48efc79943474c9d278279f005f54, type: 3}
+  subtitle: Do I regret it?

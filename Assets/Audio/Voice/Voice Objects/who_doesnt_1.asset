@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf30a9bd64065446864e5100b62a0de, type: 3}
+  m_Name: who_doesnt_1
+  m_EditorClassIdentifier: 
+  audio: {fileID: 8300000, guid: cbb0f72388820fb47b45c2a6a3f99c35, type: 3}
+  subtitle: Who doesn't lie? That's one of the few things all humans do. Why is this
+    stupid machine lecturing me about morality?

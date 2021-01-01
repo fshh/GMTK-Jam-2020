@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine.UI;
@@ -66,6 +67,11 @@ public class InkWrapper : MonoBehaviour
         }
         else if (responded)
         {
+            if (story.currentChoices.Count == 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+
             int choice = story.currentChoices.Count - 1;
             for (int i = 0; i < story.currentChoices.Count; i++)
             {

@@ -1484,11 +1484,37 @@ MonoBehaviour:
   subtitles: {fileID: 641861657}
   subtitleBackground: {fileID: 913553603}
   lines:
+  - {fileID: 11400000, guid: 6de88f46a21ec274490d635f9945c383, type: 2}
+  - {fileID: 11400000, guid: 8454e01811c2cc54582af331f4b9f639, type: 2}
+  - {fileID: 11400000, guid: 5d04625b22c35004d88dd269632a5c3b, type: 2}
+  - {fileID: 11400000, guid: e42259e8e323e9c4c915007dd1c2f793, type: 2}
+  - {fileID: 11400000, guid: af4a169b656b4cd429e5718005951ce6, type: 2}
+  - {fileID: 11400000, guid: f9d8f75482da1004287b50408d2a5d6e, type: 2}
+  - {fileID: 11400000, guid: 6cb1c9f3158adf54ead343244e6515d1, type: 2}
+  - {fileID: 11400000, guid: d0f30ccd1892c7c43bc0f6242837b793, type: 2}
+  - {fileID: 11400000, guid: f5c1c1a006eccea48abbba48f00c7e3e, type: 2}
+  - {fileID: 11400000, guid: db2db782d58dc8b4a8a1b80e1bb8e36d, type: 2}
+  - {fileID: 11400000, guid: 84880ab67bd66c34b82a4a30f52c96c6, type: 2}
+  - {fileID: 11400000, guid: cdf47ac2e693544489905ac165372ad2, type: 2}
+  - {fileID: 11400000, guid: 2f880e0dc6e61c64fa257bbef3abfeb9, type: 2}
+  - {fileID: 11400000, guid: 1b737b4604f68454d9b5a2b551c8a144, type: 2}
+  - {fileID: 11400000, guid: 7005768e14a01984c8bf007980eddba0, type: 2}
+  - {fileID: 11400000, guid: 521117908e0eabf43a04d3d213351d40, type: 2}
+  - {fileID: 11400000, guid: 58046752f66d956488f28bdbf054956c, type: 2}
   - {fileID: 11400000, guid: 89c96205bd673eb4a9d05c7c532fd3f6, type: 2}
   - {fileID: 11400000, guid: 1fa53f4a8e97f5a458ebc8642cc84a6b, type: 2}
   - {fileID: 11400000, guid: f52541634778f284a837642491bd1c28, type: 2}
   - {fileID: 11400000, guid: 192a117195017ce4ca582b621db2b53d, type: 2}
   - {fileID: 11400000, guid: 53ef1a21053fdee4aa1ae7b661441acb, type: 2}
+  - {fileID: 11400000, guid: 625c43075b209f748a4f3af6ddc86aff, type: 2}
+  - {fileID: 11400000, guid: 6f6d1dbe364c9ca4e861498bdcfca3b9, type: 2}
+  - {fileID: 11400000, guid: e30b9315c5e178b41bed8363b7575438, type: 2}
+  - {fileID: 11400000, guid: de29f21e95c1d2f4d965cd73bd0b60a9, type: 2}
+  - {fileID: 11400000, guid: 4977280dd2316294da011a22448afd3a, type: 2}
+  - {fileID: 11400000, guid: bde30a5fdb4b3c6468a2bfe3651f9a9f, type: 2}
+  - {fileID: 11400000, guid: fd6e70cc29309ee44a7fe015be28e949, type: 2}
+  - {fileID: 11400000, guid: 1b920a7d5c6161e4ea3c0c1b6b063cfc, type: 2}
+  window: []
 --- !u!114 &1382040933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5108874764570773096, guid: 35b335bad15f61846ad7431de7199fe2,
