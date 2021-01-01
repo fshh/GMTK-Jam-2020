@@ -11,7 +11,7 @@ to make commercial use of the work
 
 using UnityEngine;
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 [AddComponentMenu("Image Effects/GlitchEffect")]
 [RequireComponent(typeof(Camera))]
 public class GlitchEffect : MonoBehaviour
