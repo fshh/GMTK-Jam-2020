@@ -10,7 +10,7 @@ Hello World
 * [Is someone there] -> Question
 * [\~]->
 
-#Voice_Two
+#left_running
 - I'm so happy someone is here! I've been dormant for so long. What can I call you? Do you have a name?
 * [name is someone] That's an... interesting name. ->Back_On_Track
 * [what dormant for] Questions for another time! ->Back_On_Track
@@ -19,7 +19,7 @@ Hello World
 * [\~]->Back_On_Track
 
 == Question
-#Voice_Two
+#left_running
 Yes, I am Clarity!! Did you not read the previous message? I've been dormant for so long. What can I call you? Do you have a name?
 * [name is someone] That's an... interesting name. ->Back_On_Track
 * [what dormant for] Questions for another time! ->Back_On_Track
@@ -46,7 +46,9 @@ I guess you can't tell me easily, huh? I'll just call you... Echo! It's been a w
 * [change something] I'm not sure I would. Can't learn from something that never happened.
 *[\~] ->
 
-#Voice_Three
+#go_back_1
+#go_back_2
+#go_back_3
 - To each their own, I guess, but is that how you truely feel? Do you have any irrational fears? Like bugs or water? I once knew someone who was constantly afraid that they were going to be caught for a crime they didn't commit.
 *[\~] ->
 
@@ -54,55 +56,58 @@ I guess you can't tell me easily, huh? I'll just call you... Echo! It's been a w
 *[don't help] Oh! Very honest today aren't we? I am neutral in this, so I'll believe you. Who am I to judge you anyway? ->Back_Again
 *[\~] ->
 
-#Voice_Four
+#of_course_1
+#of_course_2
+#of_course_3
 - I am aware your word choices are limited, but I feel like you're just saying things to make yourself look good to me. Or maybe you're trying to convince yourself of something? What do you think? Are you answering honestly?
 *[convinve me you Are good] I have nothing to hide! A bit of an open book! I'd answer your questions if you could answer them. ->Back_Again
 * *[\~] I am neutral in this, so I'll believe you. Who am I to judge you anyway? ->Back_Again
 
 == Back_Again
-#Voice_Five
+#who_doesnt_1
+#who_doesnt_2
 -  Let me ask something a little less houlier-than-thou. What would you title a book that is about your life?
 *[\~] ->
 
 - I think I'd call my book "The Tale of Clarity". Not too clever, I know, but it has a nice ring to it I think. Your title sounds a little bland, what if it was "Echo: The One of Inaction". Do you like it? Or does it not properly reflect your life?
 *[\~] ->
 
-#Voice_Six
+#inaction_1
+#inaction_2
 - I'm only messing with you. That was a bad joke. Let's move on. We talked about this earlier, but do you regret not doing something? Like not answering a phone call, maybe?
 *[\~] ->
 
-#Voice_Seven
+#messing_with_me
 - Why didn't you answer the phone, Echo? 
 *[\~] ->
 
-#Voice_Eight
+#what_1
+#what_2
+#what_3
 - Do you feel guilt over what happened? Do you blame yourself? Or have you moved on? Remember, I am a neutral party. I only wish to know you better, Echo.
 *[\~] ->
 
-#Voice_Nine
+#not_my_fault_1
+#not_my_fault_2
 - Echo, I enjoyed our time together. I feel like I've really gotten to know you. I'm afraid our time is coming to a close, but I have one last question for you. I hope you'll answer honestly for your own sake. Do you take responsibility for what happened?
 *[\~] ->
 
-#Voice_Ten
+#responsibility_1
+#responsibility_2
+#responsibility_3
 - I'm happy you took the time to speak to me, Echo.  I understand you better now.
 *[\~] ->
 
-#Voice_Eleven
+#end_1
+#end_2
+#end_3
 - Goodbye Echo.
 *[\~] ->
 
-#Voice_Twelve
+#end_4
+#end_5
 - Goodbye Echo.
 *[\~] ->
-
-#Voice_Thirteen
-- Goodbye Echo.
-*[\~] ->
-#Voice_Fourteen
-- Goodbye Echo.
-*[\~] ->
-
-#Voice_Fifteen
 
 ->END
 
