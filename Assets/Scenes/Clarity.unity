@@ -1195,9 +1195,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198851003}
-  - component: {fileID: 1198851002}
-  - component: {fileID: 1198851001}
   - component: {fileID: 1198851004}
+  - component: {fileID: 1198851001}
   m_Layer: 0
   m_Name: VoiceOver
   m_TagString: Untagged
@@ -1301,49 +1300,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1198851002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198851000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a9d88694ea9b1e43a9af03f603843df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lines:
-  - {fileID: 8300000, guid: 745c667d20f3ef94e8429a75ed010360, type: 3}
-  - {fileID: 8300000, guid: e08f5943f2eea0c4da63332f80f0ca9e, type: 3}
-  - {fileID: 8300000, guid: 8852bd865aa9411469282fee777cabef, type: 3}
-  - {fileID: 8300000, guid: 9556b611f9ab52941954e3df7e06d2e0, type: 3}
-  - {fileID: 8300000, guid: a06182d1deba63a4694d22ceed3d77db, type: 3}
-  - {fileID: 8300000, guid: 22407bd3058770846b03bfdd79a7d5d6, type: 3}
-  - {fileID: 8300000, guid: 5b80ba397f935b84dbb4467cdee9c228, type: 3}
-  - {fileID: 8300000, guid: 50d3e45ec834a544886328b256b8fc1b, type: 3}
-  - {fileID: 8300000, guid: c3c48efc79943474c9d278279f005f54, type: 3}
-  - {fileID: 8300000, guid: 912640adb70d4c04ba803b09f147a3c1, type: 3}
-  - {fileID: 8300000, guid: 8471d4ba401e6ed4e875e325aac590e7, type: 3}
-  - {fileID: 8300000, guid: 0381e5ea1ca5e274696caea920dc6cc6, type: 3}
-  - {fileID: 8300000, guid: cbb0f72388820fb47b45c2a6a3f99c35, type: 3}
-  - {fileID: 8300000, guid: 0933f773a98e67f4985e59a42407b143, type: 3}
-  - {fileID: 8300000, guid: c5e6363645e9ae84098a9e4a51ac6063, type: 3}
-  - {fileID: 8300000, guid: 6850f0b7df3840f4e9b0e199faa2e110, type: 3}
-  - {fileID: 8300000, guid: cd9af3a645493704a86d4b79a0df5728, type: 3}
-  - {fileID: 8300000, guid: 9aa63227e46cc254bb2d9b895d4c6bce, type: 3}
-  - {fileID: 8300000, guid: e00f539a4ad7c54469d62ea77e3bc8cb, type: 3}
-  - {fileID: 8300000, guid: f13de6076cd79904f867336efb1dc16c, type: 3}
-  - {fileID: 8300000, guid: 755901b976cce8e489c4f4277e6c125a, type: 3}
-  - {fileID: 8300000, guid: 92624853fad75824f8123cbf9b6ea77b, type: 3}
-  - {fileID: 8300000, guid: 35f64937297e84c42b3a3b9f2a03af1e, type: 3}
-  - {fileID: 8300000, guid: fba11403adea6624ba4450323250ec1c, type: 3}
-  - {fileID: 8300000, guid: a3c23297ef255854a927d042ce0f9048, type: 3}
-  - {fileID: 8300000, guid: b61879680d44c2c48aa98628a03bf1f1, type: 3}
-  - {fileID: 8300000, guid: dd86d0beddb1ba3438304148947dc71c, type: 3}
-  - {fileID: 8300000, guid: 9c4ae34f939b99547933514533dc6867, type: 3}
-  - {fileID: 8300000, guid: f219094ce42ab2f49ab6565e2e028107, type: 3}
-  - {fileID: 8300000, guid: 740d7ca0986ae29469f402687503d2ae, type: 3}
 --- !u!4 &1198851003
 Transform:
   m_ObjectHideFlags: 0
@@ -1373,7 +1329,11 @@ MonoBehaviour:
   subtitles: {fileID: 641861657}
   subtitleBackground: {fileID: 913553603}
   lines:
-  - {fileID: 11400000, guid: 57b0f3ef4370813458324165c140715b, type: 2}
+  - {fileID: 11400000, guid: 89c96205bd673eb4a9d05c7c532fd3f6, type: 2}
+  - {fileID: 11400000, guid: 1fa53f4a8e97f5a458ebc8642cc84a6b, type: 2}
+  - {fileID: 11400000, guid: f52541634778f284a837642491bd1c28, type: 2}
+  - {fileID: 11400000, guid: 192a117195017ce4ca582b621db2b53d, type: 2}
+  - {fileID: 11400000, guid: 53ef1a21053fdee4aa1ae7b661441acb, type: 2}
 --- !u!114 &1382040933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5108874764570773096, guid: 35b335bad15f61846ad7431de7199fe2,
@@ -2107,7 +2067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b8e50622f1d3e42b99be250554ca1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: cc18a068b45733b458320c005102cd6e, type: 3}
+  inkJSON: {fileID: 4900000, guid: 7bcbf3df77d634649971a577a8083a4f, type: 3}
   min: 4
   max: 6
   secPerLetter: 0.01

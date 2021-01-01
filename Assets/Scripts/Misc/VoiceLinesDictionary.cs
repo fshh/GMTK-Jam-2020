@@ -19,10 +19,13 @@ public class VoiceLinesDictionary : MonoBehaviour
 
     int currClip = 0;
 
+    public Queue<string> voiceLineQueue;
+
     // Start is called before the first frame update
     void Start()
     {
         linesDictionary = new Dictionary<string, Dialogue>();
+        voiceLineQueue = new Queue<string>();
         foreach(Dialogue nugget in lines)
         {
             linesDictionary.Add(nugget.name, nugget);
@@ -31,19 +34,33 @@ public class VoiceLinesDictionary : MonoBehaviour
         player = GetComponent<AudioSource>();
     }
 
-    public void playLine(string lineName)
+    public void sparkVO()
     {
-        if (linesDictionary.ContainsKey(lineName))
+        if (!player.isPlaying)
         {
-            player.clip = linesDictionary[lineName].audio;
-            player.Play();
+            playLinesRecursively();
+        }
+    }
 
-            StartCoroutine(setSubtitles(linesDictionary[lineName].subtitle, player.clip.length + 1f));
-        }
-        else
+    public void playLinesRecursively()
+    {
+        if(voiceLineQueue.Count > 0)
         {
-            Debug.Log("No such voiceover exists: " + lineName);
+            string lineName = voiceLineQueue.Dequeue();
+
+            if (linesDictionary.ContainsKey(lineName))
+            {
+                player.clip = linesDictionary[lineName].audio;
+                player.Play();
+
+                StartCoroutine(setSubtitles(linesDictionary[lineName].subtitle, player.clip.length));
+            }
+            else
+            {
+                Debug.Log("No such voiceover exists: " + lineName);
+            }
         }
+
     }
 
     IEnumerator setSubtitles(string subtitle, float duration)
@@ -53,6 +70,7 @@ public class VoiceLinesDictionary : MonoBehaviour
         yield return new WaitForSeconds(duration);
         subtitles.text = "";
         subtitleBackground.enabled = false;
+        playLinesRecursively();
     }
 
 }

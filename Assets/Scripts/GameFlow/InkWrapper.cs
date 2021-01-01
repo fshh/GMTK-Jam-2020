@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InkWrapper : MonoBehaviour
 {
-public TextAsset inkJSON;
+    public TextAsset inkJSON;
 
     public Story story;
 
@@ -39,6 +39,7 @@ public TextAsset inkJSON;
     public TextMeshProUGUI terminal;
 
     public VoiceLinesDictionary voiceOver;
+
 
     // Start is called before the first frame update
     void Start()
@@ -91,11 +92,12 @@ public TextAsset inkJSON;
 
             string[] fields = voiceLineTag.Split(' ');
 
-            string voiceLineName = fields[0];
+            foreach(string field in fields)
+            {
+                voiceOver.voiceLineQueue.Enqueue(field);
+            }
 
-            //TODO, more parsing
-
-            voiceOver.playLine(voiceLineName);
+            voiceOver.sparkVO();
         }
     }
 
