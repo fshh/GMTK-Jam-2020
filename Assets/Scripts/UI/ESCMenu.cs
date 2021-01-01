@@ -9,6 +9,7 @@ public class ESCMenu : MonoBehaviour
     public GameObject ButtonPanel;
     public GameObject OptionsPanel;
     public GameObject CreditsPanel;
+    public GameObject ControlsPanel;
 
     [Header("Options")]
     public Toggle CRTToggle;
@@ -37,10 +38,15 @@ public class ESCMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            isActive = !isActive;
-            SwitchToPanel(ButtonPanel);
-            UpdateChildrenActive();
+            ToggleActive();
         }
+    }
+
+    public void ToggleActive()
+    {
+        isActive = !isActive;
+        SwitchToPanel(ButtonPanel);
+        UpdateChildrenActive();
     }
 
     private void LoadPreferences()
@@ -61,6 +67,7 @@ public class ESCMenu : MonoBehaviour
         ButtonPanel.SetActive(false);
         OptionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
+        ControlsPanel.SetActive(false);
 
         panel.SetActive(true);
     }
@@ -78,6 +85,11 @@ public class ESCMenu : MonoBehaviour
     public void Credits()
     {
         SwitchToPanel(CreditsPanel);
+    }
+
+    public void Controls()
+    {
+        SwitchToPanel(ControlsPanel);
     }
 
     public void Quit()

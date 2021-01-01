@@ -55,7 +55,7 @@ MonoBehaviour:
   defaultCursor: {fileID: 21300000, guid: 3423c10890cfde444adedaeff48ee8f2, type: 3}
   smallCursor: {fileID: 21300000, guid: 63cd9e5ea632f544f915c468c5615c68, type: 3}
   clickingSound: {fileID: 8300000, guid: a9b7101262f54854fa5392f2e71fea38, type: 3}
-  clickColor: {r: 0, g: 0, b: 0, a: 0}
+  locked: 1
 --- !u!222 &1186117062639469590
 CanvasRenderer:
   m_ObjectHideFlags: 0

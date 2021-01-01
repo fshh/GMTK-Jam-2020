@@ -34,15 +34,20 @@ public class PlayAtRandomIntervals : MonoBehaviour
     {
         if (!sound.isPlaying && Time.time > nextTime)
         {
-            nextTime += Random.Range(minTime, maxTime);
-
-            sound.clip = sounds[Random.Range(0, sounds.Count)];
-
-            sound.Play();
+            PlaySound();
         }
 
         sound.panStereo = (Mathf.PerlinNoise(Time.time / 3, seed) * 2) - 1;
 
         sound.volume = (1 - (sound.panStereo * sound.panStereo)) * volumeMultiplier;
+    }
+
+    public void PlaySound()
+    {
+        nextTime += Random.Range(minTime, maxTime);
+
+        sound.clip = sounds[Random.Range(0, sounds.Count)];
+
+        sound.Play();
     }
 }
