@@ -21,6 +21,8 @@ public class VoiceLinesDictionary : MonoBehaviour
 
     public Queue<string> voiceLineQueue;
 
+    public string[] window;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,9 @@ public class VoiceLinesDictionary : MonoBehaviour
 
     public void playLinesRecursively()
     {
+        window = new string[voiceLineQueue.Count];
+        window = voiceLineQueue.ToArray();
+
         if(voiceLineQueue.Count > 0)
         {
             string lineName = voiceLineQueue.Dequeue();

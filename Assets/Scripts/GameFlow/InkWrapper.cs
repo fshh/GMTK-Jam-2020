@@ -90,9 +90,7 @@ public class InkWrapper : MonoBehaviour
         {
             string voiceLineTag = tags[0];
 
-            string[] fields = voiceLineTag.Split(' ');
-
-            foreach(string field in fields)
+            foreach(string field in tags)
             {
                 voiceOver.voiceLineQueue.Enqueue(field);
             }
