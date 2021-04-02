@@ -8,8 +8,12 @@ public class Clarity : MonoBehaviour
 
     public TextMeshProUGUI writing;
     public Camera mainCamera;
+    public static Clarity instance;
 
-    public string LastClickedWord;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Update()
     {
@@ -19,11 +23,14 @@ public class Clarity : MonoBehaviour
 
             if (wordIndex != -1)
             {
-                LastClickedWord = writing.textInfo.wordInfo[wordIndex].GetWord();
-
-                HyperInkWrapper.instance.GoToKnot(LastClickedWord);
+                HyperInkWrapper.instance.GoToKnot(writing.textInfo.wordInfo[wordIndex].GetWord());
             }
         }
+    }
+
+    public void Choose(int choice)
+    {
+        HyperInkWrapper.instance.Choose(choice);
     }
 
     // Start is called before the first frame update

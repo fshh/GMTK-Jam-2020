@@ -26,15 +26,22 @@ public class HyperInkWrapper : MonoBehaviour
 
     public void GoToKnot(string address)
     {
-        Debug.Log("STUB: going to address: " + address);
-
-       story.ChoosePathString(address);
-       story.Continue();
-        //TODO unstub
+        story.ChoosePathString(address);
     }
 
-    public void Continue()
+    public void Choose(int choice)
     {
-        story.Continue();
+        if (story.canContinue)
+        {
+            story.ChooseChoiceIndex(choice);
+        } else
+        {
+            Debug.LogError("Attempted to continue but could not (Ezra)");
+        }
+    }
+
+    public string Continue()
+    {
+        return story.Continue();
     }
 }
