@@ -11,9 +11,12 @@ public class Clarity : MonoBehaviour
     public static Clarity instance;
     public ChoiceParent choiceParent;
 
+    private Dictionary<string, string> wordToKnotName;
+
     private void Awake()
     {
         instance = this;
+        wordToKnotName = new Dictionary<string, string>();
     }
 
     public void Start()
@@ -29,8 +32,12 @@ public class Clarity : MonoBehaviour
 
             if (wordIndex != -1)
             {
-                HyperInkWrapper.instance.GoToKnot(writing.textInfo.wordInfo[wordIndex].GetWord());
-                ContinueUntilChoice();
+                string word = writing.textInfo.wordInfo[wordIndex].GetWord();
+                if (wordToKnotName.ContainsKey(word))
+                {
+                    HyperInkWrapper.instance.GoToKnot(wordToKnotName[word]);
+                    ContinueUntilChoice();
+                }
             }
         }
     }
@@ -39,7 +46,7 @@ public class Clarity : MonoBehaviour
     {
         if (HyperInkWrapper.instance.CanContinue())
         {
-            writing.text += HyperInkWrapper.instance.Continue();
+            writing.text += HyperInkWrapper.instance.Continue(); //TODO fix weird behavior at the end
         }
 
         choiceParent.Populate(HyperInkWrapper.instance.GetChoices());

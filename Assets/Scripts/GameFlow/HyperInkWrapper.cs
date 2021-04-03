@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
@@ -21,7 +22,15 @@ public class HyperInkWrapper : MonoBehaviour
 
     public void GoToKnot(string address)
     {
-        story.ChoosePathString(address);
+        try
+        {
+            story.ChoosePathString(address);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("tried to go to address " + address + ", is this a typo? We couldn't find it. :(");
+            throw;
+        }
     }
 
     public void Choose(int choice)
@@ -33,7 +42,7 @@ public class HyperInkWrapper : MonoBehaviour
     {
         if (story.canContinue)
         {
-            return story.Continue();
+            return story.ContinueMaximally();
         }
         else
         {
