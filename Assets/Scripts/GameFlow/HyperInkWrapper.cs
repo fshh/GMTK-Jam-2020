@@ -16,11 +16,6 @@ public class HyperInkWrapper : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         story = new Story(inkJSON.text);
     }
 
@@ -31,17 +26,37 @@ public class HyperInkWrapper : MonoBehaviour
 
     public void Choose(int choice)
     {
-        if (story.canContinue)
-        {
-            story.ChooseChoiceIndex(choice);
-        } else
-        {
-            Debug.LogError("Attempted to continue but could not (Ezra)");
-        }
+        story.ChooseChoiceIndex(choice);
     }
 
     public string Continue()
     {
-        return story.Continue();
+        if (story.canContinue)
+        {
+            return story.Continue();
+        }
+        else
+        {
+            Debug.Log("tried to continue but couldn't");
+            return "Attempted to continue but could not";
+        }
+    }
+
+    public bool CanContinue()
+    {
+        return story.canContinue;
+    }
+
+    public string[] GetChoices()
+    {
+        List<Choice> choices = story.currentChoices;
+        string[] toReturn = new string[choices.Count];
+
+        for(int i = 0; i < choices.Count; i++)
+        {
+            toReturn[i] = choices[i].text;
+        }
+
+        return toReturn;
     }
 }

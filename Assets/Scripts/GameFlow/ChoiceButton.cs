@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Button))]
-public class Choice : MonoBehaviour
+public class ChoiceButton : MonoBehaviour
 {
 
     public int id;
@@ -23,16 +23,10 @@ public class Choice : MonoBehaviour
         displayText.text = (id + 1).ToString() + ". " + choiceString;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown( determineKeycode(id + 1)))
+        if (Input.GetKeyDown(determineKeycode(id + 1)))
         {
             pressed();
         }
@@ -40,8 +34,6 @@ public class Choice : MonoBehaviour
 
     public void pressed()
     {
-        //TODO unstub
-        Debug.Log("pressed " + (id + 1) + " button");
         Clarity.instance.Choose(id);
     }
 
@@ -78,7 +70,8 @@ public class Choice : MonoBehaviour
         else if (num == 9)
         {
             return KeyCode.Alpha9;
-        } else
+        }
+        else
         {
             return KeyCode.Alpha0;
         }
