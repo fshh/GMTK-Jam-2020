@@ -32,7 +32,7 @@ public class BlitRenderPassFeature : ScriptableRendererFeature
         // You don't have to call ScriptableRenderContext.submit, the render pipeline will call it at specific points in the pipeline.
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
-            CommandBuffer commandBuffer = CommandBufferPool.Get();
+            CommandBuffer commandBuffer = CommandBufferPool.Get("CustomBlitRenderPass");
 
             commandBuffer.GetTemporaryRT(tempRenderTargetHandler.id, renderingData.cameraData.cameraTargetDescriptor);
             Blit(commandBuffer, source, tempRenderTargetHandler.Identifier(), material);
