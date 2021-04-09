@@ -1,11 +1,11 @@
 #old_pc
-Hello World
-* [\~] ->
-
 #opening_1
 #opening_2
 #opening_3
 #opening_4
+Hello World
+* [\~] ->
+
 - Is someone there? I am Clarity. 
 * [Is someone there] -> Question
 * [\~]->
