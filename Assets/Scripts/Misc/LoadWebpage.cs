@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class LoadWebpage : MonoBehaviour
 {
+    public string baseURL;
 
-    public void Load(string pageName)
+    public void OpenPage(string s)
     {
-        Application.OpenURL(pageName);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            Application.ExternalEval("window.open(\"" + s + "\",\"_blank\")");
+            return;
+        } else
+        {
+            Application.OpenURL(s);
+        }
     }
 }
