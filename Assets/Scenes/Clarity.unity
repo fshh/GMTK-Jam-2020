@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 641861656}
   - component: {fileID: 641861658}
   - component: {fileID: 641861657}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: CC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641861655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0002746582}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 913553601}
@@ -815,9 +815,9 @@ MonoBehaviour:
   m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -969,7 +969,7 @@ GameObject:
   - component: {fileID: 913553601}
   - component: {fileID: 913553604}
   - component: {fileID: 913553603}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +984,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913553600}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 641861656}
@@ -1735,7 +1735,7 @@ GameObject:
   - component: {fileID: 1545147532}
   - component: {fileID: 1545147531}
   - component: {fileID: 1545147530}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1791,8 +1791,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1859773043}
-  m_PlaneDistance: 100
+  m_Camera: {fileID: 519420031}
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2363,7 +2363,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -5
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256

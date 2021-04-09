@@ -102,7 +102,9 @@ I guess you can't tell me easily, huh? I'll just call you... Echo! It's been a w
 #end_2
 #end_3
 - Goodbye Echo.
-*[\~] ->
+*[\~] -> END 
+            // (Ezra) sorry I stuck this in here to make it end sooner,
+            //so it'd be more likely people get to the demo signup thingy
 
 #end_4
 #end_5

@@ -20,7 +20,12 @@ public class LoadSceneOnKey : MonoBehaviour
     {
         if (Input.GetKeyDown(key))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            loadScene();
         }
+    }
+
+    public void loadScene()
+    {
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
