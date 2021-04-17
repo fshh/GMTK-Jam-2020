@@ -1,4 +1,4 @@
-this is the unreachable beginning of the story
+this is the ^beginning^unreachable_knot^ of the ^story^failed_knot^
  * Choice 1
  * Choice 2
  * Choice 3 (knot) -> gordian_knot
@@ -6,15 +6,17 @@ this is the unreachable beginning of the story
 
 === gordian_knot ===
  you see here a very tangled knot
-  * untie it ->failed
+  * untie it ->failed_knot
   * slice it in twain
  -you slice it in twain! ->END
   
-=== failed ===
-you have failed to untie it. 
+=== failed_knot ===
+you have failed to untie it.
+*why
+-oh
 ->END
 
-=== unreachable ===
+=== unreachable_knot ===
 you would never get here unless I implement something else
  * win 
 - you win! 
