@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[RequireComponent(typeof(AudioSource))]
 public class Clarity : MonoBehaviour
 {
 
@@ -14,10 +15,17 @@ public class Clarity : MonoBehaviour
     private char HypertextSymbol = '^';
 
     private Dictionary<string, string> wordToKnotName;
+    private AudioSource clarityVoice;
+    private Queue<AudioClip> voiceLines;
+
+    private static string AUDIO_FILE_PATH = "Wav Files/VO/"; 
 
     private void Awake()
     {
         instance = this;
+        clarityVoice = GetComponent<AudioSource>();
+
+        voiceLines = new Queue<AudioClip>();
         wordToKnotName = new Dictionary<string, string>();
     }
 
@@ -42,16 +50,45 @@ public class Clarity : MonoBehaviour
                 }
             }
         }
+
+        //dumb implementation of voice playing, probably want to include a pause later (Ezra)
+        if (!clarityVoice.isPlaying && voiceLines.Count > 0)
+        {
+            clarityVoice.clip = voiceLines.Dequeue();
+            clarityVoice.Play();
+        }
     }
 
     public void ContinueUntilChoice()
     {
         if (HyperInkWrapper.instance.CanContinue())
         {
-            writing.text += ParseForHypertext( HyperInkWrapper.instance.Continue() ); //TODO fix weird behavior at the end
+            wordToKnotName.Clear();
+
+            writing.text += ParseForHypertext(HyperInkWrapper.instance.Continue());
+            checkTags();
         }
+        writing.text += "\n";
 
         choiceParent.Populate(HyperInkWrapper.instance.GetChoices());
+    }
+
+    public void checkTags()
+    {
+        string[] tags = HyperInkWrapper.instance.getTags();
+
+        foreach(string tag in tags)
+        {
+            Debug.Log(tag);
+            AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag);
+            if(toAdd == null)
+            {
+                Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
+            } else
+            {
+                voiceLines.Enqueue(toAdd);
+            }
+        }
     }
 
     public void Choose(int choice)
@@ -64,8 +101,6 @@ public class Clarity : MonoBehaviour
     //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
     public string ParseForHypertext(string input) 
     {
-        //input = input + " ";
-
         int firstIndex = input.IndexOf(HypertextSymbol);
 
         if(firstIndex == -1) //then it wasn't found, return unparsed input

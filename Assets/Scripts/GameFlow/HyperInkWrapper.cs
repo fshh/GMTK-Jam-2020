@@ -19,7 +19,7 @@ public class HyperInkWrapper : MonoBehaviour
         instance = this;
         story = new Story(inkJSON.text);
     }
-
+    
     public void GoToKnot(string address)
     {
         try
@@ -54,6 +54,11 @@ public class HyperInkWrapper : MonoBehaviour
     public bool CanContinue()
     {
         return story.canContinue;
+    }
+
+    public string[] getTags()
+    {
+        return story.currentTags.ToArray();
     }
 
     public string[] GetChoices()
