@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0171a6a3b3c416e44bd2f602e622dd72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: 8078b660e30f5474385c6c8af958cffa, type: 3}
+  inkJSON: {fileID: 4900000, guid: edd06a41ecdde0848a200a678bd0ea70, type: 3}
 --- !u!4 &2143356488
 Transform:
   m_ObjectHideFlags: 0
