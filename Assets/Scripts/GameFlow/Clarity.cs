@@ -46,11 +46,25 @@ public class Clarity : MonoBehaviour
             if (wordIndex != -1)
             {
                 string word = writing.textInfo.wordInfo[wordIndex].GetWord();
-                if (wordToChoiceIndex.ContainsKey(word))
+                Debug.Log("word is: " + word);
+                Debug.Log("choice count: " + wordToChoiceIndex.Count);
+                foreach(KeyValuePair<string, int> pair in wordToChoiceIndex)
                 {
-                    HyperInkWrapper.instance.Choose(wordToChoiceIndex[word]);
-                    ContinueUntilChoice();
+                    Debug.Log("comparing with: " + pair.Key);
+                    if (pair.Key.Contains(word))
+                    {
+                        HyperInkWrapper.instance.Choose(pair.Value);
+                        ContinueUntilChoice();
+                        break;
+                    }
                 }
+
+                //if (wordToChoiceIndex.ContainsKey(word))
+                //{
+                //    Debug.Log("choosing: " + wordToChoiceIndex[word]);
+                //    HyperInkWrapper.instance.Choose(wordToChoiceIndex[word]);
+                //    ContinueUntilChoice();
+                //}
             }
         }
 
@@ -64,11 +78,11 @@ public class Clarity : MonoBehaviour
 
     public void ContinueUntilChoice()
     {
+        wordToChoiceIndex.Clear();
         string continueAccumulator = "";
 
         if (HyperInkWrapper.instance.CanContinue())
         {
-            wordToChoiceIndex.Clear();
 
             continueAccumulator += HyperInkWrapper.instance.Continue();
             checkTags();
@@ -94,9 +108,10 @@ public class Clarity : MonoBehaviour
                 //then it's a hypertext option
                 string cleanedChoice = choices[i].Substring(1, choices[i].Length - 1).Trim();
 
-                if (textInput.Contains(cleanedChoice)) //TODO make case insensitive
+                if (toReturn.Contains(cleanedChoice)) //TODO make case insensitive
                 {
-
+                    wordToChoiceIndex.Add(cleanedChoice, i);
+                    toReturn = Hypertextify(toReturn, cleanedChoice);
                 }
                 else
                 {
@@ -105,7 +120,7 @@ public class Clarity : MonoBehaviour
 
             } else
             {
-                //then it's a regular choice
+                //then it's a regular choice, add it as such
                 currChoices.Add(choices[i]);
             }
         }
@@ -138,4 +153,41 @@ public class Clarity : MonoBehaviour
         ContinueUntilChoice();
     }
 
+
+
+    //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
+    public string Hypertextify(string bodyText, string wordToHypertext)
+    {
+        int firstIndex = bodyText.IndexOf(wordToHypertext);
+
+        if (firstIndex == -1) //then it wasn't found, return unparsed input
+        {
+            Debug.LogError("are you sure you meant to call hypertextify? seems like that word wasn't in the text body : " + wordToHypertext);
+            return bodyText;
+        }
+
+        string beforeParse = bodyText.Substring(0, firstIndex);
+        string parse = wordToHypertext;
+        string afterParse = bodyText.Substring(firstIndex + wordToHypertext.Length);
+
+        //string afterParse;
+        //if (firstSpace == -1) //if no spaces, then it was the last word
+        //{
+        //    afterParse = "";
+        //}
+        //else
+        //{
+        //    afterParse = toParse.Substring(firstSpace);
+        //    toParse = toParse.Substring(0, firstSpace);
+        //}
+
+
+        //string[] wordAndKnot = toParse.Split(HypertextSymbol); //1 is word, 2 is knot name (0 is an empty string)
+
+
+        //wordToKnotName.Add(wordAndKnot[1], wordAndKnot[2]);
+        string parsed = "*" + parse + "*"; //TODO add markup and stuff
+
+        return beforeParse + parsed + afterParse;
+    }
 }
