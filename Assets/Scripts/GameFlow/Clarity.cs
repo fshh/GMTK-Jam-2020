@@ -14,9 +14,11 @@ public class Clarity : MonoBehaviour
 
     private char HypertextSymbol = '^';
 
-    private Dictionary<string, string> wordToKnotName;
+    private Dictionary<string, int> wordToChoiceIndex;
     private AudioSource clarityVoice;
     private Queue<AudioClip> voiceLines;
+
+    private List<string> currChoices;
 
     private static string AUDIO_FILE_PATH = "Wav Files/VO/"; 
 
@@ -25,8 +27,9 @@ public class Clarity : MonoBehaviour
         instance = this;
         clarityVoice = GetComponent<AudioSource>();
 
+        currChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();
-        wordToKnotName = new Dictionary<string, string>();
+        wordToChoiceIndex = new Dictionary<string, int>();
     }
 
     public void Start()
@@ -43,9 +46,9 @@ public class Clarity : MonoBehaviour
             if (wordIndex != -1)
             {
                 string word = writing.textInfo.wordInfo[wordIndex].GetWord();
-                if (wordToKnotName.ContainsKey(word))
+                if (wordToChoiceIndex.ContainsKey(word))
                 {
-                    HyperInkWrapper.instance.GoToKnot(wordToKnotName[word]);
+                    HyperInkWrapper.instance.Choose(wordToChoiceIndex[word]);
                     ContinueUntilChoice();
                 }
             }
@@ -61,16 +64,53 @@ public class Clarity : MonoBehaviour
 
     public void ContinueUntilChoice()
     {
+        string continueAccumulator = "";
+
         if (HyperInkWrapper.instance.CanContinue())
         {
-            wordToKnotName.Clear();
+            wordToChoiceIndex.Clear();
 
-            writing.text += ParseForHypertext(HyperInkWrapper.instance.Continue());
+            continueAccumulator += HyperInkWrapper.instance.Continue();
             checkTags();
         }
-        writing.text += "\n";
+        continueAccumulator = DetermineChoices(continueAccumulator, HyperInkWrapper.instance.GetChoices());
 
-        choiceParent.Populate(HyperInkWrapper.instance.GetChoices());
+        continueAccumulator += "\n";
+        writing.text += continueAccumulator;
+
+        choiceParent.Populate(currChoices.ToArray());
+    }
+
+    private string DetermineChoices(string textInput, string[] choices)
+    {
+        currChoices.Clear();
+
+        string toReturn = textInput;
+
+        for (int i = 0; i < choices.Length; i++)
+        {
+            if(choices[i][0] == HypertextSymbol)
+            {
+                //then it's a hypertext option
+                string cleanedChoice = choices[i].Substring(1, choices[i].Length - 1).Trim();
+
+                if (textInput.Contains(cleanedChoice)) //TODO make case insensitive
+                {
+
+                }
+                else
+                {
+                    Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
+                }
+
+            } else
+            {
+                //then it's a regular choice
+                currChoices.Add(choices[i]);
+            }
+        }
+
+        return toReturn;
     }
 
     public void checkTags()
@@ -98,37 +138,4 @@ public class Clarity : MonoBehaviour
         ContinueUntilChoice();
     }
 
-    //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
-    public string ParseForHypertext(string input) 
-    {
-        int firstIndex = input.IndexOf(HypertextSymbol);
-
-        if(firstIndex == -1) //then it wasn't found, return unparsed input
-        {
-            return input;
-        }
-
-        string beforeParse = input.Substring(0, firstIndex);
-        string toParse = input.Substring(firstIndex);
-        int firstSpace = toParse.IndexOf(' ');
-
-        string afterParse;
-        if(firstSpace == -1) //if no spaces, then it was the last word
-        {
-            afterParse = "";
-        } else
-        {
-            afterParse = toParse.Substring(firstSpace);
-            toParse = toParse.Substring(0, firstSpace);
-        }
-
-
-        string[] wordAndKnot = toParse.Split(HypertextSymbol); //1 is word, 2 is knot name (0 is an empty string)
-
-
-        wordToKnotName.Add(wordAndKnot[1], wordAndKnot[2]);
-        string parsed = "*" + wordAndKnot[1] + "*";
-
-        return beforeParse + parsed + ParseForHypertext(afterParse);
-    }
 }
