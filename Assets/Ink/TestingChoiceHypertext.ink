@@ -16,7 +16,7 @@ Have you experienced any recent memory loss?
 
 * [^No] Happy to hear that ･ᴗ･ 
 * [^Sometimes] Does this happen more often than what is normal for you?
-* [^more often] I'm sorry to hear that.
+* [^Yes] I'm sorry to hear that.
 
 - Do you say hello to strangers on the street or ignore them?
 

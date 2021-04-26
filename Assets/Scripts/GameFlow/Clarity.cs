@@ -22,6 +22,9 @@ public class Clarity : MonoBehaviour
 
     private static string AUDIO_FILE_PATH = "Wav Files/VO/"; 
 
+    private static string highlightPrefix = "<mark=#22222233>";
+    private static string highlightSuffix = "</mark>";
+
     private void Awake()
     {
         instance = this;
@@ -46,11 +49,8 @@ public class Clarity : MonoBehaviour
             if (wordIndex != -1)
             {
                 string word = writing.textInfo.wordInfo[wordIndex].GetWord();
-                Debug.Log("word is: " + word);
-                Debug.Log("choice count: " + wordToChoiceIndex.Count);
                 foreach(KeyValuePair<string, int> pair in wordToChoiceIndex)
                 {
-                    Debug.Log("comparing with: " + pair.Key);
                     if (pair.Key.Contains(word))
                     {
                         HyperInkWrapper.instance.Choose(pair.Value);
@@ -89,6 +89,11 @@ public class Clarity : MonoBehaviour
         }
         continueAccumulator = DetermineChoices(continueAccumulator, HyperInkWrapper.instance.GetChoices());
 
+        //remove highilights
+        writing.text = writing.text.Replace(highlightPrefix, "");
+        writing.text = writing.text.Replace(highlightSuffix, "");
+
+        //add new text
         continueAccumulator += "\n";
         writing.text += continueAccumulator;
 
@@ -134,7 +139,7 @@ public class Clarity : MonoBehaviour
 
         foreach(string tag in tags)
         {
-            Debug.Log(tag);
+            //Debug.Log(tag);
             AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag);
             if(toAdd == null)
             {
@@ -162,7 +167,7 @@ public class Clarity : MonoBehaviour
 
         if (firstIndex == -1) //then it wasn't found, return unparsed input
         {
-            Debug.LogError("are you sure you meant to call hypertextify? seems like that word wasn't in the text body : " + wordToHypertext);
+            Debug.LogError("are you sure you meant to call hypertextify? seems like that word wasn't in the text body: " + wordToHypertext);
             return bodyText;
         }
 
@@ -186,7 +191,7 @@ public class Clarity : MonoBehaviour
 
 
         //wordToKnotName.Add(wordAndKnot[1], wordAndKnot[2]);
-        string parsed = "*" + parse + "*"; //TODO add markup and stuff
+        string parsed = highlightPrefix + parse + highlightSuffix; //TODO add markup and stuff
 
         return beforeParse + parsed + afterParse;
     }
