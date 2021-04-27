@@ -14,12 +14,42 @@ public class HyperInkWrapper : MonoBehaviour
 
     public static HyperInkWrapper instance;
 
+    private bool waiting = false;
+    public bool Waiting { get { return waiting; } private set { waiting = value; }}
+
     private void Awake()
     {
         instance = this;
         story = new Story(inkJSON.text);
+        story.BindExternalFunction("wait", (float waitTime) => {
+            wait(waitTime);
+        });
+
+    }
+
+    //For using WaitUntil in coroutines
+    public bool WaitDelegate()
+    {
+        return !Waiting;
+    }
+
+    //Please note - this doesn't actually do anything except set the variable, other scripts must respect the waiting boolean (or not)
+    private void wait(float waitTime)
+    {
+        if(!Waiting)
+        {
+            StartCoroutine(waitHelper(waitTime));
+        }
+    }
+
+    private IEnumerator waitHelper(float waitTime)
+    {
+        Waiting = true;
+        yield return new WaitForSeconds(waitTime);
+        Waiting = false;
     }
     
+
     public void GoToKnot(string address)
     {
         try
@@ -40,9 +70,10 @@ public class HyperInkWrapper : MonoBehaviour
 
     public string Continue()
     {
+        Debug.Log("called continue");
         if (story.canContinue)
         {
-            return story.ContinueMaximally();
+            return story.Continue(); //TODO might need to go back to ContinueMaximally
         }
         else
         {

@@ -1,3 +1,5 @@
+EXTERNAL wait(waitTime)
+
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+
 
@@ -7,11 +9,11 @@ under 18,  19 - 30, 31 - 60 or 61\+
 *[^61\+] -> thanks
 
 ===thanks===
-Thank you (^◡^ )
+{wait(1)}Thank you (^◡^ )
 ->memory_loss
 
 ===memory_loss===
-Have you experienced any recent memory loss?
+{wait(1)}Have you experienced any recent memory loss?
     Yes, No, or Sometimes 
 
 * [^No] Happy to hear that ･ᴗ･ 

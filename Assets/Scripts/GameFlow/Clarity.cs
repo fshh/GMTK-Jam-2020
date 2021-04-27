@@ -78,24 +78,34 @@ public class Clarity : MonoBehaviour
 
     public void ContinueUntilChoice()
     {
+        StartCoroutine(ContinueUntilChoiceHelper());
+    }
+
+    private IEnumerator ContinueUntilChoiceHelper()
+    {
         wordToChoiceIndex.Clear();
-        string continueAccumulator = "";
-
-        if (HyperInkWrapper.instance.CanContinue())
-        {
-
-            continueAccumulator += HyperInkWrapper.instance.Continue();
-            checkTags();
-        }
-        continueAccumulator = DetermineChoices(continueAccumulator, HyperInkWrapper.instance.GetChoices());
-
         //remove highilights
         writing.text = writing.text.Replace(highlightPrefix, "");
         writing.text = writing.text.Replace(highlightSuffix, "");
 
+        string textBeforeContinue = writing.text;
+
+        string continueAccumulator = "";
+
+        while (HyperInkWrapper.instance.CanContinue())
+        {
+            continueAccumulator += HyperInkWrapper.instance.Continue();
+            Debug.Log("accumulator: " + continueAccumulator);
+            checkTags();
+            yield return new WaitUntil(HyperInkWrapper.instance.WaitDelegate);
+            writing.text = textBeforeContinue + continueAccumulator;
+        }
+        continueAccumulator = DetermineChoices(continueAccumulator, HyperInkWrapper.instance.GetChoices());
+
+
         //add new text
         continueAccumulator += "\n";
-        writing.text += continueAccumulator;
+        writing.text = textBeforeContinue + continueAccumulator;
 
         choiceParent.Populate(currChoices.ToArray());
     }
