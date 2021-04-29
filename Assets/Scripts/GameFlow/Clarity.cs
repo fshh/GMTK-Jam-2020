@@ -95,7 +95,6 @@ public class Clarity : MonoBehaviour
         while (HyperInkWrapper.instance.CanContinue())
         {
             continueAccumulator += HyperInkWrapper.instance.Continue();
-            Debug.Log("accumulator: " + continueAccumulator);
             checkTags();
             yield return new WaitUntil(HyperInkWrapper.instance.WaitDelegate);
             writing.text = textBeforeContinue + continueAccumulator;

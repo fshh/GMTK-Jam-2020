@@ -70,7 +70,6 @@ public class HyperInkWrapper : MonoBehaviour
 
     public string Continue()
     {
-        Debug.Log("called continue");
         if (story.canContinue)
         {
             return story.Continue(); //TODO might need to go back to ContinueMaximally
