@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
+public class FileTicket
+{
+    public int id;
+}
+
 public class FileSystem : MonoBehaviour
 {
     public static string ROOT_FILE_NAME = "Root";
-    
+
+    private Dictionary<FileTicket, FileNode> ticketToNode;
+    private Dictionary<FileNode, FileTicket> nodeToTicket;
+
     //this is a tree that stores the file structure
     private FileNode root; //TODO write some good setters and getters
 
@@ -40,27 +49,84 @@ public class FileSystem : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public FileType TicketToType(FileTicket ticket)
     {
-        RefreshStructure();
-        
+        if (ticketToNode.ContainsKey(ticket))
+        {
+            return ticketToNode[ticket].type;
+        } else
+        {
+            Debug.Log("Couldn't find that ticket in the dictionary");
+        }
+
+        return FileType.Text; //Default return value, shouldn't come to this
     }
 
-    // Update is called once per frame
-    void Update()
+    public string GetName(FileTicket ticket)
     {
-        
+        return ticketToNode[ticket].name;
+    }
+
+    public bool IsRoot(FileTicket ticket)
+    {
+        return ticketToNode[ticket] == root;
+    }
+
+    public FileTicket GetRootDirectory()
+    {
+        return nodeToTicket[root];
+    }
+
+    //returns tickets to all children of the node belonging to the ticket given
+    public FileTicket[] GetChildTickets(FileTicket ticket)
+    {
+        List<FileTicket> toReturn = new List<FileTicket>();
+
+        foreach(FileNode node in ticketToNode[ticket].childNodes)
+        {
+            toReturn.Add(nodeToTicket[node]);
+        }
+
+        return toReturn.ToArray();
+    }
+
+    //TODO make more robust singleton pattern that checks it's the only one
+    public static FileSystem instance;
+
+    private void Awake()
+    {
+        instance = this;
+        RefreshStructure();
     }
 
     #region Building the tree
 
+    private void AddNodeToDictionaries(FileNode toAdd)
+    {
+        FileTicket newTicket = new FileTicket();
+        newTicket.id = ticketToNode.Count; //should be the same as the count for the other dictionary
+        ticketToNode.Add(newTicket, toAdd);
+        nodeToTicket.Add(toAdd, newTicket);
+    }
+
+    private void resetDictionaries()
+    {
+        ticketToNode = new Dictionary<FileTicket, FileNode>();
+        ticketToNode.Clear();
+        nodeToTicket = new Dictionary<FileNode, FileTicket>();
+        nodeToTicket.Clear();
+    }
+
     //Re-builds the tree from the current StreamingAssets folder
     private void RefreshStructure()
     {
+        //TODO figure out how to do this without invalidating outstanding tickets in the desktop
+        resetDictionaries();
+
         root = new FileNode();
         root.path = Application.streamingAssetsPath + "/" + ROOT_FILE_NAME + "/";
         root.type = FileType.Folder;
+        AddNodeToDictionaries(root);
 
         DirectoryInfo info = new DirectoryInfo(root.path);
         root.childNodes = BuildDirectory(info, root.path);
@@ -86,6 +152,7 @@ public class FileSystem : MonoBehaviour
                 newFile.print();
 
                 filesInDirectory.Add(newFile);
+                AddNodeToDictionaries(newFile);
             }
         }
 
@@ -101,7 +168,8 @@ public class FileSystem : MonoBehaviour
 
             newDir.print();
 
-            filesInDirectory.Add(newDir);
+            filesInDirectory.Add(newDir); 
+            AddNodeToDictionaries(newDir);
         }
 
         return filesInDirectory;
