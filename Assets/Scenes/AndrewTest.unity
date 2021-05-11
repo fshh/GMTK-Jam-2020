@@ -340,6 +340,7 @@ MonoBehaviour:
     type: 3}
   applications:
   - {fileID: 11400000, guid: 1c9bf4a4c4094654ca09f66a8763dbc6, type: 2}
+  - {fileID: 11400000, guid: 2549604b4d2ba3849a810797bc6b4ce4, type: 2}
 --- !u!1 &1333185684
 GameObject:
   m_ObjectHideFlags: 0

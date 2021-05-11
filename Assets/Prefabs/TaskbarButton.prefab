@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8277012086568231824}
   - component: {fileID: 8277012086568231825}
   - component: {fileID: 8277012086568231826}
-  - component: {fileID: 8277012086568231831}
+  - component: {fileID: 7161178098045789477}
   m_Layer: 5
   m_Name: TaskbarButton
   m_TagString: Untagged
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8277012086568231831
+--- !u!114 &7161178098045789477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,48 +173,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8277012086568231821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b6f1231d7c0beb40aac81eb62797a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 0.14509805, g: 0.15294118, b: 0.16470589, a: 1}
-    m_HighlightedColor: {r: 0.22904761, g: 0.24142857, b: 0.26, a: 1}
-    m_PressedColor: {r: 0.31714287, g: 0.33428574, b: 0.36, a: 1}
-    m_SelectedColor: {r: 0.14509805, g: 0.15294118, b: 0.16470589, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 8277012086568231826}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8277012086568231824}
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  TargetImage: {fileID: 8277012086568231826}
+  DefaultColor: {r: 0.14509805, g: 0.15294118, b: 0.16470589, a: 1}
+  EventPriorities:
+  - eventType: 0
+    color: {r: 0.22904761, g: 0.24142857, b: 0.26, a: 1}
+  - eventType: 2
+    color: {r: 0.31714287, g: 0.33428574, b: 0.36, a: 1}
+  EaseSettings:
+    Duration: 0.1
+    EasingFunction: 4

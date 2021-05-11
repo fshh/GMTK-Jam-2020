@@ -84,4 +84,22 @@ public class WindowManager : Singleton<WindowManager>
 		window.transform.SetAsLastSibling();
 		focusedWindow = window;
 	}
+
+	public void MinimizeWindow(Window window)
+    {
+		window.transform.SetAsFirstSibling();
+		if (focusedWindow == window)
+        {
+			for (int ii = transform.childCount - 1; ii >= 0; ii--)
+            {
+				Window w = transform.GetChild(ii).GetComponent<Window>();
+				if (w != window && !w.Minimized)
+                {
+					focusedWindow = w;
+					return;
+                }
+            }
+			focusedWindow = null;
+        }
+    }
 }

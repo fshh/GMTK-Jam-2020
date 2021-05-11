@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TaskbarButton : MonoBehaviour
+public class TaskbarButton : MonoBehaviour, IPointerClickHandler
 {
 	public Image Icon;
 
@@ -63,4 +62,9 @@ public class TaskbarButton : MonoBehaviour
 	{
 		WindowManager.Instance.GetWindows(App)[0].Minimize();
 	}
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+		OnClick();
+    }
 }
