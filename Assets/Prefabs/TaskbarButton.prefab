@@ -186,7 +186,7 @@ MonoBehaviour:
   - eventType: 1
     color: {r: 0.13, g: 0.13, b: 0.13, a: 1}
   EaseSettings:
-    Duration: 0.1
+    Duration: 0
     EasingFunction: 7
 --- !u!1 &9097408774241603498
 GameObject:
