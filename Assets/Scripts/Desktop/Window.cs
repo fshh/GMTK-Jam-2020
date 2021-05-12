@@ -30,13 +30,13 @@ public class Window : MonoBehaviour, IPointerClickHandler
 	{
 		App = app;
 		content = Instantiate(app.AppContentPrefab, ContentParent);
-		RectTransform rect = content.GetComponent<RectTransform>();
-		rect.pivot = new Vector2(0.5f, 0.5f);
-		rect.anchorMax = Vector2.one;
-		rect.anchorMin = Vector2.zero;
-		rect.anchoredPosition = Vector2.zero;
-		rect.offsetMax = Vector2.zero;
-		rect.offsetMin = Vector2.zero;
+		RectTransform contentRect = content.GetComponent<RectTransform>();
+		contentRect.pivot = new Vector2(0.5f, 0.5f);
+		contentRect.anchorMax = Vector2.one;
+		contentRect.anchorMin = Vector2.zero;
+		contentRect.anchoredPosition = Vector2.zero;
+		contentRect.offsetMax = Vector2.zero;
+		contentRect.offsetMin = Vector2.zero;
 
 		gameObject.name = App.Name + "Window";
 		TitleText.text = App.Name;
@@ -71,6 +71,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 	{
 		// TODO
 		//Save();
+		transform.SetAsFirstSibling();
 		WindowManager.Instance.RemoveWindow(this);
 		Destroy(gameObject);
 	}

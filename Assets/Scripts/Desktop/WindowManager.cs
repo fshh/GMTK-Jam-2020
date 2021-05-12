@@ -63,11 +63,20 @@ public class WindowManager : Singleton<WindowManager>
 
 		window.transform.SetParent(transform);
 		window.transform.localScale = Vector3.one;
+
+		RectTransform windowRect = window.GetComponent<RectTransform>();
+		windowRect.anchoredPosition = windowRect.anchoredPosition + new Vector2(Random.Range(-100, 100), Random.Range(-100, 100));
+
 		window.Focus();
 	}
 
 	public void RemoveWindow(Window window)
 	{
+		if (focusedWindow == window)
+		{
+			FocusNextWindow();
+		}
+
 		if (openWindowsGrouped.ContainsKey(window.App) && openWindowsGrouped[window.App].Contains(window))
 		{
 			openWindowsGrouped[window.App].Remove(window);
@@ -89,13 +98,20 @@ public class WindowManager : Singleton<WindowManager>
     {
 		if (focusedWindow == window)
         {
-			Window w = transform.GetChild(transform.childCount - 1).GetComponent<Window>();
-			if (w != window && !w.Minimized)
-			{
-				w.Focus();
-				return;
-			}
-			focusedWindow = null;
+			FocusNextWindow();
         }
     }
+
+	private void FocusNextWindow()
+    {
+		Window w = transform.GetChild(transform.childCount - 1).GetComponent<Window>();
+		if (!w.Minimized)
+		{
+			w.Focus();
+		}
+		else
+		{
+			focusedWindow = null;
+		}
+	}
 }
