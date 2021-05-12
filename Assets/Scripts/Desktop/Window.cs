@@ -54,6 +54,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 		canvasGroup.alpha = 1f;
 		canvasGroup.interactable = true;
 		canvasGroup.blocksRaycasts = true;
+		transform.SetAsLastSibling();
 		WindowManager.Instance.FocusWindow(this);
 	}
 
@@ -62,13 +63,16 @@ public class Window : MonoBehaviour, IPointerClickHandler
 		canvasGroup.alpha = 0f;
 		canvasGroup.interactable = false;
 		canvasGroup.blocksRaycasts = false;
+		transform.SetAsFirstSibling();
 		WindowManager.Instance.MinimizeWindow(this);
 	}
 
 	public void Close()
 	{
-		Save();
-		throw new System.NotImplementedException();
+		// TODO
+		//Save();
+		WindowManager.Instance.RemoveWindow(this);
+		Destroy(gameObject);
 	}
 
 	public void Fullscreen()

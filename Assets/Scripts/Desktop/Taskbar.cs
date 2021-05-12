@@ -21,6 +21,11 @@ public class Taskbar : Singleton<Taskbar>
 		}
 	}
 
+	public TaskbarButton GetButton(ApplicationSO app)
+    {
+		return buttons.Find(b => b.App == app);
+    }
+
 	public void OpenSettings()
 	{
 		throw new System.NotImplementedException();

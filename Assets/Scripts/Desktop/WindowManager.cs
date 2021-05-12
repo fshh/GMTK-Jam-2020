@@ -81,24 +81,20 @@ public class WindowManager : Singleton<WindowManager>
 
 	public void FocusWindow(Window window)
 	{
-		window.transform.SetAsLastSibling();
+		Taskbar.Instance.GetButton(window.App).GetComponent<PointerEventColorSettings>().SetSelected(true);
 		focusedWindow = window;
 	}
 
 	public void MinimizeWindow(Window window)
     {
-		window.transform.SetAsFirstSibling();
 		if (focusedWindow == window)
         {
-			for (int ii = transform.childCount - 1; ii >= 0; ii--)
-            {
-				Window w = transform.GetChild(ii).GetComponent<Window>();
-				if (w != window && !w.Minimized)
-                {
-					focusedWindow = w;
-					return;
-                }
-            }
+			Window w = transform.GetChild(transform.childCount - 1).GetComponent<Window>();
+			if (w != window && !w.Minimized)
+			{
+				w.Focus();
+				return;
+			}
 			focusedWindow = null;
         }
     }
