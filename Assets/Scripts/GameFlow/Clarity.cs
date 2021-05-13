@@ -44,11 +44,17 @@ public class Clarity : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            var wordIndex = TMP_TextUtilities.FindIntersectingWord(writing, Input.mousePosition, mainCamera);
 
-            if (wordIndex != -1)
+            //var wordIndex = TMP_TextUtilities.FindIntersectingWord(writing, Input.mousePosition, mainCamera);
+
+            var wordIndex = TMP_TextUtilities.FindNearestWord(writing, Input.mousePosition, mainCamera);
+
+            //word must exist, but also the cursor must be over the text box, otherwise you can click from far away
+            //TODO big white spaces in the text box can still be tricky, may want to fix later.
+            if (wordIndex != -1 && TMP_TextUtilities.IsIntersectingRectTransform(writing.rectTransform, Input.mousePosition, Camera.main))
             {
                 string word = writing.textInfo.wordInfo[wordIndex].GetWord();
+
                 foreach(KeyValuePair<string, int> pair in wordToChoiceIndex)
                 {
                     if (pair.Key.Contains(word))
@@ -58,13 +64,6 @@ public class Clarity : MonoBehaviour
                         break;
                     }
                 }
-
-                //if (wordToChoiceIndex.ContainsKey(word))
-                //{
-                //    Debug.Log("choosing: " + wordToChoiceIndex[word]);
-                //    HyperInkWrapper.instance.Choose(wordToChoiceIndex[word]);
-                //    ContinueUntilChoice();
-                //}
             }
         }
 
@@ -184,23 +183,7 @@ public class Clarity : MonoBehaviour
         string parse = wordToHypertext;
         string afterParse = bodyText.Substring(firstIndex + wordToHypertext.Length);
 
-        //string afterParse;
-        //if (firstSpace == -1) //if no spaces, then it was the last word
-        //{
-        //    afterParse = "";
-        //}
-        //else
-        //{
-        //    afterParse = toParse.Substring(firstSpace);
-        //    toParse = toParse.Substring(0, firstSpace);
-        //}
-
-
-        //string[] wordAndKnot = toParse.Split(HypertextSymbol); //1 is word, 2 is knot name (0 is an empty string)
-
-
-        //wordToKnotName.Add(wordAndKnot[1], wordAndKnot[2]);
-        string parsed = highlightPrefix + parse + highlightSuffix; //TODO add markup and stuff
+        string parsed = highlightPrefix + parse + highlightSuffix;
 
         return beforeParse + parsed + afterParse;
     }

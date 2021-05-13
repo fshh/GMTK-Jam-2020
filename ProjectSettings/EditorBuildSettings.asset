@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sign Up.unity
     guid: 6f3a253e3bd872949a921b8d09acc8ea
+  - enabled: 0
+    path: Assets/Scenes/Ezra Testing New Mechanics.unity
+    guid: dd8aa7eb65bf46747901b1fc19a6cdd9
   m_configObjects: {}
