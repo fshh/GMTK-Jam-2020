@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -38,6 +39,10 @@ public class Clarity : MonoBehaviour
     public void Start()
     {
         ContinueUntilChoice();
+        if(HyperInkWrapper.instance != null && HyperInkWrapper.instance.Delete != null)
+        {
+            HyperInkWrapper.instance.Delete.AddListener(DeletePrevious);
+        }
     }
 
     private void Update()
@@ -187,4 +192,55 @@ public class Clarity : MonoBehaviour
 
         return beforeParse + parsed + afterParse;
     }
+
+    //This code is wildly inefficient but I don't think it should matter, it's not called often
+    //might be wonky with rich text, this is a first implementation
+    #region deletions
+    public void DeletePrevious(string startString, string endString)
+    {
+        if(!writing.text.Contains(startString))
+        {
+            Debug.LogError("Couldn't find string: " + startString);
+            return;
+        }
+        else if(!writing.text.Contains(endString))
+        {
+            Debug.LogError("Couldn't find string: " + endString);
+            return;
+        }
+        else
+        {
+
+            string[] splitByEndString = SplitStringWithString(writing.text, endString);
+
+            string beforeEndString = "";
+
+            //minus one because we don't want to include the last bit
+            for(int i = 0; i < splitByEndString.Length - 1; i++)
+            {
+                beforeEndString += splitByEndString[i];
+            }
+
+            string[] splitByStartString = SplitStringWithString(beforeEndString, startString);
+
+            string middleToDelete = splitByStartString[splitByStartString.Length - 1];
+
+            //Actual deletions
+            string newWritingString = writing.text.Replace(startString, "");
+            newWritingString = newWritingString.Replace(middleToDelete, "");
+            newWritingString = newWritingString.Replace(endString, "");
+
+            writing.text = newWritingString;
+        }
+    }
+
+    //requires that there be no ` in the original text
+    public string[] SplitStringWithString(string overall, string splitter)
+    {
+        //bit of a hack, first I replace the string with a char, then split with the new char
+        overall = overall.Replace(splitter, "`");
+
+        return overall.Split('`');
+    }
+    #endregion
 }

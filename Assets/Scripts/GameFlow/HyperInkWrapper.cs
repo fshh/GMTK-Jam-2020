@@ -5,6 +5,10 @@ using UnityEngine;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class TwoStrings : UnityEvent<string, string> { }
 
 public class HyperInkWrapper : MonoBehaviour
 {
@@ -13,6 +17,9 @@ public class HyperInkWrapper : MonoBehaviour
     public Story story;
 
     public static HyperInkWrapper instance;
+
+    //reaches out to other files to register the delete function from ink
+    public TwoStrings Delete;
 
     private bool waiting = false;
     public bool Waiting { get { return waiting; } private set { waiting = value; }}
@@ -24,6 +31,25 @@ public class HyperInkWrapper : MonoBehaviour
         story.BindExternalFunction("wait", (float waitTime) => {
             wait(waitTime);
         });
+
+        if (Delete == null)
+        {
+            Delete = new TwoStrings();
+        }
+
+        story.BindExternalFunction("delete", (string startString, string endString) => {
+            StartCoroutine(FireDeleteAfterContinues(startString, endString));
+        });
+
+    }
+
+    public IEnumerator FireDeleteAfterContinues(string startString, string endString)
+    {
+        //Wait for any processing of previous information
+        yield return new WaitUntil(CanContinue);
+        yield return new WaitForEndOfFrame();
+
+        Delete.Invoke(startString, endString);
 
     }
 

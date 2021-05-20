@@ -1299,8 +1299,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1580,6 +1580,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: dd756a0801f184c41b6e4ece9f6bd3a7, type: 3}
+  Delete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2143356488
 Transform:
   m_ObjectHideFlags: 0

@@ -149,8 +149,6 @@ public class FileSystem : MonoBehaviour
                 newFile.name = file.Name;
                 newFile.childNodes = null;
 
-                newFile.print();
-
                 filesInDirectory.Add(newFile);
                 AddNodeToDictionaries(newFile);
             }
@@ -164,9 +162,6 @@ public class FileSystem : MonoBehaviour
             newDir.type = FileType.Folder;
             newDir.name = SubDir.Name;
             newDir.childNodes = BuildDirectory(SubDir, newDir.path);
-
-
-            newDir.print();
 
             filesInDirectory.Add(newDir); 
             AddNodeToDictionaries(newDir);

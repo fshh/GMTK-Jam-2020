@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    material: {fileID: 2100000, guid: 9e5e1c5da4a176a49b28e32accea0c6c, type: 2}
+    material: {fileID: 2100000, guid: 0248e10c498664bc082199d120d4c4ae, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

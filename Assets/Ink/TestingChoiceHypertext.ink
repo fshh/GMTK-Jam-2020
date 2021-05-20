@@ -1,4 +1,5 @@
 EXTERNAL wait(waitTime)
+EXTERNAL delete(startString, endString)
 
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+
@@ -20,7 +21,7 @@ under 18,  19 - 30, 31 - 60 or 61\+
 * [^Sometimes] Does this happen more often than what is normal for you?
 * [^Yes] I'm sorry to hear that.
 
-- Do you say hello to strangers on the street or ignore them?
+- Do you say hello to strangers on the street or ignore them?{delete("you experienced", "memory loss")}
 
 *[^say hello] Always good to be friendly! You never know!
 *[^ignore them] Better safe than sorry, I always say.
