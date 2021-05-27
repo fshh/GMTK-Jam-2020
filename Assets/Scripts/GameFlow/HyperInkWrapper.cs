@@ -53,13 +53,13 @@ public class HyperInkWrapper : MonoBehaviour
 
     }
 
-    //For using WaitUntil in coroutines
+    ///For using WaitUntil in coroutines
     public bool WaitDelegate()
     {
         return !Waiting;
     }
 
-    //Please note - this doesn't actually do anything except set the variable, other scripts must respect the waiting boolean (or not)
+    ///Please note - this doesn't actually do anything except set the variable, other scripts must respect the waiting boolean (or not)
     private void wait(float waitTime)
     {
         if(!Waiting)
@@ -106,7 +106,6 @@ public class HyperInkWrapper : MonoBehaviour
             return "Attempted to continue but could not";
         }
     }
-
     public bool CanContinue()
     {
         return story.canContinue;

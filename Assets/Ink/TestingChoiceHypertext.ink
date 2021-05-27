@@ -5,7 +5,7 @@ How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+
 
 *[^under 18] You're my youngest user yet! I hope you have your parents permission to use the computer!
-*[^19 - 30] -> thanks
+*[`3.5`^19 - 30] -> thanks
 *[^31 - 60] -> thanks
 *[^61\+] -> thanks
 
@@ -18,10 +18,10 @@ under 18,  19 - 30, 31 - 60 or 61\+
     Yes, No, or Sometimes 
 
 * [^No] Happy to hear that ･ᴗ･ 
-* [^Sometimes] Does this happen more often than what is normal for you?
+* [`4.5`^Sometimes] Does this happen more often than what is normal for you?
 * [^Yes] I'm sorry to hear that.
 
-- Do you say hello to strangers on the street or ignore them?{delete("you experienced", "memory loss")}
+- {delete("you experienced", "memory loss")}Do you say hello to strangers on the street or ignore them?
 
 *[^say hello] Always good to be friendly! You never know!
 *[^ignore them] Better safe than sorry, I always say.

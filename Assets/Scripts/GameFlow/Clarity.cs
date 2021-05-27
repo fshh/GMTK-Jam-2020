@@ -14,6 +14,12 @@ public class Clarity : MonoBehaviour
     public ChoiceParent choiceParent;
 
     private char HypertextSymbol = '^';
+    private char AutoSelectSymbol = '`';
+
+    /// <summary>
+    /// For keeping track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine!
+    /// </summary>
+    private int choiceID = 0;
 
     private Dictionary<string, int> wordToChoiceIndex;
     private AudioSource clarityVoice;
@@ -64,7 +70,7 @@ public class Clarity : MonoBehaviour
                 {
                     if (pair.Key.Contains(word))
                     {
-                        HyperInkWrapper.instance.Choose(pair.Value);
+                        Choose(pair.Value);
                         ContinueUntilChoice();
                         break;
                     }
@@ -117,14 +123,36 @@ public class Clarity : MonoBehaviour
     {
         currChoices.Clear();
 
+
         string toReturn = textInput;
 
         for (int i = 0; i < choices.Length; i++)
         {
-            if(choices[i][0] == HypertextSymbol)
+            string cleanedChoice = choices[i];
+
+            if (cleanedChoice[0] == AutoSelectSymbol)
+            {
+                string[] tempSplit = cleanedChoice.Split(AutoSelectSymbol);
+                if(tempSplit.Length < 3)
+                {
+                    Debug.LogError("confused what to do here, were you trying to write a timed option?");
+                }
+                else
+                {
+                    cleanedChoice = tempSplit[2];
+                    string s_time = tempSplit[1];
+                    float time = float.Parse(s_time);
+
+                    StartCoroutine(timedChoice(i, time));
+                }
+
+
+            }
+
+            if (cleanedChoice[0] == HypertextSymbol)
             {
                 //then it's a hypertext option
-                string cleanedChoice = choices[i].Substring(1, choices[i].Length - 1).Trim();
+                cleanedChoice = cleanedChoice.Substring(1, cleanedChoice.Length - 1).Trim();
 
                 if (toReturn.Contains(cleanedChoice)) //TODO make case insensitive
                 {
@@ -135,7 +163,6 @@ public class Clarity : MonoBehaviour
                 {
                     Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
                 }
-
             } else
             {
                 //then it's a regular choice, add it as such
@@ -144,6 +171,25 @@ public class Clarity : MonoBehaviour
         }
 
         return toReturn;
+    }
+
+    /// <summary>
+    /// Note: to function properly must have something else stop this coroutine if another choice is made
+    /// </summary>
+    /// <param name="choice"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator timedChoice(int choice, float time)
+    {
+        //Store what choice we're currently on, Choose should increment this value
+        int ID = choiceID;
+        yield return new WaitForSeconds(time);
+
+        //If we're still on the right branch, then choose
+        if (ID == choiceID)
+        {
+            Choose(choice);
+        }
     }
 
     public void checkTags()
@@ -166,6 +212,7 @@ public class Clarity : MonoBehaviour
 
     public void Choose(int choice)
     {
+        choiceID++;
         HyperInkWrapper.instance.Choose(choice);
 
         ContinueUntilChoice();
