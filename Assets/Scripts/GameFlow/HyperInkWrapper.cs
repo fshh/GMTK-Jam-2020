@@ -44,19 +44,6 @@ public class HyperInkWrapper : MonoBehaviour
         var compiler = new Ink.Compiler(inkFileContents);
         story = compiler.Compile();
 
-        story.BindExternalFunction("wait", (float waitTime) => {
-            wait(waitTime);
-        });
-
-        if (Delete == null)
-        {
-            Delete = new TwoStrings();
-        }
-
-        story.BindExternalFunction("delete", (string startString, string endString) => {
-            StartCoroutine(FireDeleteAfterContinues(startString, endString));
-        });
-
     }
 
     //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath
@@ -90,29 +77,6 @@ public class HyperInkWrapper : MonoBehaviour
         Delete.Invoke(startString, endString);
 
     }
-
-    ///For using WaitUntil in coroutines
-    public bool WaitDelegate()
-    {
-        return !Waiting;
-    }
-
-    ///Please note - this doesn't actually do anything except set the variable, other scripts must respect the waiting boolean (or not)
-    private void wait(float waitTime)
-    {
-        if(!Waiting)
-        {
-            StartCoroutine(waitHelper(waitTime));
-        }
-    }
-
-    private IEnumerator waitHelper(float waitTime)
-    {
-        Waiting = true;
-        yield return new WaitForSeconds(waitTime);
-        Waiting = false;
-    }
-    
 
     public void GoToKnot(string address)
     {
