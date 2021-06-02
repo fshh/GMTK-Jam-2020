@@ -5,38 +5,34 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(AudioSource))]
-public class Clarity : MonoBehaviour
+public class Clarity : Singleton<Clarity>
 {
-
+    #region variables
+    [Header("References")]
     public TextMeshProUGUI writing;
     public Camera mainCamera;
-    public static Clarity instance;
     public ChoiceParent choiceParent;
 
-    private char HypertextSymbol = '^';
-    private char AutoSelectSymbol = '`';
-
-    /// <summary>
-    /// For keeping track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine!
-    /// </summary>
+    /// <summary> Keeps track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine! </summary>
     private int choiceID = 0;
 
+    //Data structures and private references
     private Dictionary<string, int> wordToChoiceIndex;
-    private AudioSource clarityVoice;
     private Queue<AudioClip> voiceLines;
-
     private List<string> currChoices;
+    private AudioSource clarityVoice; //The reason that audiosource is a required component
 
-    private static string AUDIO_FILE_PATH = "Wav Files/VO/"; 
-
-    private static string highlightPrefix = "<mark=#22222233>";
+    //Magic number-y things
+    private static string AUDIO_FILE_PATH = "Wav Files/VO/";
+    private static string highlightPrefix = "<mark=#ccff0033>";//"<mark=#22222233>";
     private static string highlightSuffix = "</mark>";
+    private static char HypertextSymbol = '^';
+    private static char AutoSelectSymbol = '`';
+    #endregion
 
     private void Awake()
     {
-        instance = this;
         clarityVoice = GetComponent<AudioSource>();
-
         currChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();
         wordToChoiceIndex = new Dictionary<string, int>();
@@ -45,7 +41,7 @@ public class Clarity : MonoBehaviour
     public void Start()
     {
         ContinueUntilChoice();
-        if(HyperInkWrapper.instance != null && HyperInkWrapper.instance.Delete != null)
+        if (HyperInkWrapper.instance != null && HyperInkWrapper.instance.Delete != null)
         {
             HyperInkWrapper.instance.Delete.AddListener(DeletePrevious);
         }
@@ -53,12 +49,19 @@ public class Clarity : MonoBehaviour
 
     private void Update()
     {
+        CheckForClickedHypertext();
+        CheckForNextVoiceClip();
+    }
+
+    /// <summary>
+    /// For calling from Update: checks if the player has clicked one of the hypertext words
+    /// </summary>
+    private void CheckForClickedHypertext()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-
-            //var wordIndex = TMP_TextUtilities.FindIntersectingWord(writing, Input.mousePosition, mainCamera);
-
             var wordIndex = TMP_TextUtilities.FindNearestWord(writing, Input.mousePosition, mainCamera);
+
 
             //word must exist, but also the cursor must be over the text box, otherwise you can click from far away
             //TODO big white spaces in the text box can still be tricky, may want to fix later.
@@ -66,18 +69,23 @@ public class Clarity : MonoBehaviour
             {
                 string word = writing.textInfo.wordInfo[wordIndex].GetWord();
 
-                foreach(KeyValuePair<string, int> pair in wordToChoiceIndex)
+                foreach (KeyValuePair<string, int> pair in wordToChoiceIndex)
                 {
                     if (pair.Key.Contains(word))
                     {
                         Choose(pair.Value);
-                        ContinueUntilChoice();
                         break;
                     }
                 }
             }
         }
+    }
 
+    /// <summary>
+    /// For calling from Update: Plays next voice clip if there's one to play and nothing is currently being played
+    /// </summary>
+    private void CheckForNextVoiceClip()
+    {
         //dumb implementation of voice playing, probably want to include a pause later (Ezra)
         if (!clarityVoice.isPlaying && voiceLines.Count > 0)
         {
@@ -86,44 +94,49 @@ public class Clarity : MonoBehaviour
         }
     }
 
-    public void ContinueUntilChoice()
+    /// <summary>
+    /// Processes text from here until the next choice
+    /// </summary>
+    private void ContinueUntilChoice()
     {
         StartCoroutine(ContinueUntilChoiceHelper());
     }
 
     private IEnumerator ContinueUntilChoiceHelper()
     {
-        wordToChoiceIndex.Clear();
-        //remove highilights
+        wordToChoiceIndex.Clear(); //Housekeeping
+
+        //Remove highlights
         writing.text = writing.text.Replace(highlightPrefix, "");
         writing.text = writing.text.Replace(highlightSuffix, "");
 
-        string textBeforeContinue = writing.text;
+        //string textBeforeContinue = writing.text;
 
-        string continueAccumulator = "";
 
+        //Add the text, waiting when the wrapper says to wait
+        //string continueAccumulator = "";
         while (HyperInkWrapper.instance.CanContinue())
         {
-            continueAccumulator += HyperInkWrapper.instance.Continue();
-            checkTags();
+            //continueAccumulator += HyperInkWrapper.instance.Continue();
             yield return new WaitUntil(HyperInkWrapper.instance.WaitDelegate);
-            writing.text = textBeforeContinue + continueAccumulator;
+            writing.text += HyperInkWrapper.instance.Continue();
+            CheckTags();
         }
-        continueAccumulator = DetermineChoices(continueAccumulator, HyperInkWrapper.instance.GetChoices());
-
-
-        //add new text
-        continueAccumulator += "\n";
-        writing.text = textBeforeContinue + continueAccumulator;
+        writing.text = DetermineChoices(writing.text, HyperInkWrapper.instance.GetChoices());
+        writing.text = writing.text + "\n";
 
         choiceParent.Populate(currChoices.ToArray());
     }
 
+    /// <summary>
+    /// Important - the string this returns is supposed to be the new version of the textInput param
+    /// </summary>
+    /// <param name="textInput"></param>
+    /// <param name="choices"></param>
+    /// <returns>textInput with highlights added from the hypertext choices</returns>
     private string DetermineChoices(string textInput, string[] choices)
     {
-        currChoices.Clear();
-
-
+        currChoices.Clear(); //Housekeeping
         string toReturn = textInput;
 
         for (int i = 0; i < choices.Length; i++)
@@ -133,7 +146,7 @@ public class Clarity : MonoBehaviour
             if (cleanedChoice[0] == AutoSelectSymbol)
             {
                 string[] tempSplit = cleanedChoice.Split(AutoSelectSymbol);
-                if(tempSplit.Length < 3)
+                if (tempSplit.Length < 3)
                 {
                     Debug.LogError("confused what to do here, were you trying to write a timed option?");
                 }
@@ -143,16 +156,13 @@ public class Clarity : MonoBehaviour
                     string s_time = tempSplit[1];
                     float time = float.Parse(s_time);
 
-                    StartCoroutine(timedChoice(i, time));
+                    StartCoroutine(TimedChoice(i, time));
                 }
-
-
             }
 
-            if (cleanedChoice[0] == HypertextSymbol)
+            if (cleanedChoice[0] == HypertextSymbol)//then it's a hypertext option
             {
-                //then it's a hypertext option
-                cleanedChoice = cleanedChoice.Substring(1, cleanedChoice.Length - 1).Trim();
+                cleanedChoice = cleanedChoice.Substring(1, cleanedChoice.Length - 1).Trim(); //lop off first character
 
                 if (toReturn.Contains(cleanedChoice)) //TODO make case insensitive
                 {
@@ -163,10 +173,11 @@ public class Clarity : MonoBehaviour
                 {
                     Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
                 }
-            } else
+            }
+            else
             {
                 //then it's a regular choice, add it as such
-                currChoices.Add(choices[i]);
+                currChoices.Add(cleanedChoice);
             }
         }
 
@@ -179,7 +190,7 @@ public class Clarity : MonoBehaviour
     /// <param name="choice"></param>
     /// <param name="time"></param>
     /// <returns></returns>
-    public IEnumerator timedChoice(int choice, float time)
+    public IEnumerator TimedChoice(int choice, float time)
     {
         //Store what choice we're currently on, Choose should increment this value
         int ID = choiceID;
@@ -192,33 +203,38 @@ public class Clarity : MonoBehaviour
         }
     }
 
-    public void checkTags()
+    /// <summary>
+    /// Plays audio related to any audio tags (TODO add other tag parsing, currently only works with audio)
+    /// </summary>
+    public void CheckTags()
     {
         string[] tags = HyperInkWrapper.instance.getTags();
 
-        foreach(string tag in tags)
+        foreach (string tag in tags)
         {
-            //Debug.Log(tag);
             AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag);
-            if(toAdd == null)
+            if (toAdd == null)
             {
                 Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
-            } else
+            }
+            else
             {
                 voiceLines.Enqueue(toAdd);
             }
         }
     }
 
+    /// <summary>
+    /// Calls choose from HyperInkWrapper (passing choice), increments choiceID
+    /// </summary>
+    /// <param name="choice"></param>
     public void Choose(int choice)
     {
         choiceID++;
+        choiceParent.Clear();
         HyperInkWrapper.instance.Choose(choice);
-
         ContinueUntilChoice();
     }
-
-
 
     //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
     public string Hypertextify(string bodyText, string wordToHypertext)
@@ -245,12 +261,13 @@ public class Clarity : MonoBehaviour
     #region deletions
     public void DeletePrevious(string startString, string endString)
     {
-        if(!writing.text.Contains(startString))
+        Debug.Break();
+        if (!writing.text.Contains(startString))
         {
             Debug.LogError("Couldn't find string: " + startString);
             return;
         }
-        else if(!writing.text.Contains(endString))
+        else if (!writing.text.Contains(endString))
         {
             Debug.LogError("Couldn't find string: " + endString);
             return;
@@ -263,7 +280,7 @@ public class Clarity : MonoBehaviour
             string beforeEndString = "";
 
             //minus one because we don't want to include the last bit
-            for(int i = 0; i < splitByEndString.Length - 1; i++)
+            for (int i = 0; i < splitByEndString.Length - 1; i++)
             {
                 beforeEndString += splitByEndString[i];
             }
@@ -281,7 +298,12 @@ public class Clarity : MonoBehaviour
         }
     }
 
-    //requires that there be no ` in the original text
+    /// <summary>
+    /// requires that there be no ` in the original text
+    /// </summary>
+    /// <param name="overall"></param>
+    /// <param name="splitter"></param>
+    /// <returns>strings split by but not including the splitter param</returns>
     public string[] SplitStringWithString(string overall, string splitter)
     {
         //bit of a hack, first I replace the string with a char, then split with the new char

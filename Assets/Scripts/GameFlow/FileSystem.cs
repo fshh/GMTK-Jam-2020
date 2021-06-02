@@ -90,7 +90,7 @@ public class FileSystem : MonoBehaviour
         return toReturn.ToArray();
     }
 
-    //TODO make more robust singleton pattern that checks it's the only one
+    //TODO Change to andrew's singleton pattern
     public static FileSystem instance;
 
     private void Awake()

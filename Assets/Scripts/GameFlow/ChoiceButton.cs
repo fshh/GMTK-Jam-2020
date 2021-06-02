@@ -34,7 +34,7 @@ public class ChoiceButton : MonoBehaviour
 
     public void pressed()
     {
-        Clarity.instance.Choose(id);
+        Clarity.Instance.Choose(id);
     }
 
     public KeyCode determineKeycode(int num)

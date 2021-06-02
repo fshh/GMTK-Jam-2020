@@ -15,13 +15,6 @@ public class ChoiceParent : MonoBehaviour
 
     public void Populate(string[] choiceArray)
     {
-        foreach(ChoiceButton choice in choices)
-        {
-            Destroy(choice.gameObject);
-        }
-
-        choices.Clear();
-
         int i = 0;
         foreach(string choiceString in choiceArray)
         {
@@ -33,4 +26,13 @@ public class ChoiceParent : MonoBehaviour
         }
     }
     
+    public void Clear()
+    {
+        foreach (ChoiceButton choice in choices)
+        {
+            Destroy(choice.gameObject);
+        }
+
+        choices.Clear();
+    }
 }

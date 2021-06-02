@@ -14,20 +14,36 @@ public class HyperInkWrapper : MonoBehaviour
 {
 
     public TextAsset inkJSON;
-    public Story story;
+
+    //TODO make this work with multiple include statements. use this link for more info https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#using-the-compiler
+
+    private Story story;
 
     public static HyperInkWrapper instance;
 
     //reaches out to other files to register the delete function from ink
+    [HideInInspector]
     public TwoStrings Delete;
 
     private bool waiting = false;
+
+    private static string INK_FILES_FOLDER_PATH = "Ink";
+    private static string INK_FILE_NAME = "Story.ink"; //TODO make this just be the first ink story in the folder
+    private string inkFileContents; //TODO not the best implementation, just a stop gap
+
     public bool Waiting { get { return waiting; } private set { waiting = value; }}
 
     private void Awake()
     {
         instance = this;
-        story = new Story(inkJSON.text);
+
+        string inkFilePath = Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH + "/" + INK_FILE_NAME;
+
+        StartCoroutine(loadStreamingAsset(inkFilePath));
+
+        var compiler = new Ink.Compiler(inkFileContents);
+        story = compiler.Compile();
+
         story.BindExternalFunction("wait", (float waitTime) => {
             wait(waitTime);
         });
@@ -41,6 +57,28 @@ public class HyperInkWrapper : MonoBehaviour
             StartCoroutine(FireDeleteAfterContinues(startString, endString));
         });
 
+    }
+
+    //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath
+    IEnumerator loadStreamingAsset(string fileName)
+    {
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
+
+        string result;
+
+        if (filePath.Contains("://") || filePath.Contains(":///"))
+        {
+            //TODO currently if it runs this path, it will break because the time taken to return will cause other things to crash
+            WWW www = new WWW(filePath);
+            yield return www;
+            result = www.text;
+        }
+        else
+        {
+            result = System.IO.File.ReadAllText(filePath);
+        }
+
+        inkFileContents = result;
     }
 
     public IEnumerator FireDeleteAfterContinues(string startString, string endString)
