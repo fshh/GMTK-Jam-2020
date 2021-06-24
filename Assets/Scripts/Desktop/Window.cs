@@ -16,7 +16,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 	public ApplicationSO App { get; private set; }
 	public bool Minimized { get => canvasGroup.alpha == 0f; }
 
-	private GameObject content;
+	public GameObject content;
 	private SaveDataGeneric<GameObject> save;
 	private CanvasGroup canvasGroup;
 

@@ -28,6 +28,10 @@ under 18,  19 - 30, 31 - 60 or 61\+
 
 -Do you prefer coffee or tea in the morning? ->END
 
-//-> [Morning] This is typically the period of time between midnight and noon, especially from sunrise to noon. Do you prefer coffee or tea during this time?
+//example of timed choice
+//-> [~10~Morning] This is typically the period of time between midnight and noon, especially from sunrise to noon. Do you prefer coffee or tea during this time?
 
 //Thank you (^◡^ )
+
+//deleting text, set a local ink variable that's a start and end string that would be deleted - function like delete(startString, endString)
+

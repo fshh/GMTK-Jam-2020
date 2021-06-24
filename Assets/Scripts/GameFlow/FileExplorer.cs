@@ -7,6 +7,7 @@ public class FileExplorer : MonoBehaviour
 {
     public GameObject buttonHolder;
     public GameObject fileButton; //must have a fileButton script attached
+    public ApplicationSO TextApp;
 
     private List<GameObject> buttons;
 
@@ -33,7 +34,11 @@ public class FileExplorer : MonoBehaviour
         if(type == FileSystem.FileType.Folder)
         {
             OpenFolder(ticket);
-        } else
+        } else if (type == FileSystem.FileType.Text) 
+        {
+            Window textWindow = TextApp.OpenWindow(FileSystem.instance.GetName(ticket));
+            textWindow.content.GetComponent<TextApp>().TextContent = FileSystem.instance.GetName(ticket);
+        } else 
         {
             //TODO unstub
             Debug.Log("Wasn't a folder, don't know what to do with this yet (Ezra)");

@@ -53,6 +53,7 @@ MonoBehaviour:
   buttonHolder: {fileID: 7087891293028590237}
   fileButton: {fileID: 8717445702583680448, guid: 9cd73a2bcce59bd4687910c4d07207bd,
     type: 3}
+  TextApp: {fileID: 11400000, guid: 7ce2eab3668172745923b4ca890f65a1, type: 2}
 --- !u!1 &7087891292301187600
 GameObject:
   m_ObjectHideFlags: 0
