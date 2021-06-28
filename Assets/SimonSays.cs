@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using TMPro;
 
 public class SimonSays : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class SimonSays : MonoBehaviour
     public float buttonGlowTime;
     public float buttonPauseTime;
 
+    public TextMeshProUGUI scoreCounter;
+    private int score = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,11 @@ public class SimonSays : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void SetScoreText()
+    {
+        scoreCounter.text = "Score: " + score.ToString();
     }
 
     public void buttonInput(int buttonID)
@@ -38,6 +47,8 @@ public class SimonSays : MonoBehaviour
             if (buttonID == sequence[currentlyOn])
             {
                 currentlyOn++;
+                score = score + 100;
+                SetScoreText();
                 if (sequence.Count <= currentlyOn)
                 {
                     Debug.Log("Won simon says!");
