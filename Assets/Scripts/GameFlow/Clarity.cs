@@ -26,8 +26,12 @@ public class Clarity : Singleton<Clarity>
     private static string AUDIO_FILE_PATH = "Wav Files/VO/";
     private static string highlightPrefix = "<mark=#ccff0033>";//"<mark=#22222233>";
     private static string highlightSuffix = "</mark>";
+
     private static char HypertextSymbol = '^';
     private static char AutoSelectSymbol = '`';
+    private static string AUDIO_TAG = "audio: ";
+    private static string DELETE_TAG = "delete: ";
+    private static string WAIT_TAG = "wait: ";
     #endregion
 
     private void Awake()
@@ -41,10 +45,6 @@ public class Clarity : Singleton<Clarity>
     public void Start()
     {
         ContinueUntilChoice();
-        if (HyperInkWrapper.instance != null && HyperInkWrapper.instance.Delete != null)
-        {
-            HyperInkWrapper.instance.Delete.AddListener(DeletePrevious);
-        }
     }
 
     private void Update()
@@ -110,20 +110,14 @@ public class Clarity : Singleton<Clarity>
         writing.text = writing.text.Replace(highlightPrefix, "");
         writing.text = writing.text.Replace(highlightSuffix, "");
 
-        //string textBeforeContinue = writing.text;
-
-
-        //Add the text, waiting when the wrapper says to wait
-        //string continueAccumulator = "";
         while (HyperInkWrapper.instance.CanContinue())
         {
-            //continueAccumulator += HyperInkWrapper.instance.Continue();
-            yield return new WaitUntil(HyperInkWrapper.instance.WaitDelegate);
+            AudioTags();
+            DeleteTags();
+            yield return new WaitForSeconds(WaitTags());
             writing.text += HyperInkWrapper.instance.Continue();
-            CheckTags();
         }
-        writing.text = DetermineChoices(writing.text, HyperInkWrapper.instance.GetChoices());
-        writing.text = writing.text + "\n";
+        writing.text = DetermineChoices(writing.text, HyperInkWrapper.instance.GetChoices()) + "\n";
 
         choiceParent.Populate(currChoices.ToArray());
     }
@@ -146,7 +140,7 @@ public class Clarity : Singleton<Clarity>
             if (cleanedChoice[0] == AutoSelectSymbol)
             {
                 string[] tempSplit = cleanedChoice.Split(AutoSelectSymbol);
-                if (tempSplit.Length < 3)
+                if(tempSplit.Length < 3)
                 {
                     Debug.LogError("confused what to do here, were you trying to write a timed option?");
                 }
@@ -173,8 +167,7 @@ public class Clarity : Singleton<Clarity>
                 {
                     Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
                 }
-            }
-            else
+            } else
             {
                 //then it's a regular choice, add it as such
                 currChoices.Add(cleanedChoice);
@@ -203,23 +196,65 @@ public class Clarity : Singleton<Clarity>
         }
     }
 
+
+    //TODO fix to work with the new tagging system - currently broken!
     /// <summary>
     /// Plays audio related to any audio tags (TODO add other tag parsing, currently only works with audio)
     /// </summary>
-    public void CheckTags()
+    private void AudioTags()
+    {
+        string[] tags = HyperInkWrapper.instance.getTags();
+
+        foreach(string tag in tags)
+        {
+            if (tag.Contains(AUDIO_TAG))
+            {
+                AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag.Replace(AUDIO_TAG, ""));
+                if (toAdd == null)
+                {
+                    Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
+                }
+                else
+                {
+                    voiceLines.Enqueue(toAdd);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the sum of all arguments to wait tags, rounded up to at least 0
+    /// </summary>
+    /// <returns>Time the program should wait before continuing</returns>
+    private float WaitTags()
+    {
+        float accumulator = 0;
+        string[] tags = HyperInkWrapper.instance.getTags();
+
+        foreach (string tag in tags)
+        {
+            if (tag.Contains(WAIT_TAG))
+            {
+                accumulator += int.Parse(tag.Replace(WAIT_TAG, "").Trim());
+            }
+        }
+
+        return Mathf.Max(accumulator, 0);
+    }
+
+    private void DeleteTags()
     {
         string[] tags = HyperInkWrapper.instance.getTags();
 
         foreach (string tag in tags)
         {
-            AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag);
-            if (toAdd == null)
+            if (tag.Contains(DELETE_TAG))
             {
-                Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
-            }
-            else
-            {
-                voiceLines.Enqueue(toAdd);
+                string[] startEndStrings = tag.Replace(DELETE_TAG, "").Trim().Split(',');
+                string start = startEndStrings[0].Trim();
+                string end = startEndStrings[1].Trim();
+
+                DeletePrevious(start, end);
             }
         }
     }
@@ -261,13 +296,12 @@ public class Clarity : Singleton<Clarity>
     #region deletions
     public void DeletePrevious(string startString, string endString)
     {
-        Debug.Break();
-        if (!writing.text.Contains(startString))
+        if(!writing.text.Contains(startString))
         {
             Debug.LogError("Couldn't find string: " + startString);
             return;
         }
-        else if (!writing.text.Contains(endString))
+        else if(!writing.text.Contains(endString))
         {
             Debug.LogError("Couldn't find string: " + endString);
             return;
@@ -280,7 +314,7 @@ public class Clarity : Singleton<Clarity>
             string beforeEndString = "";
 
             //minus one because we don't want to include the last bit
-            for (int i = 0; i < splitByEndString.Length - 1; i++)
+            for(int i = 0; i < splitByEndString.Length - 1; i++)
             {
                 beforeEndString += splitByEndString[i];
             }

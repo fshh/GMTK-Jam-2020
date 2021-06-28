@@ -1,6 +1,3 @@
-EXTERNAL wait(waitTime)
-EXTERNAL delete(startString, endString)
-
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+
 
@@ -10,18 +7,18 @@ under 18,  19 - 30, 31 - 60 or 61\+
 *[61\+] -> thanks
 
 ===thanks===
-{wait(1)}Thank you (^◡^ )
+Thank you (^◡^ ) #wait: 1
 ->memory_loss
 
 ===memory_loss===
-{wait(1)}Have you experienced any recent memory loss?
+Have you experienced any recent memory loss? #wait: 1
     Yes, No, or Sometimes 
 
 * [^No] Happy to hear that ･ᴗ･ 
 * [`1`^Sometimes] Does this happen more often than what is normal for you?
 * [^Yes] I'm sorry to hear that.
 
-- {wait(1)}Do you say hello to strangers on the street or ignore them?{delete("you experienced", "memory loss")}
+- Do you say hello to strangers on the street or ignore them?#wait: 1 #delete: you experienced, memory loss
 
 *[^say hello] Always good to be friendly! You never know!
 *[^ignore them] Better safe than sorry, I always say.
