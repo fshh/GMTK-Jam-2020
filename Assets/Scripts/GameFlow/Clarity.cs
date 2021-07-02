@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(AudioSource))]
 public class Clarity : Singleton<Clarity>
@@ -13,11 +14,15 @@ public class Clarity : Singleton<Clarity>
     public Camera mainCamera;
     public ChoiceParent choiceParent;
 
+    [Header("TODO: make serialized")]
+    public List<string> protectedChoices;
+    public SimonSays simon;
+
     /// <summary> Keeps track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine! </summary>
     private int choiceID = 0;
 
     //Data structures and private references
-    private Dictionary<string, int> wordToChoiceIndex;
+    private Dictionary<string, int> wordToChoiceIndex, invisibleChoices;
     private Queue<AudioClip> voiceLines;
     private List<string> currChoices;
     private AudioSource clarityVoice; //The reason that audiosource is a required component
@@ -32,7 +37,9 @@ public class Clarity : Singleton<Clarity>
     private static string AUDIO_TAG = "audio: ";
     private static string DELETE_TAG = "delete: ";
     private static string WAIT_TAG = "wait: ";
+    private static string SIMON_TAG = "simon: ";
     #endregion
+
 
     private void Awake()
     {
@@ -40,6 +47,7 @@ public class Clarity : Singleton<Clarity>
         currChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();
         wordToChoiceIndex = new Dictionary<string, int>();
+        invisibleChoices = new Dictionary<string, int>();
     }
 
     public void Start()
@@ -51,6 +59,34 @@ public class Clarity : Singleton<Clarity>
     {
         CheckForClickedHypertext();
         CheckForNextVoiceClip();
+    }
+
+    [Button]
+    //TODO delete this debugging function
+    public void chooseWin()
+    {
+        chooseByWord("won");
+    }
+
+    /// <summary>
+    /// Function specifically for choosing "invisible" protected choices, like for clarity says choosign "won" or "lost"
+    /// </summary>
+    public void chooseByWord(string word)
+    {
+        //TODO make case insensitive
+        if (!protectedChoices.Contains(word))
+        {
+            Debug.Log("No such protected choice exists: " + word);
+        }
+
+        if (invisibleChoices.ContainsKey(word))
+        {
+            Choose(invisibleChoices[word]);
+        }
+        else
+        {
+            Debug.Log("No such invisible choice exists: " + word);
+        }
     }
 
     /// <summary>
@@ -105,6 +141,7 @@ public class Clarity : Singleton<Clarity>
     private IEnumerator ContinueUntilChoiceHelper()
     {
         wordToChoiceIndex.Clear(); //Housekeeping
+        invisibleChoices.Clear();
 
         //Remove highlights
         writing.text = writing.text.Replace(highlightPrefix, "");
@@ -114,6 +151,7 @@ public class Clarity : Singleton<Clarity>
         {
             AudioTags();
             DeleteTags();
+            GameTags();
             yield return new WaitForSeconds(WaitTags());
             writing.text += HyperInkWrapper.instance.Continue();
         }
@@ -154,7 +192,16 @@ public class Clarity : Singleton<Clarity>
                 }
             }
 
-            if (cleanedChoice[0] == HypertextSymbol)//then it's a hypertext option
+            bool invisible = false;
+            foreach (string protectedChoice in protectedChoices)
+            {
+                if (protectedChoice.ToUpper().Equals(cleanedChoice.ToUpper()))
+                {
+                    invisible = true; //if a protected choice, don't list it
+                }
+            }
+
+            if (cleanedChoice[0] == HypertextSymbol && !invisible)//then it's a hypertext option
             {
                 cleanedChoice = cleanedChoice.Substring(1, cleanedChoice.Length - 1).Trim(); //lop off first character
 
@@ -167,7 +214,11 @@ public class Clarity : Singleton<Clarity>
                 {
                     Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
                 }
-            } else
+            } else if (invisible)
+            {
+                invisibleChoices.Add(cleanedChoice, i);
+            }
+            else
             {
                 //then it's a regular choice, add it as such
                 currChoices.Add(cleanedChoice);
@@ -255,6 +306,26 @@ public class Clarity : Singleton<Clarity>
                 string end = startEndStrings[1].Trim();
 
                 DeletePrevious(start, end);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Parses tags of the form SIMON_TAG command, length
+    /// </summary>
+    private void GameTags()
+    {
+        string[] tags = HyperInkWrapper.instance.getTags();
+
+        foreach (string tag in tags)
+        {
+            if (tag.Contains(SIMON_TAG))
+            {
+                string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
+                if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
+                {
+                    simon.createSequence(int.Parse(simonArgs[1].Trim()));
+                }
             }
         }
     }

@@ -1,5 +1,10 @@
-How old are you?
-under 18,  19 - 30, 31 - 60 or 61\+
+How old are you? #simon: start, 3
+under 18,  19 - 30, 31 - 60 or 61\+ 
+ * won
+ * lost
+ * wowee
+ - hi
+
 
 *[under 18] You're my youngest user yet! I hope you have your parents permission to use the computer!
 *[19 - 30] -> thanks

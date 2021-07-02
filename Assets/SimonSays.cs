@@ -38,7 +38,7 @@ public class SimonSays : MonoBehaviour
     public void buttonInput(int buttonID)
     {
         //if correct, validate visually then advance to the next number
-        if (sequence.Count > 0)
+        if (sequence.Count <= 0)
         {
             Debug.Log("I didn't tell you to click anything yet!");
         }
@@ -51,13 +51,13 @@ public class SimonSays : MonoBehaviour
                 SetScoreText();
                 if (sequence.Count <= currentlyOn)
                 {
-                    Debug.Log("Won simon says!");
+                    Clarity.Instance.chooseByWord("won");
                 }
             }
             else
             {
                 //if incorrect, show visually, then reset the sequence list and start over (maybe call an event?)
-                Debug.Log("Failed simon says :(");
+                Clarity.Instance.chooseByWord("lost");
                 sequence.Clear();
                 currentlyOn = 0;
             }
@@ -73,6 +73,7 @@ public class SimonSays : MonoBehaviour
 
     public void createSequence(int length)
     {
+        Debug.Log("creating sequence of length: " + length);
         sequence.Clear();
         currentlyOn = 0;
         for(int i = 0; i < length; i++)
