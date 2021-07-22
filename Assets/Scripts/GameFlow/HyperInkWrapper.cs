@@ -68,6 +68,26 @@ public class HyperInkWrapper : MonoBehaviour
         inkFileContents = result;
     }
 
+    public void ObserveVariable(string variableName, Story.VariableObserver observer)
+    {
+        story.ObserveVariable(variableName, observer);
+    }
+
+    public void SetVariable(string variableName, string newValue)
+    {
+        story.variablesState[variableName] = newValue;
+    }
+
+    public void SetVariable(string variableName, bool newValue)
+    {
+        story.variablesState[variableName] = newValue;
+    }
+
+    public void SetVariable(string variableName, int newValue)
+    {
+        story.variablesState[variableName] = newValue;
+    }
+
     public IEnumerator FireDeleteAfterContinues(string startString, string endString)
     {
         //Wait for any processing of previous information

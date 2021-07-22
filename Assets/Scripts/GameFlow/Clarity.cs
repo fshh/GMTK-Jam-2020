@@ -13,10 +13,10 @@ public class Clarity : Singleton<Clarity>
     public TextMeshProUGUI writing;
     public Camera mainCamera;
     public ChoiceParent choiceParent;
+    public GameObject popupPrefab;
 
-    [Header("TODO: make serialized")]
-    public List<string> protectedChoices;
     public SimonSays simon;
+    private List<string> protectedChoices;
 
     /// <summary> Keeps track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine! </summary>
     private int choiceID = 0;
@@ -38,6 +38,7 @@ public class Clarity : Singleton<Clarity>
     private static string DELETE_TAG = "delete: ";
     private static string WAIT_TAG = "wait: ";
     private static string SIMON_TAG = "simon: ";
+    private static string POPUP_TAG = "popup: ";
     #endregion
 
 
@@ -45,6 +46,7 @@ public class Clarity : Singleton<Clarity>
     {
         clarityVoice = GetComponent<AudioSource>();
         currChoices = new List<string>();
+        protectedChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();
         wordToChoiceIndex = new Dictionary<string, int>();
         invisibleChoices = new Dictionary<string, int>();
@@ -61,15 +63,8 @@ public class Clarity : Singleton<Clarity>
         CheckForNextVoiceClip();
     }
 
-    [Button]
-    //TODO delete this debugging function
-    public void chooseWin()
-    {
-        chooseByWord("won");
-    }
-
     /// <summary>
-    /// Function specifically for choosing "invisible" protected choices, like for clarity says choosign "won" or "lost"
+    /// Function specifically for choosing "invisible" protected choices, like for clarity says choosing "won" or "lost"
     /// </summary>
     public void chooseByWord(string word)
     {
@@ -142,6 +137,7 @@ public class Clarity : Singleton<Clarity>
     {
         wordToChoiceIndex.Clear(); //Housekeeping
         invisibleChoices.Clear();
+        protectedChoices.Clear();
 
         //Remove highlights
         writing.text = writing.text.Replace(highlightPrefix, "");
@@ -152,6 +148,7 @@ public class Clarity : Singleton<Clarity>
             AudioTags();
             DeleteTags();
             GameTags();
+            PopupTags();
             yield return new WaitForSeconds(WaitTags());
             writing.text += HyperInkWrapper.instance.Continue();
         }
@@ -325,6 +322,31 @@ public class Clarity : Singleton<Clarity>
                 if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
                 {
                     simon.createSequence(int.Parse(simonArgs[1].Trim()));
+                }
+                protectedChoices.Add("won");
+                protectedChoices.Add("lost");
+            }
+        }
+    }
+
+    private void PopupTags()
+    {
+        string[] tags = HyperInkWrapper.instance.getTags();
+
+        foreach (string tag in tags)
+        {
+            if (tag.Contains(POPUP_TAG))
+            {
+                string[] args = tag.Replace(POPUP_TAG, "").Trim().Split(',');
+                if(args.Length >= 3)
+                {
+                    GameObject popup = Instantiate(popupPrefab, transform);
+                    popup.GetComponent<Popup>().Init(args[0].Trim(), args[1].Trim(), args[2].Trim());
+                    protectedChoices.Add(args[1].Trim());
+                    protectedChoices.Add(args[2].Trim());
+                } else
+                {
+                    Debug.Log("You need more args to call the popup function. Try popup: <description>, <ButtonOneText>, <ButtonTwoText>");
                 }
             }
         }

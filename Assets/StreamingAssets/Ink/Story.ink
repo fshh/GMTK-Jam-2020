@@ -1,9 +1,15 @@
-How old are you? #simon: start, 3
+VAR camAccess = false
+
+How old are you? #popup: Clarity would like access to your camera, yes, no
 under 18,  19 - 30, 31 - 60 or 61\+ 
  * won
  * lost
  * wowee
- - hi
+ * [yes] 
+ ~ camAccess = true
+ * [no] 
+ ~ camAccess = false
+ - hi {camAccess: Gave me camera access huh? Interesting choice >:) | :(}
 
 
 *[under 18] You're my youngest user yet! I hope you have your parents permission to use the computer!
@@ -16,11 +22,12 @@ Thank you (^◡^ ) #wait: 1
 ->memory_loss
 
 ===memory_loss===
-Have you experienced any recent memory loss? #wait: 1
+Have you experienced any recent memory loss? #simon: start, 5
     Yes, No, or Sometimes 
-
+* [won] wow great job
+* [lost] wow you suck
 * [^No] Happy to hear that ･ᴗ･ 
-* [`1`^Sometimes] Does this happen more often than what is normal for you?
+* [Sometimes] Does this happen more often than what is normal for you?
 * [^Yes] I'm sorry to hear that.
 
 - Do you say hello to strangers on the street or ignore them?#wait: 1 #delete: you experienced, memory loss

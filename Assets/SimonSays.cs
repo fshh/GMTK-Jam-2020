@@ -65,12 +65,6 @@ public class SimonSays : MonoBehaviour
 
     }
 
-    [Button]
-    public void sequenceOf5()
-    {
-        createSequence(5);
-    }
-
     public void createSequence(int length)
     {
         Debug.Log("creating sequence of length: " + length);
