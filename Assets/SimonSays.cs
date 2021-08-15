@@ -19,7 +19,7 @@ public class SimonSays : MonoBehaviour
     private int score = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         sequence = new List<int>();
     }
@@ -67,7 +67,6 @@ public class SimonSays : MonoBehaviour
 
     public void createSequence(int length)
     {
-        Debug.Log("creating sequence of length: " + length);
         sequence.Clear();
         currentlyOn = 0;
         for(int i = 0; i < length; i++)

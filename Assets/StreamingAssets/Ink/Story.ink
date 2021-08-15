@@ -1,11 +1,10 @@
 VAR camAccess = false
 
-How old are you? #popup: Clarity would like access to your camera, yes, no
-under 18,  19 - 30, 31 - 60 or 61\+ 
+Testing testing testing testing woweeee woww wowee wowee testing testing
  * won
  * lost
- * wowee
- * [yes] 
+ * ^wowee
+ * [^testing] 
  ~ camAccess = true
  * [no] 
  ~ camAccess = false
@@ -22,7 +21,7 @@ Thank you (^◡^ ) #wait: 1
 ->memory_loss
 
 ===memory_loss===
-Have you experienced any recent memory loss? #simon: start, 5
+Have you experienced any recent memory loss? 
     Yes, No, or Sometimes 
 * [won] wow great job
 * [lost] wow you suck

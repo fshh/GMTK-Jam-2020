@@ -15,7 +15,14 @@ public class Clarity : Singleton<Clarity>
     public ChoiceParent choiceParent;
     public GameObject popupPrefab;
 
-    public SimonSays simon;
+
+    private bool notWaiting = false;
+    public bool NotWaiting { set { notWaiting = value; } }
+
+    //TODO make this be a reference that's created on the fly
+
+    public ApplicationSO simonApp;
+    //public SimonSays simon;
     private List<string> protectedChoices;
 
     /// <summary> Keeps track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine! </summary>
@@ -276,6 +283,10 @@ public class Clarity : Singleton<Clarity>
     /// <returns>Time the program should wait before continuing</returns>
     private float WaitTags()
     {
+        if (notWaiting)
+        {
+            return 0;
+        }
         float accumulator = 0;
         string[] tags = HyperInkWrapper.instance.getTags();
 
@@ -321,6 +332,9 @@ public class Clarity : Singleton<Clarity>
                 string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
                 if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
                 {
+                    Window simonWindow = simonApp.OpenWindow();
+                    SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
+                    
                     simon.createSequence(int.Parse(simonArgs[1].Trim()));
                 }
                 protectedChoices.Add("won");
@@ -367,7 +381,7 @@ public class Clarity : Singleton<Clarity>
     //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
     public string Hypertextify(string bodyText, string wordToHypertext)
     {
-        int firstIndex = bodyText.IndexOf(wordToHypertext);
+        int firstIndex = bodyText.LastIndexOf(wordToHypertext);
 
         if (firstIndex == -1) //then it wasn't found, return unparsed input
         {
