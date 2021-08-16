@@ -62,12 +62,25 @@ public class Clarity : Singleton<Clarity>
     public void Start()
     {
         ContinueUntilChoice();
+        
+        CommandLine.instance.commands["go"] += ToKnot;
     }
 
     private void Update()
     {
         CheckForClickedHypertext();
         CheckForNextVoiceClip();
+    }
+
+    private void OnDestroy()
+    {
+        CommandLine.instance.commands["go"] -= ToKnot;
+    }
+
+    public void ToKnot(string knotName)
+    {
+        HyperInkWrapper.instance.GoToKnot(knotName);
+        ContinueUntilChoice();
     }
 
     /// <summary>
@@ -145,6 +158,7 @@ public class Clarity : Singleton<Clarity>
         wordToChoiceIndex.Clear(); //Housekeeping
         invisibleChoices.Clear();
         protectedChoices.Clear();
+        choiceParent.Clear();
 
         //Remove highlights
         writing.text = writing.text.Replace(highlightPrefix, "");
@@ -182,17 +196,24 @@ public class Clarity : Singleton<Clarity>
             if (cleanedChoice[0] == AutoSelectSymbol)
             {
                 string[] tempSplit = cleanedChoice.Split(AutoSelectSymbol);
-                if(tempSplit.Length < 3)
+                if(tempSplit.Length < 2)
                 {
                     Debug.LogError("confused what to do here, were you trying to write a timed option?");
                 }
                 else
                 {
-                    cleanedChoice = tempSplit[2];
                     string s_time = tempSplit[1];
                     float time = float.Parse(s_time);
 
                     StartCoroutine(TimedChoice(i, time));
+                    if (!tempSplit[2].Equals(""))
+                    {
+                        cleanedChoice = tempSplit[2]; //Regular timed choice
+                    }
+                    else
+                    {
+                        continue; //Invisible timed choice (just gave a number with no letters to go along with it)
+                    }
                 }
             }
 
@@ -373,7 +394,6 @@ public class Clarity : Singleton<Clarity>
     public void Choose(int choice)
     {
         choiceID++;
-        choiceParent.Clear();
         HyperInkWrapper.instance.Choose(choice);
         ContinueUntilChoice();
     }

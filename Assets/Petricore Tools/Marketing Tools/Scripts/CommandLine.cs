@@ -6,91 +6,92 @@ using UnityEngine.Windows.WebCam;
 using System;
 using TMPro;
 
-namespace Petricore.MarketingTool
+public class CommandLine : MonoBehaviour
 {
-    public class CommandLine : MonoBehaviour
-    {
-        public Dictionary<string, Action<string>> commands;
-        public Dictionary<string, string> descriptions; //first string is the key (also the command) the second is the description
+    public Dictionary<string, Action<string>> commands;
+    public Dictionary<string, string> descriptions; //first string is the key (also the command) the second is the description
 
-        public static CommandLine instance;
-        public TextMeshProUGUI helpText;
-        public GameObject helpParent;
+    public static CommandLine instance;
+    public TextMeshProUGUI helpText;
+    public GameObject helpParent;
         
-        //Add new actions here to extend functionality
-        private Action<string> ToggleCamLayer, LoadLevel;
+    //Add new actions here to extend functionality
+    private Action<string> ToggleCamLayer, LoadLevel;
 
-        private void Awake()
+    private Action<string> GoToKnot;
+
+    private void Awake()
+    {
+        instance = this;
+        commands = new Dictionary<string, Action<string>>();
+        descriptions = new Dictionary<string, string>();
+
+        //Add more to the dictionary here to add more commands
+        //commands.Add("toggle", ToggleCamLayer);
+        //descriptions.Add("toggle", "Toggles a camera layer. Syntax is \"toggle <Camera_Layer_Name>\""); //TODO make this work again
+        commands.Add("load", LoadScene);
+        descriptions.Add("load", "Loads a scene, note that <Scene_Number> must be an integer. Syntax is \"load <Scene_Number>\"");
+        commands.Add("go", GoToKnot);
+        descriptions.Add("go", "Moves to the specified knot. Syntax is go <Knot_Name>");
+    }
+
+    public void ProcessCommand(string input)
+    {
+        string[] words = input.Split(' ');
+        string command = words[0];
+        string args = input.Replace(command, "").Trim();
+
+        bool executedCommand = false;
+        foreach (KeyValuePair<string, Action<string>> pair in commands)
         {
-            instance = this;
-            commands = new Dictionary<string, Action<string>>();
-            descriptions = new Dictionary<string, string>();
-
-            //Add more to the dictionary here to add more commands
-            //commands.Add("toggle", ToggleCamLayer);
-            //descriptions.Add("toggle", "Toggles a camera layer. Syntax is \"toggle <Camera_Layer_Name>\""); //TODO make this work again
-            commands.Add("load", LoadScene);
-            descriptions.Add("load", "Loads a scene, note that <Scene_Number> must be an integer. Syntax is \"load <Scene_Number>\"");
-        }
-
-        public void ProcessCommand(string input)
-        {
-            string[] words = input.Split(' ');
-            string command = words[0];
-            string args = input.Replace(command, "").Trim();
-
-            bool executedCommand = false;
-            foreach (KeyValuePair<string, Action<string>> pair in commands)
+            if (command.ToUpper().Equals(pair.Key.ToUpper()))
             {
-                if (command.ToUpper().Equals(pair.Key.ToUpper()))
+                if (pair.Value != null)
                 {
-                    if (pair.Value != null)
-                    {
-                        pair.Value?.Invoke(args);
-                    }
-                    else
-                    {
-                        Debug.Log("The command command \"" + command + "\" exists but had no action associated with it");
-                    }
-                    executedCommand = true;
+                    pair.Value?.Invoke(args);
                 }
-            }
-
-            if (!executedCommand)
-            {
-                //fallthrough
-                Debug.Log("Unable to find command \"" + command);
-                Help();
-            }
-        }
-
-        public void Help()
-        {
-            helpParent.SetActive(true);
-            helpText.text = "";
-            foreach (KeyValuePair<string, Action<string>> pair in commands)
-            {
-                string description;
-                if(!descriptions.TryGetValue(pair.Key, out description))
+                else
                 {
-                    description = "Couldn't find description, pester the programmers to add one for the " + pair.Key + " command";
+                    Debug.Log("The command command \"" + command + "\" exists but had no action associated with it");
                 }
-                helpText.text += "<b>" + pair.Key + "</b>" + ": " + description + "\n\n";
+                executedCommand = true;
             }
         }
 
-        public void LoadScene(string sceneNum)
+        if (!executedCommand)
         {
-            LoadLevel?.Invoke(sceneNum);
-            int intSceneNum = 0;
-            if (int.TryParse(sceneNum, out intSceneNum))
+            //fallthrough
+            Debug.Log("Unable to find command \"" + command);
+            Help();
+        }
+    }
+
+    public void Help()
+    {
+        helpParent.SetActive(true);
+        helpText.text = "";
+        foreach (KeyValuePair<string, Action<string>> pair in commands)
+        {
+            string description;
+            if(!descriptions.TryGetValue(pair.Key, out description))
             {
-                SceneManager.LoadScene(intSceneNum);
+                description = "Couldn't find description, pester the programmers to add one for the " + pair.Key + " command";
             }
-            else
-            {
-                Debug.Log("Tried to load a scene, but it seems like you didn't enter a number. Try \"load <scene number>\"");
-            }
+            helpText.text += "<b>" + pair.Key + "</b>" + ": " + description + "\n\n";
+        }
+    }
+
+    public void LoadScene(string sceneNum)
+    {
+        LoadLevel?.Invoke(sceneNum);
+        int intSceneNum = 0;
+        if (int.TryParse(sceneNum, out intSceneNum))
+        {
+            SceneManager.LoadScene(intSceneNum);
+        }
+        else
+        {
+            Debug.Log("Tried to load a scene, but it seems like you didn't enter a number. Try \"load <scene number>\"");
         }
     }
 }
