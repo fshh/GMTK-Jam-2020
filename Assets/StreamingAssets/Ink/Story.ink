@@ -1,13 +1,13 @@
 VAR camAccess = false
+VAR testFloat = 1.4
+VAR testString = "hiya"
 
 Testing testing testing testing woweeee woww wowee wowee testing testing
  * won
  * lost
- * ^wowee
- * [^testing] 
- * [`3`] did the thingy
+ * [set camAccess to true] 
  ~ camAccess = true
- * [no] 
+ * [remain false] 
  ~ camAccess = false
  - hi {camAccess: Gave me camera access huh? Interesting choice >:) | :(}
 

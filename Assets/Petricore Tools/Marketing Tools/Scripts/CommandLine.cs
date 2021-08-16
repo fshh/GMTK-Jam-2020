@@ -9,30 +9,32 @@ using TMPro;
 public class CommandLine : MonoBehaviour
 {
     public Dictionary<string, Action<string>> commands;
-    public Dictionary<string, string> descriptions; //first string is the key (also the command) the second is the description
+    public Dictionary<string, string> description; //first string is the key (also the command) the second is the description
 
     public static CommandLine instance;
     public TextMeshProUGUI helpText;
     public GameObject helpParent;
         
     //Add new actions here to extend functionality
-    private Action<string> ToggleCamLayer, LoadLevel;
+    private Action<string> ToggleCamLayer, LoadLevel, GoToKnot;
 
-    private Action<string> GoToKnot;
+    private Action<string> SetVariable;
 
     private void Awake()
     {
         instance = this;
         commands = new Dictionary<string, Action<string>>();
-        descriptions = new Dictionary<string, string>();
+        description = new Dictionary<string, string>();
 
         //Add more to the dictionary here to add more commands
         //commands.Add("toggle", ToggleCamLayer);
         //descriptions.Add("toggle", "Toggles a camera layer. Syntax is \"toggle <Camera_Layer_Name>\""); //TODO make this work again
         commands.Add("load", LoadScene);
-        descriptions.Add("load", "Loads a scene, note that <Scene_Number> must be an integer. Syntax is \"load <Scene_Number>\"");
+        description.Add("load", "Loads a scene, note that <Scene_Number> must be an integer. Syntax is \"load <Scene_Number>\"");
         commands.Add("go", GoToKnot);
-        descriptions.Add("go", "Moves to the specified knot. Syntax is go <Knot_Name>");
+        description.Add("go", "Moves to the specified knot. Syntax is go <Knot_Name>");
+        commands.Add("set", SetVariable);
+        description.Add("set", "Sets the specified variable to the specified value. Syntax is set <Variable_Name> <New_Value>");
     }
 
     public void ProcessCommand(string input)
@@ -72,10 +74,10 @@ public class CommandLine : MonoBehaviour
         helpText.text = "";
         foreach (KeyValuePair<string, Action<string>> pair in commands)
         {
-            string description;
-            if(!descriptions.TryGetValue(pair.Key, out description))
+            string description1;
+            if(!description.TryGetValue(pair.Key, out description1))
             {
-                description = "Couldn't find description, pester the programmers to add one for the " + pair.Key + " command";
+                description1 = "Couldn't find description, pester the programmers to add one for the " + pair.Key + " command";
             }
             helpText.text += "<b>" + pair.Key + "</b>" + ": " + description + "\n\n";
         }

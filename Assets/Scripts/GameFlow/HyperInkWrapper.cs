@@ -46,6 +46,51 @@ public class HyperInkWrapper : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        CommandLine.instance.commands["set"] += SetVariableCaller;
+    }
+
+    private void OnDestroy()
+    {
+        CommandLine.instance.commands["set"] -= SetVariableCaller;
+    }
+
+    /// <summary>
+    /// Args will be in the form <Variable_Name> <New_Value>
+    /// </summary>
+    /// <param name="args"></param>
+    public void SetVariableCaller(string args)
+    {
+        string[] splits = args.Split(' ');
+        if(splits.Length < 2)
+        {
+            Debug.Log("Need more args for set variable");
+            return;
+        }
+        string variableName = splits[0];
+        string newVal = splits[1];
+
+        if(story.variablesState[variableName] == null)
+        {
+            Debug.Log("Cannot find variable with name: " + variableName);
+            return;
+        }
+
+        int intVal;
+        bool boolVal;
+        if(int.TryParse(newVal, out intVal))
+        {
+            SetVariable(variableName, intVal);
+        } else if (bool.TryParse(newVal, out boolVal))
+        {
+            SetVariable(variableName, boolVal);
+        } else
+        {
+            SetVariable(variableName, newVal); //fallthrough is that it's a string
+        }
+    }
+
     //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath
     IEnumerator loadStreamingAsset(string fileName)
     {
@@ -148,6 +193,17 @@ public class HyperInkWrapper : MonoBehaviour
             toReturn[i] = choices[i].text;
         }
 
+        return toReturn;
+    }
+
+    public string GetVariables()
+    {
+        string toReturn = "";
+        VariablesState state = story.variablesState;
+        foreach(string variableName in state)
+        {
+            toReturn += variableName + ": " + state[variableName] + "\n";
+        }
         return toReturn;
     }
 }
