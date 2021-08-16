@@ -79,7 +79,7 @@ public class CommandLine : MonoBehaviour
             {
                 description1 = "Couldn't find description, pester the programmers to add one for the " + pair.Key + " command";
             }
-            helpText.text += "<b>" + pair.Key + "</b>" + ": " + description + "\n\n";
+            helpText.text += "<b>" + pair.Key + "</b>" + ": " + description1 + "\n\n";
         }
     }
 
