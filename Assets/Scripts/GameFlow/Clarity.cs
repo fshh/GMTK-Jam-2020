@@ -13,7 +13,7 @@ public class Clarity : Singleton<Clarity>
     public TextMeshProUGUI writing;
     public Camera mainCamera;
     public ChoiceParent choiceParent;
-    public GameObject popupPrefab;
+    public GameObject popupPrefab, popupParent;
 
 
     private bool notWaiting = false;
@@ -169,10 +169,10 @@ public class Clarity : Singleton<Clarity>
             AudioTags();
             DeleteTags();
             GameTags();
-            PopupTags();
             yield return new WaitForSeconds(WaitTags());
             writing.text += HyperInkWrapper.instance.Continue();
         }
+        PopupTags();
         writing.text = DetermineChoices(writing.text, HyperInkWrapper.instance.GetChoices()) + "\n";
 
         choiceParent.Populate(currChoices.ToArray());
@@ -367,21 +367,21 @@ public class Clarity : Singleton<Clarity>
     private void PopupTags()
     {
         string[] tags = HyperInkWrapper.instance.getTags();
-
         foreach (string tag in tags)
         {
             if (tag.Contains(POPUP_TAG))
             {
                 string[] args = tag.Replace(POPUP_TAG, "").Trim().Split(',');
-                if(args.Length >= 3)
+
+                if(args.Length >= 4)
                 {
-                    GameObject popup = Instantiate(popupPrefab, transform);
-                    popup.GetComponent<Popup>().Init(args[0].Trim(), args[1].Trim(), args[2].Trim());
-                    protectedChoices.Add(args[1].Trim());
+                    GameObject popup = Instantiate(popupPrefab, popupParent.transform);
+                    popup.GetComponent<Popup>().Init(args[0].Trim(), args[1].Trim(), args[2].Trim(), args[3].Trim());
                     protectedChoices.Add(args[2].Trim());
+                    protectedChoices.Add(args[3].Trim());
                 } else
                 {
-                    Debug.Log("You need more args to call the popup function. Try popup: <description>, <ButtonOneText>, <ButtonTwoText>");
+                    Debug.Log("You need more args to call the popup function. Try popup: <description>, <extraDescription>, <ButtonOneText>, <ButtonTwoText>");
                 }
             }
         }

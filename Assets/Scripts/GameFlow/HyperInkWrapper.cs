@@ -6,6 +6,8 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Ink;
+using System.IO;
 
 [System.Serializable]
 public class TwoStrings : UnityEvent<string, string> { }
@@ -41,6 +43,11 @@ public class HyperInkWrapper : MonoBehaviour
 
         StartCoroutine(loadStreamingAsset(inkFilePath));
 
+        //var compiler = new Ink.Compiler(inkFileContents, new Compiler.Options
+        //{
+        //    countAllVisits = true,
+        //    fileHandler = new UnityInkFileHandler(Path.GetDirectoryName(Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH))
+        //});
         var compiler = new Ink.Compiler(inkFileContents);
         story = compiler.Compile();
 

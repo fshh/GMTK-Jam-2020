@@ -7,7 +7,7 @@ public class Popup : MonoBehaviour
 {
     public string inkVariableName;
 
-    public TextMeshProUGUI description, buttonOne, buttonTwo;
+    public TextMeshProUGUI description, collapsedInfo, buttonOne, buttonTwo;
 
     private string[] buttonNames;
 
@@ -29,11 +29,12 @@ public class Popup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Init(string descriptionText, string buttonOneText, string buttonTwoText)
+    public void Init(string descriptionText, string extraDescription, string buttonOneText, string buttonTwoText)
     {
         buttonNames = new string[2];
 
         description.text = descriptionText;
+        collapsedInfo.text = extraDescription;
 
         buttonOne.text = buttonOneText;
         buttonNames[0] = buttonOneText;
