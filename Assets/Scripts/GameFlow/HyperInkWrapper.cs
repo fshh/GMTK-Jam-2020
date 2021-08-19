@@ -157,12 +157,13 @@ public class HyperInkWrapper : MonoBehaviour
     {
         try
         {
+            
             story.ChoosePathString(address);
         }
         catch (Exception e)
         {
-            Debug.Log(e + "tried to go to address " + address + ", is this a typo? We couldn't find it. :(");
-            throw;
+            Debug.Log("tried to go to address \"" + address + "\", is this a typo? We couldn't find it. :(");
+            //throw;
         }
     }
 

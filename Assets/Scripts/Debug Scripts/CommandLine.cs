@@ -44,6 +44,12 @@ public class CommandLine : MonoBehaviour
         string args = input.Replace(command, "").Trim();
 
         bool executedCommand = false;
+        if (command.ToUpper().Equals("HELP"))
+        {
+            Help();
+            return;
+        }
+
         foreach (KeyValuePair<string, Action<string>> pair in commands)
         {
             if (command.ToUpper().Equals(pair.Key.ToUpper()))
