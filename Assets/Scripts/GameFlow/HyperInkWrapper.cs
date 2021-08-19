@@ -17,7 +17,6 @@ public class HyperInkWrapper : MonoBehaviour
 
     public TextAsset inkJSON;
 
-    //TODO make this work with multiple include statements. use this link for more info https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#using-the-compiler
 
     private Story story;
 
@@ -43,13 +42,14 @@ public class HyperInkWrapper : MonoBehaviour
 
         StartCoroutine(loadStreamingAsset(inkFilePath));
 
-        //var compiler = new Ink.Compiler(inkFileContents, new Compiler.Options
-        //{
-        //    countAllVisits = true,
-        //    fileHandler = new UnityInkFileHandler(Path.GetDirectoryName(Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH))
-        //});
-        var compiler = new Ink.Compiler(inkFileContents);
+        //Syntax taken from here: https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#using-the-compiler
+        var compiler = new Ink.Compiler(inkFileContents, new Compiler.Options
+        {
+            countAllVisits = true,
+            fileHandler = new UnityInkFileHandler(Path.Combine(Application.streamingAssetsPath, INK_FILES_FOLDER_PATH))
+        }); ;
         story = compiler.Compile();
+
 
     }
 
@@ -212,5 +212,28 @@ public class HyperInkWrapper : MonoBehaviour
             toReturn += variableName + ": " + state[variableName] + "\n";
         }
         return toReturn;
+    }
+}
+
+
+//(Ezra) This is a disgusting workaround, apologies to god and to any other programmers who may be looking at this.
+//Ideally we'd be able to include the ink compiler in the assembly for this file but we couldn't figure out how to do that.
+public class UnityInkFileHandler : IFileHandler
+{
+    private readonly string rootDirectory;
+
+    public UnityInkFileHandler(string rootDirectory)
+    {
+        this.rootDirectory = rootDirectory;
+    }
+
+    public string ResolveInkFilename(string includeName)
+    {
+        return Path.Combine(rootDirectory, includeName);
+    }
+
+    public string LoadInkFileContents(string fullFilename)
+    {
+        return File.ReadAllText(fullFilename);
     }
 }

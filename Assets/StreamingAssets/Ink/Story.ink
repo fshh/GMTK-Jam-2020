@@ -1,3 +1,4 @@
+INCLUDE ClaritySays.ink
 VAR genericConditional = false
 VAR genericCounter = 0
 VAR isAlone = false
