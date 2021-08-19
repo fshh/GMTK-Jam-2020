@@ -17,8 +17,6 @@ public class VoiceLinesDictionary : MonoBehaviour
 
     AudioSource player;
 
-    int currClip = 0;
-
     public Queue<string> voiceLineQueue;
 
     public string[] window;

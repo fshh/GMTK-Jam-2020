@@ -8,7 +8,7 @@ public class Taskbar : Singleton<Taskbar>
 	public GameObject ButtonPrefab;
 
 	[SerializeField]
-	private List<ApplicationSO> applications;
+	private List<ApplicationSO> applications = null;
 	private List<TaskbarButton> buttons = new List<TaskbarButton>();
 
 	private void Awake()

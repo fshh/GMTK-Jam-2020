@@ -6,7 +6,7 @@ using TMPro;
 public class TextApp : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI textContent;
+    private TextMeshProUGUI textContent = null;
 
     public string TextContent
     {

@@ -22,9 +22,6 @@ public class InkWrapper : MonoBehaviour
         set { response = value; hasResponse = true; }
     }
 
-
-    bool typing = true;
-
     bool playingCoroutine = false;
 
     [Header("Time per message")]
@@ -86,7 +83,6 @@ public class InkWrapper : MonoBehaviour
             responded = false;
             hasResponse = false;
             response = "";
-            typing = true;
         }
     }
 
@@ -117,7 +113,6 @@ public class InkWrapper : MonoBehaviour
         yield return new WaitForSeconds(Mathf.Clamp(secPerLetter * text.Length, min, max));
         typingText.enabled = false;
         terminal.text += "\n" + text;
-        typing = false;
         playingCoroutine = false;
     }
 

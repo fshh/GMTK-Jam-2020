@@ -14,7 +14,7 @@ public class TwoStrings : UnityEvent<string, string> { }
 
 public class HyperInkWrapper : MonoBehaviour
 {
-
+    public string todoremove;
     public TextAsset inkJSON;
 
 
@@ -40,7 +40,9 @@ public class HyperInkWrapper : MonoBehaviour
 
         string inkFilePath = Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH + "/" + INK_FILE_NAME;
 
+#pragma warning disable CS0612 // Technically this is deprecated but I think it still works in this version of unity. using this to suppress errors relating to it.
         StartCoroutine(loadStreamingAsset(inkFilePath));
+#pragma warning restore CS0612 // 
 
         //Syntax taken from here: https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#using-the-compiler
         var compiler = new Ink.Compiler(inkFileContents, new Compiler.Options
@@ -99,6 +101,7 @@ public class HyperInkWrapper : MonoBehaviour
     }
 
     //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath
+    [System.Obsolete]
     IEnumerator loadStreamingAsset(string fileName)
     {
         string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
@@ -158,7 +161,7 @@ public class HyperInkWrapper : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("tried to go to address " + address + ", is this a typo? We couldn't find it. :(");
+            Debug.Log(e + "tried to go to address " + address + ", is this a typo? We couldn't find it. :(");
             throw;
         }
     }

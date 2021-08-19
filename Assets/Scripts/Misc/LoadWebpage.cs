@@ -6,6 +6,7 @@ public class LoadWebpage : MonoBehaviour
 {
     public string baseURL;
 
+    [System.Obsolete]
     public void OpenPage(string s)
     {
         if (Application.platform == RuntimePlatform.WebGLPlayer)

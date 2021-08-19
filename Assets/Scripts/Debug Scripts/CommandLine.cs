@@ -16,9 +16,9 @@ public class CommandLine : MonoBehaviour
     public GameObject helpParent;
         
     //Add new actions here to extend functionality
-    private Action<string> ToggleCamLayer, LoadLevel, GoToKnot;
+    private Action<string> LoadLevel = null, GoToKnot = null;
 
-    private Action<string> SetVariable;
+    private Action<string> SetVariable = null;
 
     private void Awake()
     {
