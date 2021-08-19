@@ -5,7 +5,6 @@ public class ConsoleToGUI : MonoBehaviour
 {
     string myLog = "*begin log";
     string filename = "";
-    bool doShow = true;
     int kChars = 700;
     public TextMeshProUGUI textOutput;
     void OnEnable() { Application.logMessageReceived += Log; }

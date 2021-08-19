@@ -69,7 +69,7 @@ public class CommandLine : MonoBehaviour
         if (!executedCommand)
         {
             //fallthrough
-            Debug.Log("Unable to find command \"" + command);
+            Debug.Log("Unable to find command \"" + command + "\"");
             Help();
         }
     }

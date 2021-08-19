@@ -155,20 +155,17 @@ public class HyperInkWrapper : MonoBehaviour
 
     public void GoToKnot(string address)
     {
-        try
+        if (story.CheckPathExists(address))
         {
-            
             story.ChoosePathString(address);
-        }
-        catch (Exception e)
+        } else 
         {
             Debug.Log("tried to go to address \"" + address + "\", is this a typo? We couldn't find it. :(");
-            //throw;
         }
     }
 
     public void Choose(int choice)
-    {
+    { 
         story.ChooseChoiceIndex(choice);
     }
 

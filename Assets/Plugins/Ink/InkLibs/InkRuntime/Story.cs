@@ -2199,6 +2199,11 @@ namespace Ink.Runtime
             return TagsAtStartOfFlowContainerWithPathString (path);
         }
 
+        public bool CheckPathExists(string path)
+        {
+            return ContentAtPath(new Path(path)).correctObj != null;
+        }
+
         List<string> TagsAtStartOfFlowContainerWithPathString (string pathString)
         {
             var path = new Runtime.Path (pathString);
