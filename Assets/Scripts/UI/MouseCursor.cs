@@ -6,9 +6,8 @@ public class MouseCursor : MonoBehaviour
 {
     Vector2 cursorPosition;
     Image image;
-    public Sprite loadingCursor;
     public Sprite defaultCursor;
-    public Sprite smallCursor;
+    public Sprite loadingCursor;
     public AudioClip clickingSound;
 
     public bool locked;
@@ -21,20 +20,13 @@ public class MouseCursor : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
         }
         image = GetComponent<Image>();
+        SwitchToDefaultCursor();
     }
 
     void Update()
     {
         cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPosition;
-        if (Input.GetMouseButtonDown(0))
-        {
-            SwitchToSmallCursor();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            SwitchToDefaultCursor();
-        }
     }
 
     private void OnMouseDown()
@@ -53,12 +45,5 @@ public class MouseCursor : MonoBehaviour
     public void SwitchToDefaultCursor()
     {
         image.sprite = defaultCursor;
-        image.color = Color.white;
-    }
-
-    public void SwitchToSmallCursor()
-    {
-        image.sprite = smallCursor;
-        image.color = Color.grey;
     }
 }
