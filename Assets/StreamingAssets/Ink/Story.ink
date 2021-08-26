@@ -15,8 +15,7 @@ VAR loopAllow = 2
 VAR simonsaysWins = 0
 VAR SayNoToClarity = 0
 
-Hello I’m Clarity ･ᴗ･ Your virtual nurse. I am equipped with audio and visual dialogue prompts to best suit your needs.#wait: 1
- -> Camera_Popup ->
+Press Blue Please #simon: trick, blue
 -> Opening_Questions
 === Opening_Questions ===
 How old are you?
@@ -25,6 +24,7 @@ under 18,  19 - 30, 31 - 60 or 61\+
 *[^ 19 - 30]
 *[^31 - 60]
 *[^61+]
+*[trick] aha! you know the right buttons to press ;)
 
 - Thank you (^◡^ ) <br><br> #wait: 2
 

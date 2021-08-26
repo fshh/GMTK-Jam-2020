@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using NaughtyAttributes;
@@ -218,12 +219,9 @@ public class Clarity : Singleton<Clarity>
             }
 
             bool invisible = false;
-            foreach (string protectedChoice in protectedChoices)
+            foreach (var protectedChoice in protectedChoices.Where(protectedChoice => protectedChoice.ToUpper().Equals(cleanedChoice.ToUpper())))
             {
-                if (protectedChoice.ToUpper().Equals(cleanedChoice.ToUpper()))
-                {
-                    invisible = true; //if a protected choice, don't list it
-                }
+                invisible = true; //if a protected choice, don't list it
             }
 
             if (cleanedChoice[0] == HypertextSymbol && !invisible)//then it's a hypertext option
@@ -348,18 +346,26 @@ public class Clarity : Singleton<Clarity>
 
         foreach (string tag in tags)
         {
-            if (tag.Contains(SIMON_TAG))
+            if (!tag.Contains(SIMON_TAG)) continue;
+            
+            string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
+            if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
             {
-                string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
-                if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
-                {
-                    Window simonWindow = simonApp.OpenWindow();
-                    SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
+                Window simonWindow = simonApp.OpenWindow();
+                SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
                     
-                    simon.createSequence(int.Parse(simonArgs[1].Trim()));
-                }
+                simon.CreateSequence(int.Parse(simonArgs[1].Trim()));
                 protectedChoices.Add("won");
                 protectedChoices.Add("lost");
+            }
+                
+            if (simonArgs[0].Trim().ToUpper().Equals("trick".ToUpper()))
+            {
+                Window simonWindow = simonApp.OpenWindow();
+                SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
+                    
+                simon.TrickColor = simonArgs[1].Trim();
+                protectedChoices.Add("trick");
             }
         }
     }

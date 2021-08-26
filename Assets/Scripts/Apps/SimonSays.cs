@@ -15,6 +15,40 @@ public class SimonSays : MonoBehaviour
     public float buttonGlowTime;
     public float buttonPauseTime;
 
+    private enum SimonColor
+    {
+        Orange,
+        Green,
+        Pink,
+        Blue,
+        None
+    }
+
+    private SimonColor trickColor = SimonColor.None;
+    public string TrickColor {
+        set {
+            switch (value.ToLower())
+            {
+                case "orange":
+                    trickColor = SimonColor.Orange;
+                    Debug.Log("Orange");
+                    break;
+                case "green":
+                    trickColor = SimonColor.Green;
+                    Debug.Log("Green");
+                    break;
+                case "pink":
+                    trickColor = SimonColor.Pink;
+                    Debug.Log("Pink");
+                    break;
+                case "blue":
+                    trickColor = SimonColor.Blue;
+                    Debug.Log("Blue");
+                    break;
+            }
+        }
+    }
+    
     public TextMeshProUGUI scoreCounter;
     private int score = 0;
 
@@ -24,18 +58,12 @@ public class SimonSays : MonoBehaviour
         sequence = new List<int>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetScoreText()
     {
         scoreCounter.text = "Score: " + score.ToString();
     }
 
-    public void buttonInput(int buttonID)
+    public void ButtonInput(int buttonID)
     {
         //if correct, validate visually then advance to the next number
         if (sequence.Count <= 0)
@@ -47,7 +75,7 @@ public class SimonSays : MonoBehaviour
             if (buttonID == sequence[currentlyOn])
             {
                 currentlyOn++;
-                score = score + 100;
+                score += 100;
                 SetScoreText();
                 if (sequence.Count <= currentlyOn)
                 {
@@ -63,24 +91,32 @@ public class SimonSays : MonoBehaviour
             }
         }
 
+        if (((SimonColor)buttonID).Equals(trickColor))
+        {
+            Clarity.Instance.ChooseByWord("trick");
+            trickColor = SimonColor.None;
+            sequence.Clear();
+            currentlyOn = 0;
+        }
+
     }
 
-    public void createSequence(int length)
+    public void CreateSequence(int length)
     {
         sequence.Clear();
         currentlyOn = 0;
         for(int i = 0; i < length; i++)
         {
-            addToSequence();
+            AddToSequence();
         }
 
-        StartCoroutine(showSequence());
+        StartCoroutine(ShowSequence());
     }
 
-    public IEnumerator showSequence()
+    private IEnumerator ShowSequence()
     {
         //disable buttons
-        buttonsInteractable(false);
+        ButtonsInteractable(false);
 
         foreach(int num in sequence)
         {
@@ -95,10 +131,10 @@ public class SimonSays : MonoBehaviour
             button.colors = colors;
         }
 
-        buttonsInteractable(true);
+        ButtonsInteractable(true);
     }
 
-    private void buttonsInteractable(bool state)
+    private void ButtonsInteractable(bool state)
     {
         foreach (Button button in buttons)
         {
@@ -106,7 +142,7 @@ public class SimonSays : MonoBehaviour
         }
     }
 
-    private void addToSequence()
+    private void AddToSequence()
     {
         sequence.Add(Random.Range(0, buttons.Count));
     }
