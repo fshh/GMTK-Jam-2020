@@ -1,4 +1,6 @@
 INCLUDE ClaritySays.ink
+INCLUDE Popups
+
 VAR genericConditional = false
 VAR genericCounter = 0
 VAR isAlone = false
@@ -13,31 +15,8 @@ VAR loopAllow = 2
 VAR simonsaysWins = 0
 VAR SayNoToClarity = 0
 
-Eye OS - CLARITY#wait: 1
-Copyright (C) _______ All Rights Reserved#wait: 1
- 
-Booting up CLARITY Protocol#wait: 2
-…#wait: 2
-…#wait: 2
-…#wait: 2
-Done.#wait: 2
-Init CLARITY V2.4.3#wait: 1
-…#wait: 2
-…#wait: 2
-…#wait: 2
-Done.#wait: 2
-Configuring CLARITY#wait: 1
-…#wait: 2
-…#wait: 2
-…#wait: 2
-Done.#wait: 1
-Starting CLARITY #wait: 1
-Welcome to CLARITY V2.4.3 ･ᴗ･#wait: 3
-
 Hello I’m Clarity ･ᴗ･ Your virtual nurse. I am equipped with audio and visual dialogue prompts to best suit your needs.#wait: 1
-I’m going to ask you a series of this or that questions. #wait: 1
-Please respond accurately. (✿◠‿◠)#wait: 1
-
+ -> Camera_Popup ->
 -> Opening_Questions
 === Opening_Questions ===
 How old are you?

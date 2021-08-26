@@ -1,0 +1,7 @@
+== Camera_Popup ==
+  #popup: This is the test popup, You know -- other stuffs and things <br>Maybe some more stuff, Allow Access, Don't Allow Access 
+* [Allow Access] 
+~ camAccess = true
+* [Don't Allow Access]
+~ camAccess = false
+- ->->
