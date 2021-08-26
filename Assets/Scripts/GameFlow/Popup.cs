@@ -25,7 +25,7 @@ public class Popup : MonoBehaviour
 
     public void ChooseWord(int buttonNumber)
     {
-        Clarity.Instance.chooseByWord(buttonNames[buttonNumber]);
+        Clarity.Instance.ChooseByWord(buttonNames[buttonNumber]);
         Destroy(gameObject);
     }
 

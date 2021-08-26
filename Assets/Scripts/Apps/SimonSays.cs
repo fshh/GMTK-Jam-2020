@@ -51,13 +51,13 @@ public class SimonSays : MonoBehaviour
                 SetScoreText();
                 if (sequence.Count <= currentlyOn)
                 {
-                    Clarity.Instance.chooseByWord("won");
+                    Clarity.Instance.ChooseByWord("won");
                 }
             }
             else
             {
                 //if incorrect, show visually, then reset the sequence list and start over (maybe call an event?)
-                Clarity.Instance.chooseByWord("lost");
+                Clarity.Instance.ChooseByWord("lost");
                 sequence.Clear();
                 currentlyOn = 0;
             }

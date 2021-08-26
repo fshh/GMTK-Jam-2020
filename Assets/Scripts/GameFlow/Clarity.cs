@@ -77,7 +77,7 @@ public class Clarity : Singleton<Clarity>
         CommandLine.instance.commands["go"] -= ToKnot;
     }
 
-    public void ToKnot(string knotName)
+    private void ToKnot(string knotName)
     {
         HyperInkWrapper.instance.GoToKnot(knotName);
         ContinueUntilChoice();
@@ -86,7 +86,7 @@ public class Clarity : Singleton<Clarity>
     /// <summary>
     /// Function specifically for choosing "invisible" protected choices, like for clarity says choosing "won" or "lost"
     /// </summary>
-    public void chooseByWord(string word)
+    public void ChooseByWord(string word)
     {
         //TODO make case insensitive
         if (!protectedChoices.Contains(word))
