@@ -37,7 +37,8 @@ public class FileExplorer : MonoBehaviour
         } else if (type == FileSystem.FileType.Text) 
         {
             Window textWindow = TextApp.OpenWindow(FileSystem.instance.GetName(ticket));
-            textWindow.content.GetComponent<TextApp>().TextContent = FileSystem.instance.GetName(ticket);
+            //TODO: make the name of the window be FileSystem.instance.GetName(ticket); Ask andrew how to accomplish this
+            textWindow.content.GetComponent<TextApp>().TextContent = "Temporary, Ezra is working on a fix."; //FileSystem.instance.GetName(ticket);
         } else 
         {
             //TODO unstub

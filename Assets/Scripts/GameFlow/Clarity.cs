@@ -12,9 +12,10 @@ public class Clarity : Singleton<Clarity>
     #region variables
     [Header("References")]
     public TextMeshProUGUI writing;
-    public Camera mainCamera;
     public ChoiceParent choiceParent;
-    public GameObject popupPrefab, popupParent;
+    public GameObject popupPrefab;
+    private GameObject popupParent;
+    private Camera mainCamera;
 
 
     private bool notWaiting = false;
@@ -53,6 +54,9 @@ public class Clarity : Singleton<Clarity>
     private void Awake()
     {
         clarityVoice = GetComponent<AudioSource>();
+        mainCamera = Camera.main;
+        popupParent = GameObject.FindGameObjectWithTag("PopupParent");
+        
         currChoices = new List<string>();
         protectedChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();

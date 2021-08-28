@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HighlightsParent
   - Music
+  - PopupParent
   layers:
   - Default
   - TransparentFX
