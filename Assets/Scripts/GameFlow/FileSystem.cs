@@ -67,6 +67,19 @@ public class FileSystem : MonoBehaviour
         return ticketToNode[ticket].name;
     }
 
+    public string GetPath(FileTicket ticket)
+    {
+        return ticketToNode[ticket].path;
+    }
+
+    public string GetContents(FileTicket ticket)
+    {
+        StreamReader sr = new StreamReader(ticketToNode[ticket].path);
+        string fileContents = sr.ReadToEnd();
+        sr.Close();
+        return fileContents;
+    }
+
     public bool IsRoot(FileTicket ticket)
     {
         return ticketToNode[ticket] == root;
@@ -144,7 +157,7 @@ public class FileSystem : MonoBehaviour
             if (file.Extension == ".txt")
             {
                 FileNode newFile = new FileNode();
-                newFile.path = path + file.Name + "/";
+                newFile.path = path + file.Name;
                 newFile.type = FileType.Text;
                 newFile.name = file.Name;
                 newFile.childNodes = null;
