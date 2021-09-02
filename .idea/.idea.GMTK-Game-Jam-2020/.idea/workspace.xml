@@ -30,7 +30,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../Builds/OOC with debug window\OutOfCTRL.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -72,7 +72,7 @@
       <workItem from="1630012405377" duration="2907000" />
       <workItem from="1630164361053" duration="2975000" />
       <workItem from="1630436889160" duration="1263000" />
-      <workItem from="1630531809396" duration="1425000" />
+      <workItem from="1630531809396" duration="8758000" />
     </task>
     <servers />
   </component>

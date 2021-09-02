@@ -11,7 +11,7 @@ public class Clarity : Singleton<Clarity>
 {
     #region variables
     [Header("References")]
-    public TextMeshProUGUI writing;
+    public ClarityText clarityText;
     public ChoiceParent choiceParent;
     public GameObject popupPrefab;
     private GameObject popupParent;
@@ -36,8 +36,6 @@ public class Clarity : Singleton<Clarity>
 
     //Magic number-y things
     private static string AUDIO_FILE_PATH = "Wav Files/VO/";
-    private static string highlightPrefix = "<mark=#ccff0033>";//"<mark=#22222233>";
-    private static string highlightSuffix = "</mark>";
 
     private static char HypertextSymbol = '^';
     private static char AutoSelectSymbol = '`';
@@ -112,16 +110,17 @@ public class Clarity : Singleton<Clarity>
     /// </summary>
     private void CheckForClickedHypertext()
     {
+        //TODO: reinforce abstraction between this and ClarityText by making this function be somewhere else
         if (Input.GetMouseButtonDown(0))
         {
-            var wordIndex = TMP_TextUtilities.FindNearestWord(writing, Input.mousePosition, mainCamera);
+            var wordIndex = TMP_TextUtilities.FindNearestWord(clarityText.output, Input.mousePosition, mainCamera);
 
 
             //word must exist, but also the cursor must be over the text box, otherwise you can click from far away
             //TODO big white spaces in the text box can still be tricky, may want to fix later.
-            if (wordIndex != -1 && TMP_TextUtilities.IsIntersectingRectTransform(writing.rectTransform, Input.mousePosition, Camera.main))
+            if (wordIndex != -1 && TMP_TextUtilities.IsIntersectingRectTransform(clarityText.output.rectTransform, Input.mousePosition, Camera.main))
             {
-                string word = writing.textInfo.wordInfo[wordIndex].GetWord();
+                string word = clarityText.output.textInfo.wordInfo[wordIndex].GetWord();
 
                 foreach (KeyValuePair<string, int> pair in wordToChoiceIndex)
                 {
@@ -163,20 +162,19 @@ public class Clarity : Singleton<Clarity>
         protectedChoices.Clear();
         choiceParent.Clear();
 
-        //Remove highlights
-        writing.text = writing.text.Replace(highlightPrefix, "");
-        writing.text = writing.text.Replace(highlightSuffix, "");
-
+        clarityText.RemoveHighlights();
+        
         while (HyperInkWrapper.instance.CanContinue())
         {
             AudioTags();
             DeleteTags();
             GameTags();
             yield return new WaitForSeconds(WaitTags());
-            writing.text += HyperInkWrapper.instance.Continue();
+            yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), notWaiting); 
         }
         PopupTags();
-        writing.text = DetermineChoices(writing.text, HyperInkWrapper.instance.GetChoices()) + "\n";
+        DetermineChoices(HyperInkWrapper.instance.GetChoices());
+        clarityText.Enter();
 
         choiceParent.Populate(currChoices.ToArray());
     }
@@ -187,10 +185,9 @@ public class Clarity : Singleton<Clarity>
     /// <param name="textInput"></param>
     /// <param name="choices"></param>
     /// <returns>textInput with highlights added from the hypertext choices</returns>
-    private string DetermineChoices(string textInput, string[] choices)
+    private void DetermineChoices(string[] choices)
     {
         currChoices.Clear(); //Housekeeping
-        string toReturn = textInput;
 
         for (int i = 0; i < choices.Length; i++)
         {
@@ -230,10 +227,10 @@ public class Clarity : Singleton<Clarity>
             {
                 cleanedChoice = cleanedChoice.Substring(1, cleanedChoice.Length - 1).Trim(); //lop off first character
 
-                if (toReturn.Contains(cleanedChoice)) //TODO make case insensitive
+                if (clarityText.Contains(cleanedChoice)) //TODO make case insensitive
                 {
                     wordToChoiceIndex.Add(cleanedChoice, i);
-                    toReturn = Hypertextify(toReturn, cleanedChoice);
+                    clarityText.Hypertextify(cleanedChoice);
                 }
                 else
                 {
@@ -249,8 +246,6 @@ public class Clarity : Singleton<Clarity>
                 currChoices.Add(cleanedChoice);
             }
         }
-
-        return toReturn;
     }
 
     /// <summary>
@@ -334,7 +329,7 @@ public class Clarity : Singleton<Clarity>
                 string start = startEndStrings[0].Trim();
                 string end = startEndStrings[1].Trim();
 
-                DeletePrevious(start, end);
+                clarityText.DeletePrevious(start, end);
             }
         }
     }
@@ -405,80 +400,4 @@ public class Clarity : Singleton<Clarity>
         HyperInkWrapper.instance.Choose(choice);
         ContinueUntilChoice();
     }
-
-    //I'm doing this in an inefficient way first, may want to change to stringbuilder later (Ezra)
-    public string Hypertextify(string bodyText, string wordToHypertext)
-    {
-        int firstIndex = bodyText.LastIndexOf(wordToHypertext);
-
-        if (firstIndex == -1) //then it wasn't found, return unparsed input
-        {
-            Debug.LogError("are you sure you meant to call hypertextify? seems like that word wasn't in the text body: " + wordToHypertext);
-            return bodyText;
-        }
-
-        string beforeParse = bodyText.Substring(0, firstIndex);
-        string parse = wordToHypertext;
-        string afterParse = bodyText.Substring(firstIndex + wordToHypertext.Length);
-
-        string parsed = highlightPrefix + parse + highlightSuffix;
-
-        return beforeParse + parsed + afterParse;
-    }
-
-    //This code is wildly inefficient but I don't think it should matter, it's not called often
-    //might be wonky with rich text, this is a first implementation
-    #region deletions
-    public void DeletePrevious(string startString, string endString)
-    {
-        if(!writing.text.Contains(startString))
-        {
-            Debug.LogError("Couldn't find string: " + startString);
-            return;
-        }
-        else if(!writing.text.Contains(endString))
-        {
-            Debug.LogError("Couldn't find string: " + endString);
-            return;
-        }
-        else
-        {
-
-            string[] splitByEndString = SplitStringWithString(writing.text, endString);
-
-            string beforeEndString = "";
-
-            //minus one because we don't want to include the last bit
-            for(int i = 0; i < splitByEndString.Length - 1; i++)
-            {
-                beforeEndString += splitByEndString[i];
-            }
-
-            string[] splitByStartString = SplitStringWithString(beforeEndString, startString);
-
-            string middleToDelete = splitByStartString[splitByStartString.Length - 1];
-
-            //Actual deletions
-            string newWritingString = writing.text.Replace(startString, "");
-            newWritingString = newWritingString.Replace(middleToDelete, "");
-            newWritingString = newWritingString.Replace(endString, "");
-
-            writing.text = newWritingString;
-        }
-    }
-
-    /// <summary>
-    /// requires that there be no ` in the original text
-    /// </summary>
-    /// <param name="overall"></param>
-    /// <param name="splitter"></param>
-    /// <returns>strings split by but not including the splitter param</returns>
-    public string[] SplitStringWithString(string overall, string splitter)
-    {
-        //bit of a hack, first I replace the string with a char, then split with the new char
-        overall = overall.Replace(splitter, "`");
-
-        return overall.Split('`');
-    }
-    #endregion
 }

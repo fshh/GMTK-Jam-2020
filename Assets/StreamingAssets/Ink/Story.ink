@@ -15,7 +15,7 @@ VAR loopAllow = 2
 VAR simonsaysWins = 0
 VAR SayNoToClarity = 0
 
-Press Blue Please #simon: trick, blue
+Press Blue Please <br>
 -> Opening_Questions
 === Opening_Questions ===
 How old are you?
