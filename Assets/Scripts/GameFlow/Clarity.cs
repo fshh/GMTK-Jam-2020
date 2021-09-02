@@ -21,8 +21,6 @@ public class Clarity : Singleton<Clarity>
     private bool notWaiting = false;
     public bool NotWaiting { set { notWaiting = value; } }
 
-    //TODO make this be a reference that's created on the fly
-
     public ApplicationSO simonApp;
     //public SimonSays simon;
     private List<string> protectedChoices;
@@ -277,7 +275,7 @@ public class Clarity : Singleton<Clarity>
 
     //TODO fix to work with the new tagging system - currently broken!
     /// <summary>
-    /// Plays audio related to any audio tags (TODO add other tag parsing, currently only works with audio)
+    /// Plays audio related to any audio tags
     /// </summary>
     private void AudioTags()
     {
