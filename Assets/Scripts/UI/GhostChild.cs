@@ -13,6 +13,6 @@ public class GhostChild : MonoBehaviour
         temp.a = 1;
         image.color = temp;
         GetComponent<RectTransform>().position = t.position;
-        image.DOFade(0, 1);
+        image.DOFade(0, .3f);
     }
 }

@@ -6437,7 +6437,7 @@ PrefabInstance:
     - target: {fileID: 8074978570914359834, guid: f60181696d526f14bb18b3986e578fc2,
         type: 3}
       propertyPath: waitTime
-      value: 0.02
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60181696d526f14bb18b3986e578fc2, type: 3}
@@ -6884,7 +6884,7 @@ GameObject:
   - component: {fileID: 1538036673}
   m_Layer: 5
   m_Name: Popup Parent
-  m_TagString: Untagged
+  m_TagString: PopupParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

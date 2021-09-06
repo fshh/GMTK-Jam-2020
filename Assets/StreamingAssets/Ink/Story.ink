@@ -16,7 +16,7 @@ VAR simonsaysWins = 0
 VAR SayNoToClarity = 0
 
 Press Blue Please <br>
--> Opening_Questions
+-> Camera_Popup -> Opening_Questions
 === Opening_Questions ===
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+ 
