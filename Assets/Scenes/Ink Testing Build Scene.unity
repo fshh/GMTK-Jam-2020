@@ -6424,6 +6424,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6546145695014202541, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074978570914359834, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: numGhosties
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074978570914359834, guid: f60181696d526f14bb18b3986e578fc2,
+        type: 3}
+      propertyPath: waitTime
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60181696d526f14bb18b3986e578fc2, type: 3}
 --- !u!1 &1253547940

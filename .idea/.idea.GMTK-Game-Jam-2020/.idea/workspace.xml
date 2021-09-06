@@ -18,6 +18,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GhostChild.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1xGqzp8TsSRJZAB3z2zwWwBkow0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,6 +76,8 @@
       <workItem from="1630164361053" duration="2975000" />
       <workItem from="1630436889160" duration="1263000" />
       <workItem from="1630531809396" duration="8758000" />
+      <workItem from="1630631678799" duration="599000" />
+      <workItem from="1630956191740" duration="2695000" />
     </task>
     <servers />
   </component>
