@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   output: {fileID: 0}
+  timeBetweenLetters: 0.03
+  variance: 0.01
 --- !u!114 &7765852914713353632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +237,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfff4fbfc2942c3419e26b8ad06603eb, type: 2}
-  m_sharedMaterial: {fileID: -6613432333832481856, guid: cfff4fbfc2942c3419e26b8ad06603eb,
+  m_fontAsset: {fileID: 11400000, guid: ee9c69adafa8209449c9e3e8728ae4ce, type: 2}
+  m_sharedMaterial: {fileID: -8648693818985427794, guid: ee9c69adafa8209449c9e3e8728ae4ce,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -262,8 +264,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -805,6 +807,8 @@ MonoBehaviour:
   clarityText: {fileID: 5848849562864052139}
   choiceParent: {fileID: 3011444235905140141}
   popupPrefab: {fileID: 1478976563941362059, guid: c71e92ef530060840aed0374612e5ca0,
+    type: 3}
+  inputPopupPrefab: {fileID: 2855324518347796715, guid: f5d3b441ce2fffe4886473d56c11bdbc,
     type: 3}
   simonApp: {fileID: 11400000, guid: c686bec22aaeb4b4aa7111da893c4b83, type: 2}
 --- !u!1 &5864821332700504056

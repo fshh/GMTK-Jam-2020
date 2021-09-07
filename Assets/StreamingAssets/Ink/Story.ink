@@ -14,9 +14,10 @@ VAR name = ""
 VAR loopAllow = 2
 VAR simonsaysWins = 0
 VAR SayNoToClarity = 0
+VAR playerName = ""
 
 Press Blue Please <br>
--> Camera_Popup -> Opening_Questions
+-> Name_Popup -> Opening_Questions
 === Opening_Questions ===
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+ 

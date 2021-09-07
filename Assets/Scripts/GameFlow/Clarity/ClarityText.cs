@@ -36,10 +36,6 @@ public class ClarityText : MonoBehaviour
                 //https://twitter.com/ESzanton/status/1433541156667895812?s=20 
                 int maxRichTextLength = 4;
                 string stringToCheck = "";
-                if(newText[i] == '<'){
-                    Debug.Log(newText.Length + " " + i  + " " + maxRichTextLength);
-                
-                }
             
                 if(newText.Length - i >= maxRichTextLength){
                     stringToCheck = newText.Substring(i, maxRichTextLength);

@@ -5,3 +5,8 @@
 * [Don't Allow Access]
 ~ camAccess = false
 - ->->
+
+== Name_Popup ==
+ #inputPopup: what is your name?, playerName
+ *[continue] ->->
+ 

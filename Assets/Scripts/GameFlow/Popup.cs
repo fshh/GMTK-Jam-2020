@@ -5,8 +5,6 @@ using TMPro;
 
 public class Popup : MonoBehaviour
 {
-    public string inkVariableName;
-
     public TextMeshProUGUI description, collapsedInfo, buttonOne, buttonTwo;
 
     private string[] buttonNames;

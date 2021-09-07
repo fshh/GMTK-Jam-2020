@@ -20,6 +20,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GhostChild.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameFlow/InputPopup.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xGqzp8TsSRJZAB3z2zwWwBkow0" />
   <component name="ProjectViewState">
@@ -80,6 +81,7 @@
       <workItem from="1630956191740" duration="2695000" />
       <workItem from="1630967190840" duration="259000" />
       <workItem from="1630970307945" duration="126000" />
+      <workItem from="1631023075084" duration="2093000" />
     </task>
     <servers />
   </component>

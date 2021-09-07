@@ -13,7 +13,7 @@ public class Clarity : Singleton<Clarity>
     [Header("References")]
     public ClarityText clarityText;
     public ChoiceParent choiceParent;
-    public GameObject popupPrefab;
+    public GameObject popupPrefab, inputPopupPrefab;
     private GameObject popupParent;
     private Camera mainCamera;
 
@@ -43,7 +43,7 @@ public class Clarity : Singleton<Clarity>
     private static string DELETE_TAG = "delete: ";
     private static string WAIT_TAG = "wait: ";
     private static string SIMON_TAG = "simon: ";
-    private static string POPUP_TAG = "popup: ";
+    private static string POPUP_TAG = "popup: ", INPUT_POPUP_TAG = "inputPopup: ";
     #endregion
 
 
@@ -385,6 +385,20 @@ public class Clarity : Singleton<Clarity>
                 } else
                 {
                     Debug.Log("You need more args to call the popup function. Try popup: <description>, <extraDescription>, <ButtonOneText>, <ButtonTwoText>");
+                }
+            }
+
+            if (tag.Contains(INPUT_POPUP_TAG))
+            {
+                string[] args = tag.Replace(INPUT_POPUP_TAG, "").Trim().Split(',');
+
+                if(args.Length >= 2)
+                {
+                    GameObject popup = Instantiate(inputPopupPrefab, popupParent.transform);
+                    protectedChoices.Add(popup.GetComponent<InputPopup>().Init(args[0].Trim(), args[1].Trim()));
+                } else
+                {
+                    Debug.Log("You need more args to call the inputPopup function. Try inputPopup: <description>, <inkVariableName>");
                 }
             }
         }
