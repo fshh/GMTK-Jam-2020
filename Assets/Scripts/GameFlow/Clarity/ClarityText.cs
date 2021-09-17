@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Text;
 using TMPro;
 using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class ClarityText : MonoBehaviour
 {
-    [HideInInspector] //TODO make private, need to work on the abstraction a bit
-    public TextMeshProUGUI output;
-    private static string highlightPrefix = "<mark=#ccff0033>";//"<mark=#22222233>";
-    private static string highlightSuffix = "</mark>";
-
+    private TextMeshProUGUI output;
+    private static float BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER = 108; //TODO figure out why this is the number and replace
+    public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
+    public GameObject wordButtonPrefab, wordButtonParent;
+    private List<GameObject> wordButtons;
+    
     public float timeBetweenLetters = 0.03f, variance = 0.01f;
     // Start is called before the first frame update
     void Awake()
     {
         output = GetComponent<TextMeshProUGUI>();
+        wordButtons = new List<GameObject>();
     }
 
     public IEnumerator AddText(string newText, bool notWaiting)
@@ -53,12 +56,6 @@ public class ClarityText : MonoBehaviour
             }
         }
     }
-    
-    public void RemoveHighlights()
-    {
-        output.text = output.text.Replace(highlightPrefix, "");
-        output.text = output.text.Replace(highlightSuffix, "");
-    }
 
     public void Enter()
     {
@@ -74,22 +71,132 @@ public class ClarityText : MonoBehaviour
     public void Hypertextify(string wordToHypertext)
     {
         int firstIndex = output.text.LastIndexOf(wordToHypertext);
-
+        
         if (firstIndex == -1) //then it wasn't found, return unparsed input
         {
             Debug.LogError("are you sure you meant to call hypertextify? seems like that word wasn't in the text body: " + wordToHypertext);
             return;
         }
 
-        string beforeParse = output.text.Substring(0, firstIndex);
-        string parse = wordToHypertext;
-        string afterParse = output.text.Substring(firstIndex + wordToHypertext.Length);
-
-        string parsed = highlightPrefix + parse + highlightSuffix;
-
-        output.text = beforeParse + parsed + afterParse;
+        SetWordButtonLocation(wordToHypertext);
     }
     
+    public void SetWordButtonLocation(string toMakeButton)
+    {
+            TMP_TextInfo textInfo = output.textInfo;
+            Vector2Int characters = FindString(textInfo, toMakeButton);
+            int firstCharacter = characters[0];
+            int lastCharacter = characters[1];
+            
+            bool isBeginRegion = false;
+
+            Vector3 bottomLeft = Vector3.zero;
+            Vector3 topLeft = Vector3.zero;
+            Vector3 bottomRight = Vector3.zero;
+            Vector3 topRight = Vector3.zero;
+
+            float maxAscender = -Mathf.Infinity;
+            float minDescender = Mathf.Infinity;
+            
+            // Iterate through each character of the word
+            for (int characterIndex = firstCharacter; characterIndex < lastCharacter; characterIndex++)
+            {
+                TMP_CharacterInfo currentCharInfo = textInfo.characterInfo[characterIndex];
+                int currentLine = currentCharInfo.lineNumber;
+                
+                bool isCharacterVisible = characterIndex > output.maxVisibleCharacters ||
+                                          currentCharInfo.lineNumber > output.maxVisibleLines ||
+                                         (output.overflowMode == TextOverflowModes.Page && currentCharInfo.pageNumber + 1 != output.pageToDisplay) ? false : true;
+
+                // Track Max Ascender and Min Descender
+                maxAscender = Mathf.Max(maxAscender, currentCharInfo.ascender);
+                minDescender = Mathf.Min(minDescender, currentCharInfo.descender);
+
+
+                if (isBeginRegion == false && isCharacterVisible)
+                {
+                    isBeginRegion = true;
+
+                    bottomLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.descender, 0);
+                    topLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.ascender, 0);
+
+                    // If Word is one character
+                    if ((lastCharacter - firstCharacter) == 1)
+                    {
+                        isBeginRegion = false;
+
+                        topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
+                        bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
+                        bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
+                        topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
+                    }
+                }
+
+                
+                // Last Character of Word
+                if (isBeginRegion && characterIndex == lastCharacter - 1)
+                {
+                    isBeginRegion = false;
+
+                    topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
+                    bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
+                    bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
+                    topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
+                }
+                // If Word is split on more than one line.
+                /*else if (isBeginRegion && currentLine != textInfo.characterInfo[characterIndex + 1].lineNumber)
+                {
+                    isBeginRegion = false;
+
+                    topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
+                    bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
+                    bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
+                    topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
+
+                    // Draw Region
+                    DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, wordColor);
+                    //Debug.Log("End Word Region at [" + currentCharInfo.character + "]");
+                    maxAscender = -Mathf.Infinity;
+                    minDescender = Mathf.Infinity;
+
+                }*/
+            }
+
+            GameObject newButton = Instantiate(wordButtonPrefab, wordButtonParent.transform);
+            wordButtons.Add(newButton);
+            newButton.GetComponent<WordButton>().choiceString = toMakeButton;
+            RectTransform rt = newButton.GetComponent<RectTransform>();
+            float width = topRight.x - bottomLeft.x, height = topRight.y - bottomLeft.y;
+            rt.sizeDelta = new Vector2(width + BUTTON_MARGIN_X, height + BUTTON_MARGIN_Y) * BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER;
+            rt.transform.position = bottomLeft + new Vector3(width / 2.0f, height / 2.0f, 0);
+    }
+
+    public void ClearWordButtons()
+    {
+        foreach (GameObject wordButton in wordButtons)
+        {
+            Destroy(wordButton);
+        }
+        wordButtons.Clear();
+    }
+
+    //TODO make less horribly inefficient
+    public Vector2Int FindString(TMP_TextInfo textInfo, string toFind)
+    {
+        List<char> chars = new List<char>();
+
+        foreach (TMP_CharacterInfo characterInfo in textInfo.characterInfo)
+        {
+            chars.Add(characterInfo.character);
+        }
+
+        string fullString = new string(chars.ToArray());
+
+        int first = fullString.LastIndexOf(toFind);
+        int last = first + toFind.Length;
+        
+        return new Vector2Int(first, last);
+    }
     
     //This code is wildly inefficient but I don't think it should matter, it's not called often
     //might be wonky with rich text, this is a first implementation

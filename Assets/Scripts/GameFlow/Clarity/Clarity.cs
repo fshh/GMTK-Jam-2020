@@ -45,8 +45,6 @@ public class Clarity : Singleton<Clarity>
     private static string SIMON_TAG = "simon: ";
     private static string POPUP_TAG = "popup: ", INPUT_POPUP_TAG = "inputPopup: ";
     #endregion
-
-
     private void Awake()
     {
         clarityVoice = GetComponent<AudioSource>();
@@ -67,9 +65,9 @@ public class Clarity : Singleton<Clarity>
         CommandLine.instance.commands["go"] += ToKnot;
     }
 
+
     private void Update()
     {
-        CheckForClickedHypertext();
         CheckForNextVoiceClip();
     }
 
@@ -89,12 +87,6 @@ public class Clarity : Singleton<Clarity>
     /// </summary>
     public void ChooseByWord(string word)
     {
-        //TODO make case insensitive
-        if (!protectedChoices.Contains(word))
-        {
-            Debug.Log("No such protected choice exists: " + word);
-        }
-
         if (invisibleChoices.ContainsKey(word))
         {
             Choose(invisibleChoices[word]);
@@ -104,36 +96,7 @@ public class Clarity : Singleton<Clarity>
             Debug.Log("No such invisible choice exists: " + word);
         }
     }
-
-    /// <summary>
-    /// For calling from Update: checks if the player has clicked one of the hypertext words
-    /// </summary>
-    private void CheckForClickedHypertext()
-    {
-        //TODO: reinforce abstraction between this and ClarityText by making this function be somewhere else
-        if (Input.GetMouseButtonDown(0))
-        {
-            var wordIndex = TMP_TextUtilities.FindNearestWord(clarityText.output, Input.mousePosition, mainCamera);
-
-
-            //word must exist, but also the cursor must be over the text box, otherwise you can click from far away
-            //TODO big white spaces in the text box can still be tricky, may want to fix later.
-            if (wordIndex != -1 && TMP_TextUtilities.IsIntersectingRectTransform(clarityText.output.rectTransform, Input.mousePosition, Camera.main))
-            {
-                string word = clarityText.output.textInfo.wordInfo[wordIndex].GetWord();
-
-                foreach (KeyValuePair<string, int> pair in wordToChoiceIndex)
-                {
-                    if (pair.Key.Contains(word))
-                    {
-                        Choose(pair.Value);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
+    
     /// <summary>
     /// For calling from Update: Plays next voice clip if there's one to play and nothing is currently being played
     /// </summary>
@@ -161,8 +124,7 @@ public class Clarity : Singleton<Clarity>
         invisibleChoices.Clear();
         protectedChoices.Clear();
         choiceParent.Clear();
-
-        clarityText.RemoveHighlights();
+        clarityText.ClearWordButtons();
         
         while (HyperInkWrapper.instance.CanContinue())
         {
@@ -229,7 +191,7 @@ public class Clarity : Singleton<Clarity>
 
                 if (clarityText.Contains(cleanedChoice)) //TODO make case insensitive
                 {
-                    wordToChoiceIndex.Add(cleanedChoice, i);
+                    invisibleChoices.Add(cleanedChoice, i);
                     clarityText.Hypertextify(cleanedChoice);
                 }
                 else
