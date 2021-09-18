@@ -4136,6 +4136,7 @@ GameObject:
   - component: {fileID: 783277382}
   - component: {fileID: 783277383}
   - component: {fileID: 783277384}
+  - component: {fileID: 783277385}
   m_Layer: 5
   m_Name: Debug Menu
   m_TagString: Untagged
@@ -4189,6 +4190,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helpText: {fileID: 995914719}
   helpParent: {fileID: 597846875}
+--- !u!114 &783277385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783277381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2350b32b040e7ed4d86ace9c5bf72479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textOutput: {fileID: 437613299}
 --- !u!1 &795593084
 GameObject:
   m_ObjectHideFlags: 0
@@ -9050,7 +9064,6 @@ GameObject:
   - component: {fileID: 2051213066}
   - component: {fileID: 2051213069}
   - component: {fileID: 2051213068}
-  - component: {fileID: 2051213067}
   m_Layer: 5
   m_Name: Debug View
   m_TagString: Untagged
@@ -9079,19 +9092,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -670}
   m_SizeDelta: {x: 934.0765, y: 358.89697}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &2051213067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051213065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2350b32b040e7ed4d86ace9c5bf72479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textOutput: {fileID: 437613299}
 --- !u!114 &2051213068
 MonoBehaviour:
   m_ObjectHideFlags: 0
