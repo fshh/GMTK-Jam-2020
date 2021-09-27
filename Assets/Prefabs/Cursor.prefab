@@ -28,7 +28,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186117062639469587}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 0}
+  m_SizeDelta: {x: 16, y: 23.384615}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8074978570914359834
 MonoBehaviour:
@@ -69,9 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c4345c7f531b740bc605b576e69449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingCursor: {fileID: 21300000, guid: e4d91ace070cee541a3c5306c96fc49f, type: 3}
-  defaultCursor: {fileID: 21300000, guid: 3423c10890cfde444adedaeff48ee8f2, type: 3}
-  smallCursor: {fileID: 21300000, guid: 63cd9e5ea632f544f915c468c5615c68, type: 3}
+  defaultCursor: {fileID: 21300000, guid: 8a83160e9338a944aad318a273dcb648, type: 3}
+  loadingCursor: {fileID: 21300000, guid: d9edafda5a4814749a939620be56692a, type: 3}
   clickingSound: {fileID: 8300000, guid: a9b7101262f54854fa5392f2e71fea38, type: 3}
   locked: 1
 --- !u!222 &1186117062639469590
@@ -101,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3423c10890cfde444adedaeff48ee8f2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a83160e9338a944aad318a273dcb648, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -124,4 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 1
-  m_AspectRatio: 0.6268657
+  m_AspectRatio: 0.68421054

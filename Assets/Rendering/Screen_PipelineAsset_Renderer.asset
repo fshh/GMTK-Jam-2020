@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd9e0d8690e38d7458cc92f9b741fe2d, type: 3}
-  m_Name: NewBlitRenderPassFeature
+  m_Name: CRTComplete
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
-    material: {fileID: 0}
+    material: {fileID: 2100000, guid: 510edc84630316f4d991f7bad8cb8af7, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
-  m_Name: PipelineAsset_Renderer
+  m_Name: Screen_PipelineAsset_Renderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: -3923147115913755868}
