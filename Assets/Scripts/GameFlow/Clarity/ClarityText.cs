@@ -12,6 +12,10 @@ public class ClarityText : MonoBehaviour
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;
     private List<GameObject> wordButtons;
+    public SFXPlayer sfx;
+
+    [SerializeField]
+    private int lettersUntilSound = 5;
     
     public float timeBetweenLetters = 0.03f, variance = 0.01f;
     // Start is called before the first frame update
@@ -23,6 +27,7 @@ public class ClarityText : MonoBehaviour
 
     public IEnumerator AddText(string newText, bool notWaiting)
     {
+        int soundCounter = 0;
         if (notWaiting)
         {
             output.text += newText;
@@ -53,6 +58,12 @@ public class ClarityText : MonoBehaviour
                 }
             
                 output.text += newText[i];
+                soundCounter++;
+                if (soundCounter >= lettersUntilSound)
+                {
+                    soundCounter = 0;
+                    sfx.PlayRandom();
+                }
             }
         }
     }

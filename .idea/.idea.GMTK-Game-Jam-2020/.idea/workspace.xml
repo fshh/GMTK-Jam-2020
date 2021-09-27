@@ -21,7 +21,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GhostChild.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameFlow/InputPopup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3dc54541a2574ac7826a004a212a4332115e00/67/873be926/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/WordButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/SFXPlayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/Extras.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xGqzp8TsSRJZAB3z2zwWwBkow0" />
   <component name="ProjectViewState">
@@ -86,6 +89,7 @@
       <workItem from="1631589301496" duration="2244000" />
       <workItem from="1631797913637" duration="18203000" />
       <workItem from="1631931672974" duration="280000" />
+      <workItem from="1632067490148" duration="5791000" />
     </task>
     <servers />
   </component>
