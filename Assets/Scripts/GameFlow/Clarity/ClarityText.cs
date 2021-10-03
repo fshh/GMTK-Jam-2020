@@ -59,7 +59,8 @@ public class ClarityText : MonoBehaviour
             
                 output.text += newText[i];
                 soundCounter++;
-                if (soundCounter >= lettersUntilSound)
+                //if (soundCounter >= lettersUntilSound) Old code
+                if(output.text[output.text.Length - 1].Equals(' ') || output.text[output.text.Length - 1].Equals('\n'))
                 {
                     soundCounter = 0;
                     sfx.PlayRandom();

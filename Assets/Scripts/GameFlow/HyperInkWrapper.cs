@@ -8,16 +8,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using Ink;
 using System.IO;
+using System.Linq;
+using Application = UnityEngine.Application;
 
 [System.Serializable]
 public class TwoStrings : UnityEvent<string, string> { }
 
 public class HyperInkWrapper : MonoBehaviour
 {
-    public string todoremove;
-    public TextAsset inkJSON;
-
-
     private Story story;
 
     public static HyperInkWrapper instance;
@@ -28,8 +26,7 @@ public class HyperInkWrapper : MonoBehaviour
 
     private bool waiting = false;
 
-    private static string INK_FILES_FOLDER_PATH = "Ink";
-    private static string INK_FILE_NAME = "Story.ink"; //TODO make this just be the first ink story in the folder
+    private static string INK_FILES_FOLDER_PATH = "Ink/MainStory";
     private string inkFileContents; //TODO not the best implementation, just a stop gap
 
     public bool Waiting { get { return waiting; } private set { waiting = value; }}
@@ -37,22 +34,23 @@ public class HyperInkWrapper : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        string inkFilePath = Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH + "/" + INK_FILE_NAME;
-
+        
+        string inkFolderPath = Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH;
+        //Uses a linq expression to get a list of ink files, then selects the first of that list and gets its name
+        string storyName = new DirectoryInfo(inkFolderPath).GetFiles().Where(fileInfo => fileInfo.Extension.Equals(".ink")).ToArray()[0].Name;
+        
 #pragma warning disable CS0612 // Technically this is deprecated but I think it still works in this version of unity. using this to suppress errors relating to it.
-        StartCoroutine(loadStreamingAsset(inkFilePath));
+        StartCoroutine(LoadStreamingAsset(inkFolderPath + "/" + storyName));
 #pragma warning restore CS0612 // 
-
+        
         //Syntax taken from here: https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#using-the-compiler
         var compiler = new Ink.Compiler(inkFileContents, new Compiler.Options
         {
             countAllVisits = true,
             fileHandler = new UnityInkFileHandler(Path.Combine(Application.streamingAssetsPath, INK_FILES_FOLDER_PATH))
-        }); ;
+        });
+        
         story = compiler.Compile();
-
-
     }
 
     private void Start()
@@ -102,7 +100,7 @@ public class HyperInkWrapper : MonoBehaviour
 
     //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath
     [System.Obsolete]
-    IEnumerator loadStreamingAsset(string fileName)
+    IEnumerator LoadStreamingAsset(string fileName)
     {
         string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
 
@@ -117,7 +115,7 @@ public class HyperInkWrapper : MonoBehaviour
         }
         else
         {
-            result = System.IO.File.ReadAllText(filePath);
+            result = File.ReadAllText(filePath);
         }
 
         inkFileContents = result;

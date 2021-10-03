@@ -1,5 +1,5 @@
-INCLUDE ClaritySays.ink
-INCLUDE Popups
+INCLUDE Extras/ClaritySays.ink
+INCLUDE Extras/Popups
 
 VAR genericConditional = false
 VAR genericCounter = 0
@@ -17,7 +17,7 @@ VAR SayNoToClarity = 0
 VAR playerName = ""
 
 Press Blue Please <br>
--> Name_Popup -> Opening_Questions
+-> Camera_Popup -> Opening_Questions
 === Opening_Questions ===
 How old are you?
 under 18,  19 - 30, 31 - 60 or 61\+ 

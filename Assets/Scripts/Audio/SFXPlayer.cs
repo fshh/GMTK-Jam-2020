@@ -21,28 +21,35 @@ public class SFXPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     [Button]
     public void PlayRandom()
     {
-        if (!audioSources[0].isPlaying)
-        {            
-            if (Random.Range(0, 2) > 0)
-            {
-                audioSources[0].clip = Extras.RandomElement(clips);
-                audioSources[0].time = Random.Range(audioSources[0].clip.length / 2f, audioSources[0].clip.length);
-                //audioSources[0].pitch = Random.Range(1.5f, 1.6f);
-            
-                audioSources[0].Play();
-                //audioSources[0].PlayOneShot(Extras.RandomElement(clips));
-            }
-            else
-            {
-                audioSources[0].clip = Extras.RandomElement(clips);
-                audioSources[0].Play();
-            }
+        if (/*!audioSources[0].isPlaying*/true)
+        {
+            //audioSources[0].clip = Extras.RandomElement(clips);
+            audioSources[0].PlayOneShot(Extras.RandomElement(clips));
         }
     }
 }
+
+//Code for making it weird and backwards sometimes
+/*if (!audioSources[0].isPlaying)
+{
+    if (Random.Range(0, 2) > 0)
+    {
+        audioSources[0].clip = Extras.RandomElement(clips);
+        //audioSources[0].time = Random.Range(audioSources[0].clip.length / 2f, audioSources[0].clip.length);
+        //audioSources[0].pitch = Random.Range(1.5f, 1.6f);
+
+        audioSources[0].Play();
+        //audioSources[0].PlayOneShot(Extras.RandomElement(clips));
+    }
+    else
+    {
+        audioSources[0].clip = Extras.RandomElement(clips);
+        audioSources[0].Play();
+    }
+}*/
