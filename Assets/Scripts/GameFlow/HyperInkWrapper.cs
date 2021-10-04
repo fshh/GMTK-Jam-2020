@@ -63,6 +63,11 @@ public class HyperInkWrapper : MonoBehaviour
         CommandLine.instance.commands["set"] -= SetVariableCaller;
     }
 
+    public string GetStateJson()
+    {
+        return story.state.ToJson();
+    }
+
     /// <summary>
     /// Args will be in the form <Variable_Name> <New_Value>
     /// </summary>
