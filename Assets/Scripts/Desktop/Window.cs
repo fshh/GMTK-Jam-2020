@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Window : MonoBehaviour, IPointerClickHandler
 {
 	public RectTransform ContentParent;
+	public Image AppIcon;
 	public TextMeshProUGUI TitleText;
 	public Button FullscreenButton;
 	public Button UnFullscreenButton;
@@ -55,6 +56,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 		contentRect.offsetMax = Vector2.zero;
 		contentRect.offsetMin = Vector2.zero;
 
+		AppIcon.sprite = App.Icon;
 		gameObject.name = App.Name + "Window";
 		TitleText.text = App.Name;
 

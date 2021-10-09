@@ -534,53 +534,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1120761000, guid: 5ecce331b8de79c4cacb21c19f00d4d4, type: 3}
-      propertyPath: m_StretchFill
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120761000, guid: 5ecce331b8de79c4cacb21c19f00d4d4, type: 3}
-      propertyPath: m_RefResolutionX
-      value: 720
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120761000, guid: 5ecce331b8de79c4cacb21c19f00d4d4, type: 3}
-      propertyPath: m_RefResolutionY
-      value: 540
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7252190370351930418, guid: 5ecce331b8de79c4cacb21c19f00d4d4,
         type: 3}
       propertyPath: m_RootOrder
