@@ -84,6 +84,12 @@ public class PointerEventColorSettings : MonoBehaviour,
         UpdateColor();
     }
 
+    public void SetDefault(Color color)
+    {
+        DefaultColor = color;
+        UpdateColor();
+    }
+
     public void SetSelected(bool val)
     {
         selected = val;

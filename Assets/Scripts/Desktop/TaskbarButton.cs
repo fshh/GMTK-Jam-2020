@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 public class TaskbarButton : MonoBehaviour, IPointerClickHandler
 {
-	public Image Icon;
+	public Image AppIcon;
 	public Image HasWindowOpenIndicator;
+	public Color NoWindowOpenColor;
+	public Color HasWindowOpenColor;
 
 	public ApplicationSO App { get; private set; }
 
@@ -14,7 +16,7 @@ public class TaskbarButton : MonoBehaviour, IPointerClickHandler
 	public void Initialize(ApplicationSO app)
 	{
 		App = app;
-		Icon.sprite = App.Icon;
+		AppIcon.sprite = App.Icon;
 		gameObject.name = App.Name + "TaskbarButton";
 		colorSettings = GetComponent<PointerEventColorSettings>();
 	}
@@ -22,8 +24,8 @@ public class TaskbarButton : MonoBehaviour, IPointerClickHandler
     private void Update()
     {
 		colorSettings.SetSelected(WindowManager.Instance.HasWindowFocused(App));
-		HasWindowOpenIndicator.enabled = WindowManager.Instance.HasWindowsOpen(App);
-    }
+		HasWindowOpenIndicator.color = WindowManager.Instance.HasWindowsOpen(App) ? HasWindowOpenColor : NoWindowOpenColor;
+	}
 
     public void OnClick()
 	{
