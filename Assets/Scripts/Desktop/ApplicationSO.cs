@@ -7,6 +7,7 @@ public class ApplicationSO : ScriptableObject
 {
 	public string Name;
 	public Sprite Icon;
+	public Color BackgroundColor;
 	public GameObject AppContentPrefab;
 
 	private static GameObject WindowPrefab = null;

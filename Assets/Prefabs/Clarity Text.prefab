@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd85637b05c0e8419c47e98d0a20b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BUTTON_MARGIN_X: 0.075
+  BUTTON_MARGIN_X: 2
   BUTTON_MARGIN_Y: 0.01
   wordButtonPrefab: {fileID: 2588439984867012426, guid: d8aac4f44043da247b8f10c54923ccdf,
     type: 3}

@@ -10,6 +10,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 {
 	public RectTransform ContentParent;
 	public Image AppIcon;
+	public Image Background;
 	public TextMeshProUGUI TitleText;
 	public Button FullscreenButton;
 	public Button UnFullscreenButton;
@@ -57,6 +58,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
 		contentRect.offsetMin = Vector2.zero;
 
 		AppIcon.sprite = App.Icon;
+		Background.color = App.BackgroundColor;
 		gameObject.name = App.Name + "Window";
 		TitleText.text = App.Name;
 

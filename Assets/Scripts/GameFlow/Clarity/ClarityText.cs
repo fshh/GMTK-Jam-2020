@@ -8,7 +8,7 @@ using UnityEngine;
 public class ClarityText : MonoBehaviour
 {
     private TextMeshProUGUI output;
-    private static float BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER = 108; //TODO figure out why this is the number and replace
+    private static float BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER = 10; //TODO figure out why this is the number and replace
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;
     private List<GameObject> wordButtons;
@@ -95,58 +95,45 @@ public class ClarityText : MonoBehaviour
     
     public void SetWordButtonLocation(string toMakeButton)
     {
-            TMP_TextInfo textInfo = output.textInfo;
-            Vector2Int characters = FindString(textInfo, toMakeButton);
-            int firstCharacter = characters[0];
-            int lastCharacter = characters[1];
+        TMP_TextInfo textInfo = output.textInfo;
+        Vector2Int characters = FindString(textInfo, toMakeButton);
+        int firstCharacter = characters[0];
+        int lastCharacter = characters[1];
             
-            bool isBeginRegion = false;
+        bool isBeginRegion = false;
 
-            Vector3 bottomLeft = Vector3.zero;
-            Vector3 topLeft = Vector3.zero;
-            Vector3 bottomRight = Vector3.zero;
-            Vector3 topRight = Vector3.zero;
+        Vector3 bottomLeft = Vector3.zero;
+        Vector3 topLeft = Vector3.zero;
+        Vector3 bottomRight = Vector3.zero;
+        Vector3 topRight = Vector3.zero;
 
-            float maxAscender = -Mathf.Infinity;
-            float minDescender = Mathf.Infinity;
+        float maxAscender = -Mathf.Infinity;
+        float minDescender = Mathf.Infinity;
             
-            // Iterate through each character of the word
-            for (int characterIndex = firstCharacter; characterIndex < lastCharacter; characterIndex++)
+        // Iterate through each character of the word
+        for (int characterIndex = firstCharacter; characterIndex < lastCharacter; characterIndex++)
+        {
+            TMP_CharacterInfo currentCharInfo = textInfo.characterInfo[characterIndex];
+            int currentLine = currentCharInfo.lineNumber;
+                
+            bool isCharacterVisible = characterIndex > output.maxVisibleCharacters ||
+                                        currentCharInfo.lineNumber > output.maxVisibleLines ||
+                                        (output.overflowMode == TextOverflowModes.Page && currentCharInfo.pageNumber + 1 != output.pageToDisplay) ? false : true;
+
+            // Track Max Ascender and Min Descender
+            maxAscender = Mathf.Max(maxAscender, currentCharInfo.ascender);
+            minDescender = Mathf.Min(minDescender, currentCharInfo.descender);
+
+
+            if (isBeginRegion == false && isCharacterVisible)
             {
-                TMP_CharacterInfo currentCharInfo = textInfo.characterInfo[characterIndex];
-                int currentLine = currentCharInfo.lineNumber;
-                
-                bool isCharacterVisible = characterIndex > output.maxVisibleCharacters ||
-                                          currentCharInfo.lineNumber > output.maxVisibleLines ||
-                                         (output.overflowMode == TextOverflowModes.Page && currentCharInfo.pageNumber + 1 != output.pageToDisplay) ? false : true;
+                isBeginRegion = true;
 
-                // Track Max Ascender and Min Descender
-                maxAscender = Mathf.Max(maxAscender, currentCharInfo.ascender);
-                minDescender = Mathf.Min(minDescender, currentCharInfo.descender);
+                bottomLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.descender, 0);
+                topLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.ascender, 0);
 
-
-                if (isBeginRegion == false && isCharacterVisible)
-                {
-                    isBeginRegion = true;
-
-                    bottomLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.descender, 0);
-                    topLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.ascender, 0);
-
-                    // If Word is one character
-                    if ((lastCharacter - firstCharacter) == 1)
-                    {
-                        isBeginRegion = false;
-
-                        topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
-                        bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
-                        bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
-                        topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
-                    }
-                }
-
-                
-                // Last Character of Word
-                if (isBeginRegion && characterIndex == lastCharacter - 1)
+                // If Word is one character
+                if ((lastCharacter - firstCharacter) == 1)
                 {
                     isBeginRegion = false;
 
@@ -155,32 +142,46 @@ public class ClarityText : MonoBehaviour
                     bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
                     topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
                 }
-                // If Word is split on more than one line.
-                /*else if (isBeginRegion && currentLine != textInfo.characterInfo[characterIndex + 1].lineNumber)
-                {
-                    isBeginRegion = false;
-
-                    topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
-                    bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
-                    bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
-                    topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
-
-                    // Draw Region
-                    DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, wordColor);
-                    //Debug.Log("End Word Region at [" + currentCharInfo.character + "]");
-                    maxAscender = -Mathf.Infinity;
-                    minDescender = Mathf.Infinity;
-
-                }*/
             }
 
-            GameObject newButton = Instantiate(wordButtonPrefab, wordButtonParent.transform);
-            wordButtons.Add(newButton);
-            newButton.GetComponent<WordButton>().choiceString = toMakeButton;
-            RectTransform rt = newButton.GetComponent<RectTransform>();
-            float width = topRight.x - bottomLeft.x, height = topRight.y - bottomLeft.y;
-            rt.sizeDelta = new Vector2(width + BUTTON_MARGIN_X, height + BUTTON_MARGIN_Y) * BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER;
-            rt.transform.position = bottomLeft + new Vector3(width / 2.0f, height / 2.0f, 0);
+                
+            // Last Character of Word
+            if (isBeginRegion && characterIndex == lastCharacter - 1)
+            {
+                isBeginRegion = false;
+
+                topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
+                bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
+                bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
+                topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
+            }
+            // If Word is split on more than one line.
+            /*else if (isBeginRegion && currentLine != textInfo.characterInfo[characterIndex + 1].lineNumber)
+            {
+                isBeginRegion = false;
+
+                topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
+                bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
+                bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
+                topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
+
+                // Draw Region
+                DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, wordColor);
+                //Debug.Log("End Word Region at [" + currentCharInfo.character + "]");
+                maxAscender = -Mathf.Infinity;
+                minDescender = Mathf.Infinity;
+
+            }*/
+        }
+
+        GameObject newButton = Instantiate(wordButtonPrefab, wordButtonParent.transform);
+        wordButtons.Add(newButton);
+        newButton.GetComponent<WordButton>().choiceString = toMakeButton;
+        RectTransform rt = newButton.GetComponent<RectTransform>();
+        float width = topRight.x - bottomLeft.x, height = topRight.y - bottomLeft.y;
+        Debug.Log($"{width}, {height}");
+        rt.sizeDelta = new Vector2(width + BUTTON_MARGIN_X, height + BUTTON_MARGIN_Y) * BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER;
+        rt.transform.position = bottomLeft + new Vector3(width / 2.0f, height / 2.0f, 0);
     }
 
     public void ClearWordButtons()
