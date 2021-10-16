@@ -68,6 +68,11 @@ public class HyperInkWrapper : MonoBehaviour
         return story.state.ToJson();
     }
 
+    public void SetState(string newState)
+    {
+        story.state.LoadJson(newState);
+    }
+
     /// <summary>
     /// Args will be in the form <Variable_Name> <New_Value>
     /// </summary>

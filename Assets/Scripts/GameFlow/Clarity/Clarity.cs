@@ -17,7 +17,6 @@ public class Clarity : Singleton<Clarity>
     private GameObject popupParent;
     private Camera mainCamera;
 
-
     private bool notWaiting = false;
     public bool NotWaiting { set { notWaiting = value; } }
 
