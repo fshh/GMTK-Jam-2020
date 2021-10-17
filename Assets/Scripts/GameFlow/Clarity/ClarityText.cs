@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -10,7 +11,6 @@ using UnityEngine.UI;
 public class ClarityText : MonoBehaviour
 {
     private TextMeshProUGUI output;
-    private static float BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER = 1; //TODO figure out why this is the number and replace
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;
     private List<GameObject> wordButtons;
@@ -20,11 +20,15 @@ public class ClarityText : MonoBehaviour
     private int lettersUntilSound = 5;
 
     public float timeBetweenLetters = 0.03f, variance = 0.01f;
+
+    private CanvasScaler canvasScaler;
+
     // Start is called before the first frame update
     void Awake()
     {
         output = GetComponent<TextMeshProUGUI>();
         wordButtons = new List<GameObject>();
+        canvasScaler = FindObjectOfType<CanvasScaler>();
     }
 
     public IEnumerator AddText(string newText, bool notWaiting)
@@ -99,16 +103,10 @@ public class ClarityText : MonoBehaviour
     public void SetWordButtonLocation(string toMakeButton)
     {
         TMP_TextInfo textInfo = output.textInfo;
+
         Vector2Int characters = FindString(textInfo, toMakeButton);
         int firstCharacter = characters[0];
         int lastCharacter = characters[1];
-
-        bool isBeginRegion = false;
-
-        Vector3 bottomLeft = Vector3.zero;
-        Vector3 topLeft = Vector3.zero;
-        Vector3 bottomRight = Vector3.zero;
-        Vector3 topRight = Vector3.zero;
 
         float maxAscender = Mathf.NegativeInfinity;
         float minDescender = Mathf.Infinity;
@@ -119,79 +117,27 @@ public class ClarityText : MonoBehaviour
         for (int characterIndex = firstCharacter; characterIndex < lastCharacter; characterIndex++)
         {
             TMP_CharacterInfo currentCharInfo = textInfo.characterInfo[characterIndex];
-            int currentLine = currentCharInfo.lineNumber;
-
-            bool isCharacterVisible = characterIndex > output.maxVisibleCharacters ||
-                                        currentCharInfo.lineNumber > output.maxVisibleLines ||
-                                        (output.overflowMode == TextOverflowModes.Page && currentCharInfo.pageNumber + 1 != output.pageToDisplay) ? false : true;
 
             // Track Max Ascender and Min Descender
             maxAscender = Mathf.Max(maxAscender, currentCharInfo.ascender);
             minDescender = Mathf.Min(minDescender, currentCharInfo.descender);
             minX = Mathf.Min(minX, currentCharInfo.bottomLeft.x);
             maxX = Mathf.Max(maxX, currentCharInfo.bottomRight.x);
-            /*
-            if (!isBeginRegion && isCharacterVisible)
-            {
-                isBeginRegion = true;
-
-                bottomLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.descender, 0);
-                topLeft = new Vector3(currentCharInfo.bottomLeft.x, currentCharInfo.ascender, 0);
-
-                // If Word is one character
-                if ((lastCharacter - firstCharacter) == 1)
-                {
-                    isBeginRegion = false;
-
-                    topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
-                    bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
-                    bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
-                    topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
-                }
-            }
-
-
-            // Last Character of Word
-            if (isBeginRegion && characterIndex == lastCharacter - 1)
-            {
-                isBeginRegion = false;
-
-                topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
-                bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
-                bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
-                topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
-            }*/
-            // If Word is split on more than one line.
-            /*else if (isBeginRegion && currentLine != textInfo.characterInfo[characterIndex + 1].lineNumber)
-            {
-                isBeginRegion = false;
-
-                topLeft = transform.TransformPoint(new Vector3(topLeft.x, maxAscender, 0));
-                bottomLeft = transform.TransformPoint(new Vector3(bottomLeft.x, minDescender, 0));
-                bottomRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, minDescender, 0));
-                topRight = transform.TransformPoint(new Vector3(currentCharInfo.topRight.x, maxAscender, 0));
-
-                // Draw Region
-                DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, wordColor);
-                //Debug.Log("End Word Region at [" + currentCharInfo.character + "]");
-                maxAscender = -Mathf.Infinity;
-                minDescender = Mathf.Infinity;
-
-            }*/
         }
-
-        CanvasScaler scaler = FindObjectOfType<CanvasScaler>();
-        bottomLeft = wordButtonParent.transform.InverseTransformPoint(output.transform.TransformPoint(new Vector3(minX, minDescender)) / scaler.scaleFactor);
-        topRight = wordButtonParent.transform.InverseTransformPoint(output.transform.TransformPoint(new Vector3(maxX, maxAscender)) / scaler.scaleFactor);
 
         GameObject newButton = Instantiate(wordButtonPrefab, wordButtonParent.transform);
         wordButtons.Add(newButton);
         newButton.GetComponent<WordButton>().choiceString = toMakeButton;
-        RectTransform rt = newButton.GetComponent<RectTransform>();
+
+        // (Andrew) NOTE: not sure if the canvasScaler stuff actually works here since currently the scaleFactor is 1.
+        // a forum post said I should do it so I have it here as a placeholder. I don't think our canvas scaling will change from 1 so hopefully doesn't matter.
+        Vector3 bottomLeft = wordButtonParent.transform.InverseTransformPoint(output.transform.TransformPoint(new Vector3(minX, minDescender)) / canvasScaler.scaleFactor);
+        Vector3 topRight = wordButtonParent.transform.InverseTransformPoint(output.transform.TransformPoint(new Vector3(maxX, maxAscender)) / canvasScaler.scaleFactor);
         float width = topRight.x - bottomLeft.x;
         float height = topRight.y - bottomLeft.y;
-        Debug.Log($"{width}, {height}");
-        rt.sizeDelta = new Vector2(width + BUTTON_MARGIN_X, height + BUTTON_MARGIN_Y) * BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER;
+
+        RectTransform rt = newButton.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(width + BUTTON_MARGIN_X, height + BUTTON_MARGIN_Y);
         rt.anchoredPosition = bottomLeft + new Vector3(width / 2.0f, height / 2.0f, 0);
     }
 
@@ -207,7 +153,9 @@ public class ClarityText : MonoBehaviour
     //TODO make less horribly inefficient
     public Vector2Int FindString(TMP_TextInfo textInfo, string toFind)
     {
-        string fullString = textInfo.textComponent.text;
+        // (Andrew) tried doing this with just textInfo.textComponent.text, but the indices are all offset if I do that, so this'll do for now
+        // if this gets too slow later as the full text gets longer and longer, we can look into a better way to resolve that offset
+        string fullString = new string(textInfo.characterInfo.Select(ci => ci.character).ToArray());
 
         int first = fullString.LastIndexOf(toFind);
         int last = first + toFind.Length;

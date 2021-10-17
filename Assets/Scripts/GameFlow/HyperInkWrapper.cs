@@ -196,15 +196,7 @@ public class HyperInkWrapper : MonoBehaviour
 
     public string[] GetChoices()
     {
-        List<Choice> choices = story.currentChoices;
-        string[] toReturn = new string[choices.Count];
-
-        for(int i = 0; i < choices.Count; i++)
-        {
-            toReturn[i] = choices[i].text;
-        }
-
-        return toReturn;
+        return story.currentChoices.Select(c => c.text).ToArray();
     }
 
     public string GetVariables()
