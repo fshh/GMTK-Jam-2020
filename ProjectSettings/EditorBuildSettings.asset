@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/RenderingPipeline_3D.unity
     guid: ae5d99b3adc33bf459712340708e86a5
   - enabled: 1
-    path: Assets/Scenes/NewUI.unity
+    path: Assets/Scenes/NewUI_v1.unity
     guid: 945c7c2995dc6524eb18da6c6d7c7493
   m_configObjects: {}
