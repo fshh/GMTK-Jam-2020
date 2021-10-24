@@ -25,9 +25,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/WordButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/SFXPlayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/Extras.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/SmartToggle.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameFlow/SaveWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6a0e6615ee04ea7ad535b38f9316104568788/f2/ab696e98/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/Saver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/QuickSave/Example/ExampleSceneManagerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/SaveButton.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xGqzp8TsSRJZAB3z2zwWwBkow0" />
   <component name="ProjectViewState">
@@ -97,6 +99,9 @@
       <workItem from="1632821465717" duration="599000" />
       <workItem from="1632942324831" duration="4924000" />
       <workItem from="1633295145269" duration="2725000" />
+      <workItem from="1634344804834" duration="2123000" />
+      <workItem from="1634429635661" duration="2632000" />
+      <workItem from="1635035598279" duration="2665000" />
     </task>
     <servers />
   </component>

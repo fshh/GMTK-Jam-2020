@@ -120,7 +120,6 @@ namespace SaveManagement
 			if (hasFileBeenRead)
 				return;
 
-			Debug.Log("Reading from file.");
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream fileStream = File.Open(nameOfSavingFile, FileMode.OpenOrCreate);
 
@@ -139,7 +138,6 @@ namespace SaveManagement
 		{
 			if (canWrite)
 			{
-				Debug.Log("Writing to file.");
 				BinaryFormatter formatter = new BinaryFormatter();
 				FileStream fileStream = File.Open(nameOfSavingFile, FileMode.OpenOrCreate);
 
@@ -147,16 +145,10 @@ namespace SaveManagement
 
 				fileStream.Close();
 			}
-			else
-			{
-				Debug.Log("Writing disabled");
-			}
 		}
 
 		public static void WipeFile()
 		{
-			Debug.Log("Wiping file.");
-
 			savedItems.Clear();
 
 			File.Delete(nameOfSavingFile);

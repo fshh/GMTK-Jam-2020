@@ -12,6 +12,7 @@ namespace Petricore.MarketingTool
 
         private bool childrenEnabled = false;
 
+        public bool DebugOnByDefault;
         /// <summary>
         /// Run when you open or close the GUI, bool is true if turning them on, false if turning off
         /// </summary>
@@ -19,8 +20,8 @@ namespace Petricore.MarketingTool
 
         private void Awake()
         {
-            //Just in case they're still enabled, turn them off to start
-            SetChildrenEnabled(false);
+            //set to correct on/off
+            SetChildrenEnabled(DebugOnByDefault);
         }
 
         // Update is called once per frame
