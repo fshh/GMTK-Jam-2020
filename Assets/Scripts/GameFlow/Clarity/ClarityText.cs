@@ -8,6 +8,12 @@ using UnityEngine;
 public class ClarityText : MonoBehaviour
 {
     private TextMeshProUGUI output;
+    public string Text
+    {
+        set { output.text = value;}
+        get { return output.text; }
+    }
+    
     private static float BUTTON_SIZE_MULTIPLIER_MAGIC_NUMBER = 108; //TODO figure out why this is the number and replace
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;

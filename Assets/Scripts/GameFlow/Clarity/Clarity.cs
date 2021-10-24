@@ -17,7 +17,7 @@ public class Clarity : Singleton<Clarity>
     private GameObject popupParent;
     private Camera mainCamera;
 
-    private bool notWaiting = false;
+    private bool notWaiting = true; //TODO turn this off for an actual build
     public bool NotWaiting { set { notWaiting = value; } }
 
     public ApplicationSO simonApp;
@@ -59,7 +59,15 @@ public class Clarity : Singleton<Clarity>
 
     public void Start()
     {
-        ContinueUntilChoice();
+        int nextChoice = SaveWrapper.Instance.LoadStory();
+        if (nextChoice >= 0)
+        {
+            Choose(nextChoice);
+        }
+        else
+        {
+            ContinueUntilChoice();
+        }
         
         CommandLine.instance.commands["go"] += ToKnot;
     }
@@ -372,6 +380,7 @@ public class Clarity : Singleton<Clarity>
     public void Choose(int choice)
     {
         choiceID++;
+        SaveWrapper.Instance.SaveStory(choice);
         HyperInkWrapper.instance.Choose(choice);
         ContinueUntilChoice();
     }
