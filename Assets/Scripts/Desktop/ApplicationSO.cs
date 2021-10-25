@@ -5,37 +5,39 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Application", menuName = "Application", order = 1)]
 public class ApplicationSO : ScriptableObject
 {
-	public string Name;
-	public Sprite Icon;
-	public GameObject AppContentPrefab;
+    public string Name;
+    public Sprite TaskbarIcon;
+    public Sprite WindowIcon;
+    public Color BackgroundColor;
+    public GameObject AppContentPrefab;
 
-	private static GameObject WindowPrefab = null;
+    private static GameObject WindowPrefab = null;
 
-	public Window OpenWindow()
-	{
-		if (!WindowPrefab)
-		{
-			WindowPrefab = Resources.Load<GameObject>("Window");
-		}
+    public Window OpenWindow()
+    {
+        if (!WindowPrefab)
+        {
+            WindowPrefab = Resources.Load<GameObject>("Window");
+        }
 
-		Window window = Instantiate(WindowPrefab).GetComponent<Window>();
-		window.Initialize(this);
-		return window;
-	}
+        Window window = Instantiate(WindowPrefab).GetComponent<Window>();
+        window.Initialize(this);
+        return window;
+    }
 
-	public Window OpenWindow(string fileName)
-	{
-		// TODO: handle apps that open files?
-		return OpenWindow();
-	}
+    public Window OpenWindow(string fileName)
+    {
+        // TODO: handle apps that open files?
+        return OpenWindow();
+    }
 
-	public void Save()
-	{
-		throw new System.NotImplementedException();
-	}
+    public void Save()
+    {
+        throw new System.NotImplementedException();
+    }
 
-	public void Quit()
-	{
-		throw new System.NotImplementedException();
-	}
+    public void Quit()
+    {
+        throw new System.NotImplementedException();
+    }
 }

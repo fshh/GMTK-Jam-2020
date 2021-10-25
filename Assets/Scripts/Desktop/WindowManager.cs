@@ -65,7 +65,7 @@ public class WindowManager : Singleton<WindowManager>
 		window.transform.localScale = Vector3.one;
 
 		RectTransform windowRect = window.GetComponent<RectTransform>();
-		windowRect.anchoredPosition = windowRect.anchoredPosition + new Vector2(Random.Range(-100, 100), Random.Range(-100, 100));
+		windowRect.anchoredPosition = windowRect.anchoredPosition + (openWindowsAll.Count * new Vector2(10f, -10f));
 
 		window.Focus();
 	}
