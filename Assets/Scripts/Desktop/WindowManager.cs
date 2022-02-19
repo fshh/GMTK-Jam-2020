@@ -90,7 +90,7 @@ public class WindowManager : Singleton<WindowManager>
 
 	public void FocusWindow(Window window)
 	{
-		Taskbar.Instance.GetButton(window.App).GetComponent<PointerEventColorSettings>().SetSelected(true);
+		Taskbar.Instance.GetButton(window.App).GetComponent<PointerEventColorSettings>()?.SetSelected(true);
 		focusedWindow = window;
 	}
 

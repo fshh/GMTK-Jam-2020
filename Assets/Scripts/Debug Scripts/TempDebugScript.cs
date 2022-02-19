@@ -19,8 +19,7 @@ public class TempDebugScript : MonoBehaviour
         Clarity clarity = (Clarity)FindObjectOfType(typeof(Clarity));
         if (clarity != null)
         {
-            clarity.NotWaiting = value;
+            clarity.Waiting = !value;
         }
-        
     }
 }

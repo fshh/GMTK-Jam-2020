@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChoiceParent : MonoBehaviour
 {
-
     public GameObject choiceButton;
     public List<ChoiceButton> choices;
 

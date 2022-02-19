@@ -29,7 +29,6 @@ public class TaskbarButton : MonoBehaviour, IPointerClickHandler
 
     public void OnClick()
     {
-        Debug.Log("hello");
         if (WindowManager.Instance.NumWindowsOpen(App) > 1)
         {
             WindowSelection();

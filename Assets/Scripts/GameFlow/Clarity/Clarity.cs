@@ -17,8 +17,8 @@ public class Clarity : Singleton<Clarity>
     private GameObject popupParent;
     private Camera mainCamera;
 
-    private bool notWaiting = true; //TODO turn this off for an actual build
-    public bool NotWaiting { set { notWaiting = value; } }
+    private bool waiting = true;
+    public bool Waiting { set { waiting = value; } }
 
     public ApplicationSO simonApp;
     //public SimonSays simon;
@@ -139,7 +139,7 @@ public class Clarity : Singleton<Clarity>
             DeleteTags();
             GameTags();
             yield return new WaitForSeconds(WaitTags());
-            yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), notWaiting); 
+            yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), waiting); 
         }
         PopupTags();
         DetermineChoices(HyperInkWrapper.instance.GetChoices());
@@ -268,7 +268,7 @@ public class Clarity : Singleton<Clarity>
     /// <returns>Time the program should wait before continuing</returns>
     private float WaitTags()
     {
-        if (notWaiting)
+        if (!waiting)
         {
             return 0;
         }

@@ -37,15 +37,10 @@ public class ClarityText : MonoBehaviour
         canvasScaler = FindObjectOfType<CanvasScaler>();
     }
 
-    public IEnumerator AddText(string newText, bool notWaiting)
+    public IEnumerator AddText(string newText, bool waiting)
     {
         int soundCounter = 0;
-        if (notWaiting)
-        {
-            output.text += newText;
-            yield return new WaitForEndOfFrame();
-        }
-        else
+        if (waiting)
         {
             for (int i = 0; i < newText.Length; i++)
             {
@@ -79,6 +74,11 @@ public class ClarityText : MonoBehaviour
                     sfx.PlayRandom();
                 }
             }
+        }
+        else
+        {
+            output.text += newText;
+            yield return new WaitForEndOfFrame();
         }
     }
 
