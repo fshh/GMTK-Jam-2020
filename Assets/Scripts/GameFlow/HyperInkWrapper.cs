@@ -106,6 +106,8 @@ public class HyperInkWrapper : MonoBehaviour
         {
             SetVariable(variableName, newVal); //fallthrough is that it's a string
         }
+
+        Debug.Log($"Set variable '{variableName}' to value '{newVal}'.");
     }
 
     //Note: code from this thread: https://stackoverflow.com/questions/47804594/read-and-write-file-on-streamingassetspath

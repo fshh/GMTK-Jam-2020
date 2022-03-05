@@ -86,6 +86,7 @@ public class Clarity : Singleton<Clarity>
     private void ToKnot(string knotName)
     {
         HyperInkWrapper.instance.GoToKnot(knotName);
+        Debug.Log($"Jumped to knot '{knotName}'.");
         ContinueUntilChoice();
     }
 

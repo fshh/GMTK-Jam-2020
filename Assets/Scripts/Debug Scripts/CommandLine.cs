@@ -41,6 +41,10 @@ public class CommandLine : MonoBehaviour
     {
         string[] words = input.Split(' ');
         string command = words[0];
+        if (String.IsNullOrEmpty(command))
+        {
+            return;
+        }
         string args = input.Replace(command, "").Trim();
 
         bool executedCommand = false;

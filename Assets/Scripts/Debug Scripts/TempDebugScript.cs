@@ -5,7 +5,6 @@ using UnityEngine.Audio;
 
 public class TempDebugScript : MonoBehaviour
 {
-
     private bool mute;
     public bool Mute
     {
