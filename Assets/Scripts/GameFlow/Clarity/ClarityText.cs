@@ -171,7 +171,7 @@ public class ClarityText : MonoBehaviour
 
     //This code is wildly inefficient but I don't think it should matter, it's not called often
     //might be wonky with rich text, this is a first implementation
-#region deletions
+    #region deletions
     public void DeletePrevious(string startString, string endString)
     {
         if (!output.text.Contains(startString))
@@ -223,5 +223,5 @@ public class ClarityText : MonoBehaviour
 
         return overall.Split('`');
     }
-#endregion
+    #endregion
 }
