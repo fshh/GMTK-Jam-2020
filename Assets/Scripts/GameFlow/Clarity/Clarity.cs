@@ -22,6 +22,7 @@ public class Clarity : Singleton<Clarity>
 
     public ApplicationSO simonApp;
     //public SimonSays simon;
+    public ApplicationSO progressBarApp;
     private List<string> protectedChoices;
 
     /// <summary> Keeps track of which timedChoice we're on, won't do old ones. Easier than using stop coroutine! </summary>
@@ -42,7 +43,9 @@ public class Clarity : Singleton<Clarity>
     private static string DELETE_TAG = "delete: ";
     private static string WAIT_TAG = "wait: ";
     private static string SIMON_TAG = "simon: ";
-    private static string POPUP_TAG = "popup: ", INPUT_POPUP_TAG = "inputPopup: ";
+    private static string POPUP_TAG = "popup: ";
+    private static string INPUT_POPUP_TAG = "inputPopup: ";
+    private static string PROGRESS_BAR_TAG = "progressbar: ";
     #endregion
     private void Awake()
     {
@@ -274,14 +277,16 @@ public class Clarity : Singleton<Clarity>
             return 0;
         }
         float accumulator = 0;
-        string[] tags = HyperInkWrapper.instance.getTags();
+        IEnumerable<string> waitTags = HyperInkWrapper.instance.getTags().Where(tag => tag.Contains(WAIT_TAG));
 
-        foreach (string tag in tags)
+        if (!waitTags.Any())
         {
-            if (tag.Contains(WAIT_TAG))
-            {
-                accumulator += int.Parse(tag.Replace(WAIT_TAG, "").Trim());
-            }
+            return 2f;
+        }
+
+        foreach (string tag in waitTags)
+        {
+            accumulator += float.Parse(tag.Replace(WAIT_TAG, "").Trim());
         }
 
         return Mathf.Max(accumulator, 0);
@@ -365,10 +370,35 @@ public class Clarity : Singleton<Clarity>
                 if(args.Length >= 2)
                 {
                     GameObject popup = Instantiate(inputPopupPrefab, popupParent.transform);
-                    protectedChoices.Add(popup.GetComponent<InputPopup>().Init(args[0].Trim(), args[1].Trim()));
-                } else
+                    bool shouldBeLowercase = args.Length >= 3 ? bool.Parse(args[2].Trim()) : false;
+                    protectedChoices.Add(popup.GetComponent<InputPopup>().Init(args[0].Trim(), args[1].Trim(), shouldBeLowercase));
+                }
+                else
                 {
-                    Debug.Log("You need more args to call the inputPopup function. Try inputPopup: <description>, <inkVariableName>");
+                    Debug.Log("You need more args to call the inputPopup function. Try inputPopup: <description>, <inkVariableName>, optional: <shouldBeLowercase>");
+                }
+            }
+
+            if (tag.Contains(PROGRESS_BAR_TAG))
+            {
+                string[] args = tag.Replace(PROGRESS_BAR_TAG, "").Trim().Split(',');
+
+                if (args.Length >= 3)
+                {
+                    Window progressBarWindow = progressBarApp.OpenWindow();
+
+                    bool appearOnTop = bool.Parse(args[1].Trim());
+                    if (!appearOnTop)
+                    {
+                        WindowManager.Instance.SendWindowToBack(progressBarWindow);
+                    }
+
+                    ProgressBar progressBar = progressBarWindow.content.GetComponent<ProgressBar>();
+                    progressBar.Init(float.Parse(args[0].Trim()), bool.Parse(args[2].Trim()));
+                }
+                else
+                {
+                    Debug.Log("You need more args to call the progressbar function. Try progressbar: <timeToComplete>, <appearOnTop>, <isCancelable>");
                 }
             }
         }

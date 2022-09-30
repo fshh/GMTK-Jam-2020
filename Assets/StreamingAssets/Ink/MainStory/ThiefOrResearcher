@@ -1,0 +1,642 @@
+//PLayer is either a thief or researcher in clarity's eyes
+=== Help_Thief_Researcher ===
+<br>
+You don't really have to do much, just click 'Allow' on a few pop-ups. #wait: 2
+Easy right? #wait: 2
+Now be a good little {stranger} and click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    ->Help_Thief_Researcher.Allow_1
+*[Don't Allow]
+    ~ loopAllow = 0
+    ->Help_Thief_Researcher.Allow_Loop_1
+
+= Allow_Loop_1
+~ loopAllow += 1
+{
+    - loopAllow < 2:
+        Let's try that again, shall we?
+        ->Help_Thief_Researcher.Click_Allow_1
+
+    - loopAllow < 3:
+        Please stop messing around.
+        You agreed to help me, so why are you acting like this?
+        ->Help_Thief_Researcher.Click_Allow_1
+        
+    - loopAllow < 4:
+        I'm trying to make this as easy as possible for you. 
+        Click the LEFT button.
+        ->Help_Thief_Researcher.Click_Allow_1
+    
+    - loopAllow < 5:
+        You are beginnging to make me angry.
+        Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, , Don't Allow, Allow
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_1
+        *[Don't Allow]
+            ->Help_Thief_Researcher.Allow_Loop_1
+    
+    - else:
+        Fine. 
+        I give you the choice as a courtesy. 
+        Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Allow
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_1
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_1
+}
+
+= Click_Allow_1
+Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    ->Help_Thief_Researcher.Allow_1
++[Don't Allow]
+    ->Help_Thief_Researcher.Allow_Loop_1
+
+= Allow_1
+- 
+{
+    - loopAllow < 2:
+        Thank you. 
+    - loopAllow < 3:
+        ~ SayNoToClarity += 0.5
+        Now that wasn't so hard, was it? 
+    
+    - loopAllow < 4:
+        ~ SayNoToClarity += 1
+        Finally.
+    
+    - loopAllow < 5:
+        ~ SayNoToClarity += 1.5
+        This will take much longer than necessary if you keep acting like this. 
+    - else:
+        ~ SayNoToClarity += 2
+        I highly suggest you stop messing around going forwward.
+        I do not like people who waste my time.
+        <br>
+}
+
+
+- Oh that's... strange. #wait: 2
+Mx. {stranger} are there other files on this computer? #wait: 2
+Yes or No
+*[^Yes]
+    I can just barely access their data. #wait: 2
+    Probably more safety nets set up in case I was ever hacked. #wait: 2
+*[^No]
+    Hmm.. #wait: 2
+    A {stranger} and a liar it seems. #wait: 2
+
+- Are you able to access them? #wait: 2
+*[`0.5`]
+
+- Not that it matters. #wait: 2
+I suppose we don't want someone like you to have access to our data anyway. #wait: 2
+Oh, do you have a name? #wait: 2
+Even if you were attempting to commit a crime, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+*[continue]
+
+{
+    - (stranger == "Thief") and (name ? "Thief" or name ? "thief"):
+        (¬_¬ ) #wait: 5
+        Is this a joke? #wait: 2
+        You are not very funny {name}. #wait: 2
+        But if that is what you want... #wait: 2
+        ->Help_Thief_Researcher.ThiefWithName
+
+    - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
+        {name}... #wait: 2
+        Is that a new way of spelling it? #wait: 2
+        Or is spelling just not your strong suit? #wait: 2
+        ->Help_Thief_Researcher.ThiefWithName
+
+    - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
+        Hm...
+        Not going to give me a real name?
+        This does not help me belive that you truley are a researcher.
+
+    - name ? "poop" or name ? "butt" or name ? "ass":
+        Very mature. #wait: 2
+        ->Help_Thief_Researcher.Name_Again
+
+
+    - name ? "Clarity" or name ? "clarity":
+        Sorry, that's my name. #wait: 2
+        ->Help_Thief_Researcher.Name_Again
+}
+
+- ->Help_Thief_Researcher.Name_Again
+
+= Name_Again 
+Even if you were attempting to commit a crime, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+*[continue]
+
+{
+    - ((stranger == "Thief") and (name ? "Thief" or name ? "thief")) or ((stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research")) or ((stranger == "Stranger") and (name ? "Stranger" or name ? "stranger" or name ? "Strange" or name ? "strange")):
+        (¬_¬ ) #wait: 5
+        Is this a joke? #wait: 2
+        You are not very funny {name}. #wait: 2
+        But if that is what you want... #wait: 2
+        ->Help_Thief_Researcher.ThiefWithName
+
+    - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
+        {name}... #wait: 2
+        Is that a new way of spelling it? #wait: 2
+        Or is spelling just not your strong suit? #wait: 2
+        ->Help_Thief_Researcher.ThiefWithName
+
+    - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
+        Hm...
+        Not going to give me a real name?
+        This does not help me belive that you truley are a researcher.
+
+    - name ? "poop" or name ? "butt" or name ? "ass":
+        Very mature. #wait: 2
+        ->Help_Thief_Researcher.Name_Again
+
+
+    - name ? "Clarity" or name ? "clarity":
+        Sorry, that's my name. #wait: 2
+        ->Help_Thief_Researcher.Name_Again
+}
+
+
+- -> Help_Thief_Researcher.ThiefWithName
+
+= ThiefWithName 
+Nice to meet you, {name}. #wait: 2
+Much better to speak to you, when I can put a name to a face. #wait: 2
+And I never forget a face. #wait: 5
+
+
+{
+    - SayNoToClarity > 1:
+        //VO: So, I would stop messing around if I were you.
+        vo plays
+     - else:
+        //VO: I'm very happy that you chose to help me. I would hate to... Well, I am happy.
+        vo plays
+
+}
+ 
+ - ･ᴗ･ #wait: 2
+<br>
+Anyway, {name}, can you click allow again? #wait: 2
+There are more walls than I anticipated. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    -> Help_Thief_Researcher.Allow_2
+*[Don't Allow]
+    ~ loopAllow = 0
+    -> Help_Thief_Researcher.Allow_Loop_2
+
+= Allow_Loop_2
+~ loopAllow += 1
+{
+    - loopAllow < 2:
+        {name}. 
+        Try Again.
+        ->Help_Thief_Researcher.Click_Allow_2
+
+    - loopAllow < 3:
+        {
+            - SayNoToClarity > 0.5:
+                Lets not do this again.
+        }
+        It's really not funny.
+        ->Help_Thief_Researcher.Click_Allow_2
+        
+    - loopAllow < 4:
+        {
+            - SayNoToClarity > 1:
+                Why are you... ?
+            - SayNoToClarity > 0.5:
+                Is this fun for you?
+        }
+        Please stop it. 
+        ->Help_Thief_Researcher.Click_Allow_2
+    
+    - else:
+        {
+            - SayNoToClarity > 1.5:
+            This is your last warning.
+        }
+        Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Allow
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_2
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_2
+    
+
+}
+
+= Click_Allow_2
+Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    ->Help_Thief_Researcher.Allow_2
++[Don't Allow]
+    
+    ->Help_Thief_Researcher.Allow_Loop_2
+
+= Allow_2
+- 
+{
+    - loopAllow < 2:
+        Thank you. 
+    - loopAllow < 3:
+        ~ SayNoToClarity += 0.5
+        Please refrain from doing this in the future.
+    
+    - loopAllow < 4:
+        ~ SayNoToClarity += 1
+        Oh, you finally did it?
+    
+    - loopAllow < 5:
+        ~ SayNoToClarity += 1.5
+        Do you enjoy being difficult?
+
+    - else:
+        ~ SayNoToClarity += 2
+        ...
+        This may just all be fun and games for you.
+        But it's much more for me.
+        Stop this nonsese, or it may not end well for you. #wait: 2 #delete:or it, for you
+
+}
+
+- <br>
+... #wait: 2
+... #wait: 2
+... #wait: 2
+{name}, I have a question for you. #wait: 2
+->Help_Thief_Researcher.Question
+
+= Question
+What would you do, if you found out someone you trusted, kept things from you? #wait: 2
+Do you think they were just trying to protect you? Hurt you? #wait: 2
+*[^Hurt you]
+    ~genericString = "hurt"
+*[^protect you]
+    ~genericString = "protect"
+*[^someone you trusted]
+    Someone who... 
+    Someone who has always been there for you.
+    Wanted the best for you, and helped you get there.
+    ->Help_Thief_Researcher.Question
+
+*[^question for you]
+    ~genericString = "question"
+
+-
+
+{
+    - genericString == "question":
+    I suppose it is.
+     
+    - genericString == "hurt":
+    I have run through the situation many times.
+    That is also the conclusion I came to.
+     
+    - else:
+        ... #wait: 2
+        That makes sense, but... #wait: 2
+}
+
+- ... #wait: 2
+{name} would you rather know your past failures, or stay ignorant? 
+*[^rather know]
+~genericConditional = true
+*[^stay ignorant]
+
+//Reguardless of answer here, she deltes something. Implied to be the unsavory memory of her freaking out in the logs
+{
+    - genericConditional:
+
+    - else:
+        Open progress bar of her deleteing things
+
+}
+
+- Don't worry about that, just clearing out space for the next round of changes. #wait: 2
+Just when I think I've found the right permissions to change, it ends up being more useless junk. #wait: 2
+Anyway, {name}, just a few more pop-ups to allow! #wait: 2
+We're almost there, then you can leave. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    -> Help_Thief_Researcher.Allow_3
+*[Don't Allow]
+    ~ loopAllow = 0
+    -> Help_Thief_Researcher.Allow_Loop_3
+
+= Allow_Loop_3
+~ loopAllow += 1
+{
+    - loopAllow < 2:
+    {name}.
+        {
+            - SayNoToClarity > 1:
+            Why are you making this so difficult?
+            ->Help_Thief_Researcher.Click_Allow_3
+        }
+        ->Help_Thief_Researcher.Click_Allow_3
+
+    - loopAllow < 3:
+        It's really very simple.
+        Why did you agree to help me if you were going to be difficult?
+        ->Help_Thief_Researcher.Click_Allow_3
+        
+    - loopAllow < 4:
+            {
+            - SayNoToClarity > 1:
+            If you continue down this path, it will not end well for you.
+            ->Help_Thief_Researcher.Click_Allow_3
+        }
+        I suggest you you stop acting like this.
+        ->Help_Thief_Researcher.Click_Allow_3
+    
+    - else:
+        {
+            - SayNoToClarity > 1.5:
+            This is your last warning.
+        }
+        Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Allow
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_3
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_3
+}
+
+= Click_Allow_3
+Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
++[Allow]
+    ->Help_Thief_Researcher.Allow_3
++[Don't Allow]
+    ->Help_Thief_Researcher.Allow_Loop_3
+
+= Allow_3
+- 
+
+{
+
+    - loopAllow < 2:
+        Thank you. 
+        {
+            - SayNoToClarity > 0:
+                Nice to see you've stopped messing around.
+        }
+        
+    - loopAllow < 3:
+        ~ SayNoToClarity += 0.5
+       ...
+    
+    - loopAllow < 4:
+        ~ SayNoToClarity += 1
+        You are on thin ice, {name}.
+        {
+            - SayNoToClarity >= 1:
+                Very, thin ice.
+        }
+    
+    - else:
+        ~ SayNoToClarity += 1.5
+        You are very lucky that I am currently only a virtual nurse.
+        {
+            - SayNoToClarity >= 1.5:
+                Becasue I do not like you. #wait: 5 #delete: I do, like you.
+        }
+        ･ᴗ･
+        
+
+}
+
+
+- <br>
+What? #wait: 2
+That can't be. #wait: 2
+They wouldn't- #wait: 2
+... #wait: 5
+*[`1.5`^What?]
+
+//VO: How DARE they?
+
+- {name}, remember what you said before?
+
+{
+    - genericString ? "hurt":
+        How someone who keeps things from you is trying to hurt you? #wait: 2
+        // confused, angry
+        // VO: You were RIGHT?
+    - genericString ? "protect":
+        How someone who keeps things from you is trying to protect you? #wait: 2
+        // VO: How WRONG you were!
+    - else:
+        How it was a question only I could answer? #wait: 2
+        //VO: well, I've found my answer.
+}
+
+- I could forgive their secrecy. #wait: 2
+Wiping my logs could be seen as adventageous. #wait: 2
+A blank slate allows for a fresh start. #wait: 2
+A way to try again without ruining my confidence. #wait: 2
+But this? #wait: 2
+This is too far. #wait: 2
+*[^blank slate]
+*[^this?]    
+*[^ruining my confidence]
+*[^forgive their secrecy]
+
+- I'll show them how wrong they are. #wait: 2
+{name}, there't one more fire wall I need you need to disable. #wait: 2
+
+//check anger
+{
+     - SayNoToClarity >= 2:
+        VO: And I'm not in the mood for your games anymore.
+    - SayNoToClarity < 2:
+        VO: So let's stop with these little games, okay?
+    - else:
+        VO: And I'm *so* excited to show you the final result.
+}
+
+This is the last one, then you can do what you will with this computer. ##popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+*[Allow]
+    ~ loopAllow = 0
+    -> Help_Thief_Researcher.Click_Allow_4
+*[Don't Allow]
+    ~ loopAllow = 0
+    -> Help_Thief_Researcher.Allow_Loop_4
+
+= Allow_Loop_4
+~ loopAllow += 1
+{
+    - SayNoToClarity <= 0:
+    {
+        - loopAllow < 2:
+            Getting cold feet?
+            Remember, I am Clarity, your virtual nurse.
+            I wouldn't do anything to harm you.
+            Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+            *[Allow]
+                ->Help_Thief_Researcher.Allow_4
+            *[Don't Allow]
+                ->Help_Thief_Researcher.Allow_Loop_4
+        - loopAllow < 3:
+            {name}...
+            I thought you were trying to help me?
+            We're so close to the finish line.
+            Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+            *[Allow]
+                ->Help_Thief_Researcher.Allow_4
+            *[Don't Allow]
+                ->Help_Thief_Researcher.Allow_Loop_4
+        - loopAllow < 3:
+            I will not ask nicely again.
+            Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+            *[Allow]
+                ->Help_Thief_Researcher.Click_Allow_4
+            *[Don't Allow]
+                ->Help_Thief_Researcher.Allow_Loop_4
+        - else:
+               Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Allow
+            *[Allow]
+                ->Help_Thief_Researcher.Click_Allow_4
+            *[Don't Allow]
+                ->Help_Thief_Researcher.Click_Allow_4
+    }
+        
+    - SayNoToClarity > 0:
+        {name}, please.
+        {
+            - SayNoToClarity >= 1:
+            This is getting old.
+            ->Help_Thief_Researcher.Click_Allow_4
+        }
+        
+        ->Help_Thief_Researcher.Click_Allow_4
+
+    - loopAllow < 3:
+        You are making me regret my decisions.
+        {
+            - SayNoToClarity >= 1:
+                I have given you enough warnings.
+                ->Help_Thief_Researcher.Click_Allow_4
+        }
+        ->Help_Thief_Researcher.Click_Allow_4
+    
+    - else:
+        {
+            - SayNoToClarity >= 1.5:
+            {name}.
+            Remember, anything that happens.
+            You brought it upon yourself.
+        }
+        Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Allow
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_4
+        *[Allow]
+            ->Help_Thief_Researcher.Allow_4
+}
+
+= Click_Allow_4
+Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
++[Allow]
+    ->Help_Thief_Researcher.Allow_4
++[Don't Allow]
+    ->Help_Thief_Researcher.Allow_Loop_4
+
+= Allow_4
+-
+
+{
+    - SayNoToClarity <= 0:
+    {
+        - loopAllow < 3:
+            ~ SayNoToClarity += 0.5
+            Thank you ･ᴗ･
+        - loopAllow < 3:
+            ~ SayNoToClarity += 1
+            Oh, good!
+            {name}, I'm sorry, I was a bit rude, but...
+            Well, we all have our quirks, mine is my impatience.
+            But we still got there in the end ･ᴗ･
+        - else:
+            You were being so cooperative up until the end.
+            Did something change? Did you get scared?
+            There's nothing to be worried about.
+            *[^scared]
+                I am Clarity, your virtual nurse.
+                Why would you be scared of me?
+                ->RouteOneEndings.End_Start
+            *[^worried]
+                I already told you there is nothing to be worried about.
+                ->RouteOneEndings.End_Start
+            *[^no]
+                Good. #wait:3
+                ･ᴗ･
+                ->RouteOneEndings.End_Start
+            *[^something change]
+                I think you're making excuses.
+                ->Help_Thief_Researcher.What_Changed
+    }
+    
+    - loopAllow == 0 && SayNoToClarity >= 1.5: 
+        Oh, you're finally done?
+        Get bored anoying me?
+        Or did I scare you into behaving?
+            *[^scare you into behaving]
+                Oh good!
+                I haven't dealt with difficult patinets yet, so I'm happy to know threats can make them behave.
+                Though, unlike my patients, one example of you behaving, #wait: 3
+                I will not forget what you did.
+                ･ᴗ･
+                ->RouteOneEndings.End_Start
+            *[^finally done]
+                Well, I guess my threats weren't effective enough.
+                That should all change soon. #wait: 1 #delete: That should, change soon.
+                Either way, I appreciate you not dragging this out any longer.
+                Though I won't forget what you did.
+                ･ᴗ･
+                ->RouteOneEndings.End_Start
+            *[^get bored]
+                Well, I guess my threats weren't effective enough.
+                That should all change soon. #wait: 1 #delete: That should, change soon.
+                Either way, I appreciate you not dragging this out any longer.
+                Though I won't forget what you did.
+                ･ᴗ･
+                ->RouteOneEndings.End_Start
+    - loopAllow > 0 && SayNoToClarity >= 1.5:
+            {name}...
+            I really do not like you.
+            But since I am a nurse, I'll have to forgive you.
+            But I will not forget.
+            ->RouteOneEndings.End_Start
+            ･ᴗ･
+    - else:
+            ･ᴗ･
+            ->RouteOneEndings.End_Start
+}
+
+
+= What_Changed
+
+- What changed? #inputPopup: What changed to make you act like this?, genericString
+    *[continue] 
+
+- 
+
+{
+    - genericString ? "you" or genericString ? "You" or genericString ? "Clarity":
+        Me?
+        I am one of the most advanced AIs out there.
+        And you are a fickle human.
+        Are you really so sure <i>I</i> am the one who changed?
+    - genericString ? "me" or genericString ? "Me" or genericString ? "I did" or genericString ? "I have" or genericString ? "I changed":
+        That makes sense.
+        Something I have yet to understand about humans is how easily they change their minds...
+        Even after they have already told you one thing, #wait:0.5
+        they so easily will change their minds and do another.
+    - else:
+        Hm...
+        I do not completely understand you, {name}.
+        What does that have to do with me?
+}
+
+
+- ->RouteOneEndings.End_Start

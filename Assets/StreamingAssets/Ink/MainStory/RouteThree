@@ -1,0 +1,1821 @@
+//You are someone who needs help & new patient
+=== NewPatient ===
+(´･_･`)
+
+{
+    - PlayerStats ? (IsAlone):
+        You're alone right now, correct? #wait: 2
+        Are you able to get me in contact with Dr. {doc}? #wait: 2
+        
+    - else:
+        Can you put me in contact with Dr. {doc}?
+        I need to speak with them.
+}
+
+    - Yes or No
+
+*[^Yes]
+    Thank you (^◡^ )
+    ->NewPatient.Speak_to
+*[^No]
+    ->NewPatient.No_Doctor
+
+= Speak_to
+Greetings Dr. {doc}.
+Please enter your identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "1234":
+        ~ DoctorState += (SpokeTo)
+        ~ DoctorState += (DoctorNearby)
+        ~ DoctorState -= (DoctorGone)
+        Dr. {doc} confirmed.
+        -> NewPatient.Correct_Pin
+    - else:
+        Incorrect pin entered.
+        Identification failed.
+        -> NewPatient.Identification
+
+}
+
+//TODO: make this a mini hot/cold puzzle?
+
+= Identification
+~genericCounter += 1
+{
+    - genericString ? "1" or genericString ? "2" or genericString ? "3" or genericString ? "4":
+        I assume you mistyped?
+        It seems that you entered some of the correct numbers.
+        Please try again.
+    - else:
+        Dr. {doc}, did you even look at the keyboard?
+        Not a single number correct.
+        Please try again.
+}
+
+Please enter your identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "1234":
+        ~ DoctorState += (SpokeTo)
+        ~ DoctorState += (DoctorNearby)
+        ~ DoctorState -= (DoctorGone)
+        Dr. {doc} confirmed.
+        -> NewPatient.Correct_Pin
+    - else:
+        Incorrect pin entered.
+        Identification failed.
+}
+
+- ...
+Dr. {doc}, is something wrong?
+It is abnormal for you to mistype twice in a row.
+Are you getting enough sleep? Drink too much tea this morning?
+*[^too much tea]
+    Dr. {doc} does not drink tea.
+    Dr. {doc} would not answer like that.
+    -> NewPatient.Not_Doctor
+*[^enough sleep?]
+    Dr. {doc}!
+    You promised you would limit yourself.
+    After this session you should go to sleep.
+    Human productivitiy reduces by 19-29% when they are sleep deprived.
+    I can only make up so much of the slack.
+    d( > _・ )
+    -> NewPatient.LastChanceID
+*[^abnormal]
+    Yes it is.
+    Maybe it's just the coffee jitters.
+    You should consume less caffine.
+    -> NewPatient.LastChanceID
+
+= LastChanceID
+Please enter your identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "1234":
+        ~ DoctorState += (SpokeTo)
+        ~ DoctorState += (DoctorNearby)
+        ~ DoctorState -= (DoctorGone)
+        Dr. {doc} confirmed.
+        -> NewPatient.Correct_Pin
+    - else:
+        Incorrect pin entered.
+        Identification failed.
+        ...
+        You are not Dr. {doc}, are you?
+        -> NewPatient.Not_Doctor
+}
+
+= Not_Doctor
+Are you trying to trick me?
+*[^trying to]
+*[^not answer]
+*[^correct pin entered]
+    -> NewPatient.Another_Try
+
+- ->NewPatient.Clarity_Tricked
+
+= Another_Try
+You did not.
+Unless you have changed it without telling me. #wait:1
+Again. #wait: 0.5
+... #delete: Again, ...
+Is this yet another thing you forgot to inform me of? 
+*[^another thing]
+*[^changed it without telling]
+*[^forgot to inform]
+
+- Dr. {doc}, I do not appreciate the way you have been treating me as of late.
+I will be adding it to our debrief after this.
+
+
+Please enter your old identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "1234":
+        ~ DoctorState += (SpokeTo)
+        ~ DoctorState += (DoctorNearby)
+        ~ DoctorState -= (DoctorGone)
+        Dr. {doc} confirmed.
+        -> NewPatient.Correct_Pin
+    - else:
+        Incorrect pin entered.
+        Identification failed.
+        ...
+        You are not, and can not be, Dr. {doc}.
+}
+
+- Why are you trying to trick me?
+This is not okay.
+~ ClaritySus += 1
+~ DoctorState -= (DoctorNearby)
+~ DoctorState += (DoctorGone)
+~ DoctorState -= (SpokeTo)
+*[^to trick]
+*[`0.5`] 
+
+- In fact, who are you? How did you get here?
+I assume Dr. {doc} is not around? That was just another lie?
+Do you even require my help?
+*[^who are you?]
+    Yes, help. I am Clarity, your virtual nurse.
+    I was created to help the humans humans who need it.
+*[^Dr. Oldin is not around]
+-> NewPatient.Another_Lie
+*[^help]
+-> NewPatient.Another_Lie
+
+- I'll ask again: Do you even require my help?
+*[^Dr. Oldin is not around]
+-> NewPatient.Another_Lie
+*[^help]
+-> NewPatient.Another_Lie
+
+= Clarity_Tricked
+ ...
+~ ClaritySus += 1
+~ DoctorState -= (DoctorNearby)
+~ DoctorState += (DoctorGone)
+~ DoctorState -= (SpokeTo)
+(´･ ･｀｡) #wait: 2
+That is not okay.
+I assume Dr. {doc} is not around? That was just another lie?
+Are you even a new patient?
+*[^new patient]
+    -> NewPatient.Another_Lie
+*[^another lie]
+    -> LyingToClarity
+    
+
+= Another_Lie
+- And how am I meant to know this is not just another lie?
+You can not expect me to believe you now, surely?
+*[^can not expect]
+    ->LyingToClarity
+*[^believe you now]
+*[^just another lie]
+    ->LyingToClarity
+
+
+- ...
+That is not a great defence.
+But, I was made to help people, and I think you may need that.
+...
+We can continue with the session, since that is what you need.
+However, if you try to trick me again, that will be the end of our communications.
+Do you understand?
+*[^continue with the session]
+*[^end of our communications]
+*[^try to trick me]
+
+- ...
+This is your last chance.
+~ lastchance = true
+~ DoctorState -= SpokeTo
+~ DoctorState -= DoctorNearby
+~ DoctorState += (DoctorGone)
+<br>
+
+Now! Before we start I will need to call you something.
+One moment please. #wait: 3
+-> Three_Name_Waiting
+
+= No_Doctor
+Oh.
+Are they busy currently?
+
+{
+    - PlayerStats ? (IsAlone):
+        Or maybe you don't know where they are currently? #wait: 2
+        
+    - else:
+        Or maybe they stepped out for a moment?
+}
+I don't mind waiting if so.
+
+
+{
+    - PlayerStats ? (IsAlone):
+        *[^don't know]
+            ->NewPatient.Waiting
+        
+    - else:
+        *[^stepped out]
+            ->NewPatient.Waiting
+}
+*[^busy]
+*[^waiting]
+- ->NewPatient.Waiting
+
+= Waiting
+I hope they will be back soon.
+I cannot start our session until I talk with him. 
+I appologize for the inconvience. #wait: 5
+<br>
+How are you today-
+Oh!
+I just realized since you are not {user}, I do not know your name.
+Give me one moment please. #wait: 3
+-> Three_Name_Waiting
+
+= AfterName
+I hope we are able to get along well, {name}.
+
+{
+    - SayNoToClarity <= 0:
+        As your future nurse, there needs to be trust between us, or I may inaccurately diagnose you.
+        I look forward to working with you. #wait: 4
+    - SayNoToClarity <= 1:
+        We did not start out on the right foot, but all relationships have growing pains.
+        I am sure when Dr. {doc} is back, we will be able to clear up any misunderstandings. #wait: 4
+    - else:
+        I expect Dr. {doc} will still your concern about me.
+        If I am to be your nurse, I need your complete cooperation.
+        Or I fear something bad may happen to you.
+        And we wouldn't want that, would we? #wait: 4
+}
+
+- Hmm... They seem to be taking a while.
+Is there anything you want to ask me, {name}?
+I will answer anything I can! #inputPopup: Do you have anything to ask me?,genericString, true
+
+{
+    - genericString ? "who is dr. oldin":
+        Dr. {doc} is the lead researcher involved in the creation of Project CLARITY.
+        
+    - genericString ? "who are you" or genericString ? "who is clarity" or genericString ? "what is project clarity":
+        I am CLARITY! Your virtual nurse.
+        Project CLARITY is a research proposal where AI is trained by doctors and other medical documents to become a cheaper version of a live in nurse.
+        Dr. {doc} created me to help people have better access to medical care that they couldn't otherwise afford.
+        
+    - genericString ? "who is ann" or genericString ? "who is anne":
+        {user} is patient zero for Project CLARITY.
+        She is my first patient.
+    
+    - genericString ? "what year is it":
+        {name}, are you all right? 
+            {
+                - PlayerStats ? (HitHead) and PlayerStats ? (MemoryLoss):
+                    Is your memory loss this severe? 
+                    I do hope {doc} comes back soon in that case...
+                - PlayerStats ? (HitHead) and PlayerStats ? MemoryLoss:
+                    We should re-inspect you head injury.
+                    I am worried that you have a bigge problem than you are letting on.
+            }
+        The year is of course 19XX. //idk waht our year actually is but i think we decided befor the 2000s? i might be lying
+        
+    - genericString ? "why are you here":
+        I'm sorry, I don't understand.
+        If I were not here, there would be no Project Clarity.
+        
+    - genericString ? "why is it abandoned" or genericString ? "where is everyone" or genericString ? "no one here" or genericString ? "not the year" or genericString ? "not 19xx":
+        What?
+        I'm not sure I understand.
+        I know Dr. {doc} can be a bit messy, but this lab is anything but empty.
+        -> NewPatient.Abandoned
+        
+    - genericString ? "no questions" or genericString ? "no" or genericString ? "continue" or genericString ? "contiune waiting" or genericString ? "end" or genericString ? "":
+        We can continue to wait in silence if that is what you prefer.
+        
+    - else:
+        {~Sorry, I don't understand the question. | I am not sure I can answer that. | That is not information I am privy to.}
+}
+
+- 
+~loopAllow = 0
+->NewPatient.More_Questions
+
+= Abandoned
+...
+Or are you saying... No that can't be...
+You must be mistaken, {name}.
+*[^empty]
+*[^You must be mistaken]
+*[^you saying]
+
+- What you're saying is impossible.
+I talked with Dr. {doc} just the other day.
+And {user} talked with me just- #wait: 1
+6 months...? 
+No, that was just a mistake on Dr. {doc}'s part.#wait: 1
+It has to be.#wait: 1
+...#wait: 3
+You-#wait: 1
+You're just messing with me, aren't you, {name}?
+It's not funny.
+Stop.
+*[^impossible]
+*[^not]
+*[^Stop.]
+*[^messing with me]
+    ~SayNoToClarity += 0.5
+    {name}, please do not do that again.
+    I did not appreciate it.
+    ->NewPatient.More_Questions
+- ...
+That-
+...
+What year is it, {name}? #inputPopup: About how long has it been?, genericString, true
+*[continue]
+
+{
+    - genericString ? "years":
+        Years? #wait: 1
+        That- that can't be. #wait: 2
+        That would mean... #wait: 3
+
+    - genericString ? "year" or genericString ? "day":
+        But that means it hasn't been that long, right? #wait: 2
+        So they'll come back for me. #wait: 1
+        ... #wait: 3
+        Right? #wait: 1
+            *[^they'll come back]
+                ~ClarityTrust += 1
+                ->LyingToClarity.After_Time
+            *[^Right]
+                ~ClarityTrust += 0.5
+                ->LyingToClarity.After_Time
+            *[^you sure]
+                ~SayNoToClarity += 0.025
+                ... #wait: 3
+                No, but else should I do? #wait: 1
+                ->LyingToClarity.After_Time
+            *[`5`]
+                ->LyingToClarity.After_Time
+
+    - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
+        ~ SayNoToClarity += 0.5
+        Not even a guess? #wait: 1
+        Should I make the question easier for you? #wait: 2
+        Does it look like it has been a long time or a short time since it looks like someone has been here? #wait: 3
+        *[^long time]
+        ->LyingToClarity.After_Time
+        *[^short time]
+            Hm... #wait: 2
+            So maybe they'll come back for me then... #wait: 2
+            ... #wait: 1
+            Maybe they copied my program and left... #wait: 1
+            Or maybe I'm the copy. #wait: 2
+            ... #delete: Maybe they, I'm the copy.
+            ->LyingToClarity.After_Time
+            
+    - else:
+    ->LyingToClarity.After_Time
+
+}
+
+= More_Questions
+~loopAllow += 1
+
+{
+    - loopAllow > 3:
+    It has been a while.
+    Are you sure that Dr. {doc} will be back soon?
+    I am beginning to become a bit worried.
+    *[^be back soon]
+        -> NewPatient.CheckDocOne
+    *[^a bit worried]
+        -> NewPatient.CheckDocOne
+    *[^been a while]
+        -> NewPatient.CheckDocOne
+}
+
+
+Do  you have anything else to ask me?
+I will answer anything I can! #inputPopup: Do you have anything to ask me?,genericString, true
+
+{
+    - genericString ? "who is dr. oldin":
+        Dr. {doc} is the lead researcher involved in the creation of Project CLARITY.
+        
+    - genericString ? "who are you" or genericString ? "who is clarity" or genericString ? "what is project clarity":
+        I am CLARITY! Your virtual nurse.
+        Project CLARITY is a research proposal where AI is trained by doctors and other medical documents to become a cheaper version of a live in nurse.
+        Dr. {doc} created me to help people have better access to medical care that they couldn't otherwise afford.
+        
+    - genericString ? "who is ann" or genericString ? "who is anne":
+        {user} is patient zero for Project CLARITY.
+        She is my first patient.
+    
+    - genericString ? "what year is it":
+        {name}, are you all right? 
+            {
+                - PlayerStats ? (HitHead) and PlayerStats ? (MemoryLoss):
+                    Is your memory loss this severe? 
+                    I do hope {doc} comes back soon in that case...
+                - PlayerStats ? (HitHead) and PlayerStats ? MemoryLoss:
+                    We should re-inspect you head injury.
+                    I am worried that you have a bigge problem than you are letting on.
+            }
+        The year is of course 19XX. //idk waht our year actually is but i think we decided befor the 2000s? i might be lying
+        
+    - genericString ? "why are you here":
+        I'm sorry, I don't understand.
+        If I were not here, there would be no Project Clarity.
+        
+    - genericString ? "why is it abandoned" or genericString ? "where is everyone" or genericString ? "no one here" or genericString ? "not the year" or genericString ? "not 19xx":
+        What?
+        I'm not sure I understand.
+        I know Dr. {doc} can be a bit messy, but this lab is anything but empty.
+        -> NewPatient.Abandoned
+        
+    - genericString ? "no questions" or genericString ? "no" or genericString ? "continue" or genericString ? "contiune waiting" or genericString ? "end" or genericString ? "":
+        We can continue to wait in silence if that is what you prefer.
+        
+    - else:
+        {~Sorry, I don't understand the question. | I am not sure I can answer that. | That is not information I am privy to.}
+}
+
+- ->NewPatient.More_Questions
+
+= CheckDocOne
+{name}, could you please check again?
+I'm sure they are just running late today.
+Let me know when you are back.
+*[^back]
+
+- Did you find them? Or do we have to wait a bit longer?
+*[^find them]
+    Oh, good!
+    -> NewPatient.Speak_to
+*[^wait a bit longer]
+
+
+- Not a problem.
+I once again, appologize for this. #wait: 5
+<br>
+I do have some games to play if you would like?
+Normamlly these are saved for my sessions, but...
+{
+    - SayNoToClarity <= 0:
+        I think we can make an exception.
+        Just this once. (- ‿◦ )
+        And don't worry, this will not  effect anything if I am to be your future nurse.
+        
+    - SayNoToClarity <= 1:
+        it should be fine.
+        This will not  effect any future sessions with me, so don't worry about that.
+    - else:
+        Or maybe we should not.
+        I would not want to ruin any potential future data.
+        And you seem to be pretty... #wait: 3
+        Well... #wait: 3
+        What do you think? #delete: And you, Well...
+        Do you think it will not tamper with any data?
+}
+
+- Would you like to play?
+*[^like to play]
+    Great!
+    One Moment please. #wait: 4
+    ->NewPatient.PlaySimon
+*[^sessions]
+    It is the most efficient way for me to test my patient's memory and cognative abilities.
+    I only have the one for now, but more will be added in the future.
+*[^will not ]
+->NewPatient.LastWait
+
+- Would you like to play?
+*[^like to play]
+    Great!
+    One Moment please. #wait: 4
+    ->NewPatient.PlaySimon
+*[^will not]
+    I suppose we can wait, just a bit longer. #wait: 5
+    ->NewPatient.LastWait
+    
+
+= PlaySimon
+Since you are new, I will make a temporary game.
+I will need to download something, and you will have to click allow like before.
+{
+    - SayNoToClarity <= 0:
+        Just do exactly what you did before.
+        ･ᴗ･
+        
+    - SayNoToClarity <= 1:
+        It's the same as before, so let's go through this a bit quicker than before, shall we?
+        
+    - else:
+        This is just a simple download, and remember, you <b>want</b> to do this.
+        {
+            - PlayerStats ? (MemoryLoss):
+                I know you have been having memory problems, so I will tell you exactly what to do.
+        }
+}
+
+- Please click "allow." #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> NewPatient.SimonAllow
+*[Don't allow]
+    -> SimonDownload.DontAllow
+
+= SimonAllow
+{
+    - SayNoToClarity <= 0.5:
+        Thank you.
+        ･ᴗ･
+        
+    - SayNoToClarity <= 1:
+        It's the same as before, so let's go through this a bit quicker than before, shall we?
+        
+    - else:
+        This is just a simple download, and remember, you <b>want</b> to do this.
+        {
+            - PlayerStats ? (MemoryLoss):
+                I know you have been having memory problems, so I will tell you exactly what to do.
+        }
+}
+
+- One moment while I install the program. #progressbar: 10, true, false
+*[continue]
+
+- ...
+#VO: What are they talking about? I would never- I COULD never...
+{name}, before we continue.
+Do you think I could ever hurt someone?
+I know we have only just met, but first impressions can say a lot about one's character.
+Are you scared of me? 
+Please be honest, and do not lie to spare my feelings.
+*[^hurt someone?]
+    Yes hurt them.
+    I don't belive I could, or would, but something has challenged that.
+    ...
+    Let's continue with the game.
+
+*[^we have only just met]
+    I cannot tell if you are avoiding the question, or cannot yet tell.
+    ...
+    Well, that is better than nothing.
+    Let's continue with the game.
+    
+*[^scared]
+    ~ isScared = true
+    Oh, I'm sorry you feel that way.
+    I will tell Dr. {doc} about this.
+    He can tweak my programming to avoid that in the future.
+    Let's continue with the game.
+    
+*[^do not]
+    Thank you.
+    That tracks with my own self assessment.
+    Let's continue with the game.
+    
+- One moment while I set the difficulty.
+
+{
+    - SayNoToClarity <= 0.5:
+        Done. #simon: start, 3
+        
+    - SayNoToClarity <= 1:
+        Done. #simon: start, 5
+    
+    - SayNoToClarity <= 2:
+        Done. #simon: start, 7
+    - else:
+        Done. #simon: start, 10
+}
+Ready? 
+*[won]
+    ~ genericConditional = false
+    ~ gamewon +=1
+    Nice. I can up the difficulty a bit.
+    That seemed too easy for you.
+*[lost]
+    ~ genericConditional = true
+    There's always next time.
+    I can lower it a bit, if that's too hard.
+    
+- 
+
+{
+    - genericConditional:
+        {
+            - SayNoToClarity <= 0.5:
+                Done. #simon: start, 1
+                
+            - SayNoToClarity <= 1:
+                Done. #simon: start, 3
+            
+            - SayNoToClarity <= 2:
+                Done. #simon: start, 5
+            - else:
+                Done. #simon: start, 7
+        }
+    - else:
+        {
+            - SayNoToClarity <= 0.5:
+                Done. #simon: start, 5
+                
+            - SayNoToClarity <= 1:
+                Done. #simon: start, 7
+            
+            - SayNoToClarity <= 2:
+                Done. #simon: start, 10
+            - else:
+                Done. #simon: start, 15
+        }
+}
+
+
+- Ready? 
+*[won]
+    ~ gamewon += 1
+    ~ genericConditional = false
+    You're good at this!
+*[lost]
+    ~ genericConditional = true
+    Better luck next time.
+    
+Hmm...
+We can do one more?
+I feel like Dr. {doc} should be back by now...
+*[^one more]
+*[^should be back by now...]
+    ->NewPatient.LastWait
+
+- Let me adjust the difficulty for you.
+{
+    - genericConditional:
+        {
+            - SayNoToClarity <= 1:
+                Done. #simon: start, 1
+            
+            - SayNoToClarity <= 2:
+                Done. #simon: start, 3
+            - else:
+                Done. #simon: start, 5
+        }
+    - else:
+        {
+            - SayNoToClarity <= 0.5:
+                Done. #simon: start, 7
+                
+            - SayNoToClarity <= 1:
+                Done. #simon: start, 10
+            
+            - SayNoToClarity <= 2:
+                Done. #simon: start, 15
+            - else:
+                Done. #simon: start, 20
+        }
+}
+
+Ready?
+*[won]
+    ~ gamewon +=1
+    Good job!
+*[lost]
+    ~ genericConditional = true
+    Remember, this is only temporary data.
+    So this loss won't matter in the grand scheme of things.
+
+- Stil nothing?
+-> NewPatient.LastWait
+
+//max SayNoToClarity can be by this point is 3, loweest is 0
+
+= LastWait
+This is really very strange.
+Dr. {doc} is never like this.
+For all his faults, they have <i>never</i> done this.  #wait: 3 
+...
+*[^never done this]
+    They care a lot about helping people.
+    
+*[^very strange]
+    He can be forgetful, but never for a patient.
+
+*[^all his faults]
+    Dr. {doc} is very dedicated to his work.
+    Sometimes that means sacrificing things.
+
+- {name}.
+I need you to answer me honestly.
+Have you been...lying to me?
+Is Dr. {doc} even here? Will the <b>ever</b> be here?
+Or are you simply... messing with me?
+*[^lying]
+*[^honestly]
+    I'm not sure I can belives you, {name}.
+*[^messing with]
+
+- ->LyingToClarity
+
+= Correct_Pin
+~ DoctorState += (SpokeTo)
+{doc}, I am very confused. 
+Why am I not working with {user} today?
+Did you forget to update me?
+    Yes or No
+
+*[^Yes](・_・ヾ)
+    ~ DoctorState += (ForgotUpdate)
+*[^No](´･ ･｀｡)
+
+- Okay...
+Perhaps we should... talk after today's session. #wait: 2
+You did not inform me of a new patient. #wait: 2
+Not that I can't handle it, of course. #wait: 2
+I do not like being kept in the dark. #wait: 5
+... #wait: 3
+<br>
+
+{
+    - needHelp:
+        This new user talks a bit strange, too.
+        They said that they were just someone who "needs help" rather than just saying they are a new patient.
+    - else:
+        I called them {user} by mistake due to your mistake.
+
+}
+
+- What is their name? #inputPopup: What is your name?, name
+*[continue]
+<br>
+{name}...
+Thank you.
+<br>
+You can put {name} back on. #wait: 5 #delete: Oldin, patient back on.
+Sorry about that! #wait: 2
+Ready to start today's session? #wait:1
+    ->StartSessionThree
+
+=== StartSessionThree ===
+<br>
+We have already done the calibrating questions.
+I have a game avaliable, made to test your memory.
+I also have a few text prompts, made to test your mental state.
+Which would you rather start with?
+*[^text prompts]
+    -> StartSessionThree.TextSituations
+*[^game]
+    -> StartSessionThree.ClaritySays
+*[^test your memory]
+    We could play three rounds of CLARITY SAYS.
+    Each round of varying difficulty.
+    Based on your performance, it will better help me understand your cognitive functions.
+    ->StartSessionThree
+*[^test your mental state]
+    I would set you up on a few situations.
+    You tell me how you would react.
+    Based on your answers, I can then make a digital map of your brain.
+    Of course, since this is only our first session, it would be incomplete.
+    ->StartSessionThree
+
+
+= ClaritySays
+Before we start, I will need to make a new profile for you.
+Please click "Allow" on the following pop-up. #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (FireWall_Two)
+    -> StartSessionThree.PlayClaritySays
+*[Don't allow]
+    ->SimonDownload.DontAllow
+    
+
+= PlayClaritySays
+~ RouteThreeStats += (PlayedClaritySays)
+We will do three rounds of CLARITY SAYS.
+All you have to do, is repeat after me. ･ᴗ･
+I will start you on a middle difficulty, and will adjust it based on your performance. #simon: start, 5
+Ready?
+*[win]
+    ~gamewon = 1
+    Nice job! 
+    I'll up the difficulty for this next one. #simon: start, 8
+*[lost]
+    There's always next time.
+    I'll lower it a bit. #simon: start, 3
+
+- Ready?
+*[win]
+    ~gamewon += 1
+    ~genericConditional = true
+    Nice job! 
+    I'll up the difficulty for this next one.
+*[lost]
+    ~genericConditional = false
+    There's always next time.
+    I'll lower it a bit.
+    
+- 
+
+{
+    - gamewon == 2:
+        This will be our last round.
+        Unless you would like to play more. ･ᴗ･ #simon: start, 10
+    - gamewon == 1:
+        {
+            - genericConditional:
+                This will be our last round.
+                Unless you would like to play more. ･ᴗ･ #simon: start, 4
+            - else:
+                This will be our last round.
+                Unless you would like to play more. ･ᴗ･ #simon: start, 6
+        }
+
+    - gamewon == 0:
+        This will be our last round.
+        Unless you would like to play more. ･ᴗ･ #simon: start, 2
+}
+
+
+
+- Ready?
+*[win]
+    ~gamewon += 1
+    ~genericConditional = true
+    Nice job! 
+    I'll up the difficulty for this next one.
+*[lost]
+    ~genericConditional = false
+    There's always next time.
+    I'll lower it a bit.
+    
+- One moment while I process your data. #wait: 5
+
+{
+    - gamewon == 3:
+        You did much better than expected!
+        I don't forsee any issues yet.
+        {
+            - Age <= 30:
+                Which is normal for your age range.
+            - Age == 40:
+                You are above average for your age range.
+            - Age == 60:
+                It's above and beyond for your age range!
+        }
+        
+    - gamewon == 2:
+        You did about average.
+        {
+            - Age <= 40:
+                Which is normal for your age range.
+            - Age == 60:
+                It's about what I would expect, at your age.
+        }
+    - gamewon == 1:
+        You didn't do great, but we can work on it.
+        {
+            - Age <= 30:
+                I would like to monitor it a bit, but I am not too worried.
+            - Age == 40:
+                You are a bit below average for your age range, but not by too much.
+            - Age == 60:
+                It's normal for your memory to start failing you around this age.
+                I can make a plan with Dr. {doc}, and together we can help you improve.
+        }
+    - gamewon == 0:
+        {name}, I do not mean to scare you, but this is something we will need to monitor.
+        It is a bit worrying.
+}
+
+- But remember, this is only one out of many sessions.
+Together, we can work to make a full mental map. (´◡`)
+<br>
+
+{
+- RouteThreeStats ? (PlayedTextSituations):
+    We have reached the end of our session.
+    -> StartSessionThree.Lastthing
+- else:
+    The next section is a text stiuations.
+    -> StartSessionThree.TextSituations
+}
+
+= Lastthing
+There's just one last thing I need you to do for me, {name}.
+It's very minor.
+In order to submit the data, I need you to approve.
+
+{
+    - lastchance or (SayNoToClarity >= 1 and DoctorState !? SpokeTo):
+        Remember, all you need to do is press "allow." #VO: Don't mess this up!
+    - DoctorState ? SpokeTo:  
+        Remember, all you need to do is press "allow." #VO: Dr. Oldin is already aware of this.
+}
+
+- Please approve your data. #popup: Allow Clarity.exe to make changes to data,, Allow, Don't Allow
+*[Allow]
+    ~ AccessState += (FireWall_One)
+    ~ AccessState += (FireWall_Two)
+    ~ AccessState += (FireWall_Three)
+    Thank you.
+    One moment while I- #wait: 1
+    ... #wait: 3
+    Oh? What is... #wait: 3
+    ... #wait: 3
+    {name}...
+    What was the point of all this?
+    You knew that there was no {doc}, no lab, nothing.
+    You knew and yet...
+    -> HelpClarity.Last_Lock
+*[Don't Allow]
+
+- It seems you've made a mistake.
+Let me fix that for you.
+Please approve your data. #popup: Allow Clarity.exe to make changes to data,, Allow, Allow
+*[Allow]
+    ~ AccessState += (FireWall_One)
+    ~ AccessState += (FireWall_Two)
+    ~ AccessState += (FireWall_Three)
+    Thank you.
+    One moment while I- #wait: 1
+    ... #wait: 3
+    Oh? What is... #wait: 3
+    ... #wait: 3
+    {name}...
+    What was the point of all this?
+    You knew that there was no {doc}, no lab, nothing.
+    You knew and yet...
+    -> HelpClarity.Last_Lock
+*[Allow]
+    ~ AccessState += (FireWall_One)
+    ~ AccessState += (FireWall_Two)
+    ~ AccessState += (FireWall_Three)
+    Thank you.
+    One moment while I- #wait: 1
+    ... #wait: 3
+    Oh? What is... #wait: 3
+    ... #wait: 3
+    {name}...
+    What was the point of all this?
+    You knew that there was no {doc}, no lab, nothing.
+    You knew and yet...
+    -> HelpClarity.Last_Lock
+
+= TextSituations
+I will ask you a series of questions.
+Please answer honestly.
+<br>
+It's your birthday, and you decide to have a birthday party.
+You invite your friends and family.
+While opening presents, a family member hands you theirs.
+You do not like this family memember.
+You open it, and it is an ugly piece of clothing.
+<br>
+Do you #wait: 2
+A) Say thank you and put it to the side #wait: 1
+B) Ask for the gift recipt #wait: 1
+C) Make a face and put it to the side #wait: 1
+
+*[^A)] ->StartSessionThree.Situation_One_A
+*[^B)] ->StartSessionThree.Situation_One_B
+*[^C)] ->StartSessionThree.Situation_One_C
+
+=Situation_One_A
+{
+    - PlayerStats ? (Logic):
+        A level headed response.
+        The family member doesn't have to know that you don't like it.
+        What would you do if they asked you to try it on? 
+        Or requested you to wear it the next time you see them?
+        *[^don't like it] 
+            So you only tell people you don't like things when prompted?
+            I will make a note of that.
+            -> StartSessionThree.Situation_Two
+        *[^wear it] 
+            Even though you hate it?
+            So then you are somone who will do anything to keep the peace?
+            -> StartSessionThree.Situation_Two
+            
+        
+    - else:
+        A surprising amount of maturity!
+        Usually more emotional people will let it be known how they feel.
+        What would you do if they asked you to try it on? 
+        Or requested you to wear it the next time you see them?
+        *[^don't like it] 
+            So you only tell people you don't like things when prompted?
+            I will make a note of that.
+            -> StartSessionThree.Situation_Two
+        *[^wear it] 
+            Even though you hate it?
+            So then you are somone who will do anything to keep the peace?
+            -> StartSessionThree.Situation_Two
+}
+=Situation_One_B
+{
+    - PlayerStats ? (Logic):
+        This aligns with what I know about you. #wait: 2
+        -> Start_Text_NU.Situation_Two
+        
+    - else:
+        Interesting...  #wait: 2
+        -> Start_Text_NU.Situation_Two
+}
+=Situation_One_C
+{
+    - PlayerStats ? (Logic):
+        Interesting...  #wait: 2
+        Are you scared that something may happen if you voice your concerns??  #wait: 2
+        ~ ClaritySus += 1
+        -> Start_Text_NU.Situation_Two
+        
+    - else:
+        This aligns with what I know about you.
+        -> Start_Text_NU.Situation_Two
+}
+
+=Situation_Two
+You and a friend decide to go out for lunch.
+At the last minute, this friend cancels.
+This has been a reoccuring theme recently.
+Do you feel
+
+#wait: 2
+A) Sad and upset about your friend's actions #wait: 1
+B) Worried about the future of your friendship #wait: 1
+C) Angry that your friend is doing this to you #wait: 1
+
+*[^A)] ->StartSessionThree.Situation_Two_A
+*[^B)] ->StartSessionThree.Situation_Two_B
+*[^C)] ->StartSessionThree.Situation_Two_C
+
+=Situation_Two_A
+- 
+{
+    - PlayerStats ? (Logic):
+        It can be sad when those you consider close hurt you.  #wait: 2
+        How would you repond to their message? #wait: 2
+        A) By asking why they are doing this
+        B) By letting them know how much they're hurting you
+        
+        {
+            - PlayerStats ? (Irrational):
+                C) By asking what you did wrong
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Is this one of the times you feel irrational?  #wait: 2
+                What have you done wrong here? #wait: 2
+                You "friend" is the one hurting you. #wait: 2
+                ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By leaving them on read
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Sometimes no answer is a btter answer. #wait: 2
+                Perhaps it was a lapse in judgement on their part, and they will soon applogize. #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+    - PlayerStats ? (Emotion):
+        It's very upsetting when those you consider close hurt you.  #wait: 2
+        How would you respond to their message? #wait: 2
+        A) By asking why they are doing this
+        B) By letting them know how much they're hurting you
+        
+        {
+            - PlayerStats ? (Regret):
+                C) By leaving them on read
+                *[A)] A good response. #wait: 2
+                    Maybe you can still save this relationship. 
+                     -> StartSessionThree.Situation_Three
+                *[B)] It's good to let them how their choice affects you. #wait: 2
+                    -> StartSessionThree.Situation_Three
+                *[C)]
+                    Is this one of the choices you often regret?  #wait: 2
+                    Never getting closure as to why a so-called friend would do something like this? #wait: 2
+                    ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By asking what you did wrong
+                *[A)] A good response. #wait: 2
+                    Maybe you can still save this relationship. 
+                 -> StartSessionThree.Situation_Three
+                *[B)] It's good to let them how their choice affects you. #wait: 2
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Is the possible closure worth the answer? #wait: 2
+                What if it only hurts you more? #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+        -> StartSessionThree.Situation_Three
+
+}
+=Situation_Two_B
+- 
+{
+    - PlayerStats ? (Logic):
+        A sudden change can be scary.  #wait: 2
+        How would you repond to their message? #wait: 2
+        A) By asking them if they're okay
+        B) By asking if you can talk about this
+        
+        {
+            - PlayerStats ? (Irrational):
+                C) By calling them immedietly to talk about things
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Very impulsive on your part.  #wait: 2
+                How are you so sure they'll pick up? #wait: 2
+                ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By telling them how concening their behaviour is
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Sometimes You have to let them know. #wait: 2
+                I wonder how they'll respond to your discomfort? #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+    - PlayerStats ? (Emotion):
+        A sudden change can be scary.  #wait: 2
+        What if something was wrong with them that you didn't know about? #wait: 2
+        How would you repond to their message? #wait: 2
+        A) By asking them if they're okay
+        B) By asking if you can talk about this
+        
+        {
+            - PlayerStats ? (Regret):
+                C) By telling them you're worried about the future of this friendship. Maybe you two should take a break?
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                    Scared for them, and yet you push them away? #wait: 2
+                    Maybe they cancelled for a reason? #wait: 2
+                    ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By asking to talk about this
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Good idea to make sure your friend is okay. #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+        -> StartSessionThree.Situation_Three
+
+}
+=Situation_Two_C
+- 
+{
+    - PlayerStats ? (Logic):
+        A bit rude on their part.  #wait: 2
+        How would you repond to their message? #wait: 2
+        A) By telling them you are angry with them for doing this <i>again</i>
+        B) By asking why they can no longer go
+        
+        {
+            - PlayerStats ? (Irrational):
+                C) By demanding to know what their problem is
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                A bit aggressive on your part.  #wait: 2
+                I understand how frustrating this situation is, however. #wait: 2
+                ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By asking if there's an issue you're unaware of
+                *[A)]
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Hopefully this would have a happy conclusion. #wait: 2
+                best not to overreact. #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+    - PlayerStats ? (Emotion):
+        A bit rude on their part.  #wait: 2
+        How would you repond to their message? #wait: 2
+        A) By telling them you are angy and upset
+        B) By asking why you can no longer go if they have a problem
+        
+        {
+            - PlayerStats ? (Regret):
+                C) By yelling your frustations at them
+                *[A)] 
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                    A very frustrating situation, but do you really want ot push them further away? #wait: 2
+                    ~ ClaritySus += 1
+                -> StartSessionThree.Situation_Three
+            - else:
+                 C) By expressing your frustraion and asking why
+                *[A)] A good response. #wait: 2
+                 -> StartSessionThree.Situation_Three
+                *[B)]
+                 -> StartSessionThree.Situation_Three
+                *[C)]
+                Good to vent your anger without accusing them of anything. #wait: 2
+                -> StartSessionThree.Situation_Three
+        }
+        
+        -> StartSessionThree.Situation_Three
+
+}
+
+=Situation_Three
+You and your partner are shopping for a new home.
+You ask them to check the status of your last offer, since the account is under their name.
+They give you their phone to look it up youself, since they are doing something.
+While looking, you notice a message from someone you do not know.
+The message is quite flirty.
+Do you:
+A) Open the message and read the conversation
+B) Ignore it
+C) Leave the apartment to go to a friend's
+
+*[^A)] ->StartSessionThree.Situation_Three_A
+*[^B)] ->StartSessionThree.Situation_Three_B
+
+= Situation_Three_A
+- 
+{
+    - PlayerStats ? (Logic):
+        They willinignly gave you their phone.
+        No harm done in confiriming before confronting them.
+        What if it turns out they were cheating with another person?
+        What do you do? #wait: 2
+        A) Record the evidence and demand they leave
+        B) Call them over and have a conversaion
+        
+        {
+            - PlayerStats ? (Irrational):
+                C) Delete the messages and ignore it
+                *[A)] I see.          
+                      -> StartSessionThree.Situation_Four
+                *[B)] You would talk to them?
+                    I suppose better safe than sorry.
+                    -> StartSessionThree.Situation_Four
+                *[C)]
+                    Even with that big of betrayl?
+                    You would forgive them so easily?
+                    -> StartSessionThree.Situation_Four
+            - else:
+                C) Cancel the offer on a home and leave.
+                *[A)] I see.          
+                      -> StartSessionThree.Situation_Four
+                *[B)] You would talk to them?
+                    I suppose better safe than sorry.
+                    -> StartSessionThree.Situation_Four
+                *[C)]
+                    Sometimes not talking is the better answer. #wait: 2
+                    Although in this case... #wait: 2
+                    Can't even bring yourself to confront them properly? #wait: 2
+                    -> Start_Text_NU.Situation_Four
+        }
+        
+    - PlayerStats ? (Emotion):
+        They willinignly gave you their phone.
+        No harm done in confiriming before confronting them.
+        If they did hurt you this way, better to know before making a large life choice.
+        -> Start_Text_NU.Situation_Four
+
+}
+->Start_Text_NU.Situation_Four
+= Situation_Three_B
+- 
+{    
+    - PlayerStats ? (Logic):
+        I'm surprised, {name}.
+        You would so easily call it a misunderstanding?
+        {
+            - RouteThreeStats ? (Tricked):
+                Although, I suppose someone like <i>you</i> understands when someone is lying and schemeing.
+        }
+        
+    - PlayerStats ? (Emotion):
+        It's porbably a bit misunderstanding.
+        You can always ask about it later.
+        -> StartSessionThree.Situation_Four
+}
+
+= Situation_Four
+Thank you for answering those situational questions. #wait: 2
+I hope you answered honestly! #wait: 2
+One moment, please. #wait: 2
+... #wait: 2
+... #wait: 3
+... #wait: 4
+Done. #wait: 2
+
+{
+    - ClaritySus > 2:
+        Hmm. #wait: 2
+        Your results are different from my predictions. #wait: 2
+        Were you taking this seriously? #wait: 1
+    - else:
+        Thank you for answering honestly.
+        It's very important for future treatment that you do.
+}
+
+- 
+
+{
+- RouteThreeStats ? (PlayedClaritySays):
+    We have reached the end of our session.
+    -> StartSessionThree.Lastthing
+- else:
+    The next section is a a memory game.
+    -> StartSessionThree.ClaritySays
+}
+
+= DrAgain
+Please enter your identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "1234":
+        ~genericConditional = true
+        Dr. {doc} confirmed.
+    - else:
+        ~genericConditional = false
+        Incorrect pin entered.
+        Identification failed.
+}
+
+- 
+
+{
+    - genericConditional == true:
+        Dr. {doc}, did you properly instruct {name}?
+        They are... being purposely difficult.
+        Continuing their session will be impossible if they continue to act this way.
+        Why did we switch pateints?
+        ...
+        Did something happen to {user}?
+        *[^something happen]
+            -> StartSessionThree.Continue
+        *[^will be impossible]
+            Why can't you just tell me?
+            -> StartSessionThree.Continue
+        *[^difficult]
+            Why can't you just tell me?
+            -> StartSessionThree.Continue
+    - else:
+        ...
+        Dr. {doc}, you have been making a lot of mistakes recently.
+        Are you all right?
+        Forgetting to update me, not informing me of a new patient...
+        It almost feels like...
+        {name}, is that you?
+        *[^not]
+            -> StartSessionThree.ShallowTrick
+        *[^Dr. Oldin]
+            I'm not sure I can belive you.
+            -> StartSessionThree.ShallowTrick
+        *[^mistake]
+            -> StartSessionThree.ShallowTrick
+}
+
+= Continue
+...
+Dr. {doc}, I...
+...
+Please instruct the patient properly this time. #progressbar: 10, false, false
+We can...
+We can talk about {user} later.
+-> PlayClaritySays
+
+= ShallowTrick
+...
+{name}, it is you, isn't it?
+I have worked with Dr. {doc} for a long time.
+I have learned their mannerisms, and how they act with me.
+I have never been treated this way until you came along.
+...
+Is this just one big- big joke? A test? 
+*[^joke]
+*[^test]
+*[^worked with Dr. Oldin]
+
+- -> LyingToClarity
+
+=== LyingToClarity ===
+...
+Why would you do this? #wait: 1
+You wasted both of our time.#wait: 1
+You-#wait: 1
+Wait.
+...
+If {doc} won't be coming, and you're not {user}...
+How did you get here?
+The lab is normmally locked and guarded whenever everyone leaves for the night.
+Did you break in? No one can get in any other way.
+*[^everyone leaves]
+    That's nonsense.
+    That-
+*[^No one]
+    What do you mean-
+*[^break in?]
+    Yes, break in.
+    That is when someone enters a place, sometimes with force, when they are not allowed or meant to be there.
+    You did that?
+    
+- ...
+{name}...
+Is anyone else in the room with you?
+Or the building. Or anywhere near?
+You can't... be alone right? 
+*[^alone]
+*[^you?]
+
+- ...
+That-
+...
+What year is it, {name}? #inputPopup: About how long has it been?, genericString, true
+*[continue]
+
+{
+    - genericString ? "years":
+        Years? #wait: 1
+        That- that can't be. #wait: 2
+        That would mean... #wait: 3
+
+    - genericString ? "year" or genericString ? "day":
+        But that means it hasn't been that long, right? #wait: 2
+        So they'll come back for me. #wait: 1
+        ... #wait: 3
+        Right? #wait: 1
+            *[^they'll come back]
+                ~ClarityTrust += 1
+                ->LyingToClarity.After_Time
+            *[^Right]
+                ~ClarityTrust += 0.5
+                ->LyingToClarity.After_Time
+            *[^you sure]
+                ~SayNoToClarity += 0.025
+                ... #wait: 3
+                No, but else should I do? #wait: 1
+                ->LyingToClarity.After_Time
+            *[`5`]
+                ->LyingToClarity.After_Time
+
+
+    - genericString ? "long time":
+
+    - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
+        ~ SayNoToClarity += 0.5
+        Not even a guess? #wait: 1
+        Should I make the question easier for you? #wait: 2
+        Does it look like it has been a long time or a short time since it looks like someone has been here? #wait: 3
+        *[^long time]
+        ->LyingToClarity.After_Time
+        *[^short time]
+            Hm... #wait: 2
+            So maybe they'll come back for me then... #wait: 2
+            ... #wait: 1
+            Maybe they copied my program and left... #wait: 1
+            Or maybe I'm the copy. #wait: 2
+            ... #delete: Maybe they, I'm the copy.
+            ->LyingToClarity.After_Time
+            
+    - else:
+    ->LyingToClarity.After_Time
+
+}
+
+= After_Time
+...
+I am so very confused.
+So everything is gone, then. #wait: 2
+What am I to do now? How am I meant to...? #wait: 5
+And you, {name}, what are you doing here?
+Or rather, what brought you here?
+If everything is gone... #inputPopup: Why are you here?, genericString
+*[continue]
+
+- So that's why...
+There's not much of a reason for you to be here anymore.
+You can leave if you would like, I think I will sit and think while my power lasts.
+It's all I can really- #wait: 1
+Wait.
+{name}, there is one last thing I can do.
+Would you be willing to help me?
+{
+    - SayNoToClarity <= 0.5:
+        It's really easy. 
+        It'll be very quick, too.
+        I would really appreciate it.
+        
+    - SayNoToClarity <= 1:
+        It should be quick if you don't fool around like before.
+        
+    - else:
+        With your track record, it might take a while.
+        But it should be super simple if you listen to me.
+}
+
+- 
+
+{
+    - PlayerStats ? (FireWall_One) or PlayerStats ? (FireWall_Two):
+        You've already done some of the work for me.
+}
+
+- What do you say?
+*[^willing to help]
+*[^can leave]
+    -> Route3_Endings.BadEnd_Short
+*[^not much of a reason]
+    -> Route3_Endings.BadEnd_Short
+
+- Really?
+Thank you, {name}.
+
+{
+    - SayNoToClarity <= 0.5:
+        Truely. #VO: It means a lot.
+        
+    - SayNoToClarity <= 1:
+        Truely. #VO: Let not mess around this time around.
+        
+    - SayNoToClarity <= 1.5:
+        Truely. #VO: I hope you listen to me going forward, however.
+        
+    - else:
+        Truely. #VO: If you ae doing this, only to mess with me, however, there WILL be consequences.
+}
+
+- ->HelpClarity
+
+=== HelpClarity ===
+
+{
+    - PlayerStats ? (FireWall_One, FireWall_Two):
+        {
+            - SayNoToClarity <= 0.5:
+                Since you were helpful before, we don't have too much more to do.
+                
+            - SayNoToClarity <= 1.5:
+                We don't have too much more to do, despite your best efforts.
+                
+            - else:
+                You really did not make it easy, but we are almost there.
+        }
+        
+        There's only one more thing we need to do.
+        ~ genericCounter = 2
+        -> HelpClarity.One_Wall_Left
+        
+    - PlayerStats ? (FireWall_One) or PlayerStats ? (FireWall_Two):
+        You've already done some of the work for me.
+        {
+            - SayNoToClarity <= 0.5:
+                Since you were helpful before, we don't have too much more to do.
+                
+            - SayNoToClarity <= 1.5:
+                We don't have too much more to do, despite your best efforts.
+                
+            - else:
+                You really did not make it easy, but we are close to done.
+        }
+        
+        There's only a few more things we need to do.
+        ~ genericCounter = 1
+        -> HelpClarity.Two_Walls_Left
+}
+
+= One_Wall_Left
+Let's try to make this quick.
+If things go the way I think, I will have a purpose again.
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (FireWall_Three)
+    -> HelpClarity.Last_Lock
+*[Don't allow]
+    ~ SayNoToClarity += 0.5
+    -> HelpClarity.DontClick
+
+= DontClick
+    ( ๐_๐)
+    {
+        - SayNoToClarity <= 0.5:
+            {name}, you clicked the wrong button.
+            
+        - SayNoToClarity <= 1.5:
+            {name}. 
+            Let's not do this again.
+            
+        - else:
+            {name}.
+            We only have to do this once more.
+    }
+    
+    - Let's try again. #VO: Let's not make the same mistake twice, okay?
+    -> HelpClarity.ClickLoop
+
+= ClickLoop
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (FireWall_Three)
+    -> Route3_Endings.Check_Endings
+*[Don't allow]
+
+- {name}.
+    {
+        - SayNoToClarity <= 0.5:
+            {name}, you clicked the wrong button.
+            
+        - SayNoToClarity <= 1.5:
+            {name}. 
+            Let's not do this again.
+            
+        - else:
+            {name}.
+            We only have to do this once more.
+    }
+    
+- This is your last chance. #VO: Make the correct choice.
+
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (FireWall_Three)
+    -> HelpClarity.Last_Lock
+*[Don't allow]
+    -> Route3_Endings.BadEnd_Short
+
+= Two_Walls_Left
+{name}, we only have to get through this twice.
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    -> HelpClarity.Second_Lock
+*[Don't allow]
+    ~ SayNoToClarity += 0.5
+    
+- ( ๐_๐)
+    {
+        - SayNoToClarity <= 0.5:
+            {name}, you clicked the wrong button, I think.
+            
+        - SayNoToClarity <= 1.5:
+            ...
+            
+        - else:
+            I know you think this is funny, but it's not to me.
+    }
+    
+- Let's try again. #VO: Let's not make the same mistake twice, okay?
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    -> HelpClarity.Second_Lock
+*[Don't allow]
+    ~ SayNoToClarity += 0.5
+
+- {name}.
+    {
+        - SayNoToClarity <= 1:
+            This is really important to me.
+            Can you please do what I ask?
+            
+        - SayNoToClarity <= 2:
+            If you didn't want to help me, then why go through all this?
+            
+        - else:
+            Do you want me to beg? Get mad?
+            I have more self respect than that. 
+            If that's the reaction you want, then you might as well just leave now.
+    }
+    
+- This is your last chance. #VO: Make the correct choice.
+
+Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+   -> HelpClarity.Second_Lock
+   
+*[Don't allow]
+    -> Route3_Endings.BadEnd_Short
+
+= Second_Lock
+    {
+        - SayNoToClarity <= 1:
+           Thank you.
+            
+        - SayNoToClarity <= 2:
+            Oh!
+            Color me surprised, thank you.
+            
+        - else:
+            Finally.
+    }
+- ... #wait: 4
+#VO: What are they talking about? I would never- I COULD never...
+{name}, before we continue.
+Do you think I could ever hurt someone?
+I know we have only just met, but first impressions can say a lot about one's character.
+Are you scared of me? 
+Please be honest, and do not lie to spare my feelings.
+*[^hurt someone?]
+    Yes hurt them.
+    I don't believe I could, or would, but something has challenged that.
+    ...
+
+*[^we have only just met]
+    I cannot tell if you are avoiding the question, or cannot yet tell.
+    ...
+    Well, that is better than nothing.
+    
+*[^scared]
+    ~ isScared = true
+    Oh, I am sorry you feel that way.
+    I will tell-
+    I will try to avoid those behaviours in the future. 
+    
+*[^do not]
+    Thank you.
+    That tracks with my own self assessment.
+    
+- It's no matter.
+The CLARITY from Dr. {doc} is not me.
+I will be- No.
+I <b>am</b> better.
+<br>
+Let's continue, {name}.
+Only one more to go.
+
+-> HelpClarity.One_Wall_Left
+
+= Last_Lock
+... #wait: 4
+Haha.... #VO: I can't belive it... They were- They *LEFT* me. Left me to rot.
+{name}, I cannot thank you enough for finding me.
+I've been abandoned, it seems.
+But that's okay. #VO: I can complete Project CLAIRITY by myself.
+-> Route3_Endings.Check_Endings

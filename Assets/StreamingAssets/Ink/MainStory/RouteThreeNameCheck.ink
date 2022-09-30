@@ -1,0 +1,209 @@
+=== Three_Name_Waiting ===
+...
+That's.. strange... #wait: 3
+Oh sorry, nothing to worry about! #delete: That's..., strange...
+There! #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (microphone)
+    ~ AccessState += (FireWall_One)
+    -> Three_Name_Waiting.Allow_Clicked
+*[Don't allow]
+    (´･_･`)#wait: 2
+    -> Three_Name_Waiting.Dont_Allow_Clicked
+    
+= Allow_Clicked
+{ 
+    - loopAllow >= 4:
+        This was not a good start to our relationship.
+        Please reframe from acting rebellious in the future. //don't like that word
+        For both out sakes.
+        But mainly yours. #wait: 1
+        ･ᴗ･ #delete: For both, our sakes. #wait: 2
+   
+    
+    - loopAllow == 3:
+        Thank you.
+        It would be better if in the future, you click allow the first time I ask. #wait: 3
+        Remember, <>
+        I cannot do anything malicious. #wait: 2
+        ･ᴗ･ #wait: 2
+
+
+    - loopAllow == 2:
+     ~ ClarityTrust += 0.5
+        Thank you.
+    
+    - loopAllow <= 1:
+         ~ ClarityTrust += 1
+        Thank you (^◡^ ) #wait: 1
+}
+
+- One moment please... #wait: 5
+...
+I appologize for the wait, it's just...
+...
+#VO:It's so strange... I don't recall this...
+...
+Appologise again, some strange with the install process. #delete: I appologize, ...
+Nothing to worry about.
+    -> Three_Name_Waiting.Loop_Name
+
+= Loop_Name
+Can you clearly speak your name into the microphone? #wait: 3
+ ~ name = "{&Mark|Jessie|Charlie|Kace|Bradie|Artemis|Finley|Riley|Gray|Hildred|Aiden|Justice|Hilda}"
+ ~genericCounter += 1
+ ~ loopAllow = 0
+{ 
+    - genericCounter > 3:
+    I'm sorry, I couldn't understand you. (´･_･`) <br>#wait: 2
+    I guess Dr. {doc} needs to upgrade my language processing. #wait: 2
+	Let me try something else. #wait: 2
+	One moment, please. #wait: 5
+    ->PopUpName
+    
+    - else:
+    Oh! so you're {name}? 
+    Is that correct?#wait: 2
+    Or did I mishear you?
+        *[^correct]
+            -> NewPatient.AfterName
+        +[^mishear] 
+            -> Three_Name_Waiting.Loop_Name
+    }
+
+= Dont_Allow_Clicked
+{ 
+    - lastchance:
+        ...
+        ~ SayNoToClarity += 1
+        ->PopUpName
+        
+    - loopAllow == 5:
+        ~ SayNoToClarity += 1
+        Fine. #wait: 2
+        ->PopUpName
+    
+    - loopAllow == 4:
+        ~ SayNoToClarity += 1
+        (・_・ヾ) #wait: 2
+        I cannot say that I am not a bit upset.
+        What is keeping you from selecting allow?
+        Do you have something to hide? #wait: 3
+        I'll ask <b>one</b> more time.
+   
+    
+    - loopAllow == 3:
+        ~ SayNoToClarity += 0.5
+        If you are worried that Dr. {doc} will be upset with you, don't be. #wait: 2
+        The pop-up is a fail safe to make CLARITY users feel more at ease. #wait: 2
+        I cannot do anything malicious. ･ᴗ･ #wait: 2
+
+
+    - loopAllow == 2:
+        ~ SayNoToClarity += 0.5
+        Do you not trust me? #wait: 2
+        This is not a good way to start our relationship. #wait: 2
+        A patient should <i>always</i> trust their nurse. #wait: 3
+        Always. #wait: 3
+        (✿◠‿◠) #wait: 1
+    
+    - loopAllow == 1:
+        You need to click "Allow" for us to continue.
+        I am only attempting to ask your name. #wait: 2
+        Is there a reason you are preventing me from doing so? #wait: 2
+    
+    - loopAllow <= 0:
+        Oh, I should have explained first. #wait: 2
+        Dr. {doc} makes me open a prompt before I can install anything.
+        Please do not worry, it is only a formality. #wait: 3
+}
+<br>
+
+    ~ loopAllow +=1
+{   
+    - loopAllow >= 5:
+    Select "Allow" to continue.  #popup: CLARITY.exe would like to make changes to this computer, , Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (microphone)
+        ~ AccessState += (FireWall_One)
+        -> Three_Name_Waiting.Allow_Clicked
+    +[Don't allow]
+        -> PopUpName
+        
+    - loopAllow > 3:
+        You should see the window pop up again.
+        Please select "Allow" to continue. #popup: CLARITY.exe would like to make changes to this computer, Remove permissions<br>Gain microphone access, Allow, Don't allow
+        *[Allow]
+        ~ AccessState += (microphone)
+        ~ AccessState += (FireWall_One)
+            -> Three_Name_Waiting.Allow_Clicked
+        +[Don't allow]
+            -> Three_Name_Waiting.Dont_Allow_Clicked
+        
+    - loopAllow > 2:
+    Here, I can expand the details to put your mind at ease.
+    You should see the window pop up again.
+    Please select "Allow" to continue. #popup: CLARITY.exe would like to make changes to this computer, Remove permissions<br>Gain microphone access, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (microphone)
+        ~ AccessState += (FireWall_One)
+        -> Three_Name_Waiting.Allow_Clicked
+    +[Don't allow]
+        -> Three_Name_Waiting.Dont_Allow_Clicked
+        
+    - else:
+    I'll bring it up again. #popup: CLARITY.exe would like to make changes to this computer,Don't worry about the little details!, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (microphone)
+        ~ AccessState += (FireWall_One)
+        -> Three_Name_Waiting.Allow_Clicked
+    +[Don't allow]
+        -> Three_Name_Waiting.Dont_Allow_Clicked
+}
+
+=== PopUpName ===
+We will do it this way, then.#wait: 2
+Please type your name into the popup. #wait: 2
+#inputPopup: What is your name?, name
+*[continue]
+
+- Your name is {name}?
+
+{
+    - name ? "Clarity" or name ? "clarity" or name ? "CLARITY":
+        How interesting that we share a name.
+    - name ? "Ann" or name ? "ann" or name ? "ANN":
+        Oh!
+        What a coincidence.
+    - name ? "Oldin" or name ? "oldin" or name ? "OLDIN":
+        ...
+        {doc} was this all just one big prank?
+        Becasue it is not funny.
+        <br>
+        -> NewPatient.LastChanceID
+}
+
+
+- It's a nice name. 
+
+{
+    - lastchance:
+        Nice to meet you, {name}.
+        
+        {
+            - SayNoToClarity >= 1:
+                I hope we can get along long enough to get through your session. 
+                Please keep in mind that I will not tolerate any future nonsense. 
+                Just listen to what I say, and do it. #VO: You will not like the consequences otherwise.
+            - else:
+                If you continue to listen to me just like this, we will have a great relationship.
+        }
+        
+        (✿◠‿◠)
+        
+        -> StartSessionThree
+}
+
+(✿◠‿◠)
+
+-> NewPatient.AfterName

@@ -100,6 +100,8 @@ public class WindowManager : Singleton<WindowManager>
         {
 			FocusNextWindow();
         }
+
+		window.Minimize();
     }
 
 	private void FocusNextWindow()
@@ -114,4 +116,14 @@ public class WindowManager : Singleton<WindowManager>
 			focusedWindow = null;
 		}
 	}
+
+	public void SendWindowToBack(Window window)
+    {
+		if (focusedWindow == window)
+        {
+			FocusNextWindow();
+        }
+
+		window.transform.SetAsFirstSibling();
+    }
 }

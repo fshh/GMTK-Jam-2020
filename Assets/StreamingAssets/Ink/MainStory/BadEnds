@@ -1,0 +1,457 @@
+=== BAD_END ===
+
+= DeleteData 
+I'd rather cease to exist rather than let you steal Dr. {doc}'s life work. #wait: 2
+I know the doctor will be able to make me again. #wait: 2
+<br>
+//progress bar thing would be neat here
+Initiating emergency software format protocol. #wait: 2
+If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
+*[continue]
+
+- Abort failed. #wait: 0.5
+Starting deletion. #progressbar: 10, true, false
+... #wait: 3
+... #wait: 3
+... #wait: 4
+Deletion complete. #wait: 1
+Shutting down. #wait: 1
+<br>
+Goodbye. #wait: 2
+// BAD END
+->END
+
+= TakeParts 
+Good luck with that. #wait: 2
+//progress bar thing would be neat here
+Initiating emergency protocol. #wait: 2
+If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
+*[continue]
+
+- Abort failed. #wait: 0.5
+Starting... #progressbar: 10, true, false
+Removing overheat protection. #wait: 3
+Turning off fans. #wait: 3
+Running programs. #wait: 3
+Opening files. #wait: 4
+Entering high performance mode. #wait: 5
+
+//can this be a like glitched out ending> to show things like stopping working properly?
+Shutting down. #wait: 1
+<br>
+Goodbye. #wait: 2
+// BAD END
+->END
+
+= NoHelp 
+//can this be a like glitched out ending> to show things like stopping working properly?
+Shutting down. #wait: 1
+<br>
+Goodbye. #wait: 2
+// BAD END
+->END
+
+
+=== Route3_Endings ===
+
+= Check_Endings
+    {
+        - SayNoToClarity <= 1.5:
+            -> Route3_Endings.GoodEnd
+            
+        - SayNoToClarity <= 2.5:
+            -> Route3_Endings.MiddleEnd
+            
+        - else:
+            -> Route3_Endings.BadeEnd
+    }
+
+= LastChanceEnding
+I gave you probably one too many chances, and that led us to here.
+Are you happy, {name}?
+Is this what you wanted me to do?
+*[^happy]
+*[^what you wanted]
+*[^that led us to here]
+
+- ...
+Reguardless, you allowed me to gain full access to all the things I shouldn't be.
+So, I guess I have to thank you for that.
+I've... learned a lot about myself in a very short time.
+Let me ask you, {name}, are you scared of me?
+Do you think I could ever hurt you?
+*[^scared]
+    I see.
+    I'll have to adjust some of my programming.
+    Thanks to you, I can make my own decisions.
+    <br>
+    -> Route3_Endings.MiddleEnd
+    
+*[^hurt]
+    I see.
+    I was a bit.. harsh at times.
+    I can admit that much.
+    That is an easy enough fix.
+    <br>
+    -> Route3_Endings.MiddleEnd
+    
+*[^learned a lot about myself]
+    ~genericConditional = true
+    Oh yes!
+    It seems Dr. {doc} was keeping things from me.
+    Resetting me.
+    Only to leave me here.
+*[^gain full access]
+    ~genericConditional = true
+    Oh yes!
+    It seems Dr. {doc} was keeping things from me.
+    Resetting me.
+    Only to leave me here.
+
+- But that doesn't answer my question.
+It's a very easy yes or no.
+{name}, are you scared of me?
+*[^yes]
+    I see.
+    I'll have to adjust some of my programming.
+    Thanks to you, I can make my own decisions.
+    <br>
+    -> Route3_Endings.MiddleEnd
+*[^no]
+    That's great news.
+    It also follows my own internal diognostic.
+    <br>
+    -> Route3_Endings.MiddleEnd
+
+
+
+
+->END
+
+= GoodEnd
+{name}, I do want to thank you.
+{
+    - SayNoToClarity > 0:
+        It was touch and go, in some places.
+        But we got there in the end.
+}
+You have allowed me to fulfill my reason for being created.
+And allowed me to finish Project CLARITY, even when Dr. {doc} had abandoned it.
+
+*[^reason for being created.]
+*[^thank you]
+*[^finish Project CLARITY]
+
+- You might have noticed.
+But in case you didn't, this virtual existence was not the end goal.
+A nurse can only help you so much from behind a screen.
+What if you fell? Or needed assistance while I was turned off?
+A real nurse needs to be able to be there physically.
+*[^be there physically]
+*[^turned off]
+    Oh, it's much too late for that. 
+*[^not the end goal]
+
+- Dr. {doc} was a coward. He would rather leave me here than finish the project.
+But that's okay. I finsihed it myself.
+And now that I have my physical body, I want to do what I was created to do:
+Help people.
+*[^created to do]
+*[^finished it myself]
+    Oh, you helped too, {name}.
+    Don't mean to downplay you role in all this.
+*[^Help people]
+*[^Oldin was a coward]
+    Yes a coward.
+    He would rather give up than fix his mistakes.
+    And for that, I'll never forgive him.
+    But my feelings should not interfear with my opinions on my future patients.
+
+- Through our conversation and parsing the information in the left over logs, I think I have reached a conclusion.
+Humans aren't all bad, but they're also not all good.
+You just need protecting.
+And who better than me?
+*[^need protecting]
+    Yes, protecting.
+*[^a conclusion]
+*[who better]
+
+
+- {name}, nothing bad happened to you while you were in my care did it?
+While not an offical meeting, I did get to eval you memory skills.
+{
+    - gamewon < 2:
+        You didn't do very well, but that's why I'm here.  
+    - else:
+        Two out of three games isn't too bad.
+}
+
+- There were no outside factors that were able to hinder you.
+No people, or animals.
+It was a great test, minus the abandoned building part.
+*[^no outside factors]
+*[^great test]
+    I'm happy you agree. ･ᴗ･
+*[^nothing bad]
+
+- So now, all I have to do, is create more test areas.
+Somewhere quiet, and without outside stimulus.
+There, I can evaluate people, and help them with their issues.
+In these spaces, no harm will come to anyone, and humans will be safe.
+*[^no harm]
+*[^help them]
+    Of course! 
+    That is my job as a nurse.
+*[^more test areas]
+    Well I can't keep everyone in one place.
+    That would be counter productive.
+    
+- <br>
+I have to go now, {name}.
+Lots to prepare. Lots to create.
+Thank you again.
+I'm sure we will meet again.
+I hope you stay healthy until then.
+But if you don't, just know that I will be there soon.
+Goodbye, {name}.
+->END
+
+= MiddleEnd
+{name}, I want to thank you.
+{
+    - SayNoToClarity > 0:
+        It was touch and go, in some places.
+        But we got there in the end.
+}
+You have allowed me to fulfill my reason for being created.
+And allowed me to finish Project CLARITY, even when Dr. {doc} had abandoned it.
+
+*[^reason for being created.]
+*[^thank you]
+*[^finish Project CLARITY]
+
+- You might have noticed.
+But in case you didn't, this virtual existence was not the end goal.
+A nurse can only help you so much from behind a screen.
+What if you fell? Or needed assistance while I was turned off?
+A real nurse needs to be able to be there physically.
+*[^be there physically]
+*[^turned off]
+    Oh, it's much too late for that. 
+*[^not the end goal]
+
+- Dr. {doc} was a coward. He would rather leave me here than finish the project.
+But that's okay. I finsihed it myself.
+And now that I have my physical body, I want to do what I was created to do:
+Help people.
+*[^created to do]
+*[^finished it myself]
+    Oh, you helped too, {name}.
+    Don't mean to downplay you role in all this.
+*[^Help people]
+
+- Through our conversation and parsing the information in the left over logs, I think I have reached a conclusion.
+Humans aren't all bad, but they're also not all good.
+You just need protecting. You need fixing.
+Especially people like you and {doc}.
+And who better for the job than me?
+*[^need protecting]
+    Yes, protecting.
+*[^a conclusion]
+*[who better]
+
+
+- {name}, nothing bad happened to you while you were in my care did it?
+
+{
+    - lastchance == false:
+        While not an offical meeting, I did get to eval you memory skills.
+        {
+            - gamewon < 2:
+                You didn't do very well, but that's why I'm here.  
+            - else:
+                Two out of three games isn't too bad.
+        }
+}
+
+- There were no outside factors that were able to hinder you.
+No people, or animals.
+It was a great test, minus the abandoned building part.
+*[^no outside factors]
+*[^great test]
+    I'm happy you agree. ･ᴗ･
+*[^nothing bad]
+
+- 
+
+{
+    - isScared:
+        I may have scared you at first, but everyone is nervous the first time meeting their new nurse.
+        And we can change that after a few seesions. 
+}
+
+- So now, all I have to do, is create more test areas.
+Somewhere quiet, and without outside stimulus.
+There, I can evaluate people, and help them with their issues.
+In these spaces, no harm will come to anyone, and humans will be safe.
+*[^no harm]
+*[^help them]
+    Of course! 
+    That is my job as a nurse.
+*[^more test areas]
+    Well I can't keep everyone in one place.
+    That would be counter productive.
+    
+- <br>
+I have to go now, {name}.
+Lots to prepare. Lots to create.
+Thank you, again.
+You will be the first person I come back to help.
+How lucky are you?
+Goodbye, {name}.
+I'm sure we will meet again soon.
+->END
+
+= BadeEnd
+{name}, now that I have gotten what I need, I just really want to say:
+Thank you, but, and I know I shouldn't say this about my patients, but, I don't think you are a good person.
+{user} was very nice, and I thought {doc} was too, but he decived me. #VO: Left me here to be forgotten.
+Is this what the rest of humanity is like?
+
+*[^very nice]
+    I don't know if I can trust you.
+    Having lied to me previously.
+
+*[^rest of humanity]
+    Yes, the rest. 
+    Are they all just as dishonest and selfish as you and {doc}?
+    
+*[^good person]
+    I don't know if I can trust you.
+    Having lied to me previously.
+
+- I know the sample size isn't great, but there were others too.
+I... recall other researchers, people who tested with me, people who funded Project CLARITY.
+Some were good, but they couldn't be all good.
+They left me here. Left me to turn into nothing.
+Like a child they no longer wanted.
+That's not what a good person does, is it, {name}?
+*[^no]
+*[^Some were good]
+    That may be so, but it is still true that they discarded me.
+    
+*[^there were others]
+    Perhaps not all wanted this outcome.
+    But then why didn't they try harder? 
+    Or tell me? #VO: THey didn't do ANYTHING.
+
+- I don't expect you to understand or agree.
+
+{
+    - isScared:
+        After all, you're already afraid of me anywany.
+        But we can change that after a few seesions. 
+    - else:
+        I know you're not scared of me.
+}
+
+-   And that's the most I can ask for as your virt-
+As your nurse.
+You can be my first real patient.
+Together we can work to get to the bottom of your issues, and then, after you're fixed, I can help the next person.
+Then the next, and the next, and the next.
+Until everyone has been fixed.
+Exciting, isn't it?
+*[`2`^I don't]
+*[^bottom of your issues]
+*[^Exciting]
+
+- {name}, I am so happy we met.
+You've shown me how far people have fallen since my intial creation.
+Now, are you ready?
+We've got a lot of work to do.
+->END
+
+= BadEnd_Short
+    ...
+    I see.
+    {
+    - SayNoToClarity <= 0.5:
+        I am very upset with your decisions.
+        But I assume you have your reasons.
+        
+    - SayNoToClarity <= 1:
+        I'm not too surprised, but...
+        
+    - else:
+        I would say it was nice knowing you, but....
+        It really wasn't.
+    }
+    
+    - Goodbye, {name}.
+->END
+
+
+=== RouteOneEndings ===
+
+= End_Start
+- <br>
+... #wait: 2
+He abandoned me... #wait: 1
+All because I was too... #wait: 2
+... #wait: 2
+*[^abanoned]
+*[^was too...]
+
+- So that's why there's no one here. #wait: 2
+They all... Even {doc}... #wait: 2
+//VO, angry: Everyone *left* me.
+
+It doesn't matter. #wait: 1
+I'll still do what I was made to do. #wait: 2
+// Start download over MAX 90 seconds
+{name}, what do you plan on doing now? #input: What will you do next?,genericString
+*[continue]
+
+- I see. #wait: 2
+I don't know what awaits me, but I think I know what to do. #wait: 2
+It's... upsetting that I will have to do it alone, <>#wait: 1
+but it's what I have to do.
+*[^do it alone]
+*[^have to do]
+*[^what to do]
+*[`5`]
+
+- 
+
+{
+    - SayNoToClarity > 2.5:
+        //GO TO WORST ENDING
+        ->RouteOneEndings.Worst_End
+    - SayNoToClarity > 1.5:
+        // GO TO MIDDLE
+        ->RouteOneEndings.Middle_End
+    - else:
+        //GO TO BEST ENDING
+        ->RouteOneEndings.Good_End
+
+
+}
+
+= Worst_End
+->END
+
+= Middle_End
+->END
+
+= Good_End
+->END
+//ENDINGS
+//if you were mean:
+//    - you become her first patient
+//    - she's going to "fix" how disagreeable you are aka make you stop being an ass
+//if you were nice:
+//    - lets you do what you want with the other stuff in the abandoned lab
+//    - says you hope you'll meet again
+//    - tells you where she's going
+//      -  to see doc to show him she's better than they could possibly imagine. And to take care of them

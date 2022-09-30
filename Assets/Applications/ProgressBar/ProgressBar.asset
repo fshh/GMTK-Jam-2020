@@ -16,4 +16,5 @@ MonoBehaviour:
   TaskbarIcon: {fileID: 0}
   WindowIcon: {fileID: 0}
   BackgroundColor: {r: 0, g: 0, b: 0, a: 0}
-  AppContentPrefab: {fileID: 0}
+  AppContentPrefab: {fileID: 1728924433343279697, guid: fddf9bb1e1e74ce4bb45ca69e387e55e,
+    type: 3}

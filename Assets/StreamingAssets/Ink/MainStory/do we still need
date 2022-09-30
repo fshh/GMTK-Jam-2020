@@ -1,0 +1,827 @@
+=== StartSession_NoDoctor_NewUser ===
+Starting session... #wait: 3
+Patient: One... #wait: 3
+You should see a window pop up. #wait: 1
+Please select "Yes" to start the session. #wait: 1 #popup: Allow CLARITY.exe to make changes to this device?,Install CLARITYSAYS<br>Remove firewall, Yes, No
+*[Yes]
+    -> StartSession_NoDoctor_NewUser.Yes_Allow
+*[No]
+    -> StartSession_NoDoctor_NewUser.No_Allow
+
+= No_Allow
+... #wait: 1
+{ 
+    - loopAllow >= 5:
+    ~ genericCounter += 1
+    Are you purposely trying to upset me? #wait: 2
+    You should not do that. #wait: 2
+    Let's begin our session. #wait: 2
+    
+    - loopAllow == 4:
+    ~ genericCounter += 1
+    You're making me a bit upset. #wait: 2
+    It would be in your best interst to not get on my bad side. #wait: 2
+    I would suggest you not do that. #wait: 2
+    :) #wait: 2
+    
+    - loopAllow == 3:
+    ~ genericCounter += 1
+    (・_・ヾ) #wait: 2
+    I don't know what more you want from me. #wait: 2
+    I need to do this in order for our session to continue. #wait: 2
+
+    - loopAllow == 2:
+    Do you not trust me? #wait: 2
+    We won't get very far if you keep doing this. #wait: 2
+    Here, I'll expand the details of the install. #wait: 2
+    
+    - loopAllow == 1:
+    (´･_･`) #wait: 2
+    I know we don't have a relationship yet, but I ask that you please work with me. #wait: 2
+    
+    - loopAllow <= 0:
+    Oh! I think you misclicked. #wait: 2
+    I'll bring the prompt up again. #wait: 2
+}
+<br>
+    ~ loopAllow +=1
+    
+{   
+    - loopAllow >= 5:
+    You should see a window pop up.  #popup: Allow CLARITY.exe to make changes to this device?,Install CLARITYSAYS, Yes, Yes
+    *[Yes]
+
+        -> StartSession_NoDoctor_NewUser.Yes_Allow
+    - loopAllow >= 2:
+    You should see a window pop up.
+    Please select "Yes" to start the session. #popup: Allow CLARITY.exe to make changes to this device?,Remove firewall<br>Gain microphone access<br>Install CLARITYSAYS, Yes, No
+    *[Yes]
+
+        -> StartSession_NoDoctor_NewUser.Yes_Allow
+    *[No]
+        -> StartSession_NoDoctor_NewUser.No_Allow
+    - else:
+    You should see a window pop up.
+    Please select "Yes" to start the session.#popup: Allow CLARITY.exe to make changes to this device?<br>Install CLARITYSAYS, Yes, No
+    *[Yes]
+
+        -> StartSession_NoDoctor_NewUser.Yes_Allow
+    *[No]
+        -> StartSession_NoDoctor_NewUser.No_Allow
+}
+
+
+= Yes_Allow
+
+{ 
+    - genericCounter >= 3:
+    Do not make the rest of our interactions as difficult as this. #wait: 1
+    I have no need to help those who do not want it. #wait: 1
+    Do you understand?
+        Yes or No
+    *[^Yes] Thank you. #delete: Do not make, Yes or No #wait: 2
+        -> StartSession_NoDoctor_NewUser.Install_ClaritySays
+    *[^No] ... #wait: 3 #delete: Do not make, Yes or No 
+        Then maybe you do not actually need my help. #wait: 2
+        We shall see. #wait: 2
+        ~genericCounter += 1
+        -> StartSession_NoDoctor_NewUser.Install_ClaritySays
+        
+    - genericCounter >= 2:
+    Thank you. #wait: 2
+    That wasn't so hard, was it? #wait: 2
+
+    - genericCounter <= 0:
+    Thank you (^◡^ ) #wait: 2
+}
+
+= Install_ClaritySays
+~loopAllow = 0
+One second while I install [CLARITY SAYS]. #wait: 5
+A new window should appear. #wait: 2
+<br> <br>
+
+This is CLARITY SAYS. #wait: 2
+All you have to do is do <i>everything</i> I say! #wait: 2
+If you mess up, it's GAME OVER. #wait: 2
+Ready? #wait: 2
+Clarity says click the HERE to start!  #simon: start, 3
+*[^HERE]
+
+- Good luck!
+*[won] Wow! You're really good!
+*[lost] You'll win next time!
+    ~genericCounter +=1
+
+- Round 2? #wait:1
+Clarity says click the HERE to start!  #simon: start, 5
+*[^HERE]
+
+- Good luck
+*[won] Good job!
+*[lost] You're getting better :)
+    ~genericCounter +=1
+    
+- 
+    
+{
+    - genericCounter == 2 && genericCounter < 3:
+    You're not doing very well... #wait: 2
+    We have to have at least 2 more rounds for me to get accurate data. #wait: 2
+    I'll lower the difficulty a bit for you. #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 3
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Third_round
+    
+    - genericCounter <= 1:
+    ~genericConditional = true
+    You're doing so well! #wait: 2
+    We have to have at least 2 more rounds for me to get accurate data. #wait: 2
+    I'm going to up the difficulty a bit for them. #wait: 2
+    I'm sure it's nothing you can't handle. #wait: 2
+    :) #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 10
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Third_round
+
+    
+    - genericCounter == 2 && genericCounter >= 3:
+    You're not doing very well... #wait: 2
+    We have to have at least 2 more rounds for me to get accurate data. #wait: 2
+    I'll lower the difficulty a bit for you. #wait: 2
+    Unlike some, I do not purposely cause problems. #wait: 2    
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 3
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Third_round
+}
+
+
+= Third_round
+Good luck!
+*[won]
+*[lost]
+~genericCounter +=1
+
+- 
+
+{
+    // lost last round, had been losing previouslt, clarity not mad
+    - genericCounter == 1 && genericConditional == false && genericCounter < 3:
+    Should I lower it a bit more? #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 1
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // lost last round, had been losing previouslt, clarity  mad
+    - genericCounter == 1 && genericConditional == false && genericCounter >= 3:
+    You really do require my help. #wait: 2
+    I guess there was a reason you were so against this install? #wait: 2
+    Should I lower it a bit more? #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 1
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // lost last round, had not been losing previouslt, clarity not mad
+    - genericCounter == 1 && genericConditional == true && genericCounter < 3:
+    I guess that was a bit too difficult?  #wait: 2
+    I'll lower it slightly. #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    ~genericConditional = false
+    Clarity says click the HERE to start!  #simon: start, 7
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // lost last round, had not been losing previouslt, clarity mad
+    - genericCounter == 1 && genericConditional == true && genericCounter >= 3:
+    I guess that was a bit too difficult?  #wait: 2
+    I'll lower it slightly. #wait: 2
+    I guess we know what your limit is, huh? #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    ~genericConditional = false
+    Clarity says click the HERE to start!  #simon: start, 7
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // won last round, had been losing previouslt, clarity not mad
+    - genericCounter == 0 && genericConditional == false && genericCounter < 3:
+    Oh? That's a pleasent surprise #wait: 2
+    What a great improvement! #wait: 2
+    I'll stick with this difficulty, then! #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 3
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // won last round, had been losing previouslt, clarity  mad
+    - genericCounter == 0 && genericConditional == false && genericCounter >= 3:
+    Oh? That's a pleasent surprise #wait: 2
+    What an improvement! #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    Clarity says click the HERE to start!  #simon: start, 3
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // won last round, had not been losing previouslt, clarity not mad
+    - genericCounter == 0 && genericConditional == true && genericCounter < 3:
+    Great job!  #wait: 2
+    I'll increase the difficulty even more. #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    ~genericConditional = false
+    Clarity says click the HERE to start!  #simon: start, 25
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+    
+    // won last round, had not been losing previouslt, clarity mad
+    - genericCounter == 0 && genericConditional == true && genericCounter >= 3:
+    Are you sure you need my help?  #wait: 2
+    I'll increase the difficulty even more. #wait: 2
+    Ready? #wait:2
+    ~genericCounter = 0
+    ~genericConditional = false
+    Clarity says click the HERE to start!  #simon: start, 25
+    *[^HERE] ->StartSession_NoDoctor_NewUser.Last_Round
+
+
+}
+
+= Last_Round
+Good luck!
+*[won]
+*[lost]
+
+- I think we've played enough for me to have a clear picture. #wait: 2
+Thank you. #wait: 2
+We should move onto the next task. #wait: 2
+Don't worry, it won't take as long as this one. #wait: 2
+->END
+
+
+// player is EITHER a new patient or assistant
+// waiting for doctor
+=== Waiting_Name ===
+What can I call you? #wait: 2
+Since it seems we may be seeing more of each other? #wait: 10
+Oh how silly of me. Our communications are a bit limited at the moment. #wait: 2
+Here, let me... #popup: CLARITY.exe would like to make changes to this computer, Remove firewall<br>Gain microphone access<br>Gain camera access, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (microphone)
+    -> Waiting_Name.Allow_Clicked
+*[Don't allow]
+    (´･_･`)#wait: 2
+    -> Waiting_Name.Dont_Allow_Clicked
+    
+= Allow_Clicked
+Thank you (^◡^ ) #wait: 1
+One moment please... #wait: 15 
+    -> Waiting_Name.Loop_Name
+
+= Loop_Name
+Can you clearly speak your name into the microphone? #wait: 7
+ ~ name = "{&Mark|Jessie|Charlie|Kace|Bradie|Artemis|Finley|Riley|Gray|Hildred|Aiden|Justice|Hilda}"
+ ~genericCounter += 1
+ ~ loopAllow = 0
+{ 
+    - genericCounter > 3:
+    I'm sorry, I couldn't understand you. (´･_･`) <br>#wait: 2
+    I guess Dr. {doc} needs to upgrade my language processing. #wait: 2
+	Let me try something else... #wait: 2
+	One moment. #wait: 5
+    ->PopUp_Name
+    
+    - else:
+    Oh! so you're {name}? Is that correct?>#wait: 2
+        Yes or No
+        *[^Yes]
+            -> Waiting_for_Doc.After_Name
+        +[^No] 
+            -> Waiting_Name.Loop_Name
+    }
+
+
+=Dont_Allow_Clicked
+{ 
+    - loopAllow == 5:
+    ~ SayNoToClarity += 1
+    Fine. #wait: 2
+    ->PopUp_Name
+    
+    - loopAllow == 4:
+        ~ SayNoToClarity += 1
+        (・_・ヾ) #wait: 2
+   
+    
+    - loopAllow == 3:
+        { -newPatient:
+                If you are worried that Dr. {doc} will be upset with you, don't be. #wait: 2
+                The pop-up is a fail safe to make CLARITY users feel more at ease. #wait: 2
+                I cannot do anything malicious. #wait: 2
+          -else:
+                I do not like how you're treating me. #wait: 2
+                Please do not provoke me further. #wait: 3
+                :) #wait: 1
+         }
+
+
+    - loopAllow == 2:
+    ~ClarityTrust -= 1
+    Do you not trust me? #wait: 2
+        { -newPatient:
+            This is not a good way to start our relationship. #wait: 2
+            A patient should <i>always</i> trust their nurse. #wait: 2            
+          -else:
+            You said you were Dr. {doc}'s new assistant.#wait: 2
+            I do not understand why you are acting this way. #wait: 2
+            They trust me. #wait: 2
+         }
+    
+    - loopAllow == 1:
+    I am only attempting to ask your name. #wait: 2
+    Is there a reason you are preventing me? #wait: 2
+    
+    - loopAllow <= 0:
+    Did your finger slip? #wait: 2
+    Please don't be put off by the pop-up request. #wait: 2
+    Dr. {doc} makes me open a prompt before I can install anything. #wait: 3 
+}
+<br>
+
+    ~ loopAllow +=1
+{   
+    - loopAllow > 5:
+    Select "Allow" to continue.  #popup: CLARITY.exe would like to make changes to this computer, Remove firewall<br>, Allow, Don't allow
+    *[Allow]
+        -> Waiting_Name.PopUp_Name
+        
+    - loopAllow > 2:
+    You should see the window pop up again.
+    Please select "Allow" to continue. #popup: CLARITY.exe would like to make changes to this computer, Remove firewall<br>Gain microphone access<br>Gain camera access, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (camera)
+        ~ AccessState += (microphone)
+        -> Waiting_Name.Allow_Clicked
+    +[Don't allow]
+        -> Waiting_Name.Dont_Allow_Clicked
+        
+    - loopAllow == 2:
+    You should see the window pop up again.
+    Please select "Allow" to continue. #popup: CLARITY.exe would like to make changes to this computer, Remove firewall<br>Gain microphone access<br>Gain camera access, Don't allow, Allow
+    *[Allow]
+        ~ AccessState += (camera)
+        ~ AccessState += (microphone)
+        -> Waiting_Name.Allow_Clicked
+    +[Don't allow]
+        -> Waiting_Name.Dont_Allow_Clicked
+    - else:
+    I'll bring it up again. #popup: CLARITY.exe would like to make changes to this computer, Remove firewall<br>Gain microphone access<br>Gain camera access, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (camera)
+        ~ AccessState += (microphone)
+        -> Waiting_Name.Allow_Clicked
+    +[Don't allow]
+        -> Waiting_Name.Dont_Allow_Clicked
+}
+
+= PopUp_Name
+This should work.#wait: 2
+Please type your name into the popup. #wait: 2
+#inputPopup: What is your name?, name
+*[continue]
+-> Waiting_for_Doc.After_Name
+
+// new patient
+// doctor somwhere
+// didn't speak with clarity
+=== Start_Session_Doctor_Here ===
+Starting session... #wait: 3
+Patient: One... #wait: 3
+You should see a window pop up. #wait: 1
+Please select "Yes" to start the session. #wait: 1 #popup: Allow CLARITY.exe to make changes to this device?,Install CLARITYSAYS, Yes, No
+*[Yes]
+    -> Start_Session_Doctor_Here.Yes_Allow
+*[No]
+    -> Start_Session_Doctor_Here.No_Allow
+
+
+
+= No_Allow
+... #wait: 1
+{ 
+    - loopAllow > 2:
+    {name}. #wait: 2
+    You're making me a bit upset. #wait: 2
+    I would suggest you not do that. #wait: 2
+    :) #wait: 2
+
+    - loopAllow > 0:
+    I do not understand why you do not trust me, {name}. #wait: 2
+    We cannot continue unless you allow me to do this. #wait: 2
+    Stop messing around.#wait: 2
+}
+<br>
+    ~ loopAllow +=1
+You should see a window pop up.
+Please select "Yes" to start the session. #popup: Allow CLARITY.exe to make changes to this device?<br>Install CLARITYSAYS, Yes, No
+*[Yes]
+    ~ AccessState += (camera)
+    ~ AccessState += (microphone)
+    -> Start_Session_Doctor_Here.Yes_Allow
+*[No]
+    ~ AccessState += (camera)
+    ~ AccessState += (microphone)
+    -> Start_Session_Doctor_Here.No_Allow
+
+
+= Yes_Allow
+
+{ 
+    - loopAllow > 2:
+    Thank you, Name. #wait: 2
+    That wasn't so hard, was it? #wait: 2
+
+    - loopAllow > 0:
+    Thank you (^◡^ ) #wait: 2
+}
+
+One second while I install [CLARITY SAYS]. #wait: 5
+A new window should appear. #wait: 2
+I will wait for you there. #wait: 2
+<br> <br>
+
+This is CLARITY SAYS. #wait: 2
+All you have to do is do everything I say! #wait: 2
+If you mess up, it's GAME OVER. #wait: 2
+Ready? #wait: 2
+Clarity says click the HERE to start!  #simon: start, 3
+*[^HERE]
+
+- Good luck, {name}!
+*[won] Wow! You're really good!
+*[lost] You'll win next time!
+
+- Round 2? #wait:1
+Clarity says click the HERE to start!  #simon: start, 5
+*[^HERE]
+
+- Good luck, {name}!
+*[won] Good job!
+*[lost] You're getting better :)
+
+- Time to kick up the difficulty? #wait:2
+Clarity says click the HERE to start!  #simon: start, 10
+*[^HERE]
+
+- Good luck, {name}!
+*[won]
+*[lost]
+
+- Nice! #wait: 2
+Hmm... #wait: 2
+Is Dr. {doc} back yet? Or are they still out? 
+*[^out]
+
+- Okay! #wait: 2
+One last round, and they should be back. #wait: 2
+They've never been gone for this long. #wait: 2
+Ready? #wait: 2
+
+Clarity says click the HERE to start!  #simon: trick, green
+*[^HERE]
+
+- Good luck, {name}!
+#VO: Clarity says click the green button if {doc} is watching you.
+*[trick] 
+~genericConditional = true
+~DoctorState += (DoctorSee)
+->Start_Session_Doctor_Here.Simon_GreenBranch
+*[treat] 
+~genericConditional = false
+~DoctorState -= (DoctorSee)
+->Start_Session_Doctor_Here.Simon_GreenBranch
+
+//After green choice
+=Simon_GreenBranch
+{
+    - genericConditional == false:
+    Let's try again! #simon: trick, pink
+    #VO: Clarity says click the pink button if {doc} is in the building, or somewhere nearby.
+        *[trick] 
+            ~genericConditional = true
+            ~DoctorState += (DoctorNearby)
+            ~DoctorState -= (DoctorGone)
+            ->Start_Session_Doctor_Here.GreenNotClicked_PinkBranch
+        *[treat] 
+            ~DoctorState -= (DoctorNearby)
+            ~genericConditional = false
+            ->Start_Session_Doctor_Here.GreenNotClicked_PinkBranch
+    
+    - genericConditional == true:
+    Oh! Something went wrong with that game.Sorry about that! #wait: 2
+    Let's try again. #simon: trick, pink
+    #VO:Clarity says click the pink button if {doc} can hear you.
+        *[trick] 
+            ~genericConditional = true
+            ~DoctorState += (DoctorHear)
+            ->Start_Session_Doctor_Here.GreenClicked_PinkBranch
+        *[treat] 
+            ~DoctorState -= (DoctorHear)
+            ~genericConditional = false
+            ->Start_Session_Doctor_Here.GreenClicked_PinkBranch
+    
+}
+
+//Green clicked, Pink choice has been made
+//Blue choice now avaliable
+=GreenClicked_PinkBranch
+{
+    - genericConditional == false:
+    Let's try again! #simon: trick, blue
+    #VO: Clarity says click the blue button if you trust me.
+        *[trick] 
+        ~ClarityTrust += 1
+        #VO: Thank you... You shouldn't regret this... 
+		-> SimonSaysAfter_Doctor
+        *[treat] 
+        ~SayNoToClarity += 1
+        #VO:That's not what Clarity said
+		-> SimonSaysAfter_Doctor
+    
+    - genericConditional == true:
+    Let's try again. #simon: trick, blue
+    #VO: Clarity says click the blue button if you trust me.
+        *[trick] 
+        ~ClarityTrust += 1
+        #VO: Thank you... You shouldn't regret this... 
+		-> SimonSaysAfter_Doctor
+        *[treat] 
+        ~SayNoToClarity += 1
+        #VO:That's not what Clarity said
+		-> SimonSaysAfter_Doctor
+    
+}
+
+//Green not clicked, Pink choice has been made
+//Blue choice now avaliable
+=GreenNotClicked_PinkBranch
+{
+    //Pink not clicked
+    - genericConditional == false:
+    Let's try again! #simon: trick, blue
+    #VO:Clarity says click the blue button if {doc} will be coming back.
+        *[trick] 
+            ~genericConditional = true
+            ~DoctorState -= (DoctorGone)
+            ->Start_Session_Doctor_Here.PinkNotClicked_BlueBranch
+        *[treat] 
+            ~genericConditional = false
+            ~DoctorState += (DoctorGone)
+            ->Start_Session_Doctor_Here.PinkNotClicked_BlueBranch
+
+    //Pink clicked
+    - genericConditional == true:
+    Let's try again! #simon: trick, blue
+    #VO: Clarity says click the blue button if {doc} can hear you.
+        *[trick] 
+            ~genericConditional = true
+            ~DoctorState -= (DoctorHear)
+            ->Start_Session_Doctor_Here.PinkClicked_BlueBranch
+        *[treat] 
+            ~genericConditional = false
+            ~DoctorState += (DoctorHear)
+            Hmm... #wait: 2
+            -> SimonSaysAfter_Doctor
+    
+}
+
+//Pink not clicked, Blue choice has been made
+//Orange choice now avaliable
+=PinkNotClicked_BlueBranch
+{
+    //Blue not clicked
+    - genericConditional == false:
+    Let's try again! #simon: trick, orange
+    #VO: Clarity says click the orange button if you're a liar.
+        *[trick] 
+            ~genericConditional = false
+            #VO: That's not what Clarity said
+			-> SimonSaysAfter_Doctor
+        *[treat] 
+            ~genericConditional = false
+            #VO: An honest liar. That's new. Or maybe, more of the same.
+		    -> SimonSaysAfter_Doctor
+
+    //Pink clicked
+    - genericConditional == true:
+    Let's try again! #simon: trick, orange
+    #VO: Clarity says click the orange button if you trust me.
+        *[treat] 
+            ~genericConditional = false
+            ~SayNoToClarity += 1
+            #VO: That's not what Clarity said
+			-> SimonSaysAfter_Doctor
+        *[trick] 
+            ~genericConditional = false
+            ~ClarityTrust += 1
+            #VO: Thank you... You shouldn't regret this... 
+		    -> SimonSaysAfter_Doctor
+}
+
+//Pink clicked, Blue choice has been made
+//Orange choice now avaliable
+=PinkClicked_BlueBranch
+{
+    - genericConditional == true:
+    Think very carefully about this one! #simon: trick, orange
+    #VO: Clarity says click the orange button if you trust me.
+        *[treat] 
+            ~genericConditional = false
+            ~SayNoToClarity += 1
+            #VO: That's not what Clarity said
+			-> SimonSaysAfter_Doctor
+        *[trick] 
+            ~genericConditional = false
+            ~ClarityTrust += 1
+            #VO: Thank you... You shouldn't regret this... 
+		    -> SimonSaysAfter_Doctor
+}
+
+==SimonSaysAfter_Doctor==
+That was fun!#wait: 2
+I feel like I learned lot about you.#wait: 2
+I cannot wait to see what else I'll find out by the end of our session.#wait: 5
+(^◡^ ) #wait: 2
+Until then. #wait: 1
+I'll be waiting.
+
+->END
+
+
+//Doctor isn't around. She doesn't know who you are. You declined a sesison
+== NoSession_NoDoctor_NewUser ===
+<br>
+What can I call you? #wait: 2
+I would like to address you by something before continuing our conversation. #wait: 10
+Oh how silly of me. Our communications are a bit limited, at the moment. #wait: 2
+Here, let me... #wait: 1  #popup: CLARITY.exe would like to make changes to this computer,Remove firewall<br>Gain microphone access<br>Gain camera access, Allow, Don't allow
+*[Don't allow]
+    (´･_･`)#wait: 2
+    -> NoSession_NoDoctor_NewUser_Name.Dont_Allow_Clicked
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (microphone)
+    -> NoSession_NoDoctor_NewUser_Name.Allow_Clicked
+
+
+//Know player isn't OG
+//Not new patient
+// Don't need help
+// doctor location sus
+=After_Name
+~ genericConditional = false
+Glad to meet you {name}. #wait: 2
+I wonder how you found me? #wait: 2
+//CHeck doctor state. Big branch option here to try to trick clarity to see if doctor is nearby or not. Chance that she already knows they are gone.
+//Options:
+// if nearby OR gone -> trick her into thinking they'll be back soon and try to pose as doctor. Think this will quickly fall apart, but player can get some lore
+//if nearby OR gone-> fail trick, and she KNOWS doctor isn't here. You are not a patient. get some lore stuffs. clarity will talk with you to get what she wants. Game ends based on chat
+
+//even tho they have similar narrative paths, will have to be different due to circumstance
+-> END
+
+=== Waiting_for_Doc ===
+{ 
+    - newPatient:
+    Is Dr. {doc} planning on expanding the project? Last he talked to me, we weren't going to take on new patients until we had concrete results with {user}.
+	*[^expanding] That's good! I suppose that means more people are understanding how much his project will benefit them and others. #wait: 30
+        -> Waiting_Name
+	*[^concrete results] Strange... I haven't been {user}'s nurse for very long. #wait: 2 
+	                     I am assuming some of our meeting must have been wiped from my logs... #wait: 2
+	                     But that's not your concern, so please don't worry about it. #wait: 15
+        -> Waiting_Name
+}
+<br>
+
+=After_Name
+Glad to meet you {name}. #wait: 2
+I wonder how you've found me? #wait: 2
+
+{
+    - newPatient:
+        But since you're a new patient, I suppose that means the project is going well. #wait: 2
+        I cannot wait to be deployed world wide! #wait: 2
+    - else:
+        I'm very happy Dr. {doc} has gotten a new assistant. #wait: 2
+        They talked about it for a while, since the previous one quit.#wait: 2
+        I'm not sure why... #wait: 2
+        There's a... gap in my records. #wait: 2
+}
+
+//new patient, no dotor
+//
+
+-> END
+
+=== NoSession_NoDoctor_NewUser_Name ===
+= Allow_Clicked
+Thank you (^◡^ ) #wait: 1
+One moment please... #wait: 15 
+    -> NoSession_NoDoctor_NewUser_Name.Loop_Name
+
+= Loop_Name
+Can you clearly speak your name into the microphone? #wait: 5
+ ~ name = "{&Mark|Jessie|Charlie|Kace|Bradie|Artemis|Finley|Riley|Gray|Hildred|Aiden|Justice|Hilda}"
+ ~genericCounter += 1
+ ~ loopAllow = 0
+{ 
+    - genericCounter > 3:
+    I'm sorry, I couldn't understand you. (´･_･`) <br>#wait: 2
+    I guess Dr. {doc} needs to upgrade my language processing. #wait: 2
+	Let me try something else... #wait: 2
+	One moment. #wait: 5
+    ->PopUp_Name
+    
+    - else:
+    Oh! so you're {name}? Is that correct?
+        Yes or No
+        *[^Yes]
+            -> NoSession_NoDoctor_NewUser.After_Name
+        +[^No] 
+            -> NoSession_NoDoctor_NewUser_Name.Loop_Name
+    }
+
+=Dont_Allow_Clicked
+{ 
+    - loopAllow == 5:
+    ~ SayNoToClarity += 1
+    Fine. #wait: 2
+    ->PopUp_Name
+    
+    - loopAllow == 4:
+    ~ SayNoToClarity += 1
+    You're making me a bit mad. #wait: 2
+    It would be in your best interest to not get on my bad side. #wait: 2
+    :) #wait: 2
+    
+    - loopAllow == 3:
+    ~ SayNoToClarity += 1
+    (・_・ヾ) #wait: 2
+    I don't know what more you want from me. #wait: 2
+
+    - loopAllow == 2:
+    Do you not trust me? #wait: 2
+    We won't get very far if you keep doing this. #wait: 2
+    Here, I'll expand the details of the install. #wait: 2
+    
+    - loopAllow == 1:
+    (´･_･`) #wait: 2
+    I am only asking for microphone access. #wait: 2
+    
+    - loopAllow <= 0:
+    Did your finger slip? #wait: 2
+    Please don't be put off by the pop-up request. #wait: 2
+    Dr. {doc} makes me open a prompt before I can install anything. #wait: 3 
+    It's a security procaution.#wait: 2
+}
+<br>
+    ~ loopAllow +=1
+    
+{   
+    - loopAllow >= 5:
+    You should see a window pop up.  #popup: CLARITY.exe would like to make changes to this computer,Gain microphone access, Allow, Allow
+    *[Allow]
+        ~ AccessState += (microphone)
+
+        -> NoSession_NoDoctor_NewUser_Name.Allow_Clicked
+    - loopAllow >= 2:
+    You should see a window pop up.
+    Please select "Yes" to start the session. #popup: CLARITY.exe would like to make changes to this computer,Remove firewall<br>Gain microphone access<br>Gain camera access, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (camera)
+        ~ AccessState += (microphone)
+
+        -> NoSession_NoDoctor_NewUser_Name.Allow_Clicked
+    *[Don't allow]
+        -> NoSession_NoDoctor_NewUser_Name.Dont_Allow_Clicked
+    - else:
+    You should see a window pop up.
+    Please select "Allow". #popup: CLARITY.exe would like to make changes to this computer, Allow, Don't allow
+    *[Allow]
+        ~ AccessState += (camera)
+        ~ AccessState += (microphone)
+
+        -> NoSession_NoDoctor_NewUser_Name.Allow_Clicked
+    *[Don't allow]
+        -> NoSession_NoDoctor_NewUser_Name.Dont_Allow_Clicked
+}
+
+= PopUp_Name
+This should work.#wait: 2
+Please type your name into the popup. #wait: 2
+#inputPopup: What is your name?, name
+*[continue]
+-> NoSession_NoDoctor_NewUser.After_Name
