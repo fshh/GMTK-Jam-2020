@@ -37,7 +37,7 @@ public class HyperInkWrapper : MonoBehaviour
         
         string inkFolderPath = Application.streamingAssetsPath + "/" + INK_FILES_FOLDER_PATH;
         //Uses a linq expression to get a list of ink files, then selects the first of that list and gets its name
-        string storyName = new DirectoryInfo(inkFolderPath).GetFiles().Where(fileInfo => fileInfo.Extension.Equals(".ink")).ToArray()[0].Name;
+        string storyName = new DirectoryInfo(inkFolderPath).GetFiles().Where(fileInfo => fileInfo.Name.Equals("Story.ink", StringComparison.OrdinalIgnoreCase)).ToArray()[0].Name;
         
 #pragma warning disable CS0612 // Technically this is deprecated but I think it still works in this version of unity. using this to suppress errors relating to it.
         StartCoroutine(LoadStreamingAsset(inkFolderPath + "/" + storyName));

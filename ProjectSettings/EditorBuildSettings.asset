@@ -5,16 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/RenderingPipeline_2D.unity
-    guid: 56ac141887ff7c6469db0734194d5925
-  - enabled: 0
-    path: Assets/Scenes/RenderingPipeline_3D.unity
-    guid: ae5d99b3adc33bf459712340708e86a5
-  - enabled: 0
-    path: Assets/Scenes/NewUI_v1.unity
-    guid: 945c7c2995dc6524eb18da6c6d7c7493
   - enabled: 1
-    path: Assets/Scenes/NewUI_v2.unity
-    guid: 260aa72418034bc498f76935785b47b1
+    path: Assets/Scenes/Final_Game_Scene.unity
+    guid: 3391bc71c87fe844ca03921796dbddad
   m_configObjects: {}
