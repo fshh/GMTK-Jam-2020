@@ -100,8 +100,6 @@ public class WindowManager : Singleton<WindowManager>
         {
 			FocusNextWindow();
         }
-
-		window.Minimize();
     }
 
 	private void FocusNextWindow()

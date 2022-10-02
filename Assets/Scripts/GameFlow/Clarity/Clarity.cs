@@ -36,6 +36,7 @@ public class Clarity : Singleton<Clarity>
 
     //Magic number-y things
     private static string AUDIO_FILE_PATH = "Wav Files/VO/";
+    public static float WAIT_TIME = 2.0f;
 
     private static char HypertextSymbol = '^';
     private static char AutoSelectSymbol = '`';
@@ -276,12 +277,12 @@ public class Clarity : Singleton<Clarity>
         {
             return 0;
         }
+
         float accumulator = 0;
         IEnumerable<string> waitTags = HyperInkWrapper.instance.getTags().Where(tag => tag.Contains(WAIT_TAG));
-
         if (!waitTags.Any())
         {
-            return 2f;
+            return WAIT_TIME;
         }
 
         foreach (string tag in waitTags)

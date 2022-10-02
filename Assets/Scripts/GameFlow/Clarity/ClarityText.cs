@@ -25,7 +25,7 @@ public class ClarityText : MonoBehaviour
     [SerializeField]
     private int lettersUntilSound = 5;
 
-    public float timeBetweenLetters = 0.03f, variance = 0.01f;
+    public static float CHARACTERS_PER_SECOND = 30.0f;
 
     private CanvasScaler canvasScaler;
 
@@ -44,8 +44,9 @@ public class ClarityText : MonoBehaviour
         {
             for (int i = 0; i < newText.Length; i++)
             {
-                float waitTime = Mathf.Max(timeBetweenLetters + Random.Range(-variance, variance));
-                yield return new WaitForSeconds(waitTime);
+                float waitTime = 1.0f / CHARACTERS_PER_SECOND;
+                float variance = waitTime * 0.2f;
+                yield return new WaitForSeconds(waitTime + Random.Range(-variance, variance));
 
                 //this check is a hack to try and avoid the case where you use < but not in a rich text way. really only works for <br> currently
                 //https://twitter.com/ESzanton/status/1433541156667895812?s=20 
