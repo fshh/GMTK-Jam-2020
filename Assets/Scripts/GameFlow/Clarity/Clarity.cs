@@ -35,12 +35,12 @@ public class Clarity : Singleton<Clarity>
     private AudioSource clarityVoice; //The reason that audiosource is a required component
 
     //Magic number-y things
-    private static string AUDIO_FILE_PATH = "Wav Files/VO/";
+    private static string VO_FILE_PATH = "VO/";
     public static float WAIT_TIME = 2.0f;
 
     private static char HypertextSymbol = '^';
     private static char AutoSelectSymbol = '`';
-    private static string AUDIO_TAG = "audio: ";
+    private static string VO_TAG = "VO: ";
     private static string DELETE_TAG = "delete: ";
     private static string WAIT_TAG = "wait: ";
     private static string SIMON_TAG = "simon: ";
@@ -53,7 +53,7 @@ public class Clarity : Singleton<Clarity>
         clarityVoice = GetComponent<AudioSource>();
         mainCamera = Camera.main;
         popupParent = GameObject.FindGameObjectWithTag("PopupParent");
-        
+
         currChoices = new List<string>();
         protectedChoices = new List<string>();
         voiceLines = new Queue<AudioClip>();
@@ -72,7 +72,7 @@ public class Clarity : Singleton<Clarity>
         {
             ContinueUntilChoice();
         }
-        
+
         CommandLine.instance.commands["go"] += ToKnot;
     }
 
@@ -108,7 +108,7 @@ public class Clarity : Singleton<Clarity>
             Debug.Log("No such invisible choice exists: " + word);
         }
     }
-    
+
     /// <summary>
     /// For calling from Update: Plays next voice clip if there's one to play and nothing is currently being played
     /// </summary>
@@ -137,14 +137,14 @@ public class Clarity : Singleton<Clarity>
         protectedChoices.Clear();
         choiceParent.Clear();
         clarityText.ClearWordButtons();
-        
+
         while (HyperInkWrapper.instance.CanContinue())
         {
             AudioTags();
             DeleteTags();
             GameTags();
             yield return new WaitForSeconds(WaitTags());
-            yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), waiting); 
+            yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), waiting);
         }
         PopupTags();
         DetermineChoices(HyperInkWrapper.instance.GetChoices());
@@ -170,7 +170,7 @@ public class Clarity : Singleton<Clarity>
             if (cleanedChoice[0] == AutoSelectSymbol)
             {
                 string[] tempSplit = cleanedChoice.Split(AutoSelectSymbol);
-                if(tempSplit.Length < 2)
+                if (tempSplit.Length < 2)
                 {
                     Debug.LogError("confused what to do here, were you trying to write a timed option?");
                 }
@@ -210,7 +210,8 @@ public class Clarity : Singleton<Clarity>
                 {
                     Debug.LogError("You wrote a hypertext choice that I couldn't find in the text: " + cleanedChoice);
                 }
-            } else if (invisible)
+            }
+            else if (invisible)
             {
                 invisibleChoices.Add(cleanedChoice, i);
             }
@@ -250,11 +251,11 @@ public class Clarity : Singleton<Clarity>
     {
         string[] tags = HyperInkWrapper.instance.getTags();
 
-        foreach(string tag in tags)
+        foreach (string tag in tags)
         {
-            if (tag.Contains(AUDIO_TAG))
+            if (tag.Contains(VO_TAG))
             {
-                AudioClip toAdd = (AudioClip)Resources.Load(AUDIO_FILE_PATH + tag.Replace(AUDIO_TAG, ""));
+                AudioClip toAdd = (AudioClip)Resources.Load(VO_FILE_PATH + tag.Replace(VO_TAG, ""));
                 if (toAdd == null)
                 {
                     Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
@@ -320,23 +321,23 @@ public class Clarity : Singleton<Clarity>
         foreach (string tag in tags)
         {
             if (!tag.Contains(SIMON_TAG)) continue;
-            
+
             string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
             if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
             {
                 Window simonWindow = simonApp.OpenWindow();
                 SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
-                    
+
                 simon.CreateSequence(int.Parse(simonArgs[1].Trim()));
                 protectedChoices.Add("won");
                 protectedChoices.Add("lost");
             }
-                
+
             if (simonArgs[0].Trim().ToUpper().Equals("trick".ToUpper()))
             {
                 Window simonWindow = simonApp.OpenWindow();
                 SimonSays simon = simonWindow.content.GetComponent<SimonSays>();
-                    
+
                 simon.TrickColor = simonArgs[1].Trim();
                 protectedChoices.Add("trick");
             }
@@ -352,13 +353,14 @@ public class Clarity : Singleton<Clarity>
             {
                 string[] args = tag.Replace(POPUP_TAG, "").Trim().Split(',');
 
-                if(args.Length >= 4)
+                if (args.Length >= 4)
                 {
                     GameObject popup = Instantiate(popupPrefab, popupParent.transform);
                     popup.GetComponent<Popup>().Init(args[0].Trim(), args[1].Trim(), args[2].Trim(), args[3].Trim());
                     protectedChoices.Add(args[2].Trim());
                     protectedChoices.Add(args[3].Trim());
-                } else
+                }
+                else
                 {
                     Debug.Log("You need more args to call the popup function. Try popup: <description>, <extraDescription>, <ButtonOneText>, <ButtonTwoText>");
                 }
@@ -368,7 +370,7 @@ public class Clarity : Singleton<Clarity>
             {
                 string[] args = tag.Replace(INPUT_POPUP_TAG, "").Trim().Split(',');
 
-                if(args.Length >= 2)
+                if (args.Length >= 2)
                 {
                     GameObject popup = Instantiate(inputPopupPrefab, popupParent.transform);
                     bool shouldBeLowercase = args.Length >= 3 ? bool.Parse(args[2].Trim()) : false;

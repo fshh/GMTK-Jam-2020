@@ -23,7 +23,7 @@ public class ClarityText : MonoBehaviour
     public SFXPlayer sfx;
 
     [SerializeField]
-    private int lettersUntilSound = 5;
+    private int lettersUntilSound = 3;
 
     public static float CHARACTERS_PER_SECOND = 30.0f;
 
@@ -68,11 +68,10 @@ public class ClarityText : MonoBehaviour
 
                 output.text += newText[i];
                 soundCounter++;
-                //if (soundCounter >= lettersUntilSound) Old code
-                if (output.text[output.text.Length - 1].Equals(' ') || output.text[output.text.Length - 1].Equals('\n'))
+                if (soundCounter >= lettersUntilSound)
                 {
                     soundCounter = 0;
-                    sfx.PlayRandom();
+                    sfx.PlayRandom(true, waitTime * lettersUntilSound);
                 }
             }
         }

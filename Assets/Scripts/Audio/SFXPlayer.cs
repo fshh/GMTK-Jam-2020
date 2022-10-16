@@ -9,47 +9,50 @@ public class SFXPlayer : MonoBehaviour
 {
     public List<AudioClip> clips;
 
-    private AudioSource[] audioSources;
+    private AudioSource audioSource;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        audioSources = GetComponents<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     [Button]
-    public void PlayRandom()
+    public void PlayRandom(bool interrupt = false, float truncateAfter = -1f)
     {
-        if (/*!audioSources[0].isPlaying*/true)
+        if (interrupt && audioSource.isPlaying)
         {
-            //audioSources[0].clip = Extras.RandomElement(clips);
-            audioSources[0].PlayOneShot(Extras.RandomElement(clips));
+            audioSource.Stop();
         }
+        audioSource.PlayOneShot(Extras.RandomElement(clips));
+        StartCoroutine(TruncateAfter(truncateAfter));
+    }
+
+    private IEnumerator TruncateAfter(float seconds)
+    {
+        if (seconds < 0f)
+        {
+            yield break;
+        }
+        yield return new WaitForSecondsRealtime(seconds);
+        audioSource.Stop();
     }
 }
 
 //Code for making it weird and backwards sometimes
-/*if (!audioSources[0].isPlaying)
+/*if (!audioSource.isPlaying)
 {
     if (Random.Range(0, 2) > 0)
     {
-        audioSources[0].clip = Extras.RandomElement(clips);
-        //audioSources[0].time = Random.Range(audioSources[0].clip.length / 2f, audioSources[0].clip.length);
-        //audioSources[0].pitch = Random.Range(1.5f, 1.6f);
+        audioSource.clip = Extras.RandomElement(clips);
+        //audioSource.time = Random.Range(audioSource.clip.length / 2f, audioSource.clip.length);
+        //audioSource.pitch = Random.Range(1.5f, 1.6f);
 
-        audioSources[0].Play();
-        //audioSources[0].PlayOneShot(Extras.RandomElement(clips));
+        audioSource.Play();
+        //audioSource.PlayOneShot(Extras.RandomElement(clips));
     }
     else
     {
-        audioSources[0].clip = Extras.RandomElement(clips);
-        audioSources[0].Play();
+        audioSource.clip = Extras.RandomElement(clips);
+        audioSource.Play();
     }
 }*/
