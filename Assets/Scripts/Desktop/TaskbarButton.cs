@@ -31,17 +31,36 @@ public class TaskbarButton : MonoBehaviour, IPointerClickHandler
     {
         if (WindowManager.Instance.NumWindowsOpen(App) > 1)
         {
-            WindowSelection();
+            bool anyMinimized = false;
+            foreach (Window window in WindowManager.Instance.GetWindows(App))
+            {
+                anyMinimized |= window.Minimized;
+            }
+
+            if (anyMinimized || !WindowManager.Instance.HasWindowFocused(App))
+            {
+                Window finalFocusedWindow = null;
+                if (WindowManager.Instance.HasWindowFocused(App))
+                {
+                    finalFocusedWindow = WindowManager.Instance.GetFocusedWindow();
+                }
+
+                FocusWindows(finalFocusedWindow);
+            }
+            else
+            {
+                MinimizeWindows();
+            }
         }
         else if (WindowManager.Instance.NumWindowsOpen(App) > 0)
         {
             if (WindowManager.Instance.HasWindowFocused(App))
             {
-                MinimizeWindow();
+                MinimizeWindows();
             }
             else
             {
-                FocusWindow();
+                FocusWindows();
             }
         }
         else
@@ -60,19 +79,25 @@ public class TaskbarButton : MonoBehaviour, IPointerClickHandler
         App.OpenWindow();
     }
 
-    private void WindowSelection()
+    private void FocusWindows(Window finalFocusedWindow = null)
     {
-        throw new System.NotImplementedException();
+        foreach (Window window in WindowManager.Instance.GetWindows(App))
+        {
+            window.Focus();
+        }
+
+        if (finalFocusedWindow != null)
+        {
+            finalFocusedWindow.Focus();
+        }
     }
 
-    private void FocusWindow()
+    private void MinimizeWindows()
     {
-        WindowManager.Instance.GetWindows(App)[0].Focus();
-    }
-
-    private void MinimizeWindow()
-    {
-        WindowManager.Instance.GetWindows(App)[0].Minimize();
+        foreach (Window window in WindowManager.Instance.GetWindows(App))
+        {
+            window.Minimize();
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

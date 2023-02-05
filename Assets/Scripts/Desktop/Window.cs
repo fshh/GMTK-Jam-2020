@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class Window : MonoBehaviour, IPointerClickHandler
+public class Window : MonoBehaviour, IPointerDownHandler
 {
     public RectTransform ContentParent;
     public Image AppIcon;
@@ -65,7 +65,7 @@ public class Window : MonoBehaviour, IPointerClickHandler
         WindowManager.Instance.AddWindow(this);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         Focus();
     }
