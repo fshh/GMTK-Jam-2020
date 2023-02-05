@@ -20,7 +20,7 @@ public class ClarityText : MonoBehaviour
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;
     private List<GameObject> wordButtons;
-    public SFXPlayer sfx;
+    public ClaritySpeechSounds speechSounds;
 
     [SerializeField]
     private int lettersUntilSound = 3;
@@ -71,7 +71,7 @@ public class ClarityText : MonoBehaviour
                 if (soundCounter >= lettersUntilSound)
                 {
                     soundCounter = 0;
-                    sfx.PlayRandom(true, waitTime * lettersUntilSound);
+                    speechSounds.PlayRandom(true, waitTime * lettersUntilSound);
                 }
             }
         }

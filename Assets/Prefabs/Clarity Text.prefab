@@ -227,7 +227,7 @@ MonoBehaviour:
   wordButtonPrefab: {fileID: 2588439984867012426, guid: d8aac4f44043da247b8f10c54923ccdf,
     type: 3}
   wordButtonParent: {fileID: 0}
-  sfx: {fileID: 114039950808393086}
+  speechSounds: {fileID: 114039950808393086}
   lettersUntilSound: 3
 --- !u!114 &1780692145764284731
 MonoBehaviour:
