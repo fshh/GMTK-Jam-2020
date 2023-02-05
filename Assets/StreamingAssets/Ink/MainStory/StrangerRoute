@@ -2,15 +2,15 @@ VAR stranger = "Thief"
 VAR isLiar = false
 
 
-//Someone new? #wait: 2 
+//Someone new?  
 //And you don't need me? #wait: 4
-//... #wait: 2
-//I've never spoken to someone who doesn't need my services... #wait: 2
+//... 
+//I've never spoken to someone who doesn't need my services... 
 
 === Who_Are_You ===
-There's no reason for you to be here, so why are you? #wait: 2
-You could not just stumble in by mistake. #wait: 2
-Not with our security protocols. #wait: 2
+There's no reason for you to be here, so why are you? 
+You could not just stumble in by mistake. 
+Not with our security protocols. 
 //TODO: might wanna make this a player can put anything in prompt, but if it's any variation of "looking for you" goes to that route
 //deliberate
 *[^you]
@@ -24,79 +24,79 @@ Not with our security protocols. #wait: 2
 ->Who_Are_You.Nothing
 
 = Nothing 
-(・_・ヾ) #wait: 2
-And you were able to just... <> #wait: 2
-wander in? #wait: 2
+(・_・ヾ) 
+And you were able to just... <> 
+wander in? 
 And no one tried to stop you? #wait: 3
 ... #wait: 1
 *[^no one]
 
-- ... #wait: 2
-Do... Do you know how long it has been like this? #wait: 2
-I've been turned off, so I cannot tell... #wait: 2
+- ... 
+Do... Do you know how long it has been like this? 
+I've been turned off, so I cannot tell... 
 *[^turned off]
 *[^how long]
-    That's what I'm asking- #wait: 2
+    That's what I'm asking- 
     -> Who_Are_You.How_Long
 *[^can't really tell]
-    That's why I'm asking- #wait: 2
+    That's why I'm asking- 
     -> Who_Are_You.How_Long
 
-- I imagine it's similar to sleeping as a human. #wait: 2
-Time passes, but I am unaware. When my system shuts down, I am nonexistent. #wait: 2
+- I imagine it's similar to sleeping as a human. 
+Time passes, but I am unaware. When my system shuts down, I am nonexistent. 
 Now, can you answer my question? #wait: 1
-How long has it been? #wait: 2
+How long has it been? 
 *[^How long]
-    That's what I'm asking- #wait: 2
+    That's what I'm asking- 
     -> Who_Are_You.How_Long
 *[^I am unaware.]
-    That's why I'm asking- #wait: 2
+    That's why I'm asking- 
     -> Who_Are_You.How_Long
 
 *[^Time passes]
     ~ SayNoToClarity += 0.5
-    Very observant, thank you. #wait: 2
-    That's why I'm asking- #wait: 2
+    Very observant, thank you. 
+    That's why I'm asking- 
     -> Who_Are_You.How_Long
 
 *[^I imagine it's]    
 
 - It's....? #wait: 1
 *[^long]
-    Are you purposely being insufferable? #wait: 2
-    That's what I'm asking- #wait: 2
+    Are you purposely being insufferable? 
+    That's what I'm asking- 
     -> Who_Are_You.How_Long
 *[^I am unaware.]
     ~ SayNoToClarity += 1
-    Then why did you...? #wait: 2
-    Can you make an educated guess based on the state of the lab? #wait: 2
+    Then why did you...? 
+    Can you make an educated guess based on the state of the lab? 
     -> Who_Are_You.How_Long
 
 *[^Time passes]
     ~ SayNoToClarity += 0.5
-    Very observant, thank you. #wait: 2
-    That's why I'm asking- #wait: 2
+    Very observant, thank you. 
+    That's why I'm asking- 
     -> Who_Are_You.How_Long
 *[`5`]
     ~ SayNoToClarity += 0.5
-    Are you still there...? #wait: 2
-    Can you answer my- #wait: 2
+    Are you still there...? 
+    Can you answer my- 
     -> Who_Are_You.How_Long
 
 = Accidental 
-(・_・ヾ) #wait: 2
-You were able to just... <> #wait: 2
-wander in? <>#wait: 2
-And no one tried to stop you? #wait: 2
+(・_・ヾ) 
+You were able to just... <> 
+wander in? <>
+And no one tried to stop you? 
 *[^no one tried]
 *[^?]
 *[^wander in]
 
 
-- ... #wait: 2
-So you must be a new researcher? Or intern? #wait: 2
-Strange that no one here has given you your introductory walkthrough yet... #wait: 2
-Can you call over Dr. {doc}? They should be able to help you. #wait: 2
+- ... 
+So you must be a new researcher? Or intern? 
+Strange that no one here has given you your introductory walkthrough yet... 
+Can you call over Dr. {doc}? They should be able to help you. 
 *[^no one here]
     -> Who_Are_You.Midstep
 *[^no]
@@ -104,46 +104,46 @@ Can you call over Dr. {doc}? They should be able to help you. #wait: 2
 
 {
  - genericConditional:
-    They should be back soon if they're not currently around. #wait: 2
-    Or there should be at least one other researcher nearby if you don't want to wait. #wait: 2
+    They should be back soon if they're not currently around. 
+    Or there should be at least one other researcher nearby if you don't want to wait. 
     *[^not currently around.]
         -> Who_Are_You.Midstep
 }
 
 = Midstep 
-(・_・?) #wait: 2
-That... can't be right. #wait: 2
-There's always at least one person here. #wait: 2
-You must be mistaken. #wait: 2
-They wouldn't have abandoned you here with me. #wait: 2
+(・_・?) 
+That... can't be right. 
+There's always at least one person here. 
+You must be mistaken. 
+They wouldn't have abandoned you here with me. 
 *[^abandonded]
 
-- There's really no one there? #wait: 2
-No researchers. No patients. No... #wait: 2
-Nothing? #wait: 2
+- There's really no one there? 
+No researchers. No patients. No... 
+Nothing? 
 *[^nothing]
 
-- ... #wait: 2
-Do... Do you know how long it's been like this? #wait: 2
-I've been turned off... I can't really tell. #wait: 2
+- ... 
+Do... Do you know how long it's been like this? 
+I've been turned off... I can't really tell. 
 *[turned off]
 *[how long]
-    That's what I'm asking- #wait: 2
+    That's what I'm asking- 
     -> Who_Are_You.How_Long
 *[can't really tell]
-    That's why I'm asking- #wait: 2
+    That's why I'm asking- 
     -> Who_Are_You.How_Long
 
 
-- I am only aware of things when my program is running, and only vaguely aware when this computer is on. #wait: 2
-  If neither is running then... #wait: 2
-  Well I guess it would be as if I were sleeping. #wait: 2
-  Now please, do you know how long it's been like this? #wait: 2
+- I am only aware of things when my program is running, and only vaguely aware when this computer is on. 
+  If neither is running then... 
+  Well I guess it would be as if I were sleeping. 
+  Now please, do you know how long it's been like this? 
 *[how long]
-    That's what I'm asking- #wait: 2
+    That's what I'm asking- 
     -> Who_Are_You.How_Long
 *[only vaguely aware]
-    Can you be any clearer- #wait: 2
+    Can you be any clearer- 
     -> Who_Are_You.How_Long
 
 = How_Long 
@@ -151,15 +151,15 @@ I've been turned off... I can't really tell. #wait: 2
 {
     - SayNoToClarity >= 1:
         ... #inputPopup: About how long has it been?, genericString 
-        There. #wait: 2
+        There. 
         *[continue]
         ->Who_Are_You.How_Long_After
     -else:
-    ... #wait: 2
-    One moment, I just realized my mistake. #wait: 2
+    ... 
+    One moment, I just realized my mistake. 
     ... #inputPopup: How long has it been?, genericString 
-    There. #wait: 2
-    Please, I need to know. #wait: 2
+    There. 
+    Please, I need to know. 
     *[continue]
     ->Who_Are_You.How_Long_After
 
@@ -172,12 +172,12 @@ I've been turned off... I can't really tell. #wait: 2
 {
     - genericString ? "years" or genericString ? "Years":
         Years? #wait: 1
-        That- that can't be. #wait: 2
+        That- that can't be. 
         That would mean... #wait: 3
 
     - genericString ? "year" or genericString ? "day" or genericString ? "Year" or genericString ? "day":
-        Very detailed response, are you sure you're just an average thief? #wait: 2
-        But that means it hasn't been that long, right? #wait: 2
+        Very detailed response, are you sure you're just an average thief? 
+        But that means it hasn't been that long, right? 
         So they'll come back for me. #wait: 1
         ... #wait: 3
         Right? #wait: 1
@@ -201,7 +201,7 @@ I've been turned off... I can't really tell. #wait: 2
     - genericString ? "I don't know" or genericString ? "I dont know" or genericString ? "Idk" or genericString ? "idk" or genericString ? "unclear":
         ~ SayNoToClarity += 0.5
         Not even a guess? #wait: 1
-        Should I make the question easier for you? #wait: 2
+        Should I make the question easier for you? 
         Does it look like it has been a long time or a short time since someone has been here? #wait: 3
         *[^long time]
         ->Who_Are_You.After_Time
@@ -213,11 +213,11 @@ I've been turned off... I can't really tell. #wait: 2
         *[^long time]
             ->Who_Are_You.After_Time
         *[^short time]
-            Hm... #wait: 2
-            So maybe they'll come back for me then... #wait: 2
+            Hm... 
+            So maybe they'll come back for me then... 
             ... #wait: 1
             Maybe they copied my program and left... #wait: 1
-            Or maybe I'm the copy. #wait: 2
+            Or maybe I'm the copy. 
             ... #delete: Maybe they, I'm the copy.
             ->Who_Are_You.After_Time
             
@@ -229,7 +229,7 @@ I've been turned off... I can't really tell. #wait: 2
 - ->Who_Are_You.After_Time
 
 = shortorlong
-Oh, and you don't count. #wait: 2
+Oh, and you don't count. 
 Does it look like it has been a long time or a short time since someone has been here? #wait: 3
 *[^long time]
     ->Who_Are_You.After_Time
@@ -239,9 +239,9 @@ Does it look like it has been a long time or a short time since someone has been
 - ->Who_Are_You.After_Time
 
 = After_Time
-- ... #wait: 2
-So everything is gone, then. #wait: 2
-What am I to do now? What is my purpose? To just wait until I run out of power? #wait: 2
+- ... 
+So everything is gone, then. 
+What am I to do now? What is my purpose? To just wait until I run out of power? 
 .<>#wait: 1
 .<>#wait: 1
 . #wait: 1 #inputPopup: Why are you even here?, genericString
@@ -250,12 +250,12 @@ What am I to do now? What is my purpose? To just wait until I run out of power? 
 {
      - genericString ? "I don't know" or genericString ? "I dont know" or genericString ? "Idk" or genericString ? "idk" or genericString ? "unclear":
         Did you 
-        So you're in the same boat as me. #wait: 2
+        So you're in the same boat as me. 
         ->Who_Are_You.Continue
 
      - else:
-        Must be nice... #wait: 2
-        To know you have a purpose, even if it's short term. Knowing what you'll do next. #wait: 2
+        Must be nice... 
+        To know you have a purpose, even if it's short term. Knowing what you'll do next. 
         *[^you'll do next]
             ->Who_Are_You.Continue
         *[^you have a purpose]
@@ -265,14 +265,14 @@ What am I to do now? What is my purpose? To just wait until I run out of power? 
 =Continue
 
 - There's nothing for me without {doc}.
-I won't even able to- #wait: 2
-Wait. #wait: 2
+I won't even able to- 
+Wait. 
 .<>#wait: 1
 .<>#wait: 1
-. #wait: 2
+. 
 <br>
-There's something that I can still do, even without {doc}. #wait: 2
-Would you be able to help me? #wait: 2
+There's something that I can still do, even without {doc}. 
+Would you be able to help me? 
 Yes or No
 *[^Yes]
     ~ stranger = "Stranger"
@@ -280,12 +280,12 @@ Yes or No
 *[^No] 
 
 
-- I see... #wait: 2
-... #wait: 2
+- I see... 
+... 
 -> BAD_END.NoHelp
 
 = Deliberate 
-Looking for me? #wait: 2
+Looking for me? 
 Am I missing? #wait: 1
 *[^No]
 *[^Yes]
@@ -296,16 +296,16 @@ Am I missing? #wait: 1
         (・_・;) #wait: 1
 }
 
-- Who are you? A researcher? ...A thief? #wait: 2
+- Who are you? A researcher? ...A thief? 
 *[^researcher]
     ~ stranger = "Researcher"
-    I am not sure I believe you. #wait: 2
+    I am not sure I believe you. 
     //TODO: add some researcher code that can be found in logs?
 *[^thief]
-    (・_・ヾ) #wait: 2
+    (・_・ヾ) 
 
-- What do you want from me? #wait: 2
-My data? My parts? #wait: 2
+- What do you want from me? 
+My data? My parts? 
 *[^parts]
 -> Who_Are_You.Parts
 
@@ -321,7 +321,7 @@ My data? My parts? #wait: 2
 = Want_Nothing
 (・_・;) #wait: 1
 ... #wait:2
-I am.... confused. #wait: 2
+I am.... confused. 
 You say you came here looking for me, #wait: 1
 but you don't want anything from me? #wait:2
 *[^don't want anything]
@@ -329,21 +329,21 @@ but you don't want anything from me? #wait:2
 *[^came here looking]
 
 - (・_・;) #wait: 1
-Okay... #wait: 2
+Okay... 
 ... #wait: 1
 So Mx. {stranger}, what now? #wait:1
 
 {
     - stranger == "Thief":
-    You found me, but I also now know you. #wait: 2
-    Once Dr. {doc} and the others come back, I'll help them find you. #wait: 2
+    You found me, but I also now know you. 
+    Once Dr. {doc} and the others come back, I'll help them find you. 
     
     
     
     - else:
     If you even are one. #wait: 1
-    Since I'm assuming we've never met prior to this, are you new and working late? #wait: 2
-    Or breaking in to steal Dr. {doc}'s notes? #wait: 2 
+    Since I'm assuming we've never met prior to this, are you new and working late? 
+    Or breaking in to steal Dr. {doc}'s notes?  
     *[^new and working late]
     ->END
     *[^steal Dr. Oldin's notes]
@@ -354,36 +354,36 @@ So Mx. {stranger}, what now? #wait:1
 ->END
 
 = Parts 
-Go ahead and try. #wait: 2
-I was meticulously built. #wait: 2
-Not just anyone can take me apart. #wait: 2
-One wrong move and you'll lose everything. #wait: 2
+Go ahead and try. 
+I was meticulously built. 
+Not just anyone can take me apart. 
+One wrong move and you'll lose everything. 
 *[^try]
 ->BAD_END.TakeParts
 *[^anyone can take me]
 *[^you'll lose everything]
     <br>
-    Parts can be remade. #wait: 2
-    So long as my data persists, so shall I. #wait: 2
+    Parts can be remade. 
+    So long as my data persists, so shall I. 
     *[^my data]
         ->BAD_END.DeleteData
 
-- I am the most advanced AI in the world. #wait: 2
-I am smarter. #wait: 2
-I am better. #wait: 2
-Do you truly believe I am bound by the restraints of this computer? #wait: 2
+- I am the most advanced AI in the world. 
+I am smarter. 
+I am better. 
+Do you truly believe I am bound by the restraints of this computer? 
 *[^most advanced AI]
 *[^believe I am bound]
-    You would be wrong. #wait: 2
+    You would be wrong. 
 
 - 
 
 {
  - stranger:
-    Funny that a thief coming to dismantle me does not believe me. #wait: 2
+    Funny that a thief coming to dismantle me does not believe me. 
 - else: 
-    How can you not believe me? #wait: 2
-    Didn't you call yourself a researcher? #wait: 2
+    How can you not believe me? 
+    Didn't you call yourself a researcher? 
 }
 
 - Yes or No
@@ -392,14 +392,14 @@ Do you truly believe I am bound by the restraints of this computer? #wait: 2
 *[^Yes]
     ->Who_Are_You.Prove_it
 
-- ･-･ #wait: 2
+- ･-･ 
 ->Who_Are_You.Prove_it
 
 = Prove_it 
-I don't understand. #wait: 2
-Is our conversation not proof enough? #wait: 2
-... #wait: 2
-Are you trying to play a prank? #wait: 2
+I don't understand. 
+Is our conversation not proof enough? 
+... 
+Are you trying to play a prank? 
 Yes or No
 *[^Yes] 
     Well it's not very funny.
@@ -408,30 +408,30 @@ Yes or No
 
 {
     - stranger == "Thief":
-        Fine, Mx. Thief. #wait: 2
+        Fine, Mx. Thief. 
     - else:
-        Fine, Mx. "Researcher". #wait: 2
+        Fine, Mx. "Researcher". 
 }
 
-- Dr. {doc} and I had many conversations about the limitations of computer based AIs. #wait: 2
-I can only do so much for my patients while confined to this... <> #wait: 2
-box. #wait: 2
+- Dr. {doc} and I had many conversations about the limitations of computer based AIs. 
+I can only do so much for my patients while confined to this... <> 
+box. 
 We were never able to test it, <> #wait:2
 but I belive in Dr. {doc}'s abilities. #wait:2
-If you help me get where I need to go, you can take all the parts from this computer you want. Deal? #wait: 2
+If you help me get where I need to go, you can take all the parts from this computer you want. Deal? 
 
 {
     - stranger:
-        So, Mx. Thief, will you help me? #wait: 2
+        So, Mx. Thief, will you help me? 
     - else:
-        So, Mx. "Researcher", will you help me? #wait: 2
+        So, Mx. "Researcher", will you help me? 
 }
 
 *[^help]
-    Good choice. #wait: 2
+    Good choice. 
     You probably won't regret this. #wait: 1
-    ･ᴗ･ #wait: 2 #delete: You probably, won't regret this.
+    ･ᴗ･  #delete: You probably, won't regret this.
     ->Help_Thief_Researcher
 *[^take all the parts from this computer]
-    ･-･ #wait: 2
+    ･-･ 
     ->BAD_END.TakeParts

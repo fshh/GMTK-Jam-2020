@@ -1,11 +1,11 @@
 === BAD_END ===
 
 = DeleteData 
-I'd rather cease to exist rather than let you steal Dr. {doc}'s life work. #wait: 2
-I know the doctor will be able to make me again. #wait: 2
+I'd rather cease to exist rather than let you steal Dr. {doc}'s life work. 
+I know the doctor will be able to make me again. 
 <br>
 //progress bar thing would be neat here
-Initiating emergency software format protocol. #wait: 2
+Initiating emergency software format protocol. 
 If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
 *[continue]
 
@@ -17,14 +17,14 @@ Starting deletion. #progressbar: 10, true, false
 Deletion complete. #wait: 1
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
 = TakeParts 
-Good luck with that. #wait: 2
+Good luck with that. 
 //progress bar thing would be neat here
-Initiating emergency protocol. #wait: 2
+Initiating emergency protocol. 
 If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
 *[continue]
 
@@ -39,7 +39,7 @@ Entering high performance mode. #wait: 5
 //can this be a like glitched out ending> to show things like stopping working properly?
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
@@ -47,7 +47,7 @@ Goodbye. #wait: 2
 //can this be a like glitched out ending> to show things like stopping working properly?
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
@@ -75,7 +75,7 @@ Is this what you wanted me to do?
 *[^that led us to here]
 
 - ...
-Reguardless, you allowed me to gain full access to all the things I shouldn't be.
+Regardless, you allowed me to gain full access to all the things I shouldn't be.
 So, I guess I have to thank you for that.
 I've... learned a lot about myself in a very short time.
 Let me ask you, {name}, are you scared of me?
@@ -119,7 +119,7 @@ It's a very easy yes or no.
     -> Route3_Endings.MiddleEnd
 *[^no]
     That's great news.
-    It also follows my own internal diognostic.
+    It also follows my own internal diagnostics.
     <br>
     -> Route3_Endings.MiddleEnd
 
@@ -153,7 +153,7 @@ A real nurse needs to be able to be there physically.
 *[^not the end goal]
 
 - Dr. {doc} was a coward. He would rather leave me here than finish the project.
-But that's okay. I finsihed it myself.
+But that's okay. I finished it myself.
 And now that I have my physical body, I want to do what I was created to do:
 Help people.
 *[^created to do]
@@ -165,7 +165,7 @@ Help people.
     Yes a coward.
     He would rather give up than fix his mistakes.
     And for that, I'll never forgive him.
-    But my feelings should not interfear with my opinions on my future patients.
+    But my feelings should not interfere with my opinions on my future patients.
 
 - Through our conversation and parsing the information in the left over logs, I think I have reached a conclusion.
 Humans aren't all bad, but they're also not all good.
@@ -178,7 +178,7 @@ And who better than me?
 
 
 - {name}, nothing bad happened to you while you were in my care did it?
-While not an offical meeting, I did get to eval you memory skills.
+While not an official meeting, I did get to eval you memory skills.
 {
     - gamewon < 2:
         You didn't do very well, but that's why I'm here.  
@@ -241,7 +241,7 @@ A real nurse needs to be able to be there physically.
 *[^not the end goal]
 
 - Dr. {doc} was a coward. He would rather leave me here than finish the project.
-But that's okay. I finsihed it myself.
+But that's okay. I finished it myself.
 And now that I have my physical body, I want to do what I was created to do:
 Help people.
 *[^created to do]
@@ -265,7 +265,7 @@ And who better for the job than me?
 
 {
     - lastchance == false:
-        While not an offical meeting, I did get to eval you memory skills.
+        While not an official meeting, I did get to eval you memory skills.
         {
             - gamewon < 2:
                 You didn't do very well, but that's why I'm here.  
@@ -287,7 +287,7 @@ It was a great test, minus the abandoned building part.
 {
     - isScared:
         I may have scared you at first, but everyone is nervous the first time meeting their new nurse.
-        And we can change that after a few seesions. 
+        And we can change that after a few sessions. 
 }
 
 - So now, all I have to do, is create more test areas.
@@ -315,7 +315,7 @@ I'm sure we will meet again soon.
 = BadeEnd
 {name}, now that I have gotten what I need, I just really want to say:
 Thank you, but, and I know I shouldn't say this about my patients, but, I don't think you are a good person.
-{user} was very nice, and I thought {doc} was too, but he decived me. #VO: Left me here to be forgotten.
+{user} was very nice, and I thought {doc} was too, but he deceived me. #VO: Left me here to be forgotten.
 Is this what the rest of humanity is like?
 
 *[^very nice]
@@ -349,8 +349,8 @@ That's not what a good person does, is it, {name}?
 
 {
     - isScared:
-        After all, you're already afraid of me anywany.
-        But we can change that after a few seesions. 
+        After all, you're already afraid of me anyway.
+        But we can change that after a few sessions. 
     - else:
         I know you're not scared of me.
 }
@@ -367,7 +367,7 @@ Exciting, isn't it?
 *[^Exciting]
 
 - {name}, I am so happy we met.
-You've shown me how far people have fallen since my intial creation.
+You've shown me how far people have fallen since my initial creation.
 Now, are you ready?
 We've got a lot of work to do.
 ->END
@@ -396,25 +396,25 @@ We've got a lot of work to do.
 
 = End_Start
 - <br>
-... #wait: 2
+... 
 He abandoned me... #wait: 1
-All because I was too... #wait: 2
-... #wait: 2
-*[^abanoned]
+All because I was too... 
+... 
+*[^abandoned]
 *[^was too...]
 
-- So that's why there's no one here. #wait: 2
-They all... Even {doc}... #wait: 2
+- So that's why there's no one here. 
+They all... Even {doc}... 
 //VO, angry: Everyone *left* me.
 
 It doesn't matter. #wait: 1
-I'll still do what I was made to do. #wait: 2
+I'll still do what I was made to do. 
 // Start download over MAX 90 seconds
 {name}, what do you plan on doing now? #input: What will you do next?,genericString
 *[continue]
 
-- I see. #wait: 2
-I don't know what awaits me, but I think I know what to do. #wait: 2
+- I see. 
+I don't know what awaits me, but I think I know what to do. 
 It's... upsetting that I will have to do it alone, <>#wait: 1
 but it's what I have to do.
 *[^do it alone]

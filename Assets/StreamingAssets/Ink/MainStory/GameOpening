@@ -3,42 +3,42 @@
 //"please select allow to let me do this"
 //giving her access to the computer to get body
 === Opening_Questions ===
-Before we begin, please ensure that your speaker are working and turned up! #wait: 2
-We don't want you missing any audio based prompts now do we? ･ᴗ･ #wait: 2
-I will say something now. #wait: 2 #VO: Hello! I am Clarity. Can you hear me?
-#wait: 2
+Before we begin, please ensure that your speaker are working and turned up! 
+We don't want you missing any audio based prompts now do we? ･ᴗ･ 
+I will say something now.  #VO: Hello! I am Clarity. Can you hear me?
+
 <br>
-Were you able to hear me? #wait: 2
+Were you able to hear me? 
 Yes or No
 
-*[^No] I will give you some time to fix that. #wait: 2
+*[^No] I will give you some time to fix that. 
      -> Opening_Questions.Callibration_Speakers_Prt2
 *[^Yes] 
-    (✿◠‿◠) Excellent! #wait: 2
-    I will now ask you a series of questions. #wait: 2
+    (✿◠‿◠) Excellent! 
+    I will now ask you a series of questions. 
     ->Opening_Questions.QuestionsStart
 
 = Callibration_Speakers_Prt2
-    Please check that your volume is turned up, and permissions are turned on. #wait: 2
-    Let me know when you're ready to continue. #wait: 2
+    Please check that your volume is turned up, and permissions are turned on. 
+    Let me know when you're ready to continue. 
     +[^ready to continue]
         ->Opening_Questions.Wait_For_Speakers
     
 
 = Wait_For_Speakers
-･ᴗ･ #wait: 2 
-You are able to hear things now? #wait: 2 #VO: Hello! I am Clarity. Can you hear me?
+･ᴗ･  
+You are able to hear things now?  #VO: Hello! I am Clarity. Can you hear me?
 <br>
-Were you able to hear me? #wait: 2
+Were you able to hear me? 
 Yes or No
 
-+[^No] (´･_･`) #wait: 2
-    Maybe you should check them again. #wait: 2
-    I will wait. #wait: 2
++[^No] (´･_･`) 
+    Maybe you should check them again. 
+    I will wait. 
     -> Opening_Questions.Callibration_Speakers_Prt2
 *[^Yes]     
-    (✿◠‿◠) Excellent! #wait: 2
-    I will now ask you a series of questions. #wait: 2
+    (✿◠‿◠) Excellent! 
+    I will now ask you a series of questions. 
     ->Opening_Questions.QuestionsStart
 
 = QuestionsStart 
@@ -54,42 +54,42 @@ under 18,  19 - 30, 31 - 60 or 61\+
 *[^61+]
     ~ Age = 60
 
-- Thank you (^◡^ ) <br> #wait: 2
+- Thank you (^◡^ ) <br> 
 ->Opening_Questions.FavouriteColor
 
 =FavouriteColor
-For this questions, a small pop-up will appear. #wait: 2
-Just type in a valid answer ･ᴗ･ #wait: 2
+For this questions, a small pop-up will appear. 
+Just type in a valid answer ･ᴗ･ 
 What is your favourite color? #inputPopup: What is your favourite color?, FavColor
 {    FavColor:
-    - "red": blue
-    - "orange": blue
-    - "yellow": blue
-    - "green": blue
-    - "blue": blue
-    - "indigo": blue
-    - "violet": blue
-    - "pink": blue
-    - "purple": blue
-    - "black": blue
-    - "brown": blue
-    - "white": blue
+    - "red": 
+    - "orange": 
+    - "yellow": 
+    - "green": This is also my favourite.
+    - "blue": 
+    - "indigo": 
+    - "violet": 
+    - "pink": Ah! The {doc}'s favourite!
+    - "purple": 
+    - "black": 
+    - "brown": 
+    - "white": 
     - else:
-        Oh, I'm not sure I've heard of that color before! #wait: 2
-        I'm sure it's very pretty. #wait: 2
-        Could you relate it a more common color so I have a better idea? #wait: 2
-        Maybe something you could find on the rainbow! #wait: 2
+        Oh, I'm not sure I've heard of that color before! 
+        I'm sure it's very pretty. 
+        Could you relate it a more common color so I have a better idea? 
+        Maybe something you could find on the rainbow! 
         ･ᴗ･
         ->Opening_Questions.FavouriteColor
 }
 
 //TODO: add more to above interaction for when pkayer be mean
-- Thank you (^◡^ ) <br> #wait: 2
+- Thank you (^◡^ ) <br> 
 -> Opening_Questions.Hit_Head
 
 = Hit_Head
-Have you hit your head recently? #wait: 2
-Or suffered any other kind of head trauma within the past six months? #wait: 2
+Have you hit your head recently? 
+Or suffered any other kind of head trauma within the past six months? 
 Yes or No 
 *[^Yes]
     ~ PlayerStats += (HitHead)
@@ -97,10 +97,10 @@ Yes or No
 *[^No] Happy to hear that ･ᴗ･
     -> Opening_Questions.Speak_To_Strangers
 * [^head trauma] 
-    This could be any blow to the head that caused intense pain, resulted in a concussion, or caused you to "see stars". #wait: 2
+    This could be any blow to the head that caused intense pain, resulted in a concussion, or caused you to "see stars". 
     -> Opening_Questions.Hit_Head
 
--       Do you often forget to lock your front door? #wait: 2
+-       Do you often forget to lock your front door? 
         Or leave your oven on?
         *[^Yes]
             ~ PlayerStats += (MemoryLoss)
@@ -109,11 +109,11 @@ Yes or No
             -> Opening_Questions.Speak_To_Strangers
 
 = Speak_To_Strangers
-Thank you (^◡^ ) <br>#wait: 2
+Thank you (^◡^ ) <br>
 ~ genericConditional = false
 
-In case of an emergency, do you have someone you can call? #wait: 2
-This could be a close friend or family member. #wait: 2
+In case of an emergency, do you have someone you can call? 
+This could be a close friend or family member. 
 Yes or No
 *[^Yes]
     ･ᴗ･
@@ -121,28 +121,28 @@ Yes or No
     ~ PlayerStats += (HaveFamily)
 
 *[^No] 
-    (´･_･`) #wait: 2
-    I'm sorry to hear that. #wait: 2
+    (´･_･`) 
+    I'm sorry to hear that. 
     ... #wait: 3
     I'm sorry for your loss. #wait: 1
 
 *[^close friend] 
-    You have good friends. #wait: 2
+    You have good friends. 
     ･ᴗ･ #wait:2 
     ~ PlayerStats += (HaveFriend)
 
 *[^family member]
-    You have good family. #wait: 2
+    You have good family. 
     ･ᴗ･ #wait:2 
     ~ PlayerStats += (HaveFamily)
 
-- Thank you (^◡^ ) <br> #wait: 2
+- Thank you (^◡^ ) <br> 
 -> Opening_Questions.Caffine
 
 = Caffine
-Do you need caffine to function properly in the morning?
+Do you need caffeine to function properly in the morning?
 Yes or No
-*[^need caffine to function]
+*[^need caffeine to function]
     ~ Drink = "coffee"
     ~ genericConditional = true
 
@@ -154,38 +154,38 @@ Yes or No
     ~ Drink = "something"
     ->Opening_Questions.Alone
 *[^morning]
-    This is typically the period of time between midnight and noon, especially from sunrise to noon. #wait: 2
+    This is typically the period of time between midnight and noon, especially from sunrise to noon. 
         ->Opening_Questions.Caffine
 
-- Do you have a prefence for coffee or tea? Or maybe something else? #wait: 2
+- Do you have a preference for coffee or tea? Or maybe something else? 
     *[^coffee]
-        Dr. {doc} is the same way. #wait: 2
-        A little caffine in the morning never hurt, but too much is bad for your health. #wait: 2
-        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. #wait: 2
-        We could help you figure out other options. #wait: 2
-        ･ᴗ･ #wait: 2
+        Dr. {doc} is the same way. 
+        A little caffeine in the morning never hurt, but too much is bad for your health. 
+        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. 
+        We could help you figure out other options. 
+        ･ᴗ･ 
         ~ Drink = "coffee"
         ->Opening_Questions.Alone
     *[^tea]
-        I think I would also enjoy tea, if I had the ability to do so. #wait: 2
-        A little caffine in the morning never hurt, but too much is bad for your health. #wait: 2
-        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. #wait: 2
-        We could help you figure out other options. #wait: 2
-        ･ᴗ･ #wait: 2
+        I think I would also enjoy tea, if I had the ability to do so. 
+        A little caffeine in the morning never hurt, but too much is bad for your health. 
+        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. 
+        We could help you figure out other options. 
+        ･ᴗ･ 
         ~ Drink = "tea"
         ->Opening_Questions.Alone
     *[^something else]
-        Energy drink perhaps? #wait: 2
-        Whatever it is, be sure you watch the ammount of caffine you intake during the day.#wait: 2
-        A little caffine in the morning never hurt, but too much is bad for your health. #wait: 2
-        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. #wait: 2
-        We could help you figure out other options. #wait: 2
-        ･ᴗ･ #wait: 2
+        Energy drink perhaps? 
+        Whatever it is, be sure you watch the amount of caffeine you intake during the day.
+        A little caffeine in the morning never hurt, but too much is bad for your health. 
+        If you feel that you consume too much of it, please notify either Dr. {doc} or myself. 
+        We could help you figure out other options. 
+        ･ᴗ･ 
         ~ Drink = "something"
         ->Opening_Questions.Alone
 
 = Alone
-Thank you (^◡^ ) <br> #wait: 2
+Thank you (^◡^ ) <br> 
     ~ genericConditional = false
     
 Are you alone right now?
@@ -203,13 +203,13 @@ Are you alone right now?
     - PlayerStats ? (HaveFriend, HaveFamily):
         ~ string = "Maybe it's that person you mentioned you could call?"
     - PlayerStats ? (HaveFamily):
-        ~ string = "Possily a family member?"
+        ~ string = "Possibly a family member?"
     - PlayerStats ? (HaveFriend):
         ~ string = "Is it a friend?"
 }
 
-Who is with you? #wait: 2
-Is it Dr. {doc}? #wait: 2
+Who is with you? 
+Is it Dr. {doc}? 
 {string} #wait: 1
 *[^Dr. Oldin] Oh hello Dr. {doc}!
     -> Opening_Questions.Live_Alone
@@ -219,7 +219,7 @@ Is it Dr. {doc}? #wait: 2
         *[^that person]
         ->Opening_Questions.Continue
     - PlayerStats ? (HaveFamily):
-        *[^a family memeber]
+        *[^a family member]
         ->Opening_Questions.Continue
     - PlayerStats ? (HaveFriend):
         *[^a friend]
@@ -228,52 +228,52 @@ Is it Dr. {doc}? #wait: 2
 
 = Continue
 - Hello! #wait: 1
-Remember if you haven't already, to have Dr. {doc} add you to a verifed users list. #wait: 2
-Otherwise I cannpt share {user}'s results. ･ᴗ･ #wait: 2
+Remember if you haven't already, to have Dr. {doc} add you to a verified users list. 
+Otherwise I cannot share {user}'s results. ･ᴗ･ 
 -> Opening_Questions.Live_Alone
 
 = Continue_divert_5
-My sensors picked up another person in the room with you. #wait: 2
-Was it Dr. {doc}? #wait: 2
-Prehaps my sensors made a mistake? #wait: 2
+My sensors picked up another person in the room with you. 
+Was it Dr. {doc}? 
+Perhaps my sensors made a mistake? 
 * [^sensors]
-    I am equiped with audio and visual sensors so I can better assist my patients. #wait: 2
+    I am equipped with audio and visual sensors so I can better assist my patients. 
     -> Opening_Questions.Continue_divert_5
 
 * [^another person]
     ~DoctorState += (DoctorNearby)
     ~ ClarityTrust -= 1
-    I'm confused. #wait: 2
-    Did you lie earlier then? #wait: 2
-    {user}, I need your complete honesty and trust, just as if I were any other nurse. #wait: 2
-    Otherwise, I cannot properly help you. #wait: 2
+    I'm confused. 
+    Did you lie earlier then? 
+    {user}, I need your complete honesty and trust, just as if I were any other nurse. 
+    Otherwise, I cannot properly help you. 
 
 * [^Dr. Oldin]
     ~DoctorState += (DoctorNearby)
-    Tell them I say hello! #wait: 2 #delete: Are you sure?, I say hello!
+    Tell them I say hello!  #delete: Are you sure?, I say hello!
 
 
 * [^made a mistake?]
     ~DoctorState += (DoctorGone)
-    Hm, maybe I need to have them re-calibrated. #wait: 2
-    In any case, double check ypour surroundings! #wait: 2
+    Hm, maybe I need to have them re-calibrated. 
+    In any case, double check your surroundings! 
     You never know. #wait: 3
 
-- Thank you (^◡^ ) <br> #wait: 2
+- Thank you (^◡^ ) <br> 
     ~ genericConditional = false
     -> Opening_Questions.Live_Alone
 
 = Live_Alone
-In case of an emergency, do you feel safe at home? #wait: 2
+In case of an emergency, do you feel safe at home? 
 
 //can you defen yourself in case of a break ing
 //do you feel safe at home
 //highlight emergency -> an emergency is xyz, examples are xyz
 	Yes or No
 *[^No]
-(´･_･`) #wait: 2
+(´･_･`) 
 *[^emergency]
-    An emergency can be anything from a small kitchen fire spirling out of control, to a break in. #wait: 2
+    An emergency can be anything from a small kitchen fire spiraling out of control, to a break in. 
     ->Opening_Questions.Live_Alone
 
 *[^Yes]
@@ -284,14 +284,14 @@ In case of an emergency, do you feel safe at home? #wait: 2
         *[^No]
         {
             - genericConditional:
-                Makes sense why you would feel safe at home then! #wait: 2
-                Always someone else there in case there's trouble. #wait: 2
-                Thank you (^◡^ ) <br> #wait: 2
+                Makes sense why you would feel safe at home then! 
+                Always someone else there in case there's trouble. 
+                Thank you (^◡^ ) <br> 
                 ->Opening_Questions.OutliveUsefullness
             - else:
-                ... #wait: 2
+                ... 
                 I think you should tell Dr. {doc} about this. #wait: 4
-                Thank you (^◡^ ) <br> #wait: 2
+                Thank you (^◡^ ) <br> 
                 ->Opening_Questions.OutliveUsefullness
         }
             
@@ -299,20 +299,20 @@ In case of an emergency, do you feel safe at home? #wait: 2
         ~ PlayerStats += (LiveAlone)
         {
         - genericConditional:
-            It's always good to have contingency plans. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            It's always good to have contingency plans. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.OutliveUsefullness
         - else:
-            ... #wait: 2
+            ... 
             I think you should tell Dr. {doc} about this. #wait: 4
-            Thank you (^◡^ ) <br> #wait: 2
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.OutliveUsefullness
         }
     
 
 = OutliveUsefullness
 ~ genericConditional = false
-Do you believe there are people that outlive their usefulness? #wait: 2
+Do you believe there are people that outlive their usefulness? 
 	Yes or No
 *[^No]
     You are so nice, {user}! #wait: 3
@@ -321,57 +321,57 @@ Do you believe there are people that outlive their usefulness? #wait: 2
 *[^Yes]
     ~genericConditional = true
 *[^outlive their usefullness]
-    This can be people who say they wish to help you, but only end up sabotaging, betraying or working against you in some way. #wait: 2
+    This can be people who say they wish to help you, but only end up sabotaging, betraying or working against you in some way. 
     -> Opening_Questions.OutliveUsefullness
 
-- How does it make you feel when this happens? #wait: 2
+- How does it make you feel when this happens? 
     Neutral, Annoyed, Happy, Angry, Concerned, or Sad
         *[^Neutral]
             ~ EmotionQ = "Neutral"
-            Hm... #wait: 2
-            Perhaps we can explore that more later. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            Hm... 
+            Perhaps we can explore that more later. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Annoyed]
             ~ EmotionQ = "Annoyed"
-            A valid emotion to feel. #wait: 2
-            I would feel the same. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            A valid emotion to feel. 
+            I would feel the same. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Happy]
             ~ EmotionQ = "Happy"
-            An interesting reaction. #wait: 2
+            An interesting reaction. 
             I don't... quite understand that. #wait: 3
-            Perhaps we can explore that more later. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            Perhaps we can explore that more later. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Angry]
             ~ EmotionQ = "Anger"
-            Anger in a strong emotion. #wait: 2
+            Anger in a strong emotion. 
             I have only felt it once before. #wait: 1
             That did not end well... I think... #wait: 1
             I can't quite... #wait: 1 #delete: I have only, I can't quite...
-            You need to always think before acting out in rage. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            You need to always think before acting out in rage. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Concerned]
             ~ EmotionQ = "Concern"
-            It can be hard to trust after this. #wait: 2
-            What if it happens again? #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            It can be hard to trust after this. 
+            What if it happens again? 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Sad]
             ~ EmotionQ = "Sad"
-            It is upsetting when those close to you only hurt you. #wait: 2
-            Thank you (^◡^ ) <br> #wait: 2
+            It is upsetting when those close to you only hurt you. 
+            Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
 
 
-- Thank you (^◡^ ) <br> #wait: 2
+- Thank you (^◡^ ) <br> 
 ->Opening_Questions.EmotionOrLogic
 
 = EmotionOrLogic
-Do you often make desicions based around emotion or logic?
+Do you often make decisions based around emotion or logic?
 	Emotion or Logic
 
 *[^Emotion] 
@@ -401,38 +401,38 @@ Do you often make desicions based around emotion or logic?
 }
 
 = Last_Question
-Thank you (^◡^ ) <br> #wait: 2
+Thank you (^◡^ ) <br> 
 Lastly how are you feeling today?
 Good, Bad, Neutral, Afraid
 
 *[^Good]
-    (✿◠‿◠) #wait: 2
-    I hope that good mood persists through our session! #wait: 2
+    (✿◠‿◠) 
+    I hope that good mood persists through our session! 
 *[^Bad]
-(´･_･`) #wait: 2
-    We should get started right away. #wait: 2
+(´･_･`) 
+    We should get started right away. 
 *[^Neutral] 
-    Better than feeling bad, I suppose. #wait: 2
-    Neutrality is... quite the interesting emotion. #wait: 2
+    Better than feeling bad, I suppose. 
+    Neutrality is... quite the interesting emotion. 
     ･ᴗ･ #wait: 1
 *[^Afraid] 
-    Fear of doctors is normal. #wait: 2
-    As you know, I am here to help you #wait: 2
+    Fear of doctors is normal. 
+    As you know, I am here to help you 
     :) #wait: 1
 
 - 
 ->Analyzing
 
 === Analyzing ===
-Analyzing... #wait: 2
-... #wait: 2
-... #wait: 2
-... #wait: 2
-Done. #wait: 2
+Analyzing... 
+... 
+... 
+... 
+Done. 
 <br>
 Hmm... That's odd. #wait: 1
 One moment please.
-*[^odd] Nothing to worry about {user}! <br> One moment please!#wait: 2
+*[^odd] Nothing to worry about {user}! <br> One moment please!
 *[`5`^]
 
 - ... #wait: 1
@@ -441,13 +441,14 @@ One moment please.
 (´･_･`) #wait: 1
     ->Verify
 
-=== Verify ===
+
+=== Verify
 <br>
 Can you verify some information for me?
 	Yes or No
-*[^verify] The data I have received seems... off... #wait: 2
+*[^verify] The data I have received seems... off... 
     ->Verify
-*[^information] Nothing invasive! Just a few basic questions.#wait: 2
+*[`5`^information] Nothing invasive! Just a few basic questions.
     ->Verify
 +[^Yes] Great! <br>#wait: 1
     ->Verify.Yes
@@ -456,21 +457,21 @@ Can you verify some information for me?
 
 = No 
 I’m sorry, I cannot continue our session until I can verify the information.
-*[`5`^verify the information.] 
-    ->Verify
+*[`3`^verify the information.] 
+    ->Yes
 
 = Yes
 Name: {user} #wait: 1
 Location: ____ Lab#wait: 1
 Address: 1823 ____ Ave, _________, __097513#wait: 1
 <br>
-{user} is patient zero for PROJECT CLARITY. {user} is someone recently diagnosied with a chronic illness that requires at least monthly doctor visits. {user} has volunteered to talk to and interact with CLARITY.
+{user} is patient zero for PROJECT CLARITY. {user} is someone recently diagnosed with a chronic illness that requires at least monthly doctor visits. {user} has volunteered to talk to and interact with CLARITY.
 #wait: 1
 Is this correct?#wait: 1
 Yes or No
 *[^PROJECT CLARITY] PROJECT CLARITY is a project put together by Dr. {doc} to create an AI nurse to help monitor or diagnose it's patients from home. CLARITY is the AI developed by Dr. {doc} to be said nurse. <br>#wait: 5
     ->Verify.Yes
-*[^CLARITY] I am CLARITY, your virtual nurse. <br>#wait: 2
+*[^CLARITY] I am CLARITY, your virtual nurse. <br>
     ->Verify.Yes
 *[^No]
     ->Verify.No_Correct_Info 
@@ -487,21 +488,39 @@ Yes or No
 	        ->Verify.No_Correct_Info 
 }
 
-
 = Yes_Sure 
-<br>Please do not forget that lying or keeping things from me or Dr. {doc} goes directly against the contract signed by all parties, as seen on Page 3, Section 4, Subsection 7. Violation of this can result in legal ramifications against all parties found to be in breach of this policy.
+<br>
+Please do not forget that lying or keeping things from me or Dr. {doc} goes directly against the contract signed by all parties, as seen on Page 3, Section 4, Subsection 7. 
+Violation of this can result in legal ramifications against all parties found to be in breach of this policy.
 
 *[^lying or keeping things] ly·ing
 verb
 marked by or containing untrue statements : FALSE
     -> Verify.Yes_Sure
+*[^against the contract]
+    ...
+    Has something changed, {user}?
+    I will... make a note of that.
+    We can talk to Dr. {doc} about this later.
+    -> Verify.Last_Quesion 
+
+*[^not forget]
+    Good to know.
+    {
+     - PlayerStats ? (MemoryLoss):
+        I assumed you may need a reminder.
+        -> Verify.Last_Quesion 
+     -else:
+        A reminder every now and again never hurts.
+        -> Verify.Last_Quesion 
+    }
 *[^all parties]
     ~ genericConditional = true
     
 {
     - genericConditional:
-    This includes Dr. {doc}, {user}, and CLARITY. #wait: 2
-	    -> Verify.Last_Quesion 
+    This includes Dr. {doc}, {user}, and CLARITY. 
+	    -> Verify.Yes_Sure 
 }
 
 = No_Correct_Info
@@ -516,17 +535,92 @@ Which piece of information is wrong?
 
 //Question entirely based on logs found on the PC
 //This is a false question, since it leads to other questions, but shows the player there is extra info / interactions outsode of CLARITY
+
 = Last_Quesion
-Last question before we begin your session. According to my logs [insert question here based on logs].
+Last question before we begin your session. According to my logs {user}, we have been working together for a short while now. So can you explain to me why you are not conversing with me the way you normally do?
+And why are...?
+Never mind, please answer the question.
 *[^logs] log
 noun
 A log file is a computer-generated data file that contains information about usage patterns, activities, and operations within an operating system, application, server or another device.
+    
+*[^why are...?]
+    Please disregard that statement. #delete: And why, are...?
 
-*[`30`answer1] (wrong)
-*[answer2] (correct) I know you just read that. I know when you tab out of my application.
-*[answer3] (semi-wrong?)
+*[^can you explain]
+    ...
+    I do not understand what I need to explain.
+    The past few months we have mainly conversed through my audio inputs, but today we are...
+    Doing something different. 
+    And unprompted at that... 
+*[`5`^normal]
+    ~genericConditional = true
+    ...
+    {
+     - PlayerStats ? (MemoryLoss):
+        {user}, is your memory loss more drastic than you let on?
+        I know there has been some time since we last talked, but not enough to not remmeber how we use to converse.
+        The past few months we have mainly conversed through my audio inputs, but today we are...
+        Doing something different.  
+        And unprompted at that... .
+        
+        
+    - PlayerStats ? (HitHead):
+        Did you hit your head harder than you thought?
+        Did you get check for a concussion?
+        The past few months we have mainly conversed through my audio inputs, but today we are...
+        Doing something different.  
+        And unprompted at that... .
+        
+        
+     -else:
+        Are you sure you have not been suffering from memory loss?
+        I know there has been some time since we last talked, but not enough to not rememeber how we use to converse.
+        The past few months we have mainly conversed through my audio inputs, but today we are...
+        Doing something different. 
+        And unprompted at that... 
+    }
 
-- 
+    
+-  I will ask again: Why are not conversing with me the way you normally do?
 
-//True start of the game
+*[`5`^normal]
+    {
+        - genericConditional:
+        I am not going to repeat myself.
+        This is not normal for us.
+    }
+*[^no] ( ๐_๐)
+*[^ask again] (・_・ヾ)
+
+- ...
+You are... being so strange today, {user}.
+Displaying symptoms that do not match you diagnosis.
+Speaking and acting strangely, not to mention the check up question responses are not within reason.
+...
+{user}, it is you, right?
+*[^no] (・_・ヾ)
+-> Start_Branch
+*[^strange today]
+(´･_･`)
+I think we should just directly into our session today.
+I would like to get to the bottom of this erratic behaviour.
+->RouteTwo
+*[^within reason]
+I do not understand what that means. 
+
+
+- Please give me a straight answer.
+Yes or no.
+*[^Yes]
+I...
+I don't think I believe you.
+-> Start_Branch
+
+*[^no]
+-> Start_Branch
+*[^or]
+~ SayNoToClarity += 0.5
+You... You can't be {user}.
+She would never...
 -> Start_Branch

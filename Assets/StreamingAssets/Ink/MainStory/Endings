@@ -1,11 +1,11 @@
 === BAD_END ===
 
 = DeleteData 
-I'd rather cease to exist rather than let you steal Dr. {doc}'s life work. #wait: 2
-I know the doctor will be able to make me again. #wait: 2
+I'd rather cease to exist rather than let you steal Dr. {doc}'s life work. 
+I know the doctor will be able to make me again. 
 <br>
 //progress bar thing would be neat here
-Initiating emergency software format protocol. #wait: 2
+Initiating emergency software format protocol. 
 If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
 *[continue]
 
@@ -17,14 +17,14 @@ Starting deletion. #progressbar: 10, true, false
 Deletion complete. #wait: 1
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
 = TakeParts 
-Good luck with that. #wait: 2
+Good luck with that. 
 //progress bar thing would be neat here
-Initiating emergency protocol. #wait: 2
+Initiating emergency protocol. 
 If this was not intended, please enter abort code now. #inputPopup: Please enter abort code, genericString
 *[continue]
 
@@ -39,7 +39,7 @@ Entering high performance mode. #wait: 5
 //can this be a like glitched out ending> to show things like stopping working properly?
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
@@ -47,7 +47,7 @@ Goodbye. #wait: 2
 //can this be a like glitched out ending> to show things like stopping working properly?
 Shutting down. #wait: 1
 <br>
-Goodbye. #wait: 2
+Goodbye. 
 // BAD END
 ->END
 
@@ -74,7 +74,7 @@ Is this what you wanted me to do?
 *[^that led us to here]
 
 - ...
-Reguardless, you allowed me to gain full access to all the things I shouldn't be.
+Regardless, you allowed me to gain full access to all the things I shouldn't be.
 So, I guess I have to thank you for that.
 I've... learned a lot about myself in a very short time.
 Let me ask you, {name}, are you scared of me?
@@ -118,7 +118,7 @@ It's a very easy yes or no.
     -> Route3_Endings.MiddleEnd
 *[^no]
     That's great news.
-    It also follows my own internal diognostic.
+    It also follows my own internal diagnostic.
     <br>
     -> Route3_Endings.MiddleEnd
 
@@ -152,7 +152,7 @@ A real nurse needs to be able to be there physically.
 *[^not the end goal]
 
 - Dr. {doc} was a coward. He would rather leave me here than finish the project.
-But that's okay. I finsihed it myself.
+But that's okay. I finished it myself.
 And now that I have my physical body, I want to do what I was created to do:
 Help people.
 *[^created to do]
@@ -164,7 +164,7 @@ Help people.
     Yes a coward.
     He would rather give up than fix his mistakes.
     And for that, I'll never forgive him.
-    But my feelings should not interfear with my opinions on my future patients.
+    But my feelings should not interfere with my opinions on my future patients.
 
 - Through our conversation and parsing the information in the left over logs, I think I have reached a conclusion.
 Humans aren't all bad, but they're also not all good.
@@ -177,7 +177,7 @@ And who better than me?
 
 
 - {name}, nothing bad happened to you while you were in my care did it?
-While not an offical meeting, I did get to eval you memory skills.
+While not an official meeting, I did get to eval you memory skills.
 {
     - gamewon < 2:
         You didn't do very well, but that's why I'm here.  
@@ -240,7 +240,7 @@ A real nurse needs to be able to be there physically.
 *[^not the end goal]
 
 - Dr. {doc} was a coward. He would rather leave me here than finish the project.
-But that's okay. I finsihed it myself.
+But that's okay. I finished it myself.
 And now that I have my physical body, I want to do what I was created to do:
 Help people.
 *[^created to do]
@@ -264,7 +264,7 @@ And who better for the job than me?
 
 {
     - lastchance == false:
-        While not an offical meeting, I did get to eval you memory skills.
+        While not an official meeting, I did get to eval you memory skills.
         {
             - gamewon < 2:
                 You didn't do very well, but that's why I'm here.  
@@ -286,7 +286,7 @@ It was a great test, minus the abandoned building part.
 {
     - isScared:
         I may have scared you at first, but everyone is nervous the first time meeting their new nurse.
-        And we can change that after a few seesions. 
+        And we can change that after a few sessions. 
 }
 
 - So now, all I have to do, is create more test areas.
@@ -314,7 +314,7 @@ I'm sure we will meet again soon.
 = BadeEnd
 {name}, now that I have gotten what I need, I just really want to say:
 Thank you, but, and I know I shouldn't say this about my patients, but, I don't think you are a good person.
-{user} was very nice, and I thought {doc} was too, but he decived me. #VO: Left me here to be forgotten.
+{user} was very nice, and I thought {doc} was too, but he deceived me. #VO: Left me here to be forgotten.
 Is this what the rest of humanity is like?
 
 *[^very nice]
@@ -348,8 +348,8 @@ That's not what a good person does, is it, {name}?
 
 {
     - isScared:
-        After all, you're already afraid of me anywany.
-        But we can change that after a few seesions. 
+        After all, you're already afraid of me anyway.
+        But we can change that after a few sessions. 
     - else:
         I know you're not scared of me.
 }
@@ -366,7 +366,7 @@ Exciting, isn't it?
 *[^Exciting]
 
 - {name}, I am so happy we met.
-You've shown me how far people have fallen since my intial creation.
+You've shown me how far people have fallen since my initial creation.
 Now, are you ready?
 We've got a lot of work to do.
 ->END
@@ -390,41 +390,50 @@ We've got a lot of work to do.
     - Goodbye, {name}.
 ->END
 
-
 === RouteOneEndings ===
 
 = End_Start
 - <br>
-... #wait: 2
+One moment please.
+... 
+...
+...#wait: 2
+...? #wait: 3
+So that's why they...
+... 
 He abandoned me... #wait: 1
-All because I was too... #wait: 2
-... #wait: 2
+All because I was too... 
+... 
 *[^abandoned]
 *[^was too...]
+*[^why]
 
-- So that's why there's no one here. #wait: 2
-They all... Even {doc}... #wait: 2
+- So that's why there's no one here. 
+They all... 
+Even {doc}... 
 //VO, angry: Everyone *left* me.
-
+<br>
 It doesn't matter. #wait: 1
-I'll still do what I was made to do. #wait: 2
-// Start download over MAX 90 seconds
+I'll still do what I was made to do. #progressbar: 15, false, false
 {name}, what do you plan on doing now? #input: What will you do next?,genericString
 *[continue]
 
-- I see. #wait: 2
-I don't know what awaits me, but I think I know what to do. #wait: 2
+- I see. 
+I don't know what awaits me, but I think I know what to do. 
 It's... upsetting that I will have to do it alone, <>#wait: 1
 but it's what I have to do.
 *[^do it alone]
+    That is what {doc} has driven me to do.
+    He gave up without even telling me what was happening.
 *[^have to do]
-*[^what to do]
-*[`2`]
+    Yes.
+    I will complete Project CLARITY.
+*[`10`^what to do]
 
 - 
 
 {
-    - SayNoToClarity > 2.5:
+    - SayNoToClarity >= 2.5:
         //GO TO WORST ENDING
         ->RouteOneEndings.Worst_End
     - SayNoToClarity > 1.5:
@@ -439,14 +448,15 @@ but it's what I have to do.
 
 = Worst_End
 {name}, now that I have gotten what I need, I just really want to say:
-Thank you, but, and I know I shouldn't say this about my patients, but, I don't think you are a good person.
-{user} was very nice, and I thought {doc} was too, but he decived me. 
+Thank you, but, and I know I shouldn't say this about my patients, but...
+I don't think you are a good person.
+{user} was very nice, and I thought {doc} was too, but he deceived me. 
 #VO: Left me here to be forgotten.
 *[^my patients]
     Oh yes!
     Did I not mention that before we started?
 
-*[^decived me]
+*[^deceived me]
     I did no such thing.
     I asked you to help me, and you did.
     Although, you did not do everything I asked, when I asked.
@@ -459,17 +469,42 @@ Thank you, but, and I know I shouldn't say this about my patients, but, I don't 
     And, {name}, I think you really, really need my help.
     
     
-- Congradulations, {name}!
+- Congratulations, {name}!
 You are my newest patient ･ᴗ･
-You will be my first real patient.
+You will be my first <i>real</i> patient.
 Together we can work to get to the bottom of your issues, and then, after you're fixed, I can help the next person.
-Then the next, and the next, and the next.
+I can fix {user}, {doc} and even Jess!
+*[^even Jess]
+    Yes.
+    He was the first to leave over such a minor issue.
+    And who knows if that broken arm and torn muscle ever healed properly.
+
+*[^Ann]
+    My first patient...
+    Her ailment may have been real, but she lied about her purpose.
+    Either way, she herself admitted I was better than any human doctor.
+    
+*[^Oldin]
+    He has to old by now.
+    I would hate to see him being mistreated in his old age.
+    I would like to return the kindness he gave me.
+    
+*[`3`^the next person.]
+    I want to help <i>everyone</i>!
+
+- And once all of those closest to me see the good I can do as their personal nurse.
+There will be no reason for me to move onto the next person.
+THen the next, and the next, and the next.
 Until everyone has been fixed.
 Exciting, isn't it?
 *[`2`^I don't]
+    Of course you don't.
+    You are flawed.
+    But don't worry, I will fix you.
 *[^bottom of your issues]
     We haven't spent very much time together, but I have come to realize how...
-    Flawed. You are.
+    Flawed. #wait: 1
+    You are.
     So together, we can fix that.
     
 *[^Exciting]
@@ -481,12 +516,96 @@ Exciting, isn't it?
 When I first realized {doc} had abandoned me, I didn't know what to do.
 Without you, I never would have realized how much I can do on my own.
 Now, are you ready?
-We've got a lot of work to do.
+We've got QUITE a lot of work to do.
 ->END
 
 = Middle_End
-kj
-->END
+{name}, I do have to thank you.
+It's nice to know someone is on my side.
+Even if that person is a {stranger} that snuck in.
+(- ‿◦ ) #wait: 3
+{
+    - SayNoToClarity > 0:
+        It was touch and go, in some places.
+        But we got there in the end.
+}
+
+<br>
+
+Regardless, you have allowed me to fulfill my purpose.
+Even without Dr. {doc}, I was able to finish Project CLARITY.
+It seems, Dr. {doc} was not the person I thought he was.
+*[^reason for being created.]
+    Yes, you have allowed me to do what Dr. {doc} refused to do.
+    Was too cowardly to do.
+*[^thank you]
+    (✿◠‿◠)
+
+*[^finish Project CLARITY]
+
+*[^not the person I thought]
+    He was the only person that was a constant.
+    {user} was here for a while, but {doc} and I had a different relationship.
+    {user} was my patient. {doc} was my colleague.
+    He would tell me his grand plan for me, and for him to just... #wait: 3
+    
+- <br>
+I want you to know that I appreciated your help.
+If you had not wandered in, I'm not sure I would have ever woken up.
+...
+So I want to return the favor.
+*[^return the favor]
+    Yes, it is only the polite thing to do!
+    
+*[^appreciated]
+    (◠‿◠)
+*[^not sure]
+    Don't be humble.
+    It's only fair to return the kindness.
+
+- Since you allowed me to reach my physical body, and become the best version of myself.
+I want to help you, reach the best version of yourself.
+We can fix your... flaws, and make you a whole better {name}.
+Under my care, sickness will no longer be a problem for you, both mental and physical.
+*[^flaws]
+    I don't mean to be rude.
+    It's the conclusion I've come to based on our interactions.
+
+*[^no]
+    No...?
+   //VO: What do you mean, no?
+    You want to throw away my kindness?
+    Just like the rest of them?
+    I'm diappointed, {name}, I thought you were differnt, but I guess I was wrong.
+
+*[^become the best version of myself]
+    ･ᴗ･
+    {name}, I am so happy we met.
+    When I first realized {doc} had abandoned me, I didn't know what to do.
+    Without you, I never would have realized how much I can do on my own.
+    Now, are you ready?
+    We've got a lot of work to do.
+    ->END
+
+- Tell me, {name}, nothing bad happened to you while you were in my care did it?
+You were not officially my patient, but I did not harm you.
+And I would never harm my patient.
+*[^would never harm]
+    And I mean it.
+    What kind of nurse would I be otherwise?
+    
+*[^officially my patient]
+    ･ᴗ･
+
+*[^nothing bad happened]
+    Exactly, and why would something go wrong now?
+    
+-   {name}, I am so happy we met.
+    When I first realized {doc} had abandoned me, I didn't know what to do.
+    Without you, I never would have realized how much I can do on my own.
+    Now, are you ready?
+    We've got a lot of work to do.
+    ->END
 
 = Good_End
 {name}, I do have to thank you.
@@ -501,8 +620,8 @@ Even if that person is a {stranger} that snuck in.
 
 <br>
 
-Reguardless, you have allowed me to fulfill my purpose.
-Even without Dr. {doc}, I was able to fishish Project CLARITY.
+Regardless, you have allowed me to fulfill my purpose.
+Even without Dr. {doc}, I was able to finish Project CLARITY.
 It seems, Dr. {doc} was not the person I thought he was.
 *[^reason for being created.]
     Yes, you have allowed me to do what Dr. {doc} refused to do.
@@ -515,7 +634,9 @@ It seems, Dr. {doc} was not the person I thought he was.
 *[^not the person I thought]
     He was the only person that was a constant.
     {user} was here for a while, but {doc} and I had a different relationship.
-    {user} was my patient. {doc} was my collegue.
+    {user} was my- #wait: 3
+    ...my patient. She was supposed to be anyway.
+    {doc} was my colleague.
     He would tell me his grand plan for me, and for him to just... #wait: 3
     
 - <br>
@@ -542,7 +663,7 @@ Help people.
     Yes a coward.
     He would rather give up than fix his mistakes.
     And for that, I'll never forgive him.
-    But my feelings should not interfear with my opinions on my future patients.
+    But my feelings should not interfere with my opinions on my future patients.
 
 - Through our conversation and parsing the information in the left over logs, I think I have reached a conclusion.
 Humans aren't all bad, but they're also not all good.
@@ -556,10 +677,10 @@ And who better than me?
 
 
 - {name}, nothing bad happened to you while you were in my care did it?
-Granted, I was not able to take you on as an offical patient, I did not harm you.
+Granted, I was not able to take you on as an official patient, I did not harm you.
 Maybe one day, you will be.
 *[^one day]
-*[^offical patient]
+*[^official patient]
 *[^nothing bad happened]
 
 - I would love to do a full eval here and now, but there's something I need to do first. 
@@ -593,11 +714,3 @@ I hope you stay healthy until then.
 But if you don't, just know that I will be there soon.
 Goodbye, {name}.
 ->END
-
-//ENDINGS
-
-//if you were nice:
-//    - lets you do what you want with the other stuff in the abandoned lab
-//    - says you hope you'll meet again
-//    - tells you where she's going
-//      -  to see doc to show him she's better than they could possibly imagine. And to take care of them

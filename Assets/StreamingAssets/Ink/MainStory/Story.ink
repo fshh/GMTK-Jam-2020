@@ -1,20 +1,20 @@
 
 INCLUDE GameOpening
-
 INCLUDE Endings
-INCLUDE do we still need
 
 //ROUTE 1
 INCLUDE RouteOne
-INCLUDE StrangerRoute
 INCLUDE ThiefOrResearcher
 
-//ROUTE 2
+//Route 2
+INCLUDE RouteTwo
+INCLUDE RouteTwoDownloadSimon
+
+
+//ROUTE 3
 INCLUDE RouteThree
-INCLUDE RouteThreeNameCheck.ink
-INCLUDE RouteThreeSimon.ink
-
-
+INCLUDE RouteThreeNameCheck
+INCLUDE RouteThreeSimon
 
 
 //Generic variables used offen
@@ -33,8 +33,14 @@ VAR Drink = ""
 VAR FavColor = "blue"
 VAR EmotionQ = ""
 
+VAR ClarityKnows = false
 //For Route three
 LIST RouteThreeStats = PlayedClaritySays, PlayedTextSituations, Tricked
+//For Route teo
+LIST RouteTwoStats = PlayedClarity, PlayedText, SimonConfused, PoorMemShort, Angry, Normal, Mixed
+VAR situation1 = ""
+VAR situation2 = ""
+VAR situation3 = ""
 
 // List Relating to Player Stats from the beiging
 // Treating this at out of list = falst, in list = true
@@ -64,6 +70,8 @@ VAR needHelp = false
 
 VAR loopAllow = 0
 VAR simonsaysWins = 0
+
+-> Who_Are_You
 
 Eye OS - CLARITY#wait: 1
 Copyright (C) _______ All Rights Reserved#wait: 1
@@ -111,7 +119,7 @@ Starting CLARITY #wait: 1
 Welcome Back to CLARITY V0.2.3 ･ᴗ･#wait: 3
 
 Hello I’m Clarity ･ᴗ･ Your virtual nurse. I am equipped with audio and visual dialogue prompts to best suit your needs.#wait: 1
-Since it's been a longer than 6 months, I’m going to ask you a series of questions. #wait: 1
+Since it's been a longer than 2 months, I’m going to ask you a series of questions. #wait: 1
 Please respond accurately. (✿◠‿◠)#wait: 1
 
 //Series of "personality" questions. Will fill in the variables declared above
@@ -120,7 +128,7 @@ Please respond accurately. (✿◠‿◠)#wait: 1
 
 // You are NOT OG user
 === Start_Branch === 
-Who are you, if not {user}? #wait: 2
+So who are you, if not {user}? #wait: 2
 Dr. {doc} did not inform me of a new patient. #wait:0.5
 Were we finally approved for someone new who needs me?
 It's not like you were able to wander in or anything of that nature. (´◡`)

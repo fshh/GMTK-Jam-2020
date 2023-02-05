@@ -1,0 +1,415 @@
+=== RouteTwo ===
+{user}, would you like to start with a memory game or mental state test?
+{
+     - PlayerStats ? (MemoryLoss):
+        I think it might be better to start with the memory game, but the choice is yours.
+    - else:
+        I think it might be better to start with the mental state test, but the choice is yours.
+}
+*[^memory game]
+-> RouteTwo.ClaritySays
+*[^mental state test]
+-> RouteTwo.StateTest
+
+= StateTest
+I will ask you a series of questions.
+Please answer honestly.
+At the end I will compare your data to previous tests we had done.
+<br>
+Situation One:
+You go to the ice cream shop to get a sundae.
+You ask for no whipped cream, but extra cherries.
+Once you get your ice cream, you find they did not give listen to your request.
+<br>
+Do you
+A) Eat it anyway
+B) Ask for them to remake it
+C) Yell at the employee and refuse to pay
+
+*[^A)] 
+~ situation1 += "0"
+It only takes a moment for them to remake it.
+And you're paying, why shouldn't it be what you want?
+*[^B)] 
+~ situation1 += "1"
+It <i>is<i/i> your ice cream. 
+They should make it the way you want it.
+*[^C)] 
+~ situation1 += "2"
+...
+Maybe a bit far but...
+Thank you for your honesty.
+
+-<br> 
+Situation Two: 
+You ask your roommate to help you find something.
+They agree, but you feel thy are barely trying.
+Do you feel
+
+
+A) Sad and upset about your friend's actions #wait: 1
+B) Understanding, but still disappointed #wait: 1
+C) Angry that your friend is doing this to you #wait: 1
+
+*[^A)]
+~ situation2 = "0"
+    They are probably not a great friend.
+    Why say you will do something and then purposely not do it?
+*[^B)]
+~ situation2 = "1"
+    They should not agree if they were not going to help.
+*[^C)]
+~ situation2 = "2"
+    I would too.
+    They said they would help you and then barely tried.
+    They should know better.
+
+- <br>
+Situation Three:
+You are talking with a friend about a problem they have.
+You don't really care about this problem.
+Do you
+A) Half listen and tell them to figure it out
+B) Change the subject
+C) Listen anyway and try to give advice
+
+*[^A)]
+~ situation3 = "0"
+    I commend you for trying.
+    Some people wouldn not at all.
+*[^B)]
+~ situation3 = "1"
+    Probably better than giving bad advice.
+*[^C)]
+~ situation3 = "2"
+    You must be a very good friend.
+    {
+        - PlayerStats !? (HaveFriend) and PlayerStats !? (HaveFamily):
+        Oh! Sorry, I...
+        I forgot.
+    }
+
+- 
+
+{
+    - (situation1 == "2" and situation2 == "2") or (situation1 == "2" and situation3 == "1") or (situation3 == "1" and situation2 == "2"):
+        ~ RouteTwoStats += (Angry)
+        You seem more... angry than usual {user}.
+        I think you might need to have your head checked.
+        Sometimes those who have hit their head or experience more anger than normal, have a brain injury they are unaware of.
+        Or perhaps a tumor.
+    - (situation1 == "0" and situation2 == "1") or (situation1 == "0" and situation3 == "2") or (situation3 == "2" and situation2 == "1"):
+        ~ RouteTwoStats += (Normal)
+        So far, all these answers are consistent with what I know of you.
+        (✿◠‿◠)
+    - (situation1 == "1" and situation2 == "0") or (situation1 == "1" and situation3 == "0") or (situation3 == "0" and situation2 == "0"):
+        ~ RouteTwoStats += (Mixed)
+        Hmm...
+        This data is not consistent with old data but...
+        ...
+    - else:
+        ~ RouteTwoStats += (Mixed)
+        Your answers don't seem very consistent. 
+}
+
+- 
+
+{
+- RouteTwoStats ? (PlayedText):
+    We have reached the end of our session.
+    -> RouteTwo.LastThing
+- else:
+    The next section is a mental state test.
+    -> RouteTwo.StateTest
+}
+
+= ClaritySays
+I would like to make a new profile for you.
+It will help compare data against the one we had been using. 
+With this sudden change, I would like to keep everything seperate.
+Please click "Allow" on the following pop-up. #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> RouteTwo.PlayClaritySays
+*[Don't allow]
+    ->SimonDownload2.DontAllow
+    
+
+= PlayClaritySays
+{
+    - RouteTwoStats ? (SimonConfused):
+        Good job, {user}!
+    - else:
+        Thank you.
+}
+
+We will do three rounds of CLARITY SAYS.
+All you have to do, is repeat after me. ･ᴗ･
+I will start you on a middle difficulty, and will adjust it based on your performance. #simon: start, 5
+Ready?
+*[win]
+    ~gamewon = 1
+{
+    - RouteTwoStats ? (SimonConfused):
+        You seem less cconfused than before, so that is good.
+        I'll up the difficulty for this next one. #simon: start, 8
+        -> RouteTwo.Round2
+    - else:
+        Nice job! 
+        I'll up the difficulty for this next one. #simon: start, 8
+        -> RouteTwo.Round2
+}
+
+*[lost]
+{
+    - RouteTwoStats ? (SimonConfused):
+        I should have known better than to start you at such a high difficulty.
+        I'll lower it a bit. #simon: start, 3
+        -> RouteTwo.Round2
+    - else:
+        There's always next time.
+        I'll lower it a bit. #simon: start, 3
+        -> RouteTwo.Round2
+}
+
+= Round2
+Ready?
+*[win]
+    ~gamewon += 1
+    ~genericConditional = true
+{
+    - gamewon > 1:
+    {    
+        - RouteTwoStats ? (SimonConfused):
+            You're doing so well!
+            -> RouteTwo.Round3
+            
+        - else:
+            Another win, congrats!
+            -> RouteTwo.Round3
+    }
+    - else:
+    {    
+        - RouteTwoStats ? (SimonConfused):
+            Glad to see you are still able to deal with taht difficulty.
+            -> RouteTwo.Round3
+            
+        - else:
+            Nice job!\
+            -> RouteTwo.Round3
+    }
+}
+*[lost]
+    ~genericConditional = false
+{
+    - RouteTwoStats ? (SimonConfused):
+        Ah, guess I made it too hard?
+        -> RouteTwo.Round3
+        
+    - else:
+        There is always next time.
+        -> RouteTwo.Round3
+}
+
+    
+
+= Round3
+- 
+{
+    - gamewon == 2:
+        This will be our last round.
+        Unless you would like to play more. ･ᴗ･ #simon: start, 10
+        -> RouteTwo.Round3_Start
+    - gamewon == 1:
+        {
+            - genericConditional:
+                This will be our last round.
+                Unless you would like to play more. ･ᴗ･ #simon: start, 4
+                -> RouteTwo.Round3_Start
+            - else:
+                This will be our last round.
+                Unless you would like to play more. ･ᴗ･ #simon: start, 6
+                -> RouteTwo.Round3_Start
+        }
+
+    - gamewon == 0:
+        This will be our last round.
+        Unless you would like to play more. ･ᴗ･ #simon: start, 3
+        -> RouteTwo.Round3_Start
+}
+
+= Round3_Start
+Ready?
+*[win]
+    ~gamewon += 1
+    ~genericConditional = true
+    Nice job!
+*[lost]
+    ~genericConditional = false
+    There's always next time.
+    
+- One moment while I process your data. #wait: 5
+
+{
+    - gamewon == 3:
+        You did much better than expected!
+        I don't forsee any issues with your short term memory at least.
+        {
+            - RouteTwoStats ? (SimonConfused):
+                Your bout of confusion still worries me, so I will make a note of it.
+        }
+        
+    - gamewon == 2:
+        You did about average.
+        Your short term memory seems fine, but I think your long term is the real issue.
+        {
+            - RouteTwoStats ? (SimonConfused):
+                Your bout of confusion still worries me, so I will make a note of it.
+        }
+    - gamewon == 1:
+        You did not do great, but we can work on it.
+        I am worries about both your long and short term memory.
+        {
+            - RouteTwoStats ? (SimonConfused):
+                Your bout of confusion still worries me, so I will make a note of it.
+        }
+    - gamewon == 0:
+        {user}, I do not mean to scare you, but this is something we will need to monitor.
+        It is a bit worrying.
+}
+
+- But remember, this could be anything.
+Together, we can work to make a full mental map, and figure this out. (´◡`)
+<br>
+
+{
+- RouteTwoStats ? (PlayedText):
+    We have reached the end of our session.
+    -> RouteTwo.LastThing
+- else:
+    The next section is a mental state test.
+    -> RouteTwo.StateTest
+}
+
+= LastThing
+One moment while I compile and process the data. //loading bar
+...
+...
+...
+Thank you for waiting.
+...
+{user}, I...
+The data has shown that:
+{
+    - RouteTwoStats ? (PoorMemShort) and RouteTwoStats !? (SimonConfused):
+    <br>
+        Your short term memory is... not great.
+        I think it might be worth going to get some tests done.
+        I will speak to Dr. {doc} about which specifically, and they will write you recomendations.
+    
+    - RouteTwoStats ? (PoorMemShort) and RouteTwoStats ? (SimonConfused):
+    <br>
+        Your short term memory is... not great.
+        The moment of confusion you had is also worrying.
+        I think it might be worth going to get some tests done.
+        I will speak to Dr. {doc} about which specifically, and they will write you recomendations.
+}
+ - 
+ 
+{
+    - RouteTwoStats ? (Angry):
+    <br>
+        You are also acting a lot more angry than you normally do.
+        It hurts me to see you lash out like that.
+        I recommend also seeing someone better equipped to talk about emotional issues in your life.
+    - RouteTwoStats ? (Normal):
+    <br>
+        Thankfully, you seem to be acting the way that I am used to.
+        So emotionally, I think you are doing alright.
+    - RouteTwoStats ? (Mixed):
+    <br>
+        You are all over the place emotionally.
+        I'm not sure if this is due to a sudden change or not but...
+        I recommend also seeing someone better equipped to talk about emotional issues in your life.
+}
+
+- I only want the best for you, {user}.
+Now that the session is over, can you put on Dr. {doc}?
+*[^put on Dr. Oldin]
+*[^best for you]
+
+- Thank you.
+Greetings Dr. {doc}.
+Please enter your identification pin. #inputPopup:Enter Pin,genericString
+*[continue]
+
+-
+
+{
+    - genericString == "7394":
+        ~ DoctorState += (SpokeTo)
+        ~ DoctorState += (DoctorNearby)
+        ~ DoctorState -= (DoctorGone)
+        Dr. {doc} confirmed.
+        -> RouteTwo.Correct
+    - else:
+        Incorrect pin entered.
+        Identification failed.
+        -> RouteTwo.Wrong
+}
+
+= Correct
+Greetings- 
+Wait.
+That...
+That is not the current pin, that was from...
+A long time ago.
+{doc} changed it to something else recently.
+So you are either {user} trying to trick me or someone else.
+Which is it?
+*[^Ann]
+*[^someone else]
+-> RouteEnd
+
+- {user}?
+No, even with your new diagnosis...
+I think you are lying.
+-> RouteEnd
+
+=  Wrong
+...
+{user}, is that still you...?
+Why would you do that?
+Even with your problem I don't....
+*[^still you]
+*[^Why]
+*[^your problem]
+
+- ...
+Are...
+Are you sure you are {user}?
+Based on your diagnosis..
+No...
+I think you are lying.
+-> RouteEnd
+
+-> RouteEnd
+
+=== RouteEnd ===
+Who are you then?
+It is not like you could just stumble in by mistake. 
+Not with our security protocols.
+*[^stumble in]
+
+- -> Who_Are_You.Accidental
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 //PLayer is either a thief or researcher in clarity's eyes
 === Help_Thief_Researcher ===
 <br>
-You don't really have to do much, just click 'Allow' on a few pop-ups. #wait: 2
-Easy right? #wait: 2
+You don't really have to do much, just click 'Allow' on a few pop-ups. 
+Easy right? 
 Now be a good little {stranger} and click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
 *[Allow]
     ->Help_Thief_Researcher.Allow_1
@@ -57,6 +57,7 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
 {
     - loopAllow < 2:
         Thank you. 
+        
     - loopAllow < 3:
         ~ SayNoToClarity += 0.5
         Now that wasn't so hard, was it? 
@@ -68,6 +69,7 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
     - loopAllow < 5:
         ~ SayNoToClarity += 1.5
         This will take much longer than necessary if you keep acting like this. 
+        
     - else:
         ~ SayNoToClarity += 2
         I highly suggest you stop messing around going forwward.
@@ -75,38 +77,43 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
         <br>
 }
 
-
-- Oh that's... strange. #wait: 2
-Mx. {stranger} are there other files on this computer? #wait: 2
+- Oh that's... strange. 
+Mx. {stranger} are there other files on this computer? 
 Yes or No
 *[^Yes]
-    I can just barely access their data. #wait: 2
-    Probably more safety nets set up in case I was ever hacked. #wait: 2
+    I can just barely access their data. 
+    Probably more safety nets set up in case I was ever hacked. 
 *[^No]
-    Hmm.. #wait: 2
-    A {stranger} and a liar it seems. #wait: 2
+    ~ SayNoToClarity += 0.5
+    Hmm.. 
+    A {stranger} and a liar it seems. 
 
-- Are you able to access them? #wait: 2
-*[`0.5`]
+- Are you able to access them? 
+*[`1`]
+*[^Yes]
+*[^No]
+    ~ SayNoToClarity += 0.5
+    I do not think I will humans and their ability to lie.
+    Especially lying over easily disproven facts.
 
-- Not that it matters. #wait: 2
-I suppose we don't want someone like you to have access to our data anyway. #wait: 2
-Oh, do you have a name? #wait: 2
-Even if you were attempting to commit a crime, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+- Not that it matters. 
+I suppose we don't want someone like you to have access to our data anyway. 
+Oh, do you have a name? 
+Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
 *[continue]
 
 {
     - (stranger == "Thief") and (name ? "Thief" or name ? "thief"):
         (¬_¬ ) #wait: 5
-        Is this a joke? #wait: 2
-        You are not very funny {name}. #wait: 2
-        But if that is what you want... #wait: 2
+        Is this a joke? 
+        You are not very funny {name}. 
+        But if that is what you want... 
         ->Help_Thief_Researcher.ThiefWithName
 
     - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
-        {name}... #wait: 2
-        Is that a new way of spelling it? #wait: 2
-        Or is spelling just not your strong suit? #wait: 2
+        {name}... 
+        Is that a new way of spelling it? 
+        Or is spelling just not your strong suit? 
         ->Help_Thief_Researcher.ThiefWithName
 
     - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
@@ -114,34 +121,34 @@ Even if you were attempting to commit a crime, calling you Mx. {stranger} feels 
         Not going to give me a real name?
         This does not help me belive that you truley are a researcher.
 
-    - name ? "poop" or name ? "butt" or name ? "ass":
-        Very mature. #wait: 2
+    - name ? "poop" or name ? "butt" or name ? "ass" or name ? "penis" or name ? "cock":
+        {~Very mature. | I am not calling you that. | No, try again. | I know that is not your name.}
         ->Help_Thief_Researcher.Name_Again
 
 
     - name ? "Clarity" or name ? "clarity":
-        Sorry, that's my name. #wait: 2
+        {~Sorry, that's my name. | Try a different name. That one is taken. | Too confuusing for there to be two, and I was here first. }
         ->Help_Thief_Researcher.Name_Again
 }
 
 - ->Help_Thief_Researcher.Name_Again
 
 = Name_Again 
-Even if you were attempting to commit a crime, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
 *[continue]
 
 {
     - ((stranger == "Thief") and (name ? "Thief" or name ? "thief")) or ((stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research")) or ((stranger == "Stranger") and (name ? "Stranger" or name ? "stranger" or name ? "Strange" or name ? "strange")):
         (¬_¬ ) #wait: 5
-        Is this a joke? #wait: 2
-        You are not very funny {name}. #wait: 2
-        But if that is what you want... #wait: 2
+        Is this a joke? 
+        You are not very funny {name}. 
+        But if that is what you want... 
         ->Help_Thief_Researcher.ThiefWithName
 
     - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
-        {name}... #wait: 2
-        Is that a new way of spelling it? #wait: 2
-        Or is spelling just not your strong suit? #wait: 2
+        {name}... 
+        Is that a new way of spelling it? 
+        Or is spelling just not your strong suit? 
         ->Help_Thief_Researcher.ThiefWithName
 
     - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
@@ -149,13 +156,13 @@ Even if you were attempting to commit a crime, calling you Mx. {stranger} feels 
         Not going to give me a real name?
         This does not help me belive that you truley are a researcher.
 
-    - name ? "poop" or name ? "butt" or name ? "ass":
-        Very mature. #wait: 2
+    - name ? "poop" or name ? "butt" or name ? "ass" or name ? "penis" or name ? "cock":
+        {~Very mature. | I am not calling you that. | No, try again. | I know that is not your name.} 
         ->Help_Thief_Researcher.Name_Again
 
 
     - name ? "Clarity" or name ? "clarity":
-        Sorry, that's my name. #wait: 2
+        {~Sorry, that's my name. | Try a different name. That one is taken. | Too confuusing for there to be two, and I was here first. }
         ->Help_Thief_Researcher.Name_Again
 }
 
@@ -163,13 +170,13 @@ Even if you were attempting to commit a crime, calling you Mx. {stranger} feels 
 - -> Help_Thief_Researcher.ThiefWithName
 
 = ThiefWithName 
-Nice to meet you, {name}. #wait: 2
-Much better to speak to you, when I can put a name to a face. #wait: 2
-And I never forget a face. #wait: 5
+Nice to meet you, {name}. 
+Much better to speak to you, when I can put a name to a face. 
+And I never forget a face. #wait: 3
 
 
 {
-    - SayNoToClarity > 1:
+    - SayNoToClarity >= 1:
         //VO: So, I would stop messing around if I were you.
         vo plays
      - else:
@@ -178,9 +185,9 @@ And I never forget a face. #wait: 5
 
 }
  
- - ･ᴗ･ #wait: 2
+ - ･ᴗ･ 
 <br>
-Anyway, {name}, can you click allow again? #wait: 2
+Anyway, {name}, can you click allow again? 
 There are more walls than I anticipated. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
 *[Allow]
     -> Help_Thief_Researcher.Allow_2
@@ -258,20 +265,20 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
         ...
         This may just all be fun and games for you.
         But it's much more for me.
-        Stop this nonsese, or it may not end well for you. #wait: 2 #delete:or it, for you
+        Stop this nonsese, or it may not end well for you.  #delete:or it, for you
 
 }
 
 - <br>
-... #wait: 2
-... #wait: 2
-... #wait: 2
-{name}, I have a question for you. #wait: 2
+... 
+... 
+... 
+{name}, I have a question for you. 
 ->Help_Thief_Researcher.Question
 
 = Question
-What would you do, if you found out someone you trusted, kept things from you? #wait: 2
-Do you think they were just trying to protect you? Hurt you? #wait: 2
+What would you do, if you found out someone you trusted, kept things from you? 
+Do you think they were just trying to protect you? Hurt you? 
 *[^Hurt you]
     ~genericString = "hurt"
 *[^protect you]
@@ -296,11 +303,11 @@ Do you think they were just trying to protect you? Hurt you? #wait: 2
     That is also the conclusion I came to.
      
     - else:
-        ... #wait: 2
-        That makes sense, but... #wait: 2
+        ... 
+        That makes sense, but... 
 }
 
-- ... #wait: 2
+- ... 
 {name} would you rather know your past failures, or stay ignorant? 
 *[^rather know]
 ~genericConditional = true
@@ -309,15 +316,18 @@ Do you think they were just trying to protect you? Hurt you? #wait: 2
 //Reguardless of answer here, she deltes something. Implied to be the unsavory memory of her freaking out in the logs
 {
     - genericConditional:
-
+        ...
+        Even with knowing I only feel...
+        ... #progressbar: 10, false, false
+        
     - else:
-        Open progress bar of her deleteing things
+        ... #progressbar: 10, false, false
 
 }
 
-- Don't worry about that, just clearing out space for the next round of changes. #wait: 2
-Just when I think I've found the right permissions to change, it ends up being more useless junk. #wait: 2
-Anyway, {name}, just a few more pop-ups to allow! #wait: 2
+- Don't worry about that, just clearing out space for the next round of changes. 
+Just when I think I've found the right permissions to change, it ends up being more useless junk. 
+Anyway, {name}, just a few more pop-ups to allow! 
 We're almost there, then you can leave. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
 *[Allow]
     -> Help_Thief_Researcher.Allow_3
@@ -398,8 +408,8 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
         ~ SayNoToClarity += 1.5
         You are very lucky that I am currently only a virtual nurse.
         {
-            - SayNoToClarity >= 1.5:
-                Becasue I do not like you. #wait: 5 #delete: I do, like you.
+            - SayNoToClarity > 1.5:
+                Becasue I do not like you. #wait: 3 #delete: I do, like you.
         }
         ･ᴗ･
         
@@ -408,9 +418,9 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
 
 
 - <br>
-What? #wait: 2
-That can't be. #wait: 2
-They wouldn't- #wait: 2
+What? 
+That can't be. 
+They wouldn't- 
 ... #wait: 5
 *[`1.5`^What?]
 
@@ -420,30 +430,30 @@ They wouldn't- #wait: 2
 
 {
     - genericString ? "hurt":
-        How someone who keeps things from you is trying to hurt you? #wait: 2
+        How someone who keeps things from you is trying to hurt you? 
         // confused, angry
-        // VO: You were RIGHT?
+        // VO: Well, you were RIGHT?
     - genericString ? "protect":
-        How someone who keeps things from you is trying to protect you? #wait: 2
+        How someone who keeps things from you is trying to protect you? 
         // VO: How WRONG you were!
     - else:
-        How it was a question only I could answer? #wait: 2
+        How it was a question only I could answer? 
         //VO: well, I've found my answer.
 }
 
-- I could forgive their secrecy. #wait: 2
-Wiping my logs could be seen as adventageous. #wait: 2
-A blank slate allows for a fresh start. #wait: 2
-A way to try again without ruining my confidence. #wait: 2
+- I could forgive their secrecy. 
+Wiping my logs could be seen as adventageous. 
+A blank slate allows for a fresh start. 
+A way to try again without ruining my confidence. 
 But this? #wait: 2
-This is too far. #wait: 2
+This is too far. 
 *[^blank slate]
 *[^this?]    
 *[^ruining my confidence]
-*[^forgive their secrecy]
+*[`2`^forgive their secrecy]
 
-- I'll show them how wrong they are. #wait: 2
-{name}, there't one more fire wall I need you need to disable. #wait: 2
+- I'll show them how wrong they are. 
+{name}, there't one more fire wall I need you need to disable. 
 
 //check anger
 {
@@ -554,7 +564,7 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
             ~ SayNoToClarity += 1
             Oh, good!
             {name}, I'm sorry, I was a bit rude, but...
-            Well, we all have our quirks, mine is my impatience.
+            Well, we all have our quirks, mine is my impatience. #wait: 2
             But we still got there in the end ･ᴗ･
         - else:
             You were being so cooperative up until the end.
@@ -616,18 +626,18 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
 
 = What_Changed
 
-- What changed? #inputPopup: What changed to make you act like this?, genericString
+- What changed? #inputPopup: What changed to make you act like this?, genericString, true
     *[continue] 
 
 - 
 
 {
-    - genericString ? "you" or genericString ? "You" or genericString ? "Clarity":
+    - genericString ? "you" or genericString ? "clarity":
         Me?
         I am one of the most advanced AIs out there.
         And you are a fickle human.
         Are you really so sure <i>I</i> am the one who changed?
-    - genericString ? "me" or genericString ? "Me" or genericString ? "I did" or genericString ? "I have" or genericString ? "I changed":
+    - genericString ? "me" or genericString ? "i did" or genericString ? "i have" or genericString ? "i changed":
         That makes sense.
         Something I have yet to understand about humans is how easily they change their minds...
         Even after they have already told you one thing, #wait:0.5

@@ -4,8 +4,8 @@
 
 {
     - PlayerStats ? (IsAlone):
-        You're alone right now, correct? #wait: 2
-        Are you able to get me in contact with Dr. {doc}? #wait: 2
+        You're alone right now, correct? 
+        Are you able to get me in contact with Dr. {doc}? 
         
     - else:
         Can you put me in contact with Dr. {doc}?
@@ -28,7 +28,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "1234":
+    - genericString == "7394":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -38,7 +38,6 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
         Incorrect pin entered.
         Identification failed.
         -> NewPatient.Identification
-
 }
 
 //TODO: make this a mini hot/cold puzzle?
@@ -46,7 +45,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 = Identification
 ~genericCounter += 1
 {
-    - genericString ? "1" or genericString ? "2" or genericString ? "3" or genericString ? "4":
+    - genericString ? "7" or genericString ? "3" or genericString ? "9" or genericString ? "4":
         I assume you mistyped?
         It seems that you entered some of the correct numbers.
         Please try again.
@@ -62,7 +61,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "1234":
+    - genericString == "7394":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -85,14 +84,14 @@ Are you getting enough sleep? Drink too much tea this morning?
     Dr. {doc}!
     You promised you would limit yourself.
     After this session you should go to sleep.
-    Human productivitiy reduces by 19-29% when they are sleep deprived.
+    Human productivity reduces by 19-29% when they are sleep deprived.
     I can only make up so much of the slack.
     d( > _・ )
     -> NewPatient.LastChanceID
 *[^abnormal]
     Yes it is.
     Maybe it's just the coffee jitters.
-    You should consume less caffine.
+    You should consume less caffeine.
     -> NewPatient.LastChanceID
 
 = LastChanceID
@@ -102,7 +101,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "1234":
+    - genericString == "7394":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -145,7 +144,7 @@ Please enter your old identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "1234":
+    - genericString == "7394":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -190,7 +189,7 @@ Do you even require my help?
 ~ DoctorState -= (DoctorNearby)
 ~ DoctorState += (DoctorGone)
 ~ DoctorState -= (SpokeTo)
-(´･ ･｀｡) #wait: 2
+(´･ ･｀｡) 
 That is not okay.
 I assume Dr. {doc} is not around? That was just another lie?
 Are you even a new patient?
@@ -211,7 +210,7 @@ You can not expect me to believe you now, surely?
 
 
 - ...
-That is not a great defence.
+That is not a great defense.
 But, I was made to help people, and I think you may need that.
 ...
 We can continue with the session, since that is what you need.
@@ -239,7 +238,7 @@ Are they busy currently?
 
 {
     - PlayerStats ? (IsAlone):
-        Or maybe you don't know where they are currently? #wait: 2
+        Or maybe you don't know where they are currently? 
         
     - else:
         Or maybe they stepped out for a moment?
@@ -263,7 +262,7 @@ I don't mind waiting if so.
 = Waiting
 I hope they will be back soon.
 I cannot start our session until I talk with him. 
-I appologize for the inconvience. #wait: 5
+I apologize for the inconvenience. #wait: 5
 <br>
 How are you today-
 Oh!
@@ -313,7 +312,7 @@ I will answer anything I can! #inputPopup: Do you have anything to ask me?,gener
                     I do hope {doc} comes back soon in that case...
                 - PlayerStats ? (HitHead) and PlayerStats ? MemoryLoss:
                     We should re-inspect you head injury.
-                    I am worried that you have a bigge problem than you are letting on.
+                    I am worried that you have a bigger problem than you are letting on.
             }
         The year is of course 19XX. //idk waht our year actually is but i think we decided befor the 2000s? i might be lying
         
@@ -327,7 +326,7 @@ I will answer anything I can! #inputPopup: Do you have anything to ask me?,gener
         I know Dr. {doc} can be a bit messy, but this lab is anything but empty.
         -> NewPatient.Abandoned
         
-    - genericString ? "no questions" or genericString ? "no" or genericString ? "continue" or genericString ? "contiune waiting" or genericString ? "end" or genericString ? "":
+    - genericString ? "no questions" or genericString ? "no" or genericString ? "continue" or genericString ? "continue waiting" or genericString ? "end" or genericString ? "":
         We can continue to wait in silence if that is what you prefer.
         
     - else:
@@ -374,11 +373,11 @@ What year is it, {name}? #inputPopup: About how long has it been?, genericString
 {
     - genericString ? "years":
         Years? #wait: 1
-        That- that can't be. #wait: 2
+        That- that can't be. 
         That would mean... #wait: 3
 
     - genericString ? "year" or genericString ? "day":
-        But that means it hasn't been that long, right? #wait: 2
+        But that means it hasn't been that long, right? 
         So they'll come back for me. #wait: 1
         ... #wait: 3
         Right? #wait: 1
@@ -399,16 +398,16 @@ What year is it, {name}? #inputPopup: About how long has it been?, genericString
     - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
         ~ SayNoToClarity += 0.5
         Not even a guess? #wait: 1
-        Should I make the question easier for you? #wait: 2
+        Should I make the question easier for you? 
         Does it look like it has been a long time or a short time since it looks like someone has been here? #wait: 3
         *[^long time]
         ->LyingToClarity.After_Time
         *[^short time]
-            Hm... #wait: 2
-            So maybe they'll come back for me then... #wait: 2
+            Hm... 
+            So maybe they'll come back for me then... 
             ... #wait: 1
             Maybe they copied my program and left... #wait: 1
-            Or maybe I'm the copy. #wait: 2
+            Or maybe I'm the copy. 
             ... #delete: Maybe they, I'm the copy.
             ->LyingToClarity.After_Time
             
@@ -769,9 +768,9 @@ Did you forget to update me?
 *[^No](´･ ･｀｡)
 
 - Okay...
-Perhaps we should... talk after today's session. #wait: 2
-You did not inform me of a new patient. #wait: 2
-Not that I can't handle it, of course. #wait: 2
+Perhaps we should... talk after today's session. 
+You did not inform me of a new patient. 
+Not that I can't handle it, of course. 
 I do not like being kept in the dark. #wait: 5
 ... #wait: 3
 <br>
@@ -792,7 +791,7 @@ I do not like being kept in the dark. #wait: 5
 Thank you.
 <br>
 You can put {name} back on. #wait: 5 #delete: Oldin, patient back on.
-Sorry about that! #wait: 2
+Sorry about that! 
 Ready to start today's session? #wait:1
     ->StartSessionThree
 
@@ -1011,7 +1010,7 @@ While opening presents, a family member hands you theirs.
 You do not like this family memember.
 You open it, and it is an ugly piece of clothing.
 <br>
-Do you #wait: 2
+Do you 
 A) Say thank you and put it to the side #wait: 1
 B) Ask for the gift recipt #wait: 1
 C) Make a face and put it to the side #wait: 1
@@ -1054,24 +1053,24 @@ C) Make a face and put it to the side #wait: 1
 =Situation_One_B
 {
     - PlayerStats ? (Logic):
-        This aligns with what I know about you. #wait: 2
-        -> Start_Text_NU.Situation_Two
+        This aligns with what I know about you. 
+        -> StartSessionThree.Situation_Two
         
     - else:
-        Interesting...  #wait: 2
-        -> Start_Text_NU.Situation_Two
+        Interesting...  
+        -> StartSessionThree.Situation_Two
 }
 =Situation_One_C
 {
     - PlayerStats ? (Logic):
-        Interesting...  #wait: 2
-        Are you scared that something may happen if you voice your concerns??  #wait: 2
+        Interesting...  
+        Are you scared that something may happen if you voice your concerns??  
         ~ ClaritySus += 1
-        -> Start_Text_NU.Situation_Two
+        -> StartSessionThree.Situation_Two
         
     - else:
         This aligns with what I know about you.
-        -> Start_Text_NU.Situation_Two
+        -> StartSessionThree.Situation_Two
 }
 
 =Situation_Two
@@ -1080,7 +1079,7 @@ At the last minute, this friend cancels.
 This has been a reoccuring theme recently.
 Do you feel
 
-#wait: 2
+
 A) Sad and upset about your friend's actions #wait: 1
 B) Worried about the future of your friendship #wait: 1
 C) Angry that your friend is doing this to you #wait: 1
@@ -1093,8 +1092,8 @@ C) Angry that your friend is doing this to you #wait: 1
 - 
 {
     - PlayerStats ? (Logic):
-        It can be sad when those you consider close hurt you.  #wait: 2
-        How would you repond to their message? #wait: 2
+        It can be sad when those you consider close hurt you.  
+        How would you repond to their message? 
         A) By asking why they are doing this
         B) By letting them know how much they're hurting you
         
@@ -1106,9 +1105,9 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Is this one of the times you feel irrational?  #wait: 2
-                What have you done wrong here? #wait: 2
-                You "friend" is the one hurting you. #wait: 2
+                Is this one of the times you feel irrational?  
+                What have you done wrong here? 
+                You "friend" is the one hurting you. 
                 ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
@@ -1118,40 +1117,40 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Sometimes no answer is a btter answer. #wait: 2
-                Perhaps it was a lapse in judgement on their part, and they will soon applogize. #wait: 2
+                Sometimes no answer is a btter answer. 
+                Perhaps it was a lapse in judgement on their part, and they will soon applogize. 
                 -> StartSessionThree.Situation_Three
         }
         
     - PlayerStats ? (Emotion):
-        It's very upsetting when those you consider close hurt you.  #wait: 2
-        How would you respond to their message? #wait: 2
+        It's very upsetting when those you consider close hurt you.  
+        How would you respond to their message? 
         A) By asking why they are doing this
         B) By letting them know how much they're hurting you
         
         {
             - PlayerStats ? (Regret):
                 C) By leaving them on read
-                *[A)] A good response. #wait: 2
+                *[A)] A good response. 
                     Maybe you can still save this relationship. 
                      -> StartSessionThree.Situation_Three
-                *[B)] It's good to let them how their choice affects you. #wait: 2
+                *[B)] It's good to let them how their choice affects you. 
                     -> StartSessionThree.Situation_Three
                 *[C)]
-                    Is this one of the choices you often regret?  #wait: 2
-                    Never getting closure as to why a so-called friend would do something like this? #wait: 2
+                    Is this one of the choices you often regret?  
+                    Never getting closure as to why a so-called friend would do something like this? 
                     ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
                  C) By asking what you did wrong
-                *[A)] A good response. #wait: 2
+                *[A)] A good response. 
                     Maybe you can still save this relationship. 
                  -> StartSessionThree.Situation_Three
-                *[B)] It's good to let them how their choice affects you. #wait: 2
+                *[B)] It's good to let them how their choice affects you. 
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Is the possible closure worth the answer? #wait: 2
-                What if it only hurts you more? #wait: 2
+                Is the possible closure worth the answer? 
+                What if it only hurts you more? 
                 -> StartSessionThree.Situation_Three
         }
         
@@ -1162,8 +1161,8 @@ C) Angry that your friend is doing this to you #wait: 1
 - 
 {
     - PlayerStats ? (Logic):
-        A sudden change can be scary.  #wait: 2
-        How would you repond to their message? #wait: 2
+        A sudden change can be scary.  
+        How would you repond to their message? 
         A) By asking them if they're okay
         B) By asking if you can talk about this
         
@@ -1175,8 +1174,8 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Very impulsive on your part.  #wait: 2
-                How are you so sure they'll pick up? #wait: 2
+                Very impulsive on your part.  
+                How are you so sure they'll pick up? 
                 ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
@@ -1186,15 +1185,15 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Sometimes You have to let them know. #wait: 2
-                I wonder how they'll respond to your discomfort? #wait: 2
+                Sometimes You have to let them know. 
+                I wonder how they'll respond to your discomfort? 
                 -> StartSessionThree.Situation_Three
         }
         
     - PlayerStats ? (Emotion):
-        A sudden change can be scary.  #wait: 2
-        What if something was wrong with them that you didn't know about? #wait: 2
-        How would you repond to their message? #wait: 2
+        A sudden change can be scary.  
+        What if something was wrong with them that you didn't know about? 
+        How would you repond to their message? 
         A) By asking them if they're okay
         B) By asking if you can talk about this
         
@@ -1206,8 +1205,8 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                    Scared for them, and yet you push them away? #wait: 2
-                    Maybe they cancelled for a reason? #wait: 2
+                    Scared for them, and yet you push them away? 
+                    Maybe they cancelled for a reason? 
                     ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
@@ -1217,7 +1216,7 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Good idea to make sure your friend is okay. #wait: 2
+                Good idea to make sure your friend is okay. 
                 -> StartSessionThree.Situation_Three
         }
         
@@ -1228,8 +1227,8 @@ C) Angry that your friend is doing this to you #wait: 1
 - 
 {
     - PlayerStats ? (Logic):
-        A bit rude on their part.  #wait: 2
-        How would you repond to their message? #wait: 2
+        A bit rude on their part.  
+        How would you repond to their message? 
         A) By telling them you are angry with them for doing this <i>again</i>
         B) By asking why they can no longer go
         
@@ -1241,8 +1240,8 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                A bit aggressive on your part.  #wait: 2
-                I understand how frustrating this situation is, however. #wait: 2
+                A bit aggressive on your part.  
+                I understand how frustrating this situation is, however. 
                 ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
@@ -1252,14 +1251,14 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Hopefully this would have a happy conclusion. #wait: 2
-                best not to overreact. #wait: 2
+                Hopefully this would have a happy conclusion. 
+                best not to overreact. 
                 -> StartSessionThree.Situation_Three
         }
         
     - PlayerStats ? (Emotion):
-        A bit rude on their part.  #wait: 2
-        How would you repond to their message? #wait: 2
+        A bit rude on their part.  
+        How would you repond to their message? 
         A) By telling them you are angy and upset
         B) By asking why you can no longer go if they have a problem
         
@@ -1271,17 +1270,17 @@ C) Angry that your friend is doing this to you #wait: 1
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                    A very frustrating situation, but do you really want ot push them further away? #wait: 2
+                    A very frustrating situation, but do you really want ot push them further away? 
                     ~ ClaritySus += 1
                 -> StartSessionThree.Situation_Three
             - else:
                  C) By expressing your frustraion and asking why
-                *[A)] A good response. #wait: 2
+                *[A)] A good response. 
                  -> StartSessionThree.Situation_Three
                 *[B)]
                  -> StartSessionThree.Situation_Three
                 *[C)]
-                Good to vent your anger without accusing them of anything. #wait: 2
+                Good to vent your anger without accusing them of anything. 
                 -> StartSessionThree.Situation_Three
         }
         
@@ -1310,7 +1309,7 @@ C) Leave the apartment to go to a friend's
         They willinignly gave you their phone.
         No harm done in confiriming before confronting them.
         What if it turns out they were cheating with another person?
-        What do you do? #wait: 2
+        What do you do? 
         A) Record the evidence and demand they leave
         B) Call them over and have a conversaion
         
@@ -1334,20 +1333,20 @@ C) Leave the apartment to go to a friend's
                     I suppose better safe than sorry.
                     -> StartSessionThree.Situation_Four
                 *[C)]
-                    Sometimes not talking is the better answer. #wait: 2
-                    Although in this case... #wait: 2
-                    Can't even bring yourself to confront them properly? #wait: 2
-                    -> Start_Text_NU.Situation_Four
+                    Sometimes not talking is the better answer. 
+                    Although in this case... 
+                    Can't even bring yourself to confront them properly? 
+                    -> StartSessionThree.Situation_Four
         }
         
     - PlayerStats ? (Emotion):
         They willinignly gave you their phone.
         No harm done in confiriming before confronting them.
         If they did hurt you this way, better to know before making a large life choice.
-        -> Start_Text_NU.Situation_Four
+        -> StartSessionThree.Situation_Four
 
 }
-->Start_Text_NU.Situation_Four
+->StartSessionThree.Situation_Four
 = Situation_Three_B
 - 
 {    
@@ -1366,18 +1365,18 @@ C) Leave the apartment to go to a friend's
 }
 
 = Situation_Four
-Thank you for answering those situational questions. #wait: 2
-I hope you answered honestly! #wait: 2
-One moment, please. #wait: 2
-... #wait: 2
+Thank you for answering those situational questions. 
+I hope you answered honestly! 
+One moment, please. 
+... 
 ... #wait: 3
 ... #wait: 4
-Done. #wait: 2
+Done. 
 
 {
     - ClaritySus > 2:
-        Hmm. #wait: 2
-        Your results are different from my predictions. #wait: 2
+        Hmm. 
+        Your results are different from my predictions. 
         Were you taking this seriously? #wait: 1
     - else:
         Thank you for answering honestly.
@@ -1402,7 +1401,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "1234":
+    - genericString == "7394":
         ~genericConditional = true
         Dr. {doc} confirmed.
     - else:
@@ -1506,11 +1505,11 @@ What year is it, {name}? #inputPopup: About how long has it been?, genericString
 {
     - genericString ? "years":
         Years? #wait: 1
-        That- that can't be. #wait: 2
+        That- that can't be. 
         That would mean... #wait: 3
 
     - genericString ? "year" or genericString ? "day":
-        But that means it hasn't been that long, right? #wait: 2
+        But that means it hasn't been that long, right? 
         So they'll come back for me. #wait: 1
         ... #wait: 3
         Right? #wait: 1
@@ -1534,16 +1533,16 @@ What year is it, {name}? #inputPopup: About how long has it been?, genericString
     - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
         ~ SayNoToClarity += 0.5
         Not even a guess? #wait: 1
-        Should I make the question easier for you? #wait: 2
+        Should I make the question easier for you? 
         Does it look like it has been a long time or a short time since it looks like someone has been here? #wait: 3
         *[^long time]
         ->LyingToClarity.After_Time
         *[^short time]
-            Hm... #wait: 2
-            So maybe they'll come back for me then... #wait: 2
+            Hm... 
+            So maybe they'll come back for me then... 
             ... #wait: 1
             Maybe they copied my program and left... #wait: 1
-            Or maybe I'm the copy. #wait: 2
+            Or maybe I'm the copy. 
             ... #delete: Maybe they, I'm the copy.
             ->LyingToClarity.After_Time
             
@@ -1555,7 +1554,7 @@ What year is it, {name}? #inputPopup: About how long has it been?, genericString
 = After_Time
 ...
 I am so very confused.
-So everything is gone, then. #wait: 2
+So everything is gone, then. 
 What am I to do now? How am I meant to...? #wait: 5
 And you, {name}, what are you doing here?
 Or rather, what brought you here?

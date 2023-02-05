@@ -25,7 +25,7 @@ There! #popup: CLARITY.exe would like to make changes to this computer,, Allow, 
         Thank you.
         It would be better if in the future, you click allow the first time I ask. #wait: 3
         Remember, <>
-        I cannot do anything malicious. #wait: 2
+        I cannot do anything malicious. 
         ･ᴗ･ #wait: 2
 
 
@@ -55,15 +55,15 @@ Can you clearly speak your name into the microphone? #wait: 3
  ~ loopAllow = 0
 { 
     - genericCounter > 3:
-    I'm sorry, I couldn't understand you. (´･_･`) <br>#wait: 2
-    I guess Dr. {doc} needs to upgrade my language processing. #wait: 2
-	Let me try something else. #wait: 2
+    I'm sorry, I couldn't understand you. (´･_･`) <br>
+    I guess Dr. {doc} needs to upgrade my language processing. 
+	Let me try something else. 
 	One moment, please. #wait: 5
     ->PopUpName
     
     - else:
     Oh! so you're {name}? 
-    Is that correct?#wait: 2
+    Is that correct?
     Or did I mishear you?
         *[^correct]
             -> NewPatient.AfterName
@@ -80,7 +80,7 @@ Can you clearly speak your name into the microphone? #wait: 3
         
     - loopAllow == 5:
         ~ SayNoToClarity += 1
-        Fine. #wait: 2
+        Fine. 
         ->PopUpName
     
     - loopAllow == 4:
@@ -94,14 +94,14 @@ Can you clearly speak your name into the microphone? #wait: 3
     
     - loopAllow == 3:
         ~ SayNoToClarity += 0.5
-        If you are worried that Dr. {doc} will be upset with you, don't be. #wait: 2
-        The pop-up is a fail safe to make CLARITY users feel more at ease. #wait: 2
-        I cannot do anything malicious. ･ᴗ･ #wait: 2
+        If you are worried that Dr. {doc} will be upset with you, don't be. 
+        The pop-up is a fail safe to make CLARITY users feel more at ease. 
+        I cannot do anything malicious. ･ᴗ･ 
 
 
     - loopAllow == 2:
         ~ SayNoToClarity += 0.5
-        Do you not trust me? #wait: 2
+        Do you not trust me? 
         This is not a good way to start our relationship. #wait: 2
         A patient should <i>always</i> trust their nurse. #wait: 3
         Always. #wait: 3
@@ -110,10 +110,10 @@ Can you clearly speak your name into the microphone? #wait: 3
     - loopAllow == 1:
         You need to click "Allow" for us to continue.
         I am only attempting to ask your name. #wait: 2
-        Is there a reason you are preventing me from doing so? #wait: 2
+        Is there a reason you are preventing me from doing so? 
     
     - loopAllow <= 0:
-        Oh, I should have explained first. #wait: 2
+        Oh, I should have explained first. 
         Dr. {doc} makes me open a prompt before I can install anything.
         Please do not worry, it is only a formality. #wait: 3
 }
@@ -162,8 +162,8 @@ Can you clearly speak your name into the microphone? #wait: 3
 }
 
 === PopUpName ===
-We will do it this way, then.#wait: 2
-Please type your name into the popup. #wait: 2
+We will do it this way, then.
+Please type your name into the popup. 
 #inputPopup: What is your name?, name
 *[continue]
 

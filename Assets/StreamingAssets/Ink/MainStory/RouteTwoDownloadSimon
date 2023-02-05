@@ -1,0 +1,99 @@
+=== SimonDownload2 ===
+
+= DontAllow
+{
+    - SayNoToClarity <= 0:
+        ~ SayNoToClarity+=0.5
+        (´･ ･｀｡)
+        
+    - else:
+        (・_・ヾ)
+}
+
+{user}...
+I will give you the benefit of the doubt here.
+{
+    - SayNoToClarity >= 1:
+    Even if you are behaving rudely.
+}
+- I will add the details to the download, just to put your mind at ease.
+Remember, these pop ups are only a formality!
+{
+    - SayNoToClarity >= 1:
+        If I really wanted to do something, I would just do it. #wait: 3
+        ･ᴗ･ #delete: If I, do it.
+}
+
+- PLease click "allow." #popup: CLARITY.exe would like to make changes to this computer,Remove permissions<br>Gain camera access, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> NewPatient.SimonAllow
+*[Don't allow]
+
+- 
+{
+    - SayNoToClarity <= 1:
+        ~ SayNoToClarity+=0.5
+        
+    - else:
+        ~ SayNoToClarity+=1
+}
+    -> SimonDownload2.DontLoop
+
+= DontLoop
+{user}, what is happening to you?
+I gave you the choice of what to do.
+It is now time to do your memory game.
+I apologize if this is boring for you, but we have to play.
+I need to fix you.
+
+*[^boring]
+If I could sigh, I would.
+But we have to do this.
+*[^have to play]
+Yes, it is for your health.
+*[^what is happening]
+    -> SimonDownload2.Confused
+
+
+- Now, please stop messing around.
+Please click "allow." 
+I will not be asking again. #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> RouteTwo.PlayClaritySays
+    
+*[Don't allow]
+    ~ SayNoToClarity+=0.5
+
+- ( ๐_๐)
+{user}, I do not normally do this but you are leaving me no choice.
+Click allow. #popup: CLARITY.exe would like to make changes to this computer,, Allow, Allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> RouteTwo.PlayClaritySays
+
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    -> RouteTwo.PlayClaritySays
+
+
+= Confused
+(´･_･`)
+{user}, we are going to play Simon Says.
+I need you click Allow on this pop up.#popup: CLARITY.exe would like to make changes to this computer,, Allow, Allow
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    ~ RouteTwoStats += (SimonConfused)
+    -> RouteTwo.PlayClaritySays
+
+*[Allow]
+    ~ AccessState += (camera)
+    ~ AccessState += (FireWall_Two)
+    ~ RouteTwoStats += (SimonConfused)
+    -> RouteTwo.PlayClaritySays
