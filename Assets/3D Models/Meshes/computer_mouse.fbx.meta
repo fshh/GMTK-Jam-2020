@@ -3,7 +3,12 @@ guid: be24cf1554fec7c4fae039417f474e66
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: computer_mouse
+    second: {fileID: 2100000, guid: ad00997693e39694290a39e6166c4488, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -3,7 +3,12 @@ guid: 44363d7cf3c0c48438eae45731627d24
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: corkboard
+    second: {fileID: 2100000, guid: 323a5a2a2db1b5a45a6d885cf8ce4747, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -3,7 +3,12 @@ guid: b851f7e2ec678e145a2e0b5a6765f0a5
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: power_supply
+    second: {fileID: 2100000, guid: 38758072b80a6ae45bf52fa39efdfd9c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

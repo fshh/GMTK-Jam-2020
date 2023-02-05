@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 80f25238886bde04091d8929df15a49f
+guid: fd0b35b2c16704d47b41576f0ed1ed1a
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: oscope
-    second: {fileID: 2100000, guid: 7f363466b9f396c4c845a3eb7315882a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
