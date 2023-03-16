@@ -6,6 +6,7 @@ public class AmbientIntermittentSounds : MonoBehaviour
 {
     public List<AudioClip> sounds;
     public float minTime, maxTime;
+    public float minVolumeMultiplier, maxVolumeMultiplier;
 
     private List<AudioSource> sources;
 
@@ -23,7 +24,7 @@ public class AmbientIntermittentSounds : MonoBehaviour
             float timeUntilNext = Random.Range(minTime, maxTime);
             yield return new WaitForSeconds(timeUntilNext);
             AudioSource source = sources[Random.Range(0, sources.Count)];
-            source.PlayOneShot(sounds[Random.Range(0, sounds.Count)]);
+            source.PlayOneShot(sounds[Random.Range(0, sounds.Count)], Random.Range(minVolumeMultiplier, maxVolumeMultiplier));
         }
     }
 }
