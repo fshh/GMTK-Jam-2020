@@ -6,6 +6,7 @@ using TMPro;
 public class Popup : MonoBehaviour
 {
     public TextMeshProUGUI description, collapsedInfo, buttonOne, buttonTwo;
+    public GameObject detailsToggle;
 
     private string[] buttonNames;
 
@@ -33,6 +34,10 @@ public class Popup : MonoBehaviour
 
         description.text = descriptionText;
         collapsedInfo.text = extraDescription;
+        if (string.IsNullOrWhiteSpace(extraDescription))
+        {
+            detailsToggle.SetActive(false);
+        }
 
         buttonOne.text = buttonOneText;
         buttonNames[0] = buttonOneText;

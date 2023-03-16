@@ -385,6 +385,7 @@ MonoBehaviour:
   collapsedInfo: {fileID: 7764463163935823455}
   buttonOne: {fileID: 1478976562977100131}
   buttonTwo: {fileID: 2190348563167110208}
+  detailsToggle: {fileID: 5872509659511999439}
 --- !u!114 &4939107774408246480
 MonoBehaviour:
   m_ObjectHideFlags: 0
