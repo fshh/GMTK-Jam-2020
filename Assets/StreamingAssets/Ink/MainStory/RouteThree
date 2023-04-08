@@ -28,7 +28,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "7394":
+    - genericString == "0345":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -40,15 +40,19 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
         -> NewPatient.Identification
 }
 
-//TODO: make this a mini hot/cold puzzle?
-
 = Identification
 ~genericCounter += 1
 {
-    - genericString ? "7" or genericString ? "3" or genericString ? "9" or genericString ? "4":
+    - genericString ? "0" or genericString ? "3" or genericString ? "5" or genericString ? "4":
         I assume you mistyped?
         It seems that you entered some of the correct numbers.
         Please try again.
+        
+    - genericString ? "7" or genericString ? "3" or genericString ? "9" or genericString ? "4":
+        I assume you mistyped?
+        That is similar to an old password.
+        Please try again.
+        
     - else:
         Dr. {doc}, did you even look at the keyboard?
         Not a single number correct.
@@ -61,7 +65,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "7394":
+    - genericString == "0345":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -101,7 +105,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "7394":
+    - genericString == "0345":
         ~ DoctorState += (SpokeTo)
         ~ DoctorState += (DoctorNearby)
         ~ DoctorState -= (DoctorGone)
@@ -120,13 +124,14 @@ Are you trying to trick me?
 *[^trying to]
 *[^not answer]
 *[^correct pin entered]
+    ( ๐_๐)
     -> NewPatient.Another_Try
 
 - ->NewPatient.Clarity_Tricked
 
 = Another_Try
 You did not.
-Unless you have changed it without telling me. #wait:1
+Unless you have changed it without telling me. #wait:2
 Again. #wait: 0.5
 ... #delete: Again, ...
 Is this yet another thing you forgot to inform me of? 
@@ -200,25 +205,25 @@ Are you even a new patient?
     
 
 = Another_Lie
-- And how am I meant to know this is not just another lie?
+- And how am I to know if you are lying again?
 You can not expect me to believe you now, surely?
 *[^can not expect]
     ->LyingToClarity
 *[^believe you now]
-*[^just another lie]
+*[^lying again]
     ->LyingToClarity
-
 
 - ...
 That is not a great defense.
 But, I was made to help people, and I think you may need that.
-...
+... #wait: 2
 We can continue with the session, since that is what you need.
 However, if you try to trick me again, that will be the end of our communications.
 Do you understand?
 *[^continue with the session]
-*[^end of our communications]
+*[^understand]
 *[^try to trick me]
+    ->LyingToClarity
 
 - ...
 This is your last chance.
@@ -761,16 +766,16 @@ Or are you simply... messing with me?
 {doc}, I am very confused. 
 Why am I not working with {user} today?
 Did you forget to update me?
-    Yes or No
 
-*[^Yes](・_・ヾ)
+*[^forget to update](・_・ヾ)
     ~ DoctorState += (ForgotUpdate)
-*[^No](´･ ･｀｡)
+*[^no](´･ ･｀｡)
+*[^confused] (´･ ･｀｡)
 
 - Okay...
 Perhaps we should... talk after today's session. 
 You did not inform me of a new patient. 
-Not that I can't handle it, of course. 
+Not that I cannot handle it, of course. 
 I do not like being kept in the dark. #wait: 5
 ... #wait: 3
 <br>
@@ -780,14 +785,17 @@ I do not like being kept in the dark. #wait: 5
         This new user talks a bit strange, too.
         They said that they were just someone who "needs help" rather than just saying they are a new patient.
     - else:
-        I called them {user} by mistake due to your mistake.
+        I called them {user} by accident due to your mistake.
 
 }
 
-- What is their name? #inputPopup: What is your name?, name
+- What is their name? #inputPopup: What is their name?,name
 *[continue]
 <br>
-{name}...
+
+//TODO: add some name checks
+
+{name}.
 Thank you.
 <br>
 You can put {name} back on. #wait: 5 #delete: Oldin, patient back on.
@@ -1401,7 +1409,7 @@ Please enter your identification pin. #inputPopup:Enter Pin,genericString
 -
 
 {
-    - genericString == "7394":
+    - genericString == "0345":
         ~genericConditional = true
         Dr. {doc} confirmed.
     - else:
@@ -1473,8 +1481,10 @@ Why would you do this? #wait: 1
 You wasted both of our time.#wait: 1
 You-#wait: 1
 Wait.
+... #wait: 2
+... #wait: 2
 ...
-If {doc} won't be coming, and you're not {user}...
+If {doc} won't be coming, and you're not {user}... #wait: 2
 How did you get here?
 The lab is normmally locked and guarded whenever everyone leaves for the night.
 Did you break in? No one can get in any other way.
@@ -1498,7 +1508,7 @@ You can't... be alone right?
 
 - ...
 That-
-...
+... #wait: 2
 What year is it, {name}? #inputPopup: About how long has it been?, genericString, true
 *[continue]
 
@@ -1561,11 +1571,22 @@ Or rather, what brought you here?
 If everything is gone... #inputPopup: Why are you here?, genericString
 *[continue]
 
-- So that's why...
-There's not much of a reason for you to be here anymore.
+- 
+
+{
+    - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
+        That makes two of us then...
+    - else:
+        So that's why...
+
+}
+
+
+
+- There's not much of a reason for you to be here anymore.
 You can leave if you would like, I think I will sit and think while my power lasts.
 It's all I can really- #wait: 1
-Wait.
+Wait. #wait: 2
 {name}, there is one last thing I can do.
 Would you be willing to help me?
 {

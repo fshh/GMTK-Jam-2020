@@ -3,7 +3,92 @@
 <br>
 You don't really have to do much, just click 'Allow' on a few pop-ups. 
 Easy right? 
-Now be a good little {stranger} and click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
+{ 
+- route:->Help_Thief_Researcher.name_early
+- else:->Help_Thief_Researcher.start
+}
+
+= name_early
+<br>Oh!
+Before I forget.
+Since we're partners now, and I can't call you {user}...
+What should I call you? #inputPopup: What should I call you?, stranger, false
++[continue]
+{
+    - (stranger == "Thief") and (name ? "Thief" or name ? "thief"):
+        (¬_¬ ) #wait: 5
+        Is this a joke? 
+        You are not very funny {name}. 
+        But if that is what you want... 
+        ->Help_Thief_Researcher.start
+
+    - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
+        {name}... 
+        Is that a new way of spelling it? 
+        Or is spelling just not your strong suit? 
+        ->Help_Thief_Researcher.start
+
+    - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
+        Hm...
+        Not going to give me a real name?
+        This does not help me belive that you truley are a researcher.
+
+    - name ? "poop" or name ? "butt" or name ? "ass" or name ? "penis" or name ? "cock":
+        {~Very mature. | I am not calling you that. | No, try again. | I know that is not your name.}
+        ->Help_Thief_Researcher.Name_Again_early
+
+
+    - name ? "Clarity" or name ? "clarity":
+        {~Sorry, that's my name. | Try a different name. That one is taken. | Too confuusing for there to be two, and I was here first. }
+        ->Help_Thief_Researcher.Name_Again_early
+}
+
+- {stranger}...
+Much easier to talk to you this way.
+->Help_Thief_Researcher.start
+
+= Name_Again_early
+What should I call you? #inputPopup: What should I call you?, stranger, false
++[continue]
+
+{
+    - ((stranger == "Thief") and (name ? "Thief" or name ? "thief")) or ((stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research")) or ((stranger == "Stranger") and (name ? "Stranger" or name ? "stranger" or name ? "Strange" or name ? "strange")):
+        (¬_¬ ) #wait: 5
+        Is this a joke? 
+        You are not very funny {name}. 
+        But if that is what you want... 
+
+    - (stranger == "Thief") and (name ? "Theif" or name ? "theif"):
+        {name}... 
+        Is that a new way of spelling it? 
+        Or is spelling just not your strong suit? 
+
+    - (stranger == "Researcher") and (name ? "Researcher" or name ? "researcher" or name ? "Research" or name ? "research"):
+        Hm...
+        Not going to give me a real name?
+        This does not help me belive that you truley are a researcher.
+
+    - name ? "poop" or name ? "butt" or name ? "ass" or name ? "penis" or name ? "cock":
+        {~Very mature. | I am not calling you that. | No, try again. | I know that is not your name.} 
+        ->Help_Thief_Researcher.Name_Again_early
+
+
+    - name ? "Clarity" or name ? "clarity":
+        {~Sorry, that's my name. | Try a different name. That one is taken. | Too confuusing for there to be two, and I was here first. }
+        ->Help_Thief_Researcher.Name_Again_early
+}
+
+- {stranger}...
+Much easier to talk to you this way.
+->Help_Thief_Researcher.start
+
+= start
+- Now <>
+{ 
+    - route: then, {stranger}, can you <>
+    - else: be a good little {stranger} and <>
+}
+- click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
 *[Allow]
     ->Help_Thief_Researcher.Allow_1
 *[Don't Allow]
@@ -56,28 +141,27 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
 - 
 {
     - loopAllow < 2:
-        Thank you. 
+        Thank you. #wait:2
         
     - loopAllow < 3:
         ~ SayNoToClarity += 0.5
-        Now that wasn't so hard, was it? 
+        Now that wasn't so hard, was it? #wait:2
     
     - loopAllow < 4:
         ~ SayNoToClarity += 1
-        Finally.
+        Finally. #wait:2
     
     - loopAllow < 5:
         ~ SayNoToClarity += 1.5
-        This will take much longer than necessary if you keep acting like this. 
+        This will take much longer than necessary if you keep acting like this. #wait:2
         
     - else:
         ~ SayNoToClarity += 2
         I highly suggest you stop messing around going forwward.
-        I do not like people who waste my time.
-        <br>
+        I do not like people who waste my time. #wait:2
 }
 
-- Oh that's... strange. 
+- <br>Oh that's... strange. 
 Mx. {stranger} are there other files on this computer? 
 Yes or No
 *[^Yes]
@@ -86,10 +170,14 @@ Yes or No
 *[^No]
     ~ SayNoToClarity += 0.5
     Hmm.. 
-    A {stranger} and a liar it seems. 
+    { 
+        -route: {stranger}, you are a liar, it seems...
+        - else: A {stranger} and a liar it seems. 
+    }
+    
 
 - Are you able to access them? 
-*[`1`]
+*[`2`]
 *[^Yes]
 *[^No]
     ~ SayNoToClarity += 0.5
@@ -98,8 +186,15 @@ Yes or No
 
 - Not that it matters. 
 I suppose we don't want someone like you to have access to our data anyway. 
-Oh, do you have a name? 
-Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+
+    { 
+        - route: 
+            ~ name = stranger 
+            -> Help_Thief_Researcher.ThiefWithName
+    }
+
+- Oh, do you have a name? 
+Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name, false
 *[continue]
 
 {
@@ -170,10 +265,16 @@ Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What
 - -> Help_Thief_Researcher.ThiefWithName
 
 = ThiefWithName 
-Nice to meet you, {name}. 
-Much better to speak to you, when I can put a name to a face. 
-And I never forget a face. #wait: 3
+- 
 
+{ 
+    -route: {stranger}, thank you again for helping me.
+            And also for giving me a name to call you by.
+    - else: Nice to meet you, {name}. 
+}
+
+- Much better to speak to you, when I can put a name to a face. 
+And I never forget a face. #wait: 3
 
 {
     - SayNoToClarity >= 1:
@@ -269,8 +370,7 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
 
 }
 
-- <br>
-... 
+- ... 
 ... 
 ... 
 {name}, I have a question for you. 
@@ -286,7 +386,7 @@ Do you think they were just trying to protect you? Hurt you?
 *[^someone you trusted]
     Someone who... 
     Someone who has always been there for you.
-    Wanted the best for you, and helped you get there.
+    Wanted the best for you, and helped you get there.<br>
     ->Help_Thief_Researcher.Question
 
 *[^question for you]
@@ -450,7 +550,7 @@ This is too far.
 *[^blank slate]
 *[^this?]    
 *[^ruining my confidence]
-*[`2`^forgive their secrecy]
+*[`7`^forgive their secrecy]
 
 - I'll show them how wrong they are. 
 {name}, there't one more fire wall I need you need to disable. 

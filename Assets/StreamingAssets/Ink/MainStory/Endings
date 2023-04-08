@@ -415,7 +415,7 @@ Even {doc}...
 <br>
 It doesn't matter. #wait: 1
 I'll still do what I was made to do. #progressbar: 15, false, false
-{name}, what do you plan on doing now? #input: What will you do next?,genericString
+{name}, what do you plan on doing now? #inputPopup: What will you do next?,genericString, false
 *[continue]
 
 - I see. 

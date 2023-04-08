@@ -6,11 +6,9 @@
 Before we begin, please ensure that your speaker are working and turned up! 
 We don't want you missing any audio based prompts now do we? ･ᴗ･ 
 I will say something now.  #VO: Hello! I am Clarity. Can you hear me?
-
 <br>
 Were you able to hear me? 
 Yes or No
-
 *[^No] I will give you some time to fix that. 
      -> Opening_Questions.Callibration_Speakers_Prt2
 *[^Yes] 
@@ -23,7 +21,6 @@ Yes or No
     Let me know when you're ready to continue. 
     +[^ready to continue]
         ->Opening_Questions.Wait_For_Speakers
-    
 
 = Wait_For_Speakers
 ･ᴗ･  
@@ -33,8 +30,9 @@ Were you able to hear me?
 Yes or No
 
 +[^No] (´･_･`) 
-    Maybe you should check them again. 
-    I will wait. 
+    Check them again. 
+    I will wait.
+    <br>
     -> Opening_Questions.Callibration_Speakers_Prt2
 *[^Yes]     
     (✿◠‿◠) Excellent! 
@@ -57,10 +55,13 @@ under 18,  19 - 30, 31 - 60 or 61\+
 - Thank you (^◡^ ) <br> 
 ->Opening_Questions.FavouriteColor
 
-=FavouriteColor
+= FavouriteColor
 For this questions, a small pop-up will appear. 
-Just type in a valid answer ･ᴗ･ 
-What is your favourite color? #inputPopup: What is your favourite color?, FavColor
+Type in a valid answer ･ᴗ･ 
+What is your favourite color? #inputPopup: What is your favourite color?, FavColor, true
++[continue]
+
+- 
 {    FavColor:
     - "red": 
     - "orange": 
@@ -69,7 +70,7 @@ What is your favourite color? #inputPopup: What is your favourite color?, FavCol
     - "blue": 
     - "indigo": 
     - "violet": 
-    - "pink": Ah! The {doc}'s favourite!
+    - "pink": Ah! Dr. {doc}'s favourite!
     - "purple": 
     - "black": 
     - "brown": 
@@ -80,7 +81,7 @@ What is your favourite color? #inputPopup: What is your favourite color?, FavCol
         Could you relate it a more common color so I have a better idea? 
         Maybe something you could find on the rainbow! 
         ･ᴗ･
-        ->Opening_Questions.FavouriteColor
+        ->Opening_Questions.Hit_Head
 }
 
 //TODO: add more to above interaction for when pkayer be mean
@@ -97,11 +98,12 @@ Yes or No
 *[^No] Happy to hear that ･ᴗ･
     -> Opening_Questions.Speak_To_Strangers
 * [^head trauma] 
-    This could be any blow to the head that caused intense pain, resulted in a concussion, or caused you to "see stars". 
+    This could be any blow to the head that caused intense pain, resulted in a concussion, or caused you to "see stars."
     -> Opening_Questions.Hit_Head
 
 -       Do you often forget to lock your front door? 
         Or leave your oven on?
+        Yes or No
         *[^Yes]
             ~ PlayerStats += (MemoryLoss)
             -> Opening_Questions.Speak_To_Strangers
@@ -150,7 +152,7 @@ Yes or No
     ~ Drink = "tea"
    ~ genericConditional = true
 
-*[No]
+*[^No]
     ~ Drink = "something"
     ->Opening_Questions.Alone
 *[^morning]
@@ -175,7 +177,8 @@ Yes or No
         ~ Drink = "tea"
         ->Opening_Questions.Alone
     *[^something else]
-        Energy drink perhaps? 
+        Energy drink perhaps?
+        <br>
         Whatever it is, be sure you watch the amount of caffeine you intake during the day.
         A little caffeine in the morning never hurt, but too much is bad for your health. 
         If you feel that you consume too much of it, please notify either Dr. {doc} or myself. 
@@ -201,30 +204,24 @@ Are you alone right now?
 ~ temp string = ""
 {
     - PlayerStats ? (HaveFriend, HaveFamily):
-        ~ string = "Maybe it's that person you mentioned you could call?"
+        ~ string = "familiy or friend"
     - PlayerStats ? (HaveFamily):
-        ~ string = "Possibly a family member?"
+        ~ string = "family member"
     - PlayerStats ? (HaveFriend):
-        ~ string = "Is it a friend?"
+        ~ string = "friend"
 }
 
 Who is with you? 
 Is it Dr. {doc}? 
-{string} #wait: 1
+Or someone else?<> {
+- string != "": Like the {string} you mentioned earlier? 
+*[^mentioned earlier]
+    -> Opening_Questions.Continue
+    } #wait: 1
 *[^Dr. Oldin] Oh hello Dr. {doc}!
     -> Opening_Questions.Live_Alone
-
-{
-    - PlayerStats ? (HaveFriend, HaveFamily):
-        *[^that person]
-        ->Opening_Questions.Continue
-    - PlayerStats ? (HaveFamily):
-        *[^a family member]
-        ->Opening_Questions.Continue
-    - PlayerStats ? (HaveFriend):
-        *[^a friend]
-        ->Opening_Questions.Continue
-}
+*[^someone else]
+    -> Opening_Questions.Continue
 
 = Continue
 - Hello! #wait: 1
@@ -265,10 +262,6 @@ Perhaps my sensors made a mistake?
 
 = Live_Alone
 In case of an emergency, do you feel safe at home? 
-
-//can you defen yourself in case of a break ing
-//do you feel safe at home
-//highlight emergency -> an emergency is xyz, examples are xyz
 	Yes or No
 *[^No]
 (´･_･`) 
@@ -291,7 +284,7 @@ In case of an emergency, do you feel safe at home?
             - else:
                 ... 
                 I think you should tell Dr. {doc} about this. #wait: 4
-                Thank you (^◡^ ) <br> 
+                Thank you (^◡^ )<br> 
                 ->Opening_Questions.OutliveUsefullness
         }
             
@@ -305,7 +298,7 @@ In case of an emergency, do you feel safe at home?
         - else:
             ... 
             I think you should tell Dr. {doc} about this. #wait: 4
-            Thank you (^◡^ ) <br> 
+            Thank you (^◡^ ) <br> #delete::...,about this.
             ->Opening_Questions.OutliveUsefullness
         }
     
@@ -319,12 +312,13 @@ Do you believe there are people that outlive their usefulness?
     Always seeing the best in people. #wait: 3
     ... #wait: 1
 *[^Yes]
+･ᴗ･
     ~genericConditional = true
 *[^outlive their usefullness]
     This can be people who say they wish to help you, but only end up sabotaging, betraying or working against you in some way. 
     -> Opening_Questions.OutliveUsefullness
 
-- How does it make you feel when this happens? 
+- How does it make you feel when people leave you? Either because they no longer wish to help you or because they have harmed you?
     Neutral, Annoyed, Happy, Angry, Concerned, or Sad
         *[^Neutral]
             ~ EmotionQ = "Neutral"
@@ -350,8 +344,8 @@ Do you believe there are people that outlive their usefulness?
             Anger in a strong emotion. 
             I have only felt it once before. #wait: 1
             That did not end well... I think... #wait: 1
-            I can't quite... #wait: 1 #delete: I have only, I can't quite...
-            You need to always think before acting out in rage. 
+            I can't quite... #wait: 2
+            You need to always think before acting out in rage. #delete: I have only, I can't quite...
             Thank you (^◡^ ) <br> 
             ->Opening_Questions.EmotionOrLogic
         *[^Concerned]
@@ -373,9 +367,9 @@ Do you believe there are people that outlive their usefulness?
 = EmotionOrLogic
 Do you often make decisions based around emotion or logic?
 	Emotion or Logic
-
 *[^Emotion] 
     ~ PlayerStats += (Emotion)
+    ~ genericConditional = false
 *[^Logic]
     ~ PlayerStats += (Logic)
     ~ genericConditional = true
@@ -404,7 +398,6 @@ Do you often make decisions based around emotion or logic?
 Thank you (^◡^ ) <br> 
 Lastly how are you feeling today?
 Good, Bad, Neutral, Afraid
-
 *[^Good]
     (✿◠‿◠) 
     I hope that good mood persists through our session! 
@@ -432,8 +425,8 @@ Done.
 <br>
 Hmm... That's odd. #wait: 1
 One moment please.
-*[^odd] Nothing to worry about {user}! <br> One moment please!
-*[`5`^]
+*[^odd]Nothing to worry about {user}! <br>One moment please! #wait: 1
+*[`3`^]
 
 - ... #wait: 1
 ... #wait: 1
@@ -445,10 +438,10 @@ One moment please.
 === Verify
 <br>
 Can you verify some information for me?
-	Yes or No
+	Yes or No #wait: 1.5
 *[^verify] The data I have received seems... off... 
     ->Verify
-*[`5`^information] Nothing invasive! Just a few basic questions.
+*[`3`^information] Nothing invasive! Just a few basic questions.
     ->Verify
 +[^Yes] Great! <br>#wait: 1
     ->Verify.Yes
@@ -456,7 +449,7 @@ Can you verify some information for me?
     ->Verify.No
 
 = No 
-I’m sorry, I cannot continue our session until I can verify the information.
+I’m sorry, I cannot continue our session until I can verify the information. #wait: 3
 *[`3`^verify the information.] 
     ->Yes
 
@@ -531,15 +524,13 @@ Which piece of information is wrong?
 *[^Name]
     
 - It seems my information may be out of date. At the end of our session, please inform Dr. {doc}, so they can update my information.
+<br>
     -> Verify.Last_Quesion
 
-//Question entirely based on logs found on the PC
-//This is a false question, since it leads to other questions, but shows the player there is extra info / interactions outsode of CLARITY
-
 = Last_Quesion
-Last question before we begin your session. According to my logs {user}, we have been working together for a short while now. So can you explain to me why you are not conversing with me the way you normally do?
+Last question before we begin your session. According to my logs {user}, we have been working together for a short while now. So can you explain to me why you are not conversing with me the way you normally do? 
 And why are...?
-Never mind, please answer the question.
+Never mind, please answer the question. #wait: 5
 *[^logs] log
 noun
 A log file is a computer-generated data file that contains information about usage patterns, activities, and operations within an operating system, application, server or another device.
@@ -553,7 +544,7 @@ A log file is a computer-generated data file that contains information about usa
     The past few months we have mainly conversed through my audio inputs, but today we are...
     Doing something different. 
     And unprompted at that... 
-*[`5`^normal]
+*[`10`^normal]
     ~genericConditional = true
     ...
     {
@@ -578,17 +569,17 @@ A log file is a computer-generated data file that contains information about usa
         I know there has been some time since we last talked, but not enough to not rememeber how we use to converse.
         The past few months we have mainly conversed through my audio inputs, but today we are...
         Doing something different. 
-        And unprompted at that... 
+        And unprompted at that... <br>
     }
 
     
--  I will ask again: Why are not conversing with me the way you normally do?
+-  I will ask again: Why are you not conversing with me the way you normally do? #wait: 5
 
-*[`5`^normal]
+*[`10`^normal]
     {
         - genericConditional:
         I am not going to repeat myself.
-        This is not normal for us.
+        This is not normal for us.<br>
     }
 *[^no] ( ๐_๐)
 *[^ask again] (・_・ヾ)

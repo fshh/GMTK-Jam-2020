@@ -343,6 +343,7 @@ Shit. I forgot to-
 I wiped Clarity again, and turned her off.
 Fully, this time.
 I'm not sure I'll ever wake her up again.
+-> END
 
 = 5F
 We tried one more time.

@@ -30,7 +30,7 @@ VAR doc = "Oldin"
 VAR name = ""
 VAR Age = 0
 VAR Drink = ""
-VAR FavColor = "blue"
+VAR FavColor = ""
 VAR EmotionQ = ""
 
 VAR ClarityKnows = false
@@ -41,6 +41,7 @@ LIST RouteTwoStats = PlayedClarity, PlayedText, SimonConfused, PoorMemShort, Ang
 VAR situation1 = ""
 VAR situation2 = ""
 VAR situation3 = ""
+VAR route = false
 
 // List Relating to Player Stats from the beiging
 // Treating this at out of list = falst, in list = true
@@ -71,53 +72,51 @@ VAR needHelp = false
 VAR loopAllow = 0
 VAR simonsaysWins = 0
 
--> Who_Are_You
-
-Eye OS - CLARITY#wait: 1
-Copyright (C) _______ All Rights Reserved#wait: 1
+Eye OS - CLARITY#wait: .05
+Copyright (C) _______ All Rights Reserved#wait: .05
  
-Booting up CLARITY Protocol#wait: 2
-.<>#wait: 1
-.<>#wait: 1
-. #wait: 2
+Booting up CLARITY Protocol#wait: .05
+.<>#wait: 0.5
+.<>#wait: 1.5
+. #wait: .05
 
+.<>#wait: 2
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 3
+. #wait: .05
 
+.<>#wait: 1.5
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 2
-Done.#wait: 2
-Init CLARITY V0.2.3#wait: 1
-.<>#wait: 1
-.<>#wait: 1
-. #wait: 2
+. #wait: .05
+Done.#wait: 0.05
+Init CLARITY V0.2.3#wait: .05
+.<>#wait: 0.5
+.<>#wait: 1.5
+. #wait: .05
 
+.<>#wait: 2
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 3
+. #wait: .05
 
+.<>#wait: 1.5
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 2
-Done.#wait: 2
-Configuring CLARITY#wait: 1
-.<>#wait: 1
-.<>#wait: 1
-. #wait: 2
+. #wait: .05
+Done.#wait: 0.05
+Configuring CLARITY#wait: .05
+.<>#wait: 0.5
+.<>#wait: 1.5
+. #wait: .05
 
+.<>#wait: 2
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 3
+. #wait: .05
 
+.<>#wait: 1.5
 .<>#wait: 1
-.<>#wait: 1
-. #wait: 2
-Done.#wait: 1
+. #wait: .05
+Done.#wait: 0.05
 Starting CLARITY #wait: 1
-Welcome Back to CLARITY V0.2.3 ･ᴗ･#wait: 3
-
+Welcome Back to CLARITY V0.2.3 ･ᴗ･#wait: 1
+<br>
 Hello I’m Clarity ･ᴗ･ Your virtual nurse. I am equipped with audio and visual dialogue prompts to best suit your needs.#wait: 1
 Since it's been a longer than 2 months, I’m going to ask you a series of questions. #wait: 1
 Please respond accurately. (✿◠‿◠)#wait: 1

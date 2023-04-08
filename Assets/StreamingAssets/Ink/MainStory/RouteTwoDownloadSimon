@@ -24,7 +24,7 @@ Remember, these pop ups are only a formality!
         ･ᴗ･ #delete: If I, do it.
 }
 
-- PLease click "allow." #popup: CLARITY.exe would like to make changes to this computer,Remove permissions<br>Gain camera access, Allow, Don't allow
+- Please click "Allow." #popup: CLARITY.exe would like to make changes to this computer,Remove permissions<br>Gain camera access, Allow, Don't allow
 *[Allow]
     ~ AccessState += (camera)
     ~ AccessState += (FireWall_Two)
@@ -90,10 +90,12 @@ I need you click Allow on this pop up.#popup: CLARITY.exe would like to make cha
     ~ AccessState += (camera)
     ~ AccessState += (FireWall_Two)
     ~ RouteTwoStats += (SimonConfused)
+    <br>
     -> RouteTwo.PlayClaritySays
 
 *[Allow]
     ~ AccessState += (camera)
     ~ AccessState += (FireWall_Two)
     ~ RouteTwoStats += (SimonConfused)
+    <br>
     -> RouteTwo.PlayClaritySays

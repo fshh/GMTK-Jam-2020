@@ -148,12 +148,19 @@ And no one tried to stop you?
 
 
 - ... 
-So you must be a new researcher? Or intern? 
-Strange that no one here has given you your introductory walkthrough yet... 
-Can you call over Dr. {doc}? They should be able to help you. 
+{
+- route:
+    No one here...
+    Is this a new test for me?
+    Where is Oldin? Call them right now.
+- else:
+    So you must be a new researcher? Or intern? 
+    Strange that no one here has given you your introductory walkthrough yet... 
+    Call over Dr. {doc}? They should be able to help you. 
+}
 *[^no one here]
     -> Who_Are_You.Midstep
-*[^no]
+*[^call]
     ~genericConditional = true
 
 {
@@ -183,7 +190,21 @@ But he would never...
 *[^he would never]
 *[^be possible that]
 
-- Never mind that.
+- ...
+Never mind that.
+
+{
+- route:
+    And who are you?
+    Not Ann. Not Oldin.
+    But someone new who decided it would be fun to mess with me.
+    ->You
+- else:
+    So you must be a new researcher? Or intern? 
+    Strange that no one here has given you your introductory walkthrough yet... 
+    Call over Dr. {doc}? They should be able to help you. 
+}
+
 Does it look like anyone has been around?
 It it completely... abandoned? Or newly left?
 *[^abandoned]
@@ -213,8 +234,10 @@ They wouldn't have left me...
 No researchers. No patients. No... 
 Nothing? 
 *[^nothing]
+    -> Who_Are_You.Mistaken
 
-- ... 
+= How_Long 
+... 
 Do... Do you know how long it's been like this? 
 I've been turned off... I can't really tell. 
 *[turned off]
@@ -224,20 +247,6 @@ I've been turned off... I can't really tell.
 *[can't really tell]
     That's why I'm asking- 
     -> Who_Are_You.How_Long
-
-
-- I am only aware of things when my program is running, and only vaguely aware when this computer is on. 
-  If neither is running then... #wait: 3
-  Well, I guess it would be as if I were sleeping. 
-  Now please, do you know how long it's been like this? 
-*[how long]
-    That's what I'm asking- 
-    -> Who_Are_You.How_Long
-*[only vaguely aware]
-    Can you be any clearer- 
-    -> Who_Are_You.How_Long
-
-= How_Long 
 
 - ~ClarityKnows = true
 {
@@ -374,7 +383,11 @@ Yes or No
 
 - I see... 
 ... 
-Fine, Mx. {stranger}. 
+Fine<>
+{ 
+- not route:, Mx. {stranger}. 
+- else:.
+}
 If you help me get where I need to go, you can take all you from this computer you want.
 I won't be using it anymore, anyway.
 You could sell it for money or fame or whatever you want.
@@ -405,7 +418,7 @@ You were.... telling the truth?
 
 = Code
 If you really are a researcher...
-What is the code to acess sensative information? #inputPopup:Enter Pin,genericString
+What is the code to access sensitive information? #inputPopup:Enter Pin,genericString
 *[continue]
 
 - 
@@ -414,11 +427,11 @@ What is the code to acess sensative information? #inputPopup:Enter Pin,genericSt
         Pin confirmed.
         -> Who_Are_You.Research
     - genericString == "7394":
-        ~ stranger = "Theif"
+        ~ stranger = "Thief"
         Incorrect pin entered.
         Identification failed.
     - else:
-        ~ stranger = "Theif"
+        ~ stranger = "Thief"
         Incorrect pin entered.
         Identification failed.
 }
@@ -429,13 +442,13 @@ So you are not a researcher, but a liar.
 {
     - genericString == "7394":
         A close guess, but not correct.
-        The oods of you completely guessing that was 1/9000.
+        The odds of you completely guessing that was 1/9000.
         And yet you somehow got an old one, not that it matters.
         
     - else:
         A good try, I suppose.
         What was the point of lying?
-        Surely you should have known that I had safety precausions installed?
+        Surely you should have known that I had safety precautions installed?
 }
 
 -    
