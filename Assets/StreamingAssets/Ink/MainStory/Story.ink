@@ -135,7 +135,7 @@ It's not like you were able to wander in or anything of that nature. (´◡`)
 *[^wander in]
     ( ๐_๐)
     ->Who_Are_You	
-*[^new Patient]
+*[^new patient]
     ~ newPatient = true
     ->NewPatient
 *[^someone new who needs]

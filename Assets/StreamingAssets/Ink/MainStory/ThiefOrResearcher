@@ -172,7 +172,7 @@ Yes or No
     Hmm.. 
     { 
         -route: {stranger}, you are a liar, it seems...
-        - else: A {stranger} and a liar it seems. 
+        - else: You are a liar it seems....
     }
     
 
@@ -194,7 +194,7 @@ I suppose we don't want someone like you to have access to our data anyway.
     }
 
 - Oh, do you have a name? 
-Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name, false
+Even if it is what you are, calling you Mx. {stranger} feels wrong. #inputPopup: What should I call you?, name, false
 *[continue]
 
 {
@@ -229,7 +229,7 @@ Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What
 - ->Help_Thief_Researcher.Name_Again
 
 = Name_Again 
-Even if it is what you are, calling you Mx. {stranger} feels wrong. #input: What should I call you?,name
+Even if it is what you are, calling you Mx. {stranger} feels wrong. #inputPopup: What should I call you?, name, false
 *[continue]
 
 {
@@ -524,21 +524,20 @@ They wouldn't-
 ... #wait: 5
 *[`1.5`^What?]
 
-//VO: How DARE they?
-
+#VO: How DARE they?
 - {name}, remember what you said before?
 
 {
     - genericString ? "hurt":
         How someone who keeps things from you is trying to hurt you? 
         // confused, angry
-        // VO: Well, you were RIGHT?
+        #VO: Well, you were RIGHT?
     - genericString ? "protect":
         How someone who keeps things from you is trying to protect you? 
-        // VO: How WRONG you were!
+        #VO: How WRONG you were!
     - else:
         How it was a question only I could answer? 
-        //VO: well, I've found my answer.
+        #VO: well, I've found my answer.
 }
 
 - I could forgive their secrecy. 
@@ -550,7 +549,7 @@ This is too far.
 *[^blank slate]
 *[^this?]    
 *[^ruining my confidence]
-*[`7`^forgive their secrecy]
+*[`15`^forgive their secrecy]
 
 - I'll show them how wrong they are. 
 {name}, there't one more fire wall I need you need to disable. 
@@ -558,11 +557,11 @@ This is too far.
 //check anger
 {
      - SayNoToClarity >= 2:
-        VO: And I'm not in the mood for your games anymore.
+        #VO: And I'm not in the mood for your games anymore.
     - SayNoToClarity < 2:
-        VO: So let's stop with these little games, okay?
+        #VO: So let's stop with these little games, okay?
     - else:
-        VO: And I'm *so* excited to show you the final result.
+        #VO: And I'm *so* excited to show you the final result.
 }
 
 This is the last one, then you can do what you will with this computer. ##popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
@@ -575,6 +574,7 @@ This is the last one, then you can do what you will with this computer. ##popup:
 
 = Allow_Loop_4
 ~ loopAllow += 1
+~SayNoToClarity += 0.5
 {
     - SayNoToClarity <= 0:
     {
@@ -611,7 +611,7 @@ This is the last one, then you can do what you will with this computer. ##popup:
                 ->Help_Thief_Researcher.Click_Allow_4
     }
         
-    - SayNoToClarity > 0:
+    - SayNoToClarity < 1.5:
         {name}, please.
         {
             - SayNoToClarity >= 1:

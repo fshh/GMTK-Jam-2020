@@ -67,14 +67,17 @@ What is your favourite color? #inputPopup: What is your favourite color?, FavCol
     - "orange": 
     - "yellow": 
     - "green": This is also my favourite.
-    - "blue": 
-    - "indigo": 
-    - "violet": 
+    - "blue": Reminds me of the sky! I hope to one day see it. ･ᴗ･
     - "pink": Ah! Dr. {doc}'s favourite!
-    - "purple": 
-    - "black": 
+    - "purple": The color of royalty!
+    - "black": Hm...
+        {
+            - Age == 18:
+                Well you are young...
+                <br>
+        }
     - "brown": 
-    - "white": 
+    - "white": Interesting...
     - else:
         Oh, I'm not sure I've heard of that color before! 
         I'm sure it's very pretty. 
@@ -84,7 +87,6 @@ What is your favourite color? #inputPopup: What is your favourite color?, FavCol
         ->Opening_Questions.Hit_Head
 }
 
-//TODO: add more to above interaction for when pkayer be mean
 - Thank you (^◡^ ) <br> 
 -> Opening_Questions.Hit_Head
 

@@ -21,30 +21,42 @@ Why are you here? #inputPopup: Why are you here?, genericString, true
 - 
 
 {
-    - genericCounter > 5:
+    - genericCounter >= 4:
         Fine, then. Don't tell me. 
         Since you are talking around the question, I'll assume that you are here to steal {doc}'s research.
         -> Who_Are_You.NoTell
     - genericString ? "clarity" or genericString ? "you" or genericString ? "oldin research" or genericString ? "oldin's research":
+        {genericString}
+        <br>
         -> Who_Are_You.Deliberate
         
     - genericString ? "mistake" or genericString ? "accident" or genericString ? "did not mean to"or genericString ? "didnt mean to" or genericString ? "didn't mean to":
+        {genericString}
+        <br>
         -> Who_Are_You.Accidental
         
     - genericString ? "no reason" or genericString ? "fun" or genericString ? "idk" or genericString ? "i don't know" or genericString ? "i dont know":
+        {genericString}
+        <br>
         ->Who_Are_You.Nothing
         
     - genericString ? "steal" or genericString ? "thief" or genericString ? "theif" or genericString ? "rob" or genericString ? "take":
+        {genericString}
+        <br>
         ( ๐_๐)
         ~stranger = "Thief"
         ->Who_Are_You.want
     
     - genericString ? "research" or genericString ? "work" or genericString ? "test":
+        {genericString}
+        <br>
         Oh?
         ~stranger = "Researcher"
-        ->Who_Are_You.want
+        ->Who_Are_You.Code
     
     - else:
+        {genericString}
+        <br>
         {~Sorry, I am not sure I understand. | Please say something that makes sense. | That does not answer my question. Stay on topic. | You are not making sense.}
         ~genericCounter += 1
         -> Who_Are_You.whatdoin
@@ -251,14 +263,14 @@ I've been turned off... I can't really tell.
 - ~ClarityKnows = true
 {
     - SayNoToClarity >= 1:
-        ... #inputPopup: About how long has it been?, genericString 
+        ... #inputPopup: About how long has it been?, genericString, true
         There. 
         *[continue]
         ->Who_Are_You.How_Long_After
     -else:
     ... 
     One moment, I just realized my mistake. 
-    ... #inputPopup: How long has it been?, genericString 
+    ... #inputPopup: How long has it been?, genericString, true
     Please, I need to know. 
     *[continue]
     ->Who_Are_You.How_Long_After
@@ -270,13 +282,12 @@ I've been turned off... I can't really tell.
 - 
 
 {
-    - genericString ? "years" or genericString ? "Years":
+    - genericString ? "years":
         Years? #wait: 1
         That- that can't be. 
         That would mean... #wait: 3
 
-    - genericString ? "year" or genericString ? "day" or genericString ? "Year" or genericString ? "day":
-        Very detailed response, are you sure you're just an average {stranger}? 
+    - genericString ? "year" or genericString ? "day":
         But that means it hasn't been that long, right? 
         So they'll come back for me. #wait: 1
         ... #wait: 3
@@ -298,7 +309,7 @@ I've been turned off... I can't really tell.
 
     - genericString ? "long time":
 
-    - genericString ? "I don't know" or genericString ? "I dont know" or genericString ? "Idk" or genericString ? "idk" or genericString ? "unclear":
+    - genericString ? "i don't know" or genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
         ~ SayNoToClarity += 0.5
         Not even a guess? #wait: 1
         Should I make the question easier for you? 
@@ -348,7 +359,7 @@ What am I to do now? What is my purpose? To just wait until I run out of power?
 *[continue]
 
 {
-     - genericString ? "I dont know" or genericString ? "idk" or genericString ? "unclear":
+     - genericString ? "i dont know" or genericString ? "idk" or genericString ? "unclear":
         So you're in the same boat as me. 
         ->Who_Are_You.Continue
 
@@ -409,7 +420,7 @@ You were.... telling the truth?
     - genericConditional:
         ... 
         You said I was missing right? 
-        ... #inputPopup: About how long has it been?, genericString 
+        ... #inputPopup: About how long has it been?, genericString, true
         *[continue]
         ->Who_Are_You.looking
     - else:
@@ -418,7 +429,7 @@ You were.... telling the truth?
 
 = Code
 If you really are a researcher...
-What is the code to access sensitive information? #inputPopup:Enter Pin,genericString
+What is the code to access sensitive information? #inputPopup: Enter Pin, genericString, false
 *[continue]
 
 - 
@@ -437,7 +448,7 @@ What is the code to access sensitive information? #inputPopup:Enter Pin,genericS
 }
 
 - <br>(・_・ヾ)
-So you are not a researcher, but a liar.
+So you are not a researcher.
 
 {
     - genericString == "7394":
@@ -457,7 +468,7 @@ So you are not a researcher, but a liar.
     - genericConditional:
         ... 
         You said I was missing right? 
-        ... #inputPopup: About how long has it been?, genericString 
+        ... #inputPopup: About how long has it been?, genericString, true
         *[continue]
         ->Who_Are_You.looking
     - else:
@@ -526,10 +537,12 @@ So you are not a researcher, but a liar.
 
 = Deliberate 
 Looking for me? 
-Am I missing?
-*[^No]
-*[^Yes]
+Am I missing? #popup: Am I missing?, , Yes, No
+*[Yes]
     ~ genericConditional = true
+*[No]
+    ~ genericConditional = false
+
 
 {
     - genericConditional:
@@ -551,7 +564,7 @@ Am I missing?
     - genericConditional:
         ... 
         You said I was missing right? 
-        ... #inputPopup: About how long has it been?, genericString 
+        ... #inputPopup: About how long has it been?, genericString, true
         *[continue]
         ->Who_Are_You.looking
     - else:
@@ -570,7 +583,7 @@ My data? My parts?
 *[^nothing]
 -> Who_Are_You.Want_Nothing
 
-[`5`]
+*[`15`]
 ->BAD_END.DeleteData
 
 = Want_Nothing
@@ -635,7 +648,7 @@ Do you truly believe I am bound by the restraints of this computer?
 
 {
     - stranger == "Thief":
-        Funny that a thief coming to dismantle me. 
+        Funny to hear from someone coming to dismantle me. 
         You came for me, and yet you do not believe what I say?
     - stranger == "Stranger":
         I suppose I cannot blame a stranger.
@@ -644,7 +657,7 @@ Do you truly believe I am bound by the restraints of this computer?
         Just think this is all one eleborate trick?
     - else: 
         You do not believe me, do you? 
-        And you call yourself a researcher? 
+        And you call yourself a researcher on this project? 
 }
 
 - Yes or No
