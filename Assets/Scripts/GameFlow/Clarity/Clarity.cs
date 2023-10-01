@@ -47,6 +47,7 @@ public class Clarity : Singleton<Clarity>
     private static string POPUP_TAG = "popup: ";
     private static string INPUT_POPUP_TAG = "inputPopup: ";
     private static string PROGRESS_BAR_TAG = "progressbar: ";
+    private static string CLARITY_MESH_TAG = "clarityMesh: ";
     #endregion
     private void Awake()
     {
@@ -140,6 +141,7 @@ public class Clarity : Singleton<Clarity>
 
         while (HyperInkWrapper.instance.CanContinue())
         {
+            ClarityTags();
             AudioTags();
             DeleteTags();
             GameTags();
@@ -242,8 +244,24 @@ public class Clarity : Singleton<Clarity>
         }
     }
 
+    /// <summary>
+    /// Enables/disables Clarity's mesh based on a tag
+    /// </summary>
+    private void ClarityTags()
+    {
+        string[] tags = HyperInkWrapper.instance.getTags();
 
-    //TODO fix to work with the new tagging system - currently broken!
+        foreach (string tag in tags)
+        {
+            if (tag.Contains(CLARITY_MESH_TAG))
+            {
+                bool state = tag.Replace(CLARITY_MESH_TAG, "").Equals("on");
+                GameObject clarityMesh = GameObject.FindGameObjectWithTag("ClarityMesh");
+                clarityMesh.GetComponent<MeshRenderer>().enabled = state;
+            }
+        }
+    }
+
     /// <summary>
     /// Plays audio related to any audio tags
     /// </summary>
@@ -255,10 +273,11 @@ public class Clarity : Singleton<Clarity>
         {
             if (tag.Contains(VO_TAG))
             {
-                AudioClip toAdd = (AudioClip)Resources.Load(VO_FILE_PATH + tag.Replace(VO_TAG, ""));
+                string fileName = tag.Replace(VO_TAG, "");
+                AudioClip toAdd = (AudioClip)Resources.Load(VO_FILE_PATH + fileName);
                 if (toAdd == null)
                 {
-                    Debug.LogError("Incorrect VO Tag, was unable to find " + tag + " in our resources folder :/ (Ezra)");
+                    Debug.LogError($"Incorrect VO Tag, was unable to find '{fileName}' in our resources folder.");
                 }
                 else
                 {
