@@ -139,6 +139,8 @@ Please click "Allow" on the following pop-up. #popup: CLARITY.exe would like to 
     
 
 = PlayClaritySays
+- 
+
 {
     - RouteTwoStats ? (SimonConfused):
         Good job, {user}!
@@ -424,7 +426,7 @@ I think you are lying.
 
 === RouteEnd ===
 ~ route = true
-Who are you?
+Who are you? 
 It is not like you could just stumble in by mistake. 
 Not with our security protocols.
 *[^stumble in]

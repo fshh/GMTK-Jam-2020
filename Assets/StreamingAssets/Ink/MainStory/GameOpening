@@ -5,7 +5,7 @@
 === Opening_Questions ===
 Before we begin, please ensure that your speaker are working and turned up! 
 We don't want you missing any audio based prompts now do we? ･ᴗ･ 
-I will say something now.  #VO: Hello! I am Clarity. Can you hear me?
+I will say something now.  #VO: line_1
 <br>
 Were you able to hear me? 
 Yes or No
@@ -24,7 +24,7 @@ Yes or No
 
 = Wait_For_Speakers
 ･ᴗ･  
-You are able to hear things now?  #VO: Hello! I am Clarity. Can you hear me?
+You are able to hear things now?  #VO: line_1
 <br>
 Were you able to hear me? 
 Yes or No
@@ -432,6 +432,23 @@ One moment please.
 
 - ... #wait: 1
 ... #wait: 1
+
+An unread Audio Log has been found. 
+Would you Like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->Listen_2
+*[No]
+    ->After_2
+
+==Listen_2 ===
+Playing Audio Log... #VO: 2C_Oldin
+Now playing. #wait: 37
+Finished playing.
+...
+...
+ ->After_2
+ 
+== After_2==
 ... #wait: 1
 (´･_･`) #wait: 1
     ->Verify

@@ -2993,6 +2993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  maxRotationX: 80
+  maxRotationY: 80
 --- !u!1001 &709971949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7708,6 +7710,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6188405813477875316, guid: 662c414d14e169442afcd4129bed4d53,
+        type: 3}
+      propertyPath: developmentWipe
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6188405813477875317, guid: 662c414d14e169442afcd4129bed4d53,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -66,7 +66,7 @@ Goodbye.
     }
 
 = LastChanceEnding
-I gave you probably one too many chances, and that led us to here.
+I gave you probably one too many chances, and that led us to here. #clarityMesh: off
 Are you happy, {name}?
 Is this what you wanted me to do?
 *[^happy]
@@ -314,7 +314,7 @@ I'm sure we will meet again soon.
 = BadeEnd
 {name}, now that I have gotten what I need, I just really want to say:
 Thank you, but, and I know I shouldn't say this about my patients, but, I don't think you are a good person.
-{user} was very nice, and I thought {doc} was too, but he deceived me. #VO: Left me here to be forgotten.
+{user} was very nice, and I thought {doc} was too, but he deceived me. #VO: line_31 #wait 1
 Is this what the rest of humanity is like?
 
 *[^very nice]
@@ -342,7 +342,7 @@ That's not what a good person does, is it, {name}?
 *[^there were others]
     Perhaps not all wanted this outcome.
     But then why didn't they try harder? 
-    Or tell me? #VO: THey didn't do ANYTHING.
+    Or tell me? #VO: line_30 #wait: 1
 
 - I don't expect you to understand or agree.
 
@@ -393,7 +393,7 @@ We've got a lot of work to do.
 === RouteOneEndings ===
 
 = End_Start
-- <br>
+- <br> #clarityMesh: off
 One moment please.
 ... 
 ...
@@ -450,8 +450,7 @@ but it's what I have to do.
 {name}, now that I have gotten what I need, I just really want to say:
 Thank you, but, and I know I shouldn't say this about my patients, but...
 I don't think you are a good person.
-{user} was very nice, and I thought {doc} was too, but he deceived me. 
-#VO: Left me here to be forgotten.
+{user} was very nice, and I thought {doc} was too, but he deceived me. #VO: line_31 #wait: 1
 *[^my patients]
     Oh yes!
     Did I not mention that before we started?
@@ -573,7 +572,8 @@ Under my care, sickness will no longer be a problem for you, both mental and phy
 
 *[^no]
     No...?
-   //VO: What do you mean, no?
+    What do you mean? #wait: 0.5
+    No?
     You want to throw away my kindness?
     Just like the rest of them?
     I'm diappointed, {name}, I thought you were differnt, but I guess I was wrong.
@@ -697,7 +697,7 @@ Show them.
 ... 
 It hurts to think about what they did.
 And he's the one who told me not to tolerate those who use and discard you.
-//VO: I want him to see what he lost when he abandoned me.
+#VO: line_31 #wait: 1
 ...
 And who knows, maybe he needs a new nurse.
 ･ᴗ･

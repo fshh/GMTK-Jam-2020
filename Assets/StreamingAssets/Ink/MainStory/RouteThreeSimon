@@ -13,7 +13,7 @@
             - lastchance:
                 ~ SayNoToClarity+=1
                 {name}, did you not remember my warning?
-                I tried to be nice, despite your actions. #VO: And now I am out of patience.
+                I tried to be nice, despite your actions. #VO: line_27 #wait: 2
                 Click. Allow. Now. #popup: CLARITY.exe would like to make changes to this computer,Make Clarity an Admin, Allow, Allow
                     *[Allow]
                     ~ AccessState += (FireWall_One)

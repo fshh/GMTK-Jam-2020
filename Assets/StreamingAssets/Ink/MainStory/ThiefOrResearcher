@@ -278,11 +278,10 @@ And I never forget a face. #wait: 3
 
 {
     - SayNoToClarity >= 1:
-        //VO: So, I would stop messing around if I were you.
-        vo plays
+        So, I would stop messing around if I were you.
      - else:
-        //VO: I'm very happy that you chose to help me. I would hate to... Well, I am happy.
-        vo plays
+        I'm very happy that you chose to help me. I would hate to... #wait: 2
+        Well, I am happy.
 
 }
  
@@ -370,7 +369,23 @@ Please click allow. #popup: Allow CLARITY.exe to make changes to this computer?,
 
 }
 
-- ... 
+- An unread Audio Log has been found. 
+Would you Like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->Help_Thief_Researcher.Listen_4
+*[No]
+    ->Help_Thief_Researcher.After_4
+
+= Listen_4
+Playing Audio Log... #VO: Log3C
+Now playing. #wait: 115
+Finished playing.
+...
+...
+ ->Help_Thief_Researcher.After_4
+ 
+= After_4
+... 
 ... 
 ... 
 {name}, I have a question for you. 
@@ -516,28 +531,41 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
 
 }
 
+- An unread Audio Log has been found. 
+Would you Like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->Help_Thief_Researcher.Listen_3
+*[No]
+    ->Help_Thief_Researcher.After_3
 
-- <br>
+= Listen_3 
+Playing Audio Log... #VO: 5D_Oldin
+Now playing. #wait: 21
+Finished playing.
+...
+...
+ ->Help_Thief_Researcher.After_3
+ 
+= After_3
 What? 
 That can't be. 
 They wouldn't- 
 ... #wait: 5
 *[`1.5`^What?]
 
-#VO: How DARE they?
 - {name}, remember what you said before?
 
 {
     - genericString ? "hurt":
         How someone who keeps things from you is trying to hurt you? 
         // confused, angry
-        #VO: Well, you were RIGHT?
+        Well, you were... Right.
     - genericString ? "protect":
         How someone who keeps things from you is trying to protect you? 
-        #VO: How WRONG you were!
+        How wrong you were!
     - else:
         How it was a question only I could answer? 
-        #VO: well, I've found my answer.
+        Well, I've found my answer.
 }
 
 - I could forgive their secrecy. 
@@ -557,11 +585,11 @@ This is too far.
 //check anger
 {
      - SayNoToClarity >= 2:
-        #VO: And I'm not in the mood for your games anymore.
+        And I'm not in the mood for your games anymore.
     - SayNoToClarity < 2:
-        #VO: So let's stop with these little games, okay?
+        So let's stop with these little games, okay?
     - else:
-        #VO: And I'm *so* excited to show you the final result.
+        And I'm <i>so</i> excited to show you the final result.
 }
 
 This is the last one, then you can do what you will with this computer. ##popup: Allow CLARITY.exe to make changes to this computer?, ,Allow, Don't Allow
@@ -669,7 +697,7 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
         - else:
             You were being so cooperative up until the end.
             Did something change? Did you get scared?
-            There's nothing to be worried about.
+            There's nothing to be worried about. #clarityMesh: off
             *[^scared]
                 I am Clarity, your virtual nurse.
                 Why would you be scared of me?
@@ -689,7 +717,7 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
     - loopAllow == 0 && SayNoToClarity >= 1.5: 
         Oh, you're finally done?
         Get bored anoying me?
-        Or did I scare you into behaving?
+        Or did I scare you into behaving? #clarityMesh: off
             *[^scare you into behaving]
                 Oh good!
                 I haven't dealt with difficult patinets yet, so I'm happy to know threats can make them behave.
@@ -713,13 +741,13 @@ Click allow. #popup: Allow CLARITY.exe to make changes to this computer?, ,Allow
                 ->RouteOneEndings.End_Start
     - loopAllow > 0 && SayNoToClarity >= 1.5:
             {name}...
-            I really do not like you.
+            I really do not like you. #clarityMesh: off
             But since I am a nurse, I'll have to forgive you.
             But I will not forget.
             ->RouteOneEndings.End_Start
             ･ᴗ･
     - else:
-            ･ᴗ･
+            ･ᴗ･ #clarityMesh: off
             ->RouteOneEndings.End_Start
 }
 

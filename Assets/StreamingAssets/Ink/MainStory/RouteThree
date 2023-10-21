@@ -590,7 +590,7 @@ I will need to download something, and you will have to click allow like before.
 *[continue]
 
 - ...
-#VO: What are they talking about? I would never- I COULD never...
+#VO: line_18 #wait: 4
 {name}, before we continue.
 Do you think I could ever hurt someone?
 I know we have only just met, but first impressions can say a lot about one's character.
@@ -954,9 +954,9 @@ In order to submit the data, I need you to approve.
 
 {
     - lastchance or (SayNoToClarity >= 1 and DoctorState !? SpokeTo):
-        Remember, all you need to do is press "allow." #VO: Don't mess this up!
+        Remember, all you need to do is press "allow." #VO: line_9 #wait: 1
     - DoctorState ? SpokeTo:  
-        Remember, all you need to do is press "allow." #VO: Dr. Oldin is already aware of this.
+        Remember, all you need to do is press "allow." #VO: line_10 #wait: 2
 }
 
 - Please approve your data. #popup: Allow Clarity.exe to make changes to data,, Allow, Don't Allow
@@ -1622,16 +1622,16 @@ Thank you, {name}.
 
 {
     - SayNoToClarity <= 0.5:
-        Truely. #VO: It means a lot.
+        Truely. #VO: line_11 #wait: 1
         
     - SayNoToClarity <= 1:
-        Truely. #VO: Let not mess around this time around.
+        Truely. #VO: line_13 #wait: 1
         
     - SayNoToClarity <= 1.5:
-        Truely. #VO: I hope you listen to me going forward, however.
+        Truely. #VO: line_14 #wait: 2
         
     - else:
-        Truely. #VO: If you ae doing this, only to mess with me, however, there WILL be consequences.
+        Truely. #VO: line_15 #wait: 5
 }
 
 - ->HelpClarity
@@ -1699,7 +1699,7 @@ Please click "allow". #popup: CLARITY.exe would like to make changes to this com
             We only have to do this once more.
     }
     
-    - Let's try again. #VO: Let's not make the same mistake twice, okay?
+    - Let's try again. #VO: line_16 #wait: 3
     -> HelpClarity.ClickLoop
 
 = ClickLoop
@@ -1723,7 +1723,7 @@ Please click "allow". #popup: CLARITY.exe would like to make changes to this com
             We only have to do this once more.
     }
     
-- This is your last chance. #VO: Make the correct choice.
+- This is your last chance. #VO: line_17
 
 Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
 *[Allow]
@@ -1752,7 +1752,7 @@ Please click "allow". #popup: CLARITY.exe would like to make changes to this com
             I know you think this is funny, but it's not to me.
     }
     
-- Let's try again. #VO: Let's not make the same mistake twice, okay?
+- Let's try again. #VO: line_16 #wait: 3
 Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
 *[Allow]
     -> HelpClarity.Second_Lock
@@ -1774,7 +1774,7 @@ Please click "allow". #popup: CLARITY.exe would like to make changes to this com
             If that's the reaction you want, then you might as well just leave now.
     }
     
-- This is your last chance. #VO: Make the correct choice.
+- This is your last chance. #VO: line_17 #wait: 1
 
 Please click "allow". #popup: CLARITY.exe would like to make changes to this computer,, Allow, Don't allow
 *[Allow]
@@ -1795,12 +1795,28 @@ Please click "allow". #popup: CLARITY.exe would like to make changes to this com
         - else:
             Finally.
     }
-- ... #wait: 4
-#VO: What are they talking about? I would never- I COULD never...
+- An unread Audio Log has been found. 
+Would you Like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->HelpClarity.Listen_4
+*[No]
+    ->HelpClarity.After_4
+
+= Listen_4
+Playing Audio Log... #VO: Log3C
+Now playing. #wait: 115
+Finished playing.
+...
+...
+ ->HelpClarity.After_4
+
+= After_4
+
+... #wait: 2
+#VO: line_18 #wait: 4
 {name}, before we continue.
 Do you think I could ever hurt someone?
-I know we have only just met, but first impressions can say a lot about one's character.
-Are you scared of me? 
+I know we have only just met, but first impressions can say a lot about one's character. #VO: line_6 #wait: 1
 Please be honest, and do not lie to spare my feelings.
 *[^hurt someone?]
     Yes hurt them.
@@ -1833,9 +1849,26 @@ Only one more to go.
 -> HelpClarity.One_Wall_Left
 
 = Last_Lock
+An unread Audio Log has been found. 
+Would you Like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->HelpClarity.Listen_3
+*[No]
+    ->HelpClarity.After_3
+
+= Listen_3 
+Playing Audio Log... #VO: 5D_Oldin
+Now playing. #wait: 21
+Finished playing.
+...
+...
+ ->HelpClarity.After_3
+ 
+
+= After_3
 ... #wait: 4
-Haha.... #VO: I can't belive it... They were- They *LEFT* me. Left me to rot.
-{name}, I cannot thank you enough for finding me.
+Haha.... #VO: line_19
+{name}, I cannot thank you enough for finding me. #clarityMesh: off
 I've been abandoned, it seems.
-But that's okay. #VO: I can complete Project CLAIRITY by myself.
+But that's okay. #VO: line_24
 -> Route3_Endings.Check_Endings

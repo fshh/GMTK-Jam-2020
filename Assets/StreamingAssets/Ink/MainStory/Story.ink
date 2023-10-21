@@ -115,10 +115,26 @@ Configuring CLARITY#wait: .05
 . #wait: .05
 Done.#wait: 0.05
 Starting CLARITY #wait: 1
-Welcome Back to CLARITY V0.2.3 ･ᴗ･#wait: 1
 <br>
+There is an unread Audio Log avaliable. 
+Would you like to listen? #popup: Listen to unread Audio Log?,, Yes, No
+*[Yes]
+     ->Listen
+*[No]
+    ->After
+
+==Listen ===
+Playing Audio Log... #VO: 1A_Oldin
+Now playing. #wait: 103
+Finished playing.
+...
+...
+ ->After
+ 
+== After==
+Welcome back to CLARITY V0.2.3 ･ᴗ･#wait: 1
 Hello I’m Clarity ･ᴗ･ Your virtual nurse. I am equipped with audio and visual dialogue prompts to best suit your needs.#wait: 1
-Since it's been a longer than 2 months, I’m going to ask you a series of questions. #wait: 1
+Since it's been longer than 2 months, I’m going to ask you a series of questions. #wait: 1
 Please respond accurately. (✿◠‿◠)#wait: 1
 
 //Series of "personality" questions. Will fill in the variables declared above
