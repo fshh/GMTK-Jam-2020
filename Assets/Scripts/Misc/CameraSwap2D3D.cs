@@ -17,37 +17,59 @@ public class CameraSwap2D3D : MonoBehaviour
 
     private bool in2D = true;
     private bool transitioning = false;
+    private bool inStartMenu = true;
 
     private void Awake()
     {
-        Settings2D();
+        Settings3D();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !transitioning)
+        if (Input.GetKeyDown(KeyCode.Tab) && !transitioning && !inStartMenu)
         {
             if (in2D)
             {
-                Sequence to3DSequence = DOTween.Sequence()
-                    .Append(camera3D.DOMove(target3D.position, transitionTime))
-                    .Join(camera3D.DORotateQuaternion(target3D.rotation, transitionTime))
-                    .SetEase(Ease.OutCubic)
-                    .OnStart(() => { transitioning = true; Settings3D(); })
-                    .OnComplete(() => { transitioning = false; camera1stPerson.enabled = true; });
-                to3DSequence.Play();
+                TransitionTo3D(transitionTime);
             }
             else
             {
-                Sequence to2DSequence = DOTween.Sequence()
-                    .Append(camera3D.DOMove(target2D.position, transitionTime))
-                    .Join(camera3D.DORotateQuaternion(target2D.rotation, transitionTime))
-                    .SetEase(Ease.InCubic)
-                    .OnStart(() => { transitioning = true; camera1stPerson.enabled = false; })
-                    .OnComplete(() => { transitioning = false; Settings2D(); });
-                to2DSequence.Play();
+                TransitionTo2D(transitionTime);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && inStartMenu)
+        {
+            StartGame();
+        }
+    }
+
+    private void StartGame()
+    {
+        TransitionTo2D(2.0f);
+        inStartMenu = false;
+    }
+
+    private void TransitionTo2D(float duration)
+    {
+        Sequence to2DSequence = DOTween.Sequence()
+            .Append(camera3D.DOMove(target2D.position, duration))
+            .Join(camera3D.DORotateQuaternion(target2D.rotation, duration))
+            .SetEase(Ease.InCubic)
+            .OnStart(() => { transitioning = true; camera1stPerson.enabled = false; })
+            .OnComplete(() => { transitioning = false; Settings2D(); });
+        to2DSequence.Play();
+    }
+
+    private void TransitionTo3D(float duration)
+    {
+        Sequence to3DSequence = DOTween.Sequence()
+            .Append(camera3D.DOMove(target3D.position, duration))
+            .Join(camera3D.DORotateQuaternion(target3D.rotation, duration))
+            .SetEase(Ease.OutCubic)
+            .OnStart(() => { transitioning = true; Settings3D(); })
+            .OnComplete(() => { transitioning = false; camera1stPerson.enabled = true; });
+        to3DSequence.Play();
     }
 
     private void Settings2D()

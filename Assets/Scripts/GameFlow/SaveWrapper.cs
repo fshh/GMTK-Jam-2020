@@ -8,6 +8,7 @@ public class SaveWrapper : Singleton<SaveWrapper>
     public static string INK_STATE = "InkState";
     public static string CLARITY_TEXT = "ClarityText";
     public static string NEXT_CHOICE = "NextChoice";
+    public static string NEW_GAME = "NewGame";
 
     public void SaveStory(int nextChoice)
     {
@@ -37,5 +38,15 @@ public class SaveWrapper : Singleton<SaveWrapper>
     public void ClearStory()
     {
         SaveManager.WipeFile();
+    }
+
+    public bool IsNewGame()
+    {
+        return SaveManager.GetData(NEW_GAME) == null;
+    }
+
+    public void SetNotNewGame()
+    {
+        SaveManager.SetData(NEW_GAME, false);
     }
 }

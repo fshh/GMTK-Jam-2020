@@ -2855,7 +2855,6 @@ GameObject:
   - component: {fileID: 673002322}
   - component: {fileID: 673002321}
   - component: {fileID: 673002320}
-  - component: {fileID: 673002324}
   - component: {fileID: 673002325}
   m_Layer: 0
   m_Name: 3D Camera
@@ -2953,33 +2952,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673002319}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.702, z: -0.958}
+  m_LocalRotation: {x: -0.08305781, y: 0.46188542, z: 0.043497093, w: 0.88197017}
+  m_LocalPosition: {x: -3.211, y: -0.307, z: -4.924}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &673002324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673002319}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 8
-  m_RefResolutionX: 720
-  m_RefResolutionY: 540
-  m_UpscaleRT: 0
-  m_PixelSnapping: 1
-  m_CropFrameX: 1
-  m_CropFrameY: 1
-  m_StretchFill: 1
+  m_LocalEulerAnglesHint: {x: -10.76, y: 55.282, z: 0}
 --- !u!114 &673002325
 MonoBehaviour:
   m_ObjectHideFlags: 0
