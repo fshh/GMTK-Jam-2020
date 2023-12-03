@@ -26,7 +26,7 @@ public class CameraSwap2D3D : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !transitioning && !inStartMenu)
+        if (Input.GetKeyDown(KeyCode.Tab) && !transitioning && !inStartMenu && !ClarityText.endgame)
         {
             if (in2D)
             {

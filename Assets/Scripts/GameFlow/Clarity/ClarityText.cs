@@ -18,6 +18,7 @@ public class ClarityText : MonoBehaviour
         get { return output.text; }
     }
 
+    public static bool endgame = false;
     public float BUTTON_MARGIN_X = 0, BUTTON_MARGIN_Y = 0;
     public GameObject wordButtonPrefab, wordButtonParent;
     private List<GameObject> wordButtons;
@@ -237,21 +238,25 @@ public class ClarityText : MonoBehaviour
 
     private IEnumerator EndGame()
     {
+        endgame = true;
         yield return new WaitUntil(()=> Input.anyKeyDown);
         print("pressed");
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Delete))
         {            
             if (Input.GetKey(KeyCode.Delete) && Input.GetKey(KeyCode.LeftControl))
             {
-                print("here");
+                endgame = false;
                 SaveWrapper.Instance.ClearStory();
                 Application.Quit();
+                yield break;
             }
         }
         else
         {
+            endgame = false;
             SaveWrapper.Instance.ClearStory();
             SceneManager.LoadScene(0);
+            yield break;
         }
 
         yield return new WaitForEndOfFrame();
