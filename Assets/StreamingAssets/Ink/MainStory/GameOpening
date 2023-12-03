@@ -53,11 +53,11 @@ under 18,  19 - 30, 31 - 60 or 61\+
     ~ Age = 60
 
 - Thank you (^◡^ ) <br> 
+For this questions, a small pop-up will appear. 
+Type in a valid answer ･ᴗ･ 
 ->Opening_Questions.FavouriteColor
 
 = FavouriteColor
-For this questions, a small pop-up will appear. 
-Type in a valid answer ･ᴗ･ 
 What is your favourite color? #inputPopup: What is your favourite color?, FavColor, true
 +[continue]
 
@@ -84,7 +84,7 @@ What is your favourite color? #inputPopup: What is your favourite color?, FavCol
         Could you relate it a more common color so I have a better idea? 
         Maybe something you could find on the rainbow! 
         ･ᴗ･
-        ->Opening_Questions.Hit_Head
+        ->Opening_Questions.FavouriteColor
 }
 
 - Thank you (^◡^ ) <br> 

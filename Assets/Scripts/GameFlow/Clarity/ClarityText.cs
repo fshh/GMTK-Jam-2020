@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
@@ -37,7 +38,7 @@ public class ClarityText : MonoBehaviour
         canvasScaler = FindObjectOfType<CanvasScaler>();
     }
 
-    public IEnumerator AddText(string newText, bool waiting)
+    public IEnumerator AddText(string newText, bool waiting, bool isEndGame = false)
     {
         int soundCounter = 0;
         if (waiting)
@@ -74,6 +75,9 @@ public class ClarityText : MonoBehaviour
                     speechSounds.PlayRandom(true, waitTime * lettersUntilSound);
                 }
             }
+
+            if (isEndGame)
+                StartCoroutine(EndGame());
         }
         else
         {
@@ -224,4 +228,36 @@ public class ClarityText : MonoBehaviour
         return overall.Split('`');
     }
     #endregion
+
+    public void DeleteAllText()
+    {
+        output.text = "";
+        output.alignment = TextAlignmentOptions.Center;
+    }
+
+    private IEnumerator EndGame()
+    {
+        yield return new WaitUntil(()=> Input.anyKeyDown);
+        print("pressed");
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Delete))
+        {            
+            if (Input.GetKey(KeyCode.Delete) && Input.GetKey(KeyCode.LeftControl))
+            {
+                print("here");
+                SaveWrapper.Instance.ClearStory();
+                Application.Quit();
+            }
+        }
+        else
+        {
+            SaveWrapper.Instance.ClearStory();
+            SceneManager.LoadScene(0);
+        }
+
+        yield return new WaitForEndOfFrame();
+
+        StartCoroutine(EndGame());
+    }
+
+
 }

@@ -38,11 +38,11 @@ public class GlitchEffect : MonoBehaviour
 	private float _glitchupTime = 0.05f;
 	private float _glitchdownTime = 0.05f;
 	private float _flickerTime = 0.5f;
-	private Material _material;
+	public Material _material;
 
 	void Start()
 	{
-		_material = new Material(Shader);
+		//_material = new Material(Shader);
 		MaxIntensityGlitch();
 		Invoke("MediumIntensityGlitch", introGlitchTime);
 	}

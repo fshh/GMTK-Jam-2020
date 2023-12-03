@@ -119,7 +119,7 @@ Starting CLARITY #wait: 1
 There is an unread Audio Log avaliable. 
 Would you like to listen? #popup: Listen to unread Audio Log?,, Yes, No
 *[Yes]
-     ->Listen
+     ->END
 *[No]
     ->After
 

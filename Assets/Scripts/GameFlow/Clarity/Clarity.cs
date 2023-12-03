@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using NaughtyAttributes;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class Clarity : Singleton<Clarity>
@@ -149,10 +150,21 @@ public class Clarity : Singleton<Clarity>
             yield return clarityText.AddText(HyperInkWrapper.instance.Continue(), waiting);
         }
         PopupTags();
-        DetermineChoices(HyperInkWrapper.instance.GetChoices());
+        var choices = HyperInkWrapper.instance.GetChoices();
+        if (choices.Length <= 0)
+            EndGame();
+
+        DetermineChoices(choices);
         clarityText.Enter();
 
         choiceParent.Populate(currChoices.ToArray());
+    }
+
+    private void EndGame()
+    {
+        print("game end");
+        clarityText.DeleteAllText();
+        StartCoroutine(clarityText.AddText("A fatal error has ocurred in E2005:510668 in D542565. Current application will be terrminated.\n\n* Press any key to terminate\n* Press CTRL + DEL to restart\n\nYou will lose all unsaved data", true, true));
     }
 
     /// <summary>
@@ -339,7 +351,8 @@ public class Clarity : Singleton<Clarity>
 
         foreach (string tag in tags)
         {
-            if (!tag.Contains(SIMON_TAG)) continue;
+            if (!tag.Contains(SIMON_TAG))
+                continue;
 
             string[] simonArgs = tag.Replace(SIMON_TAG, "").Trim().Split(',');
             if (simonArgs[0].Trim().ToUpper().Equals("start".ToUpper()))
